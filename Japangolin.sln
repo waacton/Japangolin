@@ -1,13 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin", "Japangolin\Japangolin.csproj", "{ABE4A64B-0120-45DC-A71E-BAE307D98DF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Domain", "Japangolin.Domain\Japangolin.Domain.csproj", "{A309954B-3AFB-46F2-86EF-BE401B9890B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.UI", "Japangolin.UI\Japangolin.UI.csproj", "{0C7DBA20-1023-4D16-BDD2-04AA61B79D2F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{25F255C2-1A79-4E8C-BAE6-A9B9B025AEE7}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Caliburn.Micro.dll = Dependencies\Caliburn.Micro.dll
+		Dependencies\Wacton.Tovarisch.dll = Dependencies\Wacton.Tovarisch.dll
+		Dependencies\Wacton.Tovarisch.MVVM.dll = Dependencies\Wacton.Tovarisch.MVVM.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
