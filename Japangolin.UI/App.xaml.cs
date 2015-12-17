@@ -1,4 +1,4 @@
-﻿namespace Japangolin.UI
+﻿namespace Wacton.Japangolin.UI
 {
     using System.Windows;
 

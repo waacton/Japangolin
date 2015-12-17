@@ -1,11 +1,9 @@
-﻿namespace Japangolin
+﻿namespace Wacton.Japangolin
 {
     using System.Reflection;
 
-    using Japangolin.Domain;
-    using Japangolin.Properties;
-    using Japangolin.UI;
-
+    using Wacton.Japangolin.Domain;
+    using Wacton.Japangolin.UI;
     using Wacton.Tovarisch.MVVM;
 
     public static class Startup

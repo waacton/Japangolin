@@ -1,8 +1,5 @@
-﻿namespace Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     public class DomainBootstrapper
     {
 

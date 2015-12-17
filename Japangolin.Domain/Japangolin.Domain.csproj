@@ -7,8 +7,8 @@
     <ProjectGuid>{A309954B-3AFB-46F2-86EF-BE401B9890B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Japangolin.Domain</RootNamespace>
-    <AssemblyName>Japangolin.Domain</AssemblyName>
+    <RootNamespace>Wacton.Japangolin.Domain</RootNamespace>
+    <AssemblyName>Wacton.Japangolin.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

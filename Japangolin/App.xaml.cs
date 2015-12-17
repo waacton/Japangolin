@@ -1,4 +1,4 @@
-﻿namespace Japangolin
+﻿namespace Wacton.Japangolin
 {
     using System;
     using System.Windows;
@@ -13,7 +13,7 @@
             // hook up unhandled exception handling
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
-            Japangolin.Startup.Go();
+            global::Wacton.Japangolin.Startup.Go();
         }
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)

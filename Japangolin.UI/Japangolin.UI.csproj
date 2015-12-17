@@ -7,8 +7,8 @@
     <ProjectGuid>{0C7DBA20-1023-4D16-BDD2-04AA61B79D2F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Japangolin.UI</RootNamespace>
-    <AssemblyName>Japangolin.UI</AssemblyName>
+    <RootNamespace>Wacton.Japangolin.UI</RootNamespace>
+    <AssemblyName>Wacton.Japangolin.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

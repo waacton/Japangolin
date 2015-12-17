@@ -1,4 +1,4 @@
-﻿namespace Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain
 {
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain
 {
     public enum KanaType
     {

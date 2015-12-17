@@ -1,4 +1,4 @@
-﻿namespace Japangolin.UI
+﻿namespace Wacton.Japangolin.UI
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -6,8 +6,7 @@
     using System.Windows.Input;
     using System.Windows.Media;
 
-    using Japangolin.Domain;
-
+    using Wacton.Japangolin.Domain;
     using Wacton.Tovarisch.Randomness;
 
     /// <summary>
