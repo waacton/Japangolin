@@ -8,12 +8,10 @@
     /// </summary>
     public partial class App : Application
     {
-        private void ApplicationStartup(object sender, StartupEventArgs e)
+        public App()
         {
             // hook up unhandled exception handling
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-
-            global::Wacton.Japangolin.Startup.Go();
         }
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)

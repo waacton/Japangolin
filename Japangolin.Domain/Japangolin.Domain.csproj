@@ -41,27 +41,32 @@
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
     </Reference>
+    <Reference Include="Wacton.Tovarisch.MVVM">
+      <HintPath>..\Dependencies\Wacton.Tovarisch.MVVM.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chouon.cs" />
-    <Compile Include="DomainBootstrapper.cs" />
-    <Compile Include="Kana.cs" />
-    <Compile Include="KanaBase.cs" />
-    <Compile Include="KanaSyllabary.cs" />
-    <Compile Include="KanaType.cs" />
-    <Compile Include="Kurikaeshi.cs" />
-    <Compile Include="PhraseProvider.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="JapanesePronunciations\Chouon.cs" />
+    <Compile Include="JapanesePhrases\DictionaryEntry.cs" />
+    <Compile Include="JapanesePronunciations\Kana.cs" />
+    <Compile Include="JapanesePronunciations\KanaBase.cs" />
+    <Compile Include="JapanesePronunciations\Syllabary.cs" />
+    <Compile Include="JapanesePronunciations\KanaType.cs" />
+    <Compile Include="JapanesePronunciations\Kurikaeshi.cs" />
+    <Compile Include="Mains\Main.cs" />
+    <Compile Include="JapanesePhrases\JapanesePhraseProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sokuon.cs" />
-    <Compile Include="Tokushuon.cs" />
-    <Compile Include="TransliteratedKana.cs" />
-    <Compile Include="Transliterator.cs" />
-    <Compile Include="Youon.cs" />
+    <Compile Include="JapanesePronunciations\Sokuon.cs" />
+    <Compile Include="JapanesePronunciations\Tokushuon.cs" />
+    <Compile Include="JapanesePhrases\JapanesePhrase.cs" />
+    <Compile Include="JapanesePhrases\Transliterator.cs" />
+    <Compile Include="DomainCommands\UpdateJapanesePhraseCommand.cs" />
+    <Compile Include="JapanesePronunciations\Youon.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\JMdict" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
