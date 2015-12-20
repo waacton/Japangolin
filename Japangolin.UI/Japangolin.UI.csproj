@@ -71,7 +71,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JapangolinBootstrapper.cs" />
+    <Compile Include="AppBootstrapper.cs" />
     <Compile Include="DesignTime\DesignTimeViewModelLocator.cs" />
     <Compile Include="Mains\Feedback.cs" />
     <Compile Include="Mains\MainViewModel.cs" />

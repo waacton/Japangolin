@@ -16,16 +16,16 @@
             }
 
             Kernel = new StandardKernel();
-            JapangolinBootstrapper.SetupKernelBindings(Kernel);
+            AppBootstrapper.SetupKernelBindings(Kernel);
+            
+            //SetupDesignTimeEnvironment();
         }
 
         public static MainViewModel MainViewModel => Kernel.Get<MainViewModel>();
 
         private static void SetupDesignTimeEnvironment()
         {
-            MainViewModel.ResetPhrase();
-            MainViewModel.Romaji = "ワカトン";
-            MainViewModel.NotifyOfPropertyChange(() => MainViewModel.Romaji);
+            
         }
     }
 }
