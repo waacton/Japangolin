@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignTime\DesignTimeJapanesePhraseProvider.cs" />
+    <Compile Include="JapanesePhrases\IJapanesePhraseProvider.cs" />
     <Compile Include="JapanesePronunciations\Chouon.cs" />
     <Compile Include="JapanesePhrases\DictionaryEntry.cs" />
     <Compile Include="JapanesePronunciations\Kana.cs" />

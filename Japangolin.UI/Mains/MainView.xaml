@@ -6,7 +6,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Japangolins" Height="500" Width="1200" Background="{Binding FeedbackBrush}"
+        Title="Wacton.Japangolin" TitleCaps="False" Height="500" Width="1200"
         GlowBrush="{DynamicResource AccentColorBrush}"              
         d:DataContext="{Binding Source={StaticResource DesignTimeViewModelLocator}, Path=MainViewModel}">
 
@@ -17,8 +17,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid Background="{Binding Feedback.Brush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -52,7 +52,7 @@
                    VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 0"
                    Visibility="{Binding IsFanfare, Converter={StaticResource BoolToNotHiddenConverter}}"/>
 
-        <TextBlock x:Name="Feedback" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Text="{Binding FeedbackText}" 
+        <TextBlock x:Name="Feedback" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Text="{Binding Feedback.Text}" 
                    FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </controls:MetroWindow>

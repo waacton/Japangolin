@@ -1,12 +1,9 @@
 ﻿namespace Wacton.Japangolin.UI.Mains
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Input;
-    using System.Windows.Media;
 
-    using Wacton.Japangolin.Domain;
     using Wacton.Japangolin.Domain.DomainCommands;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.Delegates;
@@ -24,34 +21,17 @@
 
         private bool IsRomajiCorrect => this.Romaji != null && this.Romaji.Equals(this.mainModel.Romaji);
 
-        private Dictionary<Feedback, string> feedbackTexts = SetupFeedbackTexts();
-        private Dictionary<Feedback, SolidColorBrush> feedbackBrushes = SetupFeedbackBrushes();
-
-        private SolidColorBrush feedbackBrush;
-        public SolidColorBrush FeedbackBrush
+        private Feedback feedback;
+        public Feedback Feedback
         {
             get
             {
-                return this.feedbackBrush;
+                return this.feedback;
             }
             set
             {
-                this.feedbackBrush = value;
-                this.NotifyOfPropertyChange(() => this.FeedbackBrush);
-            }
-        }
-
-        private string feedbackText;
-        public string FeedbackText
-        {
-            get
-            {
-                return this.feedbackText;
-            }
-            set
-            {
-                this.feedbackText = value;
-                this.NotifyOfPropertyChange(() => this.FeedbackText);
+                this.feedback = value;
+                this.NotifyOfPropertyChange(nameof(this.Feedback));
             }
         }
 
@@ -65,7 +45,7 @@
             set
             {
                 this.isFanfare = value;
-                this.NotifyOfPropertyChange(() => this.IsFanfare);
+                this.NotifyOfPropertyChange(nameof(this.IsFanfare));
             }
         }
 
@@ -74,7 +54,7 @@
         {
             this.mainModel = mainModel;
             this.updateJapanesePhraseCommand = updateJapanesePhraseCommand;
-            this.UpdateFeedback(Feedback.None);
+            this.Feedback = Feedback.None;
         }
 
         public void RomajiEntered(KeyEventArgs e)
@@ -102,15 +82,23 @@
 
         private void PhraseEnteredIncorrectly()
         {
-            this.UpdateFeedback(Feedback.Bad);
-            Action<Feedback> action = this.UpdateFeedback;
-            action.InvokeAfterDelay(Feedback.None, TimeSpan.FromSeconds(1));
+            this.Feedback = Feedback.Bad;
+            Action action = this.ClearBadFeedback;
+            action.InvokeAfterDelay(TimeSpan.FromSeconds(0.75));
         }
 
         private void PhraseEnteredCorrectly()
         {
             this.IsFanfare = true;
-            this.UpdateFeedback(Feedback.Good);
+            this.Feedback = Feedback.Good;
+        }
+
+        private void ClearBadFeedback()
+        {
+            if (this.Feedback.Equals(Feedback.Bad))
+            {
+                this.Feedback = Feedback.None;
+            }
         }
 
         public void ResetPhrase()
@@ -118,33 +106,7 @@
             this.Romaji = string.Empty;
             this.updateJapanesePhraseCommand.ExecuteAndNotify();
             this.IsFanfare = false;
-            this.UpdateFeedback(Feedback.None);
-        }
-
-        private void UpdateFeedback(Feedback feedback)
-        {
-            this.FeedbackText = this.feedbackTexts[feedback];
-            this.FeedbackBrush = this.feedbackBrushes[feedback];
-        }
-
-        private static Dictionary<Feedback, string> SetupFeedbackTexts()
-        {
-            return new Dictionary<Feedback, string>
-                   {
-                       { Feedback.None, string.Empty },
-                       { Feedback.Bad, "馬鹿 [○・｀Д´・○]" },
-                       { Feedback.Good, "万歳！！！ ヽ(=^･ω･^=)丿" }
-                   };
-        }
-
-        private static Dictionary<Feedback, SolidColorBrush> SetupFeedbackBrushes()
-        {
-            return new Dictionary<Feedback, SolidColorBrush>
-                   {
-                       { Feedback.None, Brushes.White },
-                       { Feedback.Bad, Brushes.Tomato },
-                       { Feedback.Good, Brushes.MediumSeaGreen }
-                   };
+            this.Feedback = Feedback.None;
         }
     }
 }

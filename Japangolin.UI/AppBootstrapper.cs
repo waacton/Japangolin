@@ -2,6 +2,7 @@
 {
     using Ninject;
 
+    using Wacton.Japangolin.Domain.DesignTime;
     using Wacton.Japangolin.Domain.JapanesePhrases;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.UI.Mains;
@@ -9,15 +10,21 @@
 
     public class AppBootstrapper : Bootstrapper<MainViewModel>
     {
-        protected override void ConfigureApplication()
+        protected override void ConfigureApplication(IKernel kernel)
         {
-            SetupKernelBindings(this.Kernel);
+            SetupKernelBindings(kernel);
         }
 
         public static void SetupKernelBindings(IKernel kernel)
         {
-            kernel.Bind<JapanesePhraseProvider>().ToSelf().InSingletonScope();
+            kernel.Bind<IJapanesePhraseProvider>().To<JapanesePhraseProvider>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
+        }
+
+        public static void SetupKernelBindingsForDesignTime(IKernel kernel)
+        {
+            SetupKernelBindings(kernel);
+            kernel.Rebind<IJapanesePhraseProvider>().To<DesignTimeJapanesePhraseProvider>().InSingletonScope();
         }
     }
 }

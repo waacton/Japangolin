@@ -7,7 +7,7 @@
 
     using Wacton.Tovarisch.Randomness;
 
-    public class JapanesePhraseProvider
+    public class JapanesePhraseProvider : IJapanesePhraseProvider
     {
         private List<JapanesePhrase> japanesePhrases;
 
@@ -67,7 +67,7 @@
                                             var language = reader.GetAttribute(0);
                                             if (language == "eng")
                                             {
-                                                dictionaryEntry.SetEnglish(reader.ReadString());
+                                                dictionaryEntry.AddEnglish(reader.ReadString());
                                             }
 
                                             break;

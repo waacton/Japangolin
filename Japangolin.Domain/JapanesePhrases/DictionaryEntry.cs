@@ -2,15 +2,16 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public class DictionaryEntry
     {
         private bool isIdentifierSet;
         public int Identifier { get; private set; }
-        public List<string> Kanji { get; private set; }
-        public List<string> Kana { get; private set; }
-        public string English { get; private set; }
+        public List<string> Kanji { get; }
+        public List<string> Kana { get; }
+        public List<string> English { get; }
 
         public List<string> Unprocessed { get; private set; }
 
@@ -18,6 +19,7 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
         {
             this.Kanji = new List<string>();
             this.Kana = new List<string>();
+            this.English = new List<string>();
             this.Unprocessed = new List<string>();
         }
 
@@ -45,9 +47,9 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
             }
         }
 
-        public void SetEnglish(string english)
+        public void AddEnglish(string english)
         {
-            this.English = english;
+            this.English.Add(english);
         }
 
         public override string ToString()
@@ -65,7 +67,7 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
                 stringbuilder.Append(kana + " | ");
             }
 
-            stringbuilder.Append(this.English);
+            stringbuilder.Append(this.English.First());
             return stringbuilder.ToString();
         }
     }

@@ -16,16 +16,16 @@
             }
 
             Kernel = new StandardKernel();
-            AppBootstrapper.SetupKernelBindings(Kernel);
+            AppBootstrapper.SetupKernelBindingsForDesignTime(Kernel);
             
-            //SetupDesignTimeEnvironment();
+            SetupDesignTimeEnvironment();
         }
 
         public static MainViewModel MainViewModel => Kernel.Get<MainViewModel>();
 
         private static void SetupDesignTimeEnvironment()
         {
-            
+            // nothing required currently
         }
     }
 }
