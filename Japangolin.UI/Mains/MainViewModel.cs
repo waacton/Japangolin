@@ -4,22 +4,22 @@
     using System.Linq;
     using System.Windows.Input;
 
-    using Wacton.Japangolin.Domain.DomainCommands;
+    using Wacton.Japangolin.Domain.Commands;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.Delegates;
     using Wacton.Tovarisch.MVVM;
 
     public class MainViewModel : ViewModelBase
     {
-        private readonly Main mainModel;
+        private readonly Main main;
         private readonly UpdateJapanesePhraseCommand updateJapanesePhraseCommand;
 
-        public string Kana => this.mainModel.Kana;
+        public string Kana => this.main.Kana;
         public string Romaji { get; set; }
-        public string Kanji => this.mainModel.Kanji.Any() ? this.mainModel.Kanji.First() : "<no kanji available>";
-        public string Meaning => this.mainModel.Meaning;
+        public string Kanji => this.main.Kanji.Any() ? this.main.Kanji.First() : "<no kanji available>";
+        public string Meaning => this.main.Meaning;
 
-        private bool IsRomajiCorrect => this.Romaji != null && this.Romaji.Equals(this.mainModel.Romaji);
+        private bool IsRomajiCorrect => this.Romaji != null && this.Romaji.Equals(this.main.Romaji);
 
         private Feedback feedback;
         public Feedback Feedback
@@ -49,10 +49,10 @@
             }
         }
 
-        public MainViewModel(Main mainModel, UpdateJapanesePhraseCommand updateJapanesePhraseCommand, CommandInvoker commandInvoker)
-            : base(commandInvoker, mainModel)
+        public MainViewModel(Main main, UpdateJapanesePhraseCommand updateJapanesePhraseCommand, ModelChanger modelChanger)
+            : base(modelChanger, main)
         {
-            this.mainModel = mainModel;
+            this.main = main;
             this.updateJapanesePhraseCommand = updateJapanesePhraseCommand;
             this.Feedback = Feedback.None;
         }

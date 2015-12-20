@@ -62,7 +62,7 @@
     <Compile Include="JapanesePronunciations\Tokushuon.cs" />
     <Compile Include="JapanesePhrases\JapanesePhrase.cs" />
     <Compile Include="JapanesePhrases\Transliterator.cs" />
-    <Compile Include="DomainCommands\UpdateJapanesePhraseCommand.cs" />
+    <Compile Include="Commands\UpdateJapanesePhraseCommand.cs" />
     <Compile Include="JapanesePronunciations\Youon.cs" />
   </ItemGroup>
   <ItemGroup>

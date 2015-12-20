@@ -1,14 +1,14 @@
-﻿namespace Wacton.Japangolin.Domain.DomainCommands
+﻿namespace Wacton.Japangolin.Domain.Commands
 {
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
 
-    public class UpdateJapanesePhraseCommand : DomainCommand
+    public class UpdateJapanesePhraseCommand : ModelCommand
     {
         private readonly Main main;
 
-        public UpdateJapanesePhraseCommand(CommandInvoker commandInvoker, Main main)
-            : base(commandInvoker, main)
+        public UpdateJapanesePhraseCommand(ModelChanger modelChanger, Main main)
+            : base(modelChanger, main)
         {
             this.main = main;
         }
