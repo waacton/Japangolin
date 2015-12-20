@@ -6,7 +6,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Wacton.Japangolin" TitleCaps="False" Height="500" Width="1200"
+        Title="{Binding Title}" TitleCaps="False" Height="500" Width="1200"
         GlowBrush="{DynamicResource AccentColorBrush}"              
         d:DataContext="{Binding Source={StaticResource DesignTimeViewModelLocator}, Path=MainViewModel}">
 

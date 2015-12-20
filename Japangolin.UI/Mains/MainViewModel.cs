@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using System.Windows.Input;
 
     using Wacton.Japangolin.Domain.Commands;
@@ -11,6 +12,8 @@
 
     public class MainViewModel : ViewModelBase
     {
+        public static string Title { get; set; }
+
         private readonly Main main;
         private readonly UpdateJapanesePhraseCommand updateJapanesePhraseCommand;
 
@@ -84,7 +87,7 @@
         {
             this.Feedback = Feedback.Bad;
             Action action = this.ClearBadFeedback;
-            action.InvokeAfterDelay(TimeSpan.FromSeconds(0.75));
+            action.InvokeAfterDelay(TimeSpan.FromSeconds(1));
         }
 
         private void PhraseEnteredCorrectly()
