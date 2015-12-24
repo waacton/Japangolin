@@ -1,0 +1,36 @@
+﻿<controls:MetroWindow x:Class="Wacton.Japangolin.UI.Mains.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" Height="500" Width="1200"
+        TitleCaps="False" GlowBrush="{DynamicResource AccentColorBrush}"              
+        d:DataContext="{Binding Source={StaticResource DesignTimeViewModelLocator}, Path=ShellViewModel}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/BaseStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <mains:MainView DataContext="{Binding MainViewModel}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+    </Grid>
+</controls:MetroWindow>

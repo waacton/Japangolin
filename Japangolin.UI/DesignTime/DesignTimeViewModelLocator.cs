@@ -8,6 +8,9 @@
     {
         private static readonly IKernel Kernel;
 
+        public static ShellViewModel ShellViewModel => Kernel.Get<ShellViewModel>();
+        public static MainViewModel MainViewModel => ShellViewModel.MainViewModel;
+
         static DesignTimeViewModelLocator()
         {
             if (Kernel != null)
@@ -20,8 +23,6 @@
             
             SetupDesignTimeEnvironment();
         }
-
-        public static MainViewModel MainViewModel => Kernel.Get<MainViewModel>();
 
         private static void SetupDesignTimeEnvironment()
         {

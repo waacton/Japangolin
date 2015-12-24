@@ -74,6 +74,10 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="DesignTime\DesignTimeViewModelLocator.cs" />
     <Compile Include="Mains\Feedback.cs" />
+    <Compile Include="Mains\ShellViewModel.cs" />
+    <Compile Include="Mains\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Mains\MainViewModel.cs" />
     <Compile Include="Mains\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -81,11 +85,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Mains\ShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Mains\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\BaseStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

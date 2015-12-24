@@ -8,7 +8,7 @@
     using Wacton.Japangolin.UI.Mains;
     using Wacton.Tovarisch.MVVM;
 
-    public class AppBootstrapper : Bootstrapper<MainViewModel>
+    public class AppBootstrapper : Bootstrapper<ShellViewModel>
     {
         protected override void ConfigureApplication(IKernel kernel)
         {
