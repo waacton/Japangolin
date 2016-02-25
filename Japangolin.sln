@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 		Dependencies\Wacton.Tovarisch.MVVM.dll = Dependencies\Wacton.Tovarisch.MVVM.dll
 	EndProjectSection
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Japangolin.Web", "Japangolin.Web\Japangolin.Web.xproj", "{1A527B48-3FDE-4580-876E-8CC5B42202BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0C7DBA20-1023-4D16-BDD2-04AA61B79D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C7DBA20-1023-4D16-BDD2-04AA61B79D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C7DBA20-1023-4D16-BDD2-04AA61B79D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A527B48-3FDE-4580-876E-8CC5B42202BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A527B48-3FDE-4580-876E-8CC5B42202BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A527B48-3FDE-4580-876E-8CC5B42202BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A527B48-3FDE-4580-876E-8CC5B42202BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
