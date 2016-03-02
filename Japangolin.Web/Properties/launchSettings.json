@@ -11,7 +11,6 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/japanesephrase",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       }
