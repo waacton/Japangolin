@@ -17,14 +17,14 @@
 
         public static void SetupKernelBindings(IKernel kernel)
         {
-            kernel.Bind<IJapanesePhraseProvider>().To<JapanesePhraseProvider>().InSingletonScope();
+            kernel.Bind<IJapanesePhraseRepository>().To<JapanesePhraseRepository>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
         }
 
         public static void SetupKernelBindingsForDesignTime(IKernel kernel)
         {
             SetupKernelBindings(kernel);
-            kernel.Rebind<IJapanesePhraseProvider>().To<DesignTimeJapanesePhraseProvider>().InSingletonScope();
+            kernel.Rebind<IJapanesePhraseRepository>().To<DesignTimeJapanesePhraseRepository>().InSingletonScope();
         }
     }
 }

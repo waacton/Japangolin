@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net451": {
+      "bin": {
+        "assembly": "../../Dependencies/Wacton.Tovarisch.MVVM.dll"
+      }
+    },
+    "net452": {
+      "bin": {
+        "assembly": "../../Dependencies/Wacton.Tovarisch.MVVM.dll"
+      }
+    }
+  }
+}

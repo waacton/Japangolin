@@ -7,7 +7,7 @@
 
     public class Main
     {
-        private readonly IJapanesePhraseProvider japanesePhraseProvider;
+        private readonly IJapanesePhraseRepository japanesePhraseRepository;
         private JapanesePhrase currentJapanesePhrase;
 
         public string Kana => this.currentJapanesePhrase.Kana;
@@ -15,15 +15,15 @@
         public List<string> Kanji => this.currentJapanesePhrase.Kanji;
         public string Meaning => this.currentJapanesePhrase.Meaning.First();
 
-        public Main(IJapanesePhraseProvider japanesePhraseProvider)
+        public Main(IJapanesePhraseRepository japanesePhraseRepository)
         {
-            this.japanesePhraseProvider = japanesePhraseProvider;
+            this.japanesePhraseRepository = japanesePhraseRepository;
             this.UpdatePhrase();
         }
 
         public void UpdatePhrase()
         {
-            this.currentJapanesePhrase = this.japanesePhraseProvider.GetRandomPhrase();
+            this.currentJapanesePhrase = this.japanesePhraseRepository.GetRandomPhrase();
         }
     }
 }

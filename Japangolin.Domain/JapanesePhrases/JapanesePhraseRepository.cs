@@ -7,17 +7,25 @@
 
     using Wacton.Tovarisch.Randomness;
 
-    public class JapanesePhraseProvider : IJapanesePhraseProvider
+    public class JapanesePhraseRepository : IJapanesePhraseRepository
     {
         private List<JapanesePhrase> japanesePhrases;
 
+        public int PhraseCount { get; }
+
+        public JapanesePhraseRepository()
+        {
+            this.Initialise();
+            this.PhraseCount = this.japanesePhrases.Count;
+        }
+
+        public JapanesePhrase GetPhrase(int index)
+        {
+            return index < this.PhraseCount ? this.japanesePhrases[index] : null;
+        }
+
         public JapanesePhrase GetRandomPhrase()
         {
-            if (this.japanesePhrases == null)
-            {
-                this.Initialise();
-            }
-
             return RandomSelection.SelectOne(this.japanesePhrases);
         }
 
