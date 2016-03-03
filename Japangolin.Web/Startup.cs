@@ -1,4 +1,4 @@
-﻿namespace Japangolin.Web
+﻿namespace Wacton.Japangolin.Web
 {
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;

@@ -1,4 +1,4 @@
-﻿namespace Japangolin.Web.Controllers
+﻿namespace Wacton.Japangolin.Web.Controllers
 {
     using Microsoft.AspNet.Mvc;
 
