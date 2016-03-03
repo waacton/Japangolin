@@ -4,27 +4,29 @@
 
     using Wacton.Japangolin.Domain.JapanesePhrases;
 
+    /* mostly here for future reference */
+
     [Route("api/[controller]")]
-    public class JapanesePhraseController : Controller
+    public class JapangolinController : Controller
     {
         [FromServices]
         public IJapanesePhraseRepository JapanesePhraseRepository { get; set; }
 
-        // GET: api/japanesephrase
+        // GET: api/japangolin
         [HttpGet]
         public int Get()
         {
             return this.JapanesePhraseRepository.PhraseCount;
         }
 
-        // GET: api/japanesephrase/65
+        // GET: api/japangolin/12345
         [HttpGet("{id}")]
         public JapanesePhrase Get(int id)
         {
             return this.JapanesePhraseRepository.GetPhrase(id);
         }
 
-        // GET: api/japanesephrase/random
+        // GET: api/japangolin/random
         [HttpGet("random")]
         public JapanesePhrase GetRandom()
         {

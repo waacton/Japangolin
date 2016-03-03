@@ -1,7 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿<!-- TODO: a view model instead? -->
+@using Wacton.Japangolin.Domain.JapanesePhrases
+@model JapanesePhrase
+
+@{
+    ViewData["Title"] = Model.Kana;
 }
 
 <div>
-    <p>Time for some japangolin!</p>
+    <h2>@Model.Kana</h2>
+    <hr/>
+@{
+    foreach (var meaning in Model.Meaning)
+    {
+        <p>@meaning</p>
+    }
+}
 </div>
