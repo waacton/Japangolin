@@ -14,5 +14,11 @@
             var phrase = this.JapanesePhraseRepository.GetRandomPhrase();
             return this.View(phrase);
         }
+
+        public IActionResult Next()
+        {
+            var phrase = this.JapanesePhraseRepository.GetRandomPhrase();
+            return this.View(phrase);
+        }
     }
 }

@@ -7,7 +7,19 @@
 }
 
 <div>
-    <h2>@Model.Kana</h2>
+    <h2 id="kana">@Model.Kana</h2>
+    <hr/>
+    <form asp-controller="Home" asp-action="Next" method="post" role="form">
+        @*<div>
+            <label>Next</label>
+        </div>*@
+        <div>
+            <div>
+                <button type="submit" class="btn btn-default">Japangolin?</button>
+                @*<button type="submit" class="btn btn-default">Japangolin?</button>*@
+            </div>
+        </div>
+    </form>
     <hr/>
 @{
     foreach (var meaning in Model.Meaning)
@@ -15,4 +27,19 @@
         <p>@meaning</p>
     }
 }
+    
 </div>
+
+<!-- copypasta... -->
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("kana").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("GET", "/api/japangolin/random", false);
+  xhttp.send();
+}
+</script>
