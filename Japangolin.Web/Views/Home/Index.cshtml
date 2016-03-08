@@ -13,40 +13,20 @@
         <div>
             <div>
                 <button type="submit" class="btn btn-default">Japangolin?-asp</button>
-                <button type="button" class="btn btn-default" onclick="updatePhrase()">Japangolin?-js</button>
+                <button type="button" class="btn btn-default" onclick="updatePhrase(window, window.document)">Japangolin?-js</button>
             </div>
         </div>
     </form>
     <hr/>
     <div id="meanings">
-       @{
-           foreach (var meaning in Model.Meaning)
-           {
-               <p>@meaning</p>
-           }
-       }
+        @{
+            foreach (var meaning in Model.Meaning)
+            {
+                <p>@meaning</p>
+            }
+        }
     </div>
-    
 </div>
 
-<script>
-    function updatePhrase() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                var japanesePhrase = JSON.parse(xhttp.responseText);
-                document.title = "Japangolin | " + japanesePhrase.Kana;
-                document.getElementById("kana").innerHTML = japanesePhrase.Kana;
+<script type="text/javascript" src="/js/functions.js"></script>
 
-                var meaningsHtml = "";
-                japanesePhrase.Meaning.forEach(function(item) {
-                    meaningsHtml += "<p>" + item + "</p>";
-                });
-                document.getElementById("meanings").innerHTML = meaningsHtml;
-            }
-        };
-
-        xhttp.open("GET", "api/random?t=" + Math.random(), false); // unique ID to avoid caching (IE...)
-        xhttp.send();
-    }
-</script>
