@@ -7,7 +7,7 @@
 }
 
 <div>
-    <h2 id="kana"></h2>
+    <h1 id="kana"></h1>
     @*<hr/>
     <form asp-controller="Home" asp-action="Next" method="post" role="form">
         <div>
@@ -16,11 +16,13 @@
             </div>
         </div>
     </form>*@
-    <hr/>
-    <div>
-        <input id="userText" type="text" clas="form-control"/>
-        <button id="updateButton" type="button" class="btn btn-default" style="margin-left: 10px;">Give up :(</button>
+    <div class="input-group input-group-lg">
+        <input id="userText" type="text" class="form-control" placeholder="Romaji..."/>
+        <span class="input-group-btn">
+            <button id="updateButton" type="button" class="btn btn-warning">Give up :(</button>
+        </span>
     </div>
+
     <div>
     </div>
     <div id="kanji">
