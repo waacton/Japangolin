@@ -25,6 +25,7 @@
         }
 
         // GET: api/random
+        [ResponseCache(NoStore = true)]
         [HttpGet("random")]
         public JapanesePhrase GetRandom()
         {
