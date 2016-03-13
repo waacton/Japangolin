@@ -4,7 +4,12 @@
     ViewData["Title"] = "About";
 }
 
-<h2>@Model.Title</h2>
-<h3>@Model.Subtitle</h3>
+<div style="margin-top: 20px">
+    <h3 style="display: inline">@Model.Title</h3>
+    <h6 style="display: inline">@Model.Subtitle</h6>
+</div>
 
-<p style="margin-top: 10px">@Model.Link</p>
+<div style="margin-top: 5px">
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    <a href="@Model.Link">@Model.Link</a>
+</div>

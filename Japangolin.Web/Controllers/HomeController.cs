@@ -23,6 +23,11 @@
             return this.View(this.aboutViewModel);
         }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         //public IActionResult Next()
         //{
         //    var phrase = this.JapanesePhraseRepository.GetRandomPhrase();
