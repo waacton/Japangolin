@@ -15,6 +15,8 @@ var PhraseUpdater = (function () {
                 _this.document.getElementById("userText").value = "";
                 _this.document.getElementById("kanji").style.display = "none";
                 _this.document.getElementById("meanings").style.display = "none";
+                _this.document.getElementById("skipRow").style.display = "none";
+                _this.document.getElementById("proceedRow").style.display = "none";
             }
         };
         xhttp.open("GET", "api/random", true);
@@ -23,13 +25,16 @@ var PhraseUpdater = (function () {
     PhraseUpdater.prototype.validate = function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == 13) {
-            var userInput = this.document.getElementById("userText").value;
-            if (userInput === this.phrase.Romaji) {
-                if (this.isReviewing) {
-                    this.update();
+            if (this.isReviewing) {
+                this.update();
+            }
+            else {
+                var userInput = this.document.getElementById("userText").value;
+                if (userInput === this.phrase.Romaji) {
+                    this.showReview();
                 }
                 else {
-                    this.showReview();
+                    this.document.getElementById("skipRow").style.display = "block";
                 }
             }
         }
@@ -50,6 +55,8 @@ var PhraseUpdater = (function () {
         });
         this.document.getElementById("meanings").innerHTML = meaningsHtml;
         this.document.getElementById("meanings").style.display = "inline";
+        this.document.getElementById("skipRow").style.display = "none";
+        this.document.getElementById("proceedRow").style.display = "block";
     };
     return PhraseUpdater;
 })();

@@ -7,7 +7,7 @@
 }
 
 <div>
-    <h1 id="kana"></h1>
+    <h1 id="kana">Loading...</h1>
     @*<hr/>
     <form asp-controller="Home" asp-action="Next" method="post" role="form">
         <div>
@@ -16,18 +16,25 @@
             </div>
         </div>
     </form>*@
-    <div class="input-group input-group-lg">
-        <input id="userText" type="text" class="form-control" placeholder="Romaji..."/>
-        <span class="input-group-btn">
-            <button id="updateButton" type="button" class="btn btn-warning">Give up :(</button>
-        </span>
+    <div class="form-group">
+        <input id="userText" type="text" placeholder="Romaji..." class="form-control form-control-lg" style="margin-bottom: 10px"/>
+        <div class="row" id="skipRow" style="display: none">
+            <div class="col-sm-2">
+                <input id="skipButton" type="button" value="Skip" class="btn btn-warning btn-block"/>
+            </div>
+        </div>
+        <div class="row" id="proceedRow" style="display: none">
+            <div class="col-sm-2">
+                <input id="proceedButton" type="button" value="Proceed" class="btn btn-success btn-block"/>
+            </div>
+        </div>
     </div>
 
     <div>
     </div>
-    <div id="kanji">
+    <div id="kanji" style="display: none">
     </div>
-    <div id="meanings">
+    <div id="meanings" style="display: none">
     </div>
 </div>
 
