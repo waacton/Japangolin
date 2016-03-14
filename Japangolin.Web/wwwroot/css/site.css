@@ -17,6 +17,11 @@ textarea {
     /*max-width: 280px;*/
 }
 
+/* overriding input focus glow (http://stackoverflow.com/a/27778789)*/
+.form-control:focus {
+  border-color: #acb6bf;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(172, 182, 191, 0.6);
+}
 /* overriding bootstrap navbar (http://work.smarchal.com/twbscolor/css/83919facb6bfc1c8cfffffff1) */
 .navbar-default {
   background-color: #83919f;
