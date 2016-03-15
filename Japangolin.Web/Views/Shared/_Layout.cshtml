@@ -6,10 +6,16 @@
     <title>Japangolin | @ViewData["Title"]</title>
 
     <!-- TODO: need asp-fallback-href="<local bootstrap css>" -->
+    <!-- TODO: need asp-fallback-src="<local bootstrap js>" -->
     <environment names="Development,Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.css"/>
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.svg" />
         <link rel="stylesheet" href="/css/site.css" asp-append-version="true"/>
+
+        <!-- moved from body (some general guidelines: http://stackoverflow.com/questions/3531314/should-i-write-script-in-the-body-or-the-head-of-the-html) -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"></script>
+        @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
     </environment>
 </head>
 <body>
@@ -38,13 +44,6 @@
             <p>&copy; 2016 - Wacton</p>
         </footer>
     </div>
-
-    <!-- TODO: need asp-fallback-src="<local bootstrap js>" -->
-    <environment names="Development,Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"></script>
-        @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
-    </environment>
 
     @RenderSection("scripts", required: false)
 </body>
