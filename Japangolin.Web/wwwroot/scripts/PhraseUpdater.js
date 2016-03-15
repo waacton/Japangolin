@@ -22,20 +22,17 @@ var PhraseUpdater = (function () {
         xhttp.open("GET", "api/random", true);
         xhttp.send();
     };
-    PhraseUpdater.prototype.validate = function (event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == 13) {
-            if (this.isReviewing) {
-                this.update();
+    PhraseUpdater.prototype.validate = function () {
+        if (this.isReviewing) {
+            this.update();
+        }
+        else {
+            var userInput = this.document.getElementById("userText").value;
+            if (userInput === this.phrase.Romaji) {
+                this.showReview();
             }
             else {
-                var userInput = this.document.getElementById("userText").value;
-                if (userInput === this.phrase.Romaji) {
-                    this.showReview();
-                }
-                else {
-                    this.document.getElementById("skipRow").style.display = "block";
-                }
+                this.document.getElementById("skipRow").style.display = "block";
             }
         }
     };

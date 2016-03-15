@@ -32,18 +32,15 @@
         xhttp.send();
     }
 
-    validate(event: KeyboardEvent) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == 13) { // enter key
-            if (this.isReviewing) {
-                this.update();
+    validate() {
+        if (this.isReviewing) {
+            this.update();
+        } else {
+            var userInput = (this.document.getElementById("userText") as HTMLInputElement).value;
+            if (userInput === this.phrase.Romaji) {
+                this.showReview();
             } else {
-                var userInput = (<HTMLInputElement>this.document.getElementById("userText")).value;
-                if (userInput === this.phrase.Romaji) {
-                    this.showReview();
-                } else {
-                    this.document.getElementById("skipRow").style.display = "block";
-                }
+                this.document.getElementById("skipRow").style.display = "block";
             }
         }
     }
