@@ -7,64 +7,95 @@
     constructor(window: Window, document: Document) {
         this.window = window;
         this.document = document;
+
+        this.phrase = JSON.parse(this.window.localStorage.getItem("phrase"));
+        if (this.phrase == null) {
+            this.updatePhrase();
+        } else {
+            this.updateHtml();
+        }
+
+        this.isReviewing = Boolean(this.window.localStorage.getItem("isReviewing"));
+        if (this.isReviewing) {
+            this.updatePhrase();
+        }
+
+        // TODO: should instead be done when trying to read/write, both here and about page?
+        if (this.window.localStorage.getItem("passes") == null) {
+            this.window.localStorage.setItem("passes", "0");
+        }
+
+        if (this.window.localStorage.getItem("fails") == null) {
+            this.window.localStorage.setItem("fails", "0");
+        }
     }
 
-    update() {
+    updatePhrase() {
         this.isReviewing = false;
+        this.window.localStorage.setItem("isReviewing", "false");
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                this.phrase = JSON.parse(xhttp.responseText);
+        $.getJSON("api/random", (result) => {
+            this.phrase = result;
+            this.window.localStorage.setItem("phrase", JSON.stringify(this.phrase));
+            this.updateHtml();
+        });
+    }
 
-                this.document.title = `Japangolin | ${this.phrase.Kana}`;
-                this.document.getElementById("kana").innerHTML = this.phrase.Kana;
-                (<HTMLInputElement>this.document.getElementById("userText")).value = "";
+    updateHtml() {
+        this.document.title = `Japangolin | ${this.phrase.Kana}`;
+        $("#kana").html(this.phrase.Kana);
+        $("#userText").val("");
 
-                this.document.getElementById("kanji").style.display = "none";
-                this.document.getElementById("meanings").style.display = "none";
-                this.document.getElementById("skipRow").style.display = "none";
-                this.document.getElementById("proceedRow").style.display = "none";
-            }
-        };
+        $("#kanji").val("");
+        $("#meanings").val("");
 
-        xhttp.open("GET", "api/random", true);
-        xhttp.send();
+        $("#kanji").hide();
+        $("#meanings").hide();
+
+        $("#skipRow").hide();
+        $("#proceedRow").hide();
     }
 
     validate() {
         if (this.isReviewing) {
-            this.update();
+            this.updatePhrase();
         } else {
-            var userInput = (this.document.getElementById("userText") as HTMLInputElement).value;
+            var userInput = $("#userText").val();
             if (userInput === this.phrase.Romaji) {
+                var passes = Number(this.window.localStorage.getItem("passes")) + 1;
+                this.window.localStorage.setItem("passes", String(passes));
                 this.showReview();
             } else {
-                this.document.getElementById("skipRow").style.display = "block";
+                var fails = Number(this.window.localStorage.getItem("fails")) + 1;
+                this.window.localStorage.setItem("fails", String(fails));
+                $("#skipRow").show();
             }
         }
     }
 
     showReview() {
         this.isReviewing = true;
+        this.window.localStorage.setItem("isReviewing", "true");
 
         if (this.phrase.Kanji.length > 0) {
             var kanjiHtml = "<hr/>";
             this.phrase.Kanji.forEach(item => {
                 kanjiHtml += `<p>${item}</p>`;
             });
-            this.document.getElementById("kanji").innerHTML = kanjiHtml;
-            this.document.getElementById("kanji").style.display = "inline";
+
+            $("#kanji").html(kanjiHtml);
+            $("#kanji").show();
         }
         
         var meaningsHtml = "<hr/>";
         this.phrase.Meaning.forEach(item => {
             meaningsHtml += `<p>${item}</p>`;
         });
-        this.document.getElementById("meanings").innerHTML = meaningsHtml;
-        this.document.getElementById("meanings").style.display = "inline";
 
-        this.document.getElementById("skipRow").style.display = "none";
-        this.document.getElementById("proceedRow").style.display = "block";
+        $("#meanings").html(meaningsHtml);
+        $("#meanings").show();
+
+        $("#skipRow").hide();
+        $("#proceedRow").show();
     }
 }
