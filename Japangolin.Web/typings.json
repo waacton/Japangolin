@@ -2,6 +2,7 @@
   "version": false,
   "dependencies": {},
   "ambientDependencies": {
+    "chart": "registry:dt/chart#0.0.0+20160221214739",
     "jquery": "registry:dt/jquery#1.10.0+20160303223636",
     "react": "registry:dt/react#0.14.0+20160302224448"
   }

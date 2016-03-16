@@ -48,7 +48,7 @@ var PhraseUpdater = (function () {
         }
         else {
             var userInput = $("#userText").val();
-            if (userInput === this.phrase.Romaji) {
+            if (userInput.toLowerCase() === this.phrase.Romaji.toLowerCase()) {
                 var passes = Number(this.window.localStorage.getItem("passes")) + 1;
                 this.window.localStorage.setItem("passes", String(passes));
                 this.showReview();
