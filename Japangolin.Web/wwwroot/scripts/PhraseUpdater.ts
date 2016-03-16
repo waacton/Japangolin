@@ -15,7 +15,7 @@
             this.updateHtml();
         }
 
-        this.isReviewing = Boolean(this.window.localStorage.getItem("isReviewing"));
+        this.isReviewing = (this.window.localStorage.getItem("isReviewing") == "true");
         if (this.isReviewing) {
             this.updatePhrase();
         }
