@@ -12,10 +12,6 @@
         this.window = window;
         this.document = document;
         this.loadState();
-
-        if (this.currentPhrase == null || this.nextPhrase == null) {
-            this.initialisePhrases();
-        }
     }
 
     initialisePhrases() {
@@ -119,13 +115,17 @@
         this.passes = Number(this.window.localStorage.getItem("passes")); // Number(null) -> 0
         this.fails = Number(this.window.localStorage.getItem("fails"));
 
-        this.updateHtml();
+        if (this.currentPhrase == null || this.nextPhrase == null) {
+            this.initialisePhrases();
+        } else {
+            this.updateHtml();
 
-        $("#userText").val(this.window.localStorage.getItem("userText"));
-        if (this.isCurrentPassed) {
-            this.showPass();
-        } else if (this.isCurrentFailed) {
-            this.showFail();
+            $("#userText").val(this.window.localStorage.getItem("userText"));
+            if (this.isCurrentPassed) {
+                this.showPass();
+            } else if (this.isCurrentFailed) {
+                this.showFail();
+            }
         }
     }
 }

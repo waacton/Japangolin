@@ -3,9 +3,6 @@ var PhraseUpdater = (function () {
         this.window = window;
         this.document = document;
         this.loadState();
-        if (this.currentPhrase == null || this.nextPhrase == null) {
-            this.initialisePhrases();
-        }
     }
     PhraseUpdater.prototype.initialisePhrases = function () {
         var _this = this;
@@ -94,13 +91,18 @@ var PhraseUpdater = (function () {
         this.isCurrentFailed = (this.window.localStorage.getItem("isCurrentFailed") == "true");
         this.passes = Number(this.window.localStorage.getItem("passes")); // Number(null) -> 0
         this.fails = Number(this.window.localStorage.getItem("fails"));
-        this.updateHtml();
-        $("#userText").val(this.window.localStorage.getItem("userText"));
-        if (this.isCurrentPassed) {
-            this.showPass();
+        if (this.currentPhrase == null || this.nextPhrase == null) {
+            this.initialisePhrases();
         }
-        else if (this.isCurrentFailed) {
-            this.showFail();
+        else {
+            this.updateHtml();
+            $("#userText").val(this.window.localStorage.getItem("userText"));
+            if (this.isCurrentPassed) {
+                this.showPass();
+            }
+            else if (this.isCurrentFailed) {
+                this.showFail();
+            }
         }
     };
     return PhraseUpdater;
