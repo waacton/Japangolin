@@ -1,49 +1,50 @@
 ﻿class PhraseUpdater {
     window: Window;
     document: Document;
-    phrase: any;
-    isReviewing: boolean;
+    currentPhrase: any;
+    nextPhrase: any;
+    isCurrentPassed: boolean;
+    isCurrentFailed: boolean;
+    passes: number;
+    fails: number;
 
     constructor(window: Window, document: Document) {
         this.window = window;
         this.document = document;
+        this.loadState();
 
-        this.phrase = JSON.parse(this.window.localStorage.getItem("phrase"));
-        if (this.phrase == null) {
-            this.updatePhrase();
-        } else {
-            this.updateHtml();
-        }
-
-        this.isReviewing = (this.window.localStorage.getItem("isReviewing") == "true");
-        if (this.isReviewing) {
-            this.updatePhrase();
-        }
-
-        // TODO: should instead be done when trying to read/write, both here and about page?
-        if (this.window.localStorage.getItem("passes") == null) {
-            this.window.localStorage.setItem("passes", "0");
-        }
-
-        if (this.window.localStorage.getItem("fails") == null) {
-            this.window.localStorage.setItem("fails", "0");
+        if (this.currentPhrase == null || this.nextPhrase == null) {
+            this.initialisePhrases();
         }
     }
 
-    updatePhrase() {
-        this.isReviewing = false;
-        this.window.localStorage.setItem("isReviewing", "false");
+    initialisePhrases() {
+        $("#kana").html("Loading...");
 
+        // this is an up-front cost to get the first phrase
+        // future phrases will be retrieved in the background
         $.getJSON("api/random", (result) => {
-            this.phrase = result;
-            this.window.localStorage.setItem("phrase", JSON.stringify(this.phrase));
-            this.updateHtml();
+            this.nextPhrase = result;
+            this.updatePhrases();
         });
     }
 
-    updateHtml() {
-        this.document.title = `Japangolin | ${this.phrase.Kana}`;
-        $("#kana").html(this.phrase.Kana);
+    updatePhrases() {
+        this.isCurrentPassed = false;
+        this.isCurrentFailed = false;
+
+        this.currentPhrase = this.nextPhrase;
+        this.updateHtml();
+
+        // this will collect the next phrase in the background
+        $.getJSON("api/random", (result) => {
+            this.nextPhrase = result;
+        });
+    }
+
+    private updateHtml() {
+        this.document.title = `Japangolin | ${this.currentPhrase.Kana}`;
+        $("#kana").html(this.currentPhrase.Kana);
         $("#userText").val("");
 
         $("#kanji").val("");
@@ -57,29 +58,26 @@
     }
 
     validate() {
-        if (this.isReviewing) {
-            this.updatePhrase();
+        if (this.isCurrentPassed) {
+            this.updatePhrases();
         } else {
             var userInput = $("#userText").val();
-            if (userInput.toLowerCase() === this.phrase.Romaji.toLowerCase()) {
-                var passes = Number(this.window.localStorage.getItem("passes")) + 1;
-                this.window.localStorage.setItem("passes", String(passes));
-                this.showReview();
+            if (userInput.toLowerCase() === this.currentPhrase.Romaji.toLowerCase()) {
+                this.isCurrentPassed = true;
+                this.passes++;
+                this.showPass();
             } else {
-                var fails = Number(this.window.localStorage.getItem("fails")) + 1;
-                this.window.localStorage.setItem("fails", String(fails));
-                $("#skipRow").show();
+                this.isCurrentFailed = true;
+                this.fails++;
+                this.showFail();
             }
         }
     }
 
-    showReview() {
-        this.isReviewing = true;
-        this.window.localStorage.setItem("isReviewing", "true");
-
-        if (this.phrase.Kanji.length > 0) {
+    private showPass() {
+        if (this.currentPhrase.Kanji.length > 0) {
             var kanjiHtml = "<hr/>";
-            this.phrase.Kanji.forEach(item => {
+            this.currentPhrase.Kanji.forEach(item => {
                 kanjiHtml += `<p>${item}</p>`;
             });
 
@@ -88,7 +86,7 @@
         }
         
         var meaningsHtml = "<hr/>";
-        this.phrase.Meaning.forEach(item => {
+        this.currentPhrase.Meaning.forEach(item => {
             meaningsHtml += `<p>${item}</p>`;
         });
 
@@ -97,5 +95,37 @@
 
         $("#skipRow").hide();
         $("#proceedRow").show();
+    }
+
+    private showFail() {
+        $("#skipRow").show();
+    }
+
+    saveState() {
+        this.window.localStorage.setItem("currentPhrase", JSON.stringify(this.currentPhrase));
+        this.window.localStorage.setItem("nextPhrase", JSON.stringify(this.nextPhrase));
+        this.window.localStorage.setItem("isCurrentPassed", this.isCurrentPassed ? "true" : "false");
+        this.window.localStorage.setItem("isCurrentFailed", this.isCurrentFailed ? "true" : "false");
+        this.window.localStorage.setItem("passes", String(this.passes));
+        this.window.localStorage.setItem("fails", String(this.fails));
+        this.window.localStorage.setItem("userText", $("#userText").val());
+    }
+
+    private loadState() {
+        this.currentPhrase = JSON.parse(this.window.localStorage.getItem("currentPhrase"));
+        this.nextPhrase = JSON.parse(this.window.localStorage.getItem("nextPhrase"));
+        this.isCurrentPassed = (this.window.localStorage.getItem("isCurrentPassed") == "true");
+        this.isCurrentFailed = (this.window.localStorage.getItem("isCurrentFailed") == "true");
+        this.passes = Number(this.window.localStorage.getItem("passes")); // Number(null) -> 0
+        this.fails = Number(this.window.localStorage.getItem("fails"));
+
+        this.updateHtml();
+
+        $("#userText").val(this.window.localStorage.getItem("userText"));
+        if (this.isCurrentPassed) {
+            this.showPass();
+        } else if (this.isCurrentFailed) {
+            this.showFail();
+        }
     }
 }

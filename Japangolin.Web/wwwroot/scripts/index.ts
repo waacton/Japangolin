@@ -2,11 +2,11 @@
     var phraseUpdater = new PhraseUpdater(window, window.document);
 
     $("#skipButton").click(() => {
-        phraseUpdater.updatePhrase();
+        phraseUpdater.updatePhrases();
     });
 
     $("#proceedButton").click(() => {
-        phraseUpdater.updatePhrase();
+        phraseUpdater.updatePhrases();
     });
 
     $("#userText").keyup((event) => {
@@ -15,16 +15,18 @@
             phraseUpdater.validate();
         }
     });
+
+    $(window).on("beforeunload", () => {
+        phraseUpdater.saveState();
+    });
 });
-
-
 
 /* old non-jQuery code, for curiosity! */
 //window.onload = () => {
 //    var phraseUpdater = new PhraseUpdater(window, window.document);
 
-//    document.getElementById("skipButton").onclick = () => { phraseUpdater.updatePhrase(); }
-//    document.getElementById("proceedButton").onclick = () => { phraseUpdater.updatePhrase(); }
+//    document.getElementById("skipButton").onclick = () => { phraseUpdater.updatePhrases(); }
+//    document.getElementById("proceedButton").onclick = () => { phraseUpdater.updatePhrases(); }
 //    document.getElementById("userText").onkeyup = (event) => {
 //        var keycode = (event.keyCode ? event.keyCode : event.which);
 //        if (keycode == 13) { // enter key
@@ -32,5 +34,5 @@
 //        }
 //    }
 
-//    phraseUpdater.updatePhrase();
+//    phraseUpdater.updatePhrases();
 //};

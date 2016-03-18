@@ -4,8 +4,7 @@
 
     $("#clearStorageButton").click(() => {
         this.window.localStorage.clear();
-        this.window.localStorage.setItem("passes", "0");
-        this.window.localStorage.setItem("fails", "0");
+
         this.updateCounts();
         this.createChart();
     });
@@ -51,5 +50,5 @@ function createChart() {
 
     var canvas = $("#countsChart").get(0);
     var ctx = (<HTMLCanvasElement>canvas).getContext("2d");
-    var myNewChart = new Chart(ctx).Pie(data);
+    var chart = new Chart(ctx).Pie(data);
 }

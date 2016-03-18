@@ -2,38 +2,35 @@ var PhraseUpdater = (function () {
     function PhraseUpdater(window, document) {
         this.window = window;
         this.document = document;
-        this.phrase = JSON.parse(this.window.localStorage.getItem("phrase"));
-        if (this.phrase == null) {
-            this.updatePhrase();
-        }
-        else {
-            this.updateHtml();
-        }
-        this.isReviewing = (this.window.localStorage.getItem("isReviewing") == "true");
-        if (this.isReviewing) {
-            this.updatePhrase();
-        }
-        // TODO: should instead be done when trying to read/write, both here and about page?
-        if (this.window.localStorage.getItem("passes") == null) {
-            this.window.localStorage.setItem("passes", "0");
-        }
-        if (this.window.localStorage.getItem("fails") == null) {
-            this.window.localStorage.setItem("fails", "0");
+        this.loadState();
+        if (this.currentPhrase == null || this.nextPhrase == null) {
+            this.initialisePhrases();
         }
     }
-    PhraseUpdater.prototype.updatePhrase = function () {
+    PhraseUpdater.prototype.initialisePhrases = function () {
         var _this = this;
-        this.isReviewing = false;
-        this.window.localStorage.setItem("isReviewing", "false");
+        $("#kana").html("Loading...");
+        // this is an up-front cost to get the first phrase
+        // future phrases will be retrieved in the background
         $.getJSON("api/random", function (result) {
-            _this.phrase = result;
-            _this.window.localStorage.setItem("phrase", JSON.stringify(_this.phrase));
-            _this.updateHtml();
+            _this.nextPhrase = result;
+            _this.updatePhrases();
+        });
+    };
+    PhraseUpdater.prototype.updatePhrases = function () {
+        var _this = this;
+        this.isCurrentPassed = false;
+        this.isCurrentFailed = false;
+        this.currentPhrase = this.nextPhrase;
+        this.updateHtml();
+        // this will collect the next phrase in the background
+        $.getJSON("api/random", function (result) {
+            _this.nextPhrase = result;
         });
     };
     PhraseUpdater.prototype.updateHtml = function () {
-        this.document.title = "Japangolin | " + this.phrase.Kana;
-        $("#kana").html(this.phrase.Kana);
+        this.document.title = "Japangolin | " + this.currentPhrase.Kana;
+        $("#kana").html(this.currentPhrase.Kana);
         $("#userText").val("");
         $("#kanji").val("");
         $("#meanings").val("");
@@ -43,42 +40,68 @@ var PhraseUpdater = (function () {
         $("#proceedRow").hide();
     };
     PhraseUpdater.prototype.validate = function () {
-        if (this.isReviewing) {
-            this.updatePhrase();
+        if (this.isCurrentPassed) {
+            this.updatePhrases();
         }
         else {
             var userInput = $("#userText").val();
-            if (userInput.toLowerCase() === this.phrase.Romaji.toLowerCase()) {
-                var passes = Number(this.window.localStorage.getItem("passes")) + 1;
-                this.window.localStorage.setItem("passes", String(passes));
-                this.showReview();
+            if (userInput.toLowerCase() === this.currentPhrase.Romaji.toLowerCase()) {
+                this.isCurrentPassed = true;
+                this.passes++;
+                this.showPass();
             }
             else {
-                var fails = Number(this.window.localStorage.getItem("fails")) + 1;
-                this.window.localStorage.setItem("fails", String(fails));
-                $("#skipRow").show();
+                this.isCurrentFailed = true;
+                this.fails++;
+                this.showFail();
             }
         }
     };
-    PhraseUpdater.prototype.showReview = function () {
-        this.isReviewing = true;
-        this.window.localStorage.setItem("isReviewing", "true");
-        if (this.phrase.Kanji.length > 0) {
+    PhraseUpdater.prototype.showPass = function () {
+        if (this.currentPhrase.Kanji.length > 0) {
             var kanjiHtml = "<hr/>";
-            this.phrase.Kanji.forEach(function (item) {
+            this.currentPhrase.Kanji.forEach(function (item) {
                 kanjiHtml += "<p>" + item + "</p>";
             });
             $("#kanji").html(kanjiHtml);
             $("#kanji").show();
         }
         var meaningsHtml = "<hr/>";
-        this.phrase.Meaning.forEach(function (item) {
+        this.currentPhrase.Meaning.forEach(function (item) {
             meaningsHtml += "<p>" + item + "</p>";
         });
         $("#meanings").html(meaningsHtml);
         $("#meanings").show();
         $("#skipRow").hide();
         $("#proceedRow").show();
+    };
+    PhraseUpdater.prototype.showFail = function () {
+        $("#skipRow").show();
+    };
+    PhraseUpdater.prototype.saveState = function () {
+        this.window.localStorage.setItem("currentPhrase", JSON.stringify(this.currentPhrase));
+        this.window.localStorage.setItem("nextPhrase", JSON.stringify(this.nextPhrase));
+        this.window.localStorage.setItem("isCurrentPassed", this.isCurrentPassed ? "true" : "false");
+        this.window.localStorage.setItem("isCurrentFailed", this.isCurrentFailed ? "true" : "false");
+        this.window.localStorage.setItem("passes", String(this.passes));
+        this.window.localStorage.setItem("fails", String(this.fails));
+        this.window.localStorage.setItem("userText", $("#userText").val());
+    };
+    PhraseUpdater.prototype.loadState = function () {
+        this.currentPhrase = JSON.parse(this.window.localStorage.getItem("currentPhrase"));
+        this.nextPhrase = JSON.parse(this.window.localStorage.getItem("nextPhrase"));
+        this.isCurrentPassed = (this.window.localStorage.getItem("isCurrentPassed") == "true");
+        this.isCurrentFailed = (this.window.localStorage.getItem("isCurrentFailed") == "true");
+        this.passes = Number(this.window.localStorage.getItem("passes")); // Number(null) -> 0
+        this.fails = Number(this.window.localStorage.getItem("fails"));
+        this.updateHtml();
+        $("#userText").val(this.window.localStorage.getItem("userText"));
+        if (this.isCurrentPassed) {
+            this.showPass();
+        }
+        else if (this.isCurrentFailed) {
+            this.showFail();
+        }
     };
     return PhraseUpdater;
 })();
