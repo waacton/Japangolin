@@ -23,6 +23,7 @@ var PhraseUpdater = (function () {
         // this will collect the next phrase in the background
         $.getJSON("api/random", function (result) {
             _this.nextPhrase = result;
+            _this.saveBasicState();
         });
     };
     PhraseUpdater.prototype.updateHtml = function () {
@@ -52,6 +53,7 @@ var PhraseUpdater = (function () {
                 this.fails++;
                 this.showFail();
             }
+            this.saveBasicState();
         }
     };
     PhraseUpdater.prototype.showPass = function () {
@@ -76,13 +78,18 @@ var PhraseUpdater = (function () {
         $("#skipRow").show();
     };
     PhraseUpdater.prototype.saveState = function () {
-        this.window.localStorage.setItem("currentPhrase", JSON.stringify(this.currentPhrase));
-        this.window.localStorage.setItem("nextPhrase", JSON.stringify(this.nextPhrase));
+        this.saveBasicState();
         this.window.localStorage.setItem("isCurrentPassed", this.isCurrentPassed ? "true" : "false");
         this.window.localStorage.setItem("isCurrentFailed", this.isCurrentFailed ? "true" : "false");
+        this.window.localStorage.setItem("userText", $("#userText").val());
+    };
+    // not all browsers seem to trigger window 'unload'/'beforeunload' (e.g. my phone...)
+    // so this method is called during usage of the webpage to save basic details
+    PhraseUpdater.prototype.saveBasicState = function () {
+        this.window.localStorage.setItem("currentPhrase", JSON.stringify(this.currentPhrase));
+        this.window.localStorage.setItem("nextPhrase", JSON.stringify(this.nextPhrase));
         this.window.localStorage.setItem("passes", String(this.passes));
         this.window.localStorage.setItem("fails", String(this.fails));
-        this.window.localStorage.setItem("userText", $("#userText").val());
     };
     PhraseUpdater.prototype.loadState = function () {
         this.currentPhrase = JSON.parse(this.window.localStorage.getItem("currentPhrase"));
