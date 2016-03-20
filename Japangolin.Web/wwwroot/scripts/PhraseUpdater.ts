@@ -16,6 +16,7 @@
 
     initialisePhrases() {
         $("#kana").html("Loading...");
+        $("#userText").prop("disabled", true);
 
         // this is an up-front cost to get the first phrase
         // future phrases will be retrieved in the background
@@ -35,13 +36,14 @@
         // this will collect the next phrase in the background
         $.getJSON("api/random", (result) => {
             this.nextPhrase = result;
-            this.saveBasicState();
+            this.saveState();
         });
     }
 
     private updateHtml() {
         this.document.title = `Japangolin | ${this.currentPhrase.Kana}`;
         $("#kana").html(this.currentPhrase.Kana);
+        $("#userText").prop("disabled", false);
         $("#userText").val("");
 
         $("#kanji").val("");
@@ -69,7 +71,7 @@
                 this.showFail();
             }
 
-            this.saveBasicState();
+            this.saveState();
         }
     }
 
@@ -100,20 +102,17 @@
         $("#skipRow").show();
     }
 
-    saveState() {
-        this.saveBasicState();
-        this.window.localStorage.setItem("isCurrentPassed", this.isCurrentPassed ? "true" : "false");
-        this.window.localStorage.setItem("isCurrentFailed", this.isCurrentFailed ? "true" : "false");
-        this.window.localStorage.setItem("userText", $("#userText").val());
-    }
-
     // not all browsers seem to trigger window 'unload'/'beforeunload' (e.g. my phone...)
-    // so this method is called during usage of the webpage to save basic details
-    private saveBasicState() {
+    // so this method is also called during usage of the webpage to save basic details
+    saveState() {
         this.window.localStorage.setItem("currentPhrase", JSON.stringify(this.currentPhrase));
         this.window.localStorage.setItem("nextPhrase", JSON.stringify(this.nextPhrase));
         this.window.localStorage.setItem("passes", String(this.passes));
         this.window.localStorage.setItem("fails", String(this.fails));
+
+        this.window.localStorage.setItem("isCurrentPassed", this.isCurrentPassed ? "true" : "false");
+        this.window.localStorage.setItem("isCurrentFailed", this.isCurrentFailed ? "true" : "false");
+        this.window.localStorage.setItem("userText", $("#userText").val());
     }
 
     private loadState() {
