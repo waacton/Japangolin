@@ -6,6 +6,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    using React.AspNet;
+
     using Wacton.Japangolin.Domain.JapanesePhrases;
 
     public class Startup
@@ -34,7 +36,10 @@
             // Add framework services.
             services.AddApplicationInsightsTelemetry(this.Configuration);
 
+            // see http://reactjs.net/getting-started/aspnet5.html
+            services.AddReact(); 
             services.AddMvc();
+
             services.AddSingleton<IJapanesePhraseRepository, JapanesePhraseRepository>();
         }
 
@@ -59,14 +64,54 @@
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            // see http://reactjs.net/getting-started/aspnet5.html
+            app.UseReact(config =>
+            {
+                // If you want to use server-side rendering of React components,
+                // add all the necessary JavaScript files here. This includes
+                // your components as well as all of their dependencies.
+                // See http://reactjs.net/ for more information. Example:
+                //config
+                //    .AddScript("~/Scripts/First.jsx")
+                //    .AddScript("~/Scripts/Second.jsx");
+
+                // If you use an external build too (for example, Babel, Webpack,
+                // Browserify or Gulp), you can improve performance by disabling
+                // ReactJS.NET's version of Babel and loading the pre-transpiled
+                // scripts. Example:
+                //config
+                //    .SetLoadBabel(false)
+                //    .AddScriptWithoutTransform("~/Scripts/bundle.server.js");
+            });
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc(
+                routes =>
+                {
+                    // default route
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+
+                    // .../react
+                    // convention based: needs ReactController, View/React/ReactDemo
+                    routes.MapRoute(
+                        name: "react route",
+                        template: "react",
+                        defaults: new { controller = "React", action = "ReactDemo" });
+
+                    // .../comments
+                    routes.MapRoute(
+                        name: "comments route",
+                        template: "comments",
+                        defaults: new { controller = "React", action = "Comments" });
+
+                    routes.MapRoute(
+                        name: "new comment",
+                        template: "comments/new",
+                        defaults: new { controller = "React", action = "AddComment" });
+                }
+            );
         }
 
         // Entry point for the application.
