@@ -1,4 +1,29 @@
-﻿var Kana = React.createClass({
+﻿var Navigation = React.createClass({
+    render: function() {
+        return (
+            <div className="navbar navbar-default navbar-fixed-top">
+                <div className="container">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
+                        <a className="navbar-brand">Japangolin</a>
+                    </div>
+                    <div className="navbar-collapse collapse">
+                        <ul className="nav navbar-nav">
+                            <li><a>About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
+
+var Kana = React.createClass({
     render: function() {
         return (
             <h1>
@@ -12,7 +37,7 @@ var UserRomaji = React.createClass({
     render: function() {
         return (
             <div className="form-group">
-                <input id="userText" type="text" placeholder="Romaji..." className="form-control form-control-lg" style={{maxWidth : 280}} />
+                <input id="userText" type="text" placeholder="Romaji..." className="form-control form-control-lg" />
             </div>
         );
     }
@@ -55,7 +80,7 @@ var Meaning = React.createClass({
 });
 
 var Japangolin = React.createClass({
-    getPhraseFromServer: function() {
+    updatePhraseFromServer: function() {
         $.ajax({
             url: this.props.url,
             dataType: "json",
@@ -73,12 +98,13 @@ var Japangolin = React.createClass({
         return { data: { Kana: "Loading...", Kanji: [], Meaning: [] } };
     },
     componentDidMount: function () {
-        this.getPhraseFromServer();
+        this.updatePhraseFromServer();
     },
-    render: function() {
+    render: function () {
+        // bootstrap's container provides default padding and margin
         return (
-            <div>
-                <h1>Japangolin!</h1>
+            <div className="container"> 
+                <Navigation />
                 <Kana kana={this.state.data.Kana} />
                 <UserRomaji />
                 <hr />

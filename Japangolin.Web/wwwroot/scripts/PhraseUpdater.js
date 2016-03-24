@@ -61,16 +61,20 @@ var PhraseUpdater = (function () {
     PhraseUpdater.prototype.showPass = function () {
         if (this.currentPhrase.Kanji.length > 0) {
             var kanjiHtml = "<hr/>";
+            kanjiHtml += "<ul>";
             this.currentPhrase.Kanji.forEach(function (item) {
-                kanjiHtml += "<p>" + item + "</p>";
+                kanjiHtml += "<li>" + item + "</li>";
             });
+            kanjiHtml += "</ul>";
             $("#kanji").html(kanjiHtml);
             $("#kanji").show();
         }
         var meaningsHtml = "<hr/>";
+        meaningsHtml += "<ul>";
         this.currentPhrase.Meaning.forEach(function (item) {
-            meaningsHtml += "<p>" + item + "</p>";
+            meaningsHtml += "<li>" + item + "</li>";
         });
+        meaningsHtml += "</ul>";
         $("#meanings").html(meaningsHtml);
         $("#meanings").show();
         $("#skipRow").hide();
