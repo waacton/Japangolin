@@ -43,6 +43,32 @@ var UserRomaji = React.createClass({
     }
 });
 
+var SkipButton = React.createClass({
+    render: function() {
+        return (
+            <div className="row" id="skipRow">
+                <div className="col-sm-2">
+                    {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
+                    <input id="skipButton" type="button" value="Skip" className="btn btn-warning btn-block" />
+                </div>
+            </div>
+        );
+    }
+});
+
+var ProceedButton = React.createClass({
+    render: function() {
+        return (
+            <div className="row" id="proceedRow">
+                <div className="col-sm-2">
+                    {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
+                    <input id="proceedButton" type="button" value="Proceed" className="btn btn-success btn-block" />
+                </div>
+            </div>
+        );
+    }
+});
+
 var ListItemWrapper = React.createClass({
     render: function() {
         return <li>{this.props.text}</li>;
@@ -86,7 +112,7 @@ var Japangolin = React.createClass({
             dataType: "json",
             cache: false,
             success: function(data) {
-                this.setState({ data: data });
+                this.setState({ currentPhrase: data });
                 this.render();
             }.bind(this),
             error: function(xhr, status, err) {
@@ -95,23 +121,38 @@ var Japangolin = React.createClass({
         });
     },
     getInitialState: function () {
-        return { data: { Kana: "Loading...", Kanji: [], Meaning: [] } };
+        return {
+            currentPhrase: JSON.parse(window.localStorage.getItem("currentPhrase")),
+            nextPhrase: JSON.parse(window.localStorage.getItem("nextPhrase")),
+            isCurrentPassed: (window.localStorage.getItem("isCurrentPassed") == "true"),
+            isCurrentFailed: (window.localStorage.getItem("isCurrentFailed") == "true"),
+            passes: Number(window.localStorage.getItem("passes")), // Number(null) -> 0
+            fails: Number(window.localStorage.getItem("fails"))
+        };
     },
     componentDidMount: function () {
-        this.updatePhraseFromServer();
+        if (this.state.currentPhrase == null) {
+            this.updatePhraseFromServer();
+        }
     },
     render: function () {
+        var userButton = this.state.isCurrentPassed ? <ProceedButton /> : this.state.isCurrentFailed ? <SkipButton /> : null;
+
         // bootstrap's container provides default padding and margin
         return (
             <div className="container"> 
                 <Navigation />
-                <Kana kana={this.state.data.Kana} />
+                <Kana kana={this.state.currentPhrase.Kana} />
                 <UserRomaji />
+                {userButton}
                 <hr />
-                <Kanji kanji={this.state.data.Kanji} />
+                <Kanji kanji={this.state.currentPhrase.Kanji} />
                 <hr />
-                <Meaning meaning={this.state.data.Meaning} />
+                <Meaning meaning={this.state.currentPhrase.Meaning} />
                 <hr />
+                <footer>
+                    <p>&copy; 2016 - Wacton</p>
+                </footer>
             </div>
         );
     }
