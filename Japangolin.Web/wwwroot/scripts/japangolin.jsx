@@ -34,22 +34,41 @@ var Kana = React.createClass({
 });
 
 var UserRomaji = React.createClass({
+    getInitialState: function() {
+        return { value: this.props.initialText };
+    },
+    handleKeyUp: function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == 13) { // enter key
+            console.log("Enter key detected -> " + event.target.value);
+            this.props.handleInputEntered(event.target.value);
+        }
+    },
+    handleChange: function (event) {
+        this.setState({ value: event.target.value });
+        this.props.handleInputChanged(event.target.value);
+    },
     render: function() {
         return (
             <div className="form-group">
-                <input id="userText" type="text" placeholder="Romaji..." className="form-control form-control-lg" />
+                <input type="text" placeholder="Romaji..." className="form-control form-control-lg" 
+                       value={this.state.value} onKeyUp={this.handleKeyUp} onChange={this.handleChange} disabled={this.props.isDisabled}/>
             </div>
         );
     }
 });
 
 var SkipButton = React.createClass({
+    onSkipClick: function(event) {
+        this.props.handleClick();
+        return;
+    },
     render: function() {
         return (
             <div className="row" id="skipRow">
                 <div className="col-sm-2">
                     {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
-                    <input id="skipButton" type="button" value="Skip" className="btn btn-warning btn-block" />
+                    <input type="button" value="Skip" className="btn btn-warning btn-block" onClick={this.onSkipClick}/>
                 </div>
             </div>
         );
@@ -57,12 +76,16 @@ var SkipButton = React.createClass({
 });
 
 var ProceedButton = React.createClass({
+    onProceedClick: function(event) {
+        this.props.handleClick();
+        return;
+    },
     render: function() {
         return (
             <div className="row" id="proceedRow">
                 <div className="col-sm-2">
                     {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
-                    <input id="proceedButton" type="button" value="Proceed" className="btn btn-success btn-block" />
+                    <input type="button" value="Proceed" className="btn btn-success btn-block" onClick={this.onProceedClick}/>
                 </div>
             </div>
         );
@@ -106,44 +129,88 @@ var Meaning = React.createClass({
 });
 
 var Japangolin = React.createClass({
-    updatePhraseFromServer: function() {
+    getInitialState: function () {
+        return {
+            currentPhrase: JSON.parse(localStorage.getItem("currentPhrase")),
+            nextPhrase: JSON.parse(localStorage.getItem("nextPhrase")),
+            isCurrentPassed: (localStorage.getItem("isCurrentPassed") == "true"),
+            isCurrentFailed: (localStorage.getItem("isCurrentFailed") == "true"),
+            passes: Number(localStorage.getItem("passes")), // Number(null) -> 0
+            fails: Number(localStorage.getItem("fails")),
+            userText: localStorage.getItem("userText")
+        };
+    },
+    componentDidMount: function () {
+        if (this.state.currentPhrase == null || this.state.nextPhrase == null) {
+            this.getNextPhraseFromServer();
+            this.updateCurrentPhrase();
+        }
+    },
+    getNextPhraseFromServer: function () {
         $.ajax({
             url: this.props.url,
             dataType: "json",
             cache: false,
-            success: function(data) {
-                this.setState({ currentPhrase: data });
+            success: function (data) {
+                this.setState({ nextPhrase: data });
+                this.saveState();
                 this.render();
             }.bind(this),
-            error: function(xhr, status, err) {
+            error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
     },
-    getInitialState: function () {
-        return {
-            currentPhrase: JSON.parse(window.localStorage.getItem("currentPhrase")),
-            nextPhrase: JSON.parse(window.localStorage.getItem("nextPhrase")),
-            isCurrentPassed: (window.localStorage.getItem("isCurrentPassed") == "true"),
-            isCurrentFailed: (window.localStorage.getItem("isCurrentFailed") == "true"),
-            passes: Number(window.localStorage.getItem("passes")), // Number(null) -> 0
-            fails: Number(window.localStorage.getItem("fails"))
-        };
+    updateCurrentPhrase: function () {
+        this.setState({
+            isCurrentPassed: false,
+            isCurrentFailed: false,
+            currentPhrase: this.state.nextPhrase
+        });
+
+        this.getNextPhraseFromServer();
+        this.saveState();
     },
-    componentDidMount: function () {
-        if (this.state.currentPhrase == null) {
-            this.updatePhraseFromServer();
+    saveState: function() {
+        localStorage.setItem("currentPhrase", JSON.stringify(this.state.currentPhrase));
+        localStorage.setItem("nextPhrase", JSON.stringify(this.state.nextPhrase));
+        localStorage.setItem("passes", String(this.state.passes));
+        localStorage.setItem("fails", String(this.state.fails));
+        localStorage.setItem("isCurrentPassed", this.state.isCurrentPassed ? "true" : "false");
+        localStorage.setItem("isCurrentFailed", this.state.isCurrentFailed ? "true" : "false");
+        localStorage.setItem("userText", this.state.userText);
+    },
+    validateUserRomaji: function (userInput) {
+        if (this.state.isCurrentPassed) {
+            this.updateCurrentPhrase();
+            return;
+        }
+
+        if (userInput.toLowerCase() === this.state.currentPhrase.Romaji.toLowerCase()) {
+            this.setState({ isCurrentPassed: true, passes: this.state.passes + 1, userText: userInput.toString() }, () => this.saveState());
+        } else {
+            this.setState({ isCurrentFailed: true, fails: this.state.fails + 1, userText: userInput.toString() }, () => this.saveState());
         }
     },
+    saveUserRomaji: function(userInput) {
+        this.setState({ userText: userInput }, () => this.saveState());
+    },
     render: function () {
-        var userButton = this.state.isCurrentPassed ? <ProceedButton /> : this.state.isCurrentFailed ? <SkipButton /> : null;
+        var userButton;
+        if (this.state.isCurrentPassed) {
+            userButton = <ProceedButton handleClick={this.updateCurrentPhrase } />;
+        }  else if (this.state.isCurrentFailed) {
+            userButton = <SkipButton handleClick={this.updateCurrentPhrase } />;
+        } else {
+            userButton = null;
+        }
 
-        // bootstrap's container provides default padding and margin
+        // bootstrap's "container" provides default padding and margin
         return (
             <div className="container"> 
                 <Navigation />
                 <Kana kana={this.state.currentPhrase.Kana} />
-                <UserRomaji />
+                <UserRomaji initialText={this.state.userText} isDisabled={this.state.currentPhrase == null || this.state.nextPhrase == null} handleInputEntered={this.validateUserRomaji} handleInputChanged={this.saveUserRomaji} />
                 {userButton}
                 <hr />
                 <Kanji kanji={this.state.currentPhrase.Kanji} />
