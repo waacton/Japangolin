@@ -165,7 +165,8 @@ var Japangolin = React.createClass({
         this.setState({
             isCurrentPassed: false,
             isCurrentFailed: false,
-            currentPhrase: this.state.nextPhrase
+            currentPhrase: this.state.nextPhrase,
+            userText: ""
         });
 
         this.getNextPhraseFromServer();
