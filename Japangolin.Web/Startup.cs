@@ -55,7 +55,8 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseIISPlatformHandler();
@@ -67,6 +68,8 @@
             // see http://reactjs.net/getting-started/aspnet5.html
             app.UseReact(config =>
             {
+                config.SetAllowMsieEngine(false);
+
                 // If you want to use server-side rendering of React components,
                 // add all the necessary JavaScript files here. This includes
                 // your components as well as all of their dependencies.

@@ -21,7 +21,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
+    "web": "Microsoft.AspNet.Server.Kestrel"
   },
 
   "frameworks": {
@@ -36,6 +36,7 @@
     "wwwroot",
     "node_modules"
   ],
+
   "publishExclude": [
     "**.user",
     "**.vspscc"
