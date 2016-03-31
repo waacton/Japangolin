@@ -34,25 +34,20 @@ var Kana = React.createClass({
 });
 
 var UserRomaji = React.createClass({
-    getInitialState: function() {
-        return { value: this.props.initialText };
-    },
     handleKeyUp: function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == 13) { // enter key
-            console.log("Enter key detected -> " + event.target.value);
             this.props.handleInputEntered(event.target.value);
         }
     },
     handleChange: function (event) {
-        this.setState({ value: event.target.value });
         this.props.handleInputChanged(event.target.value);
     },
-    render: function() {
+    render: function () {
         return (
             <div className="form-group">
                 <input type="text" placeholder="Romaji..." className="form-control form-control-lg" 
-                       value={this.state.value} onKeyUp={this.handleKeyUp} onChange={this.handleChange} disabled={this.props.isDisabled}/>
+                       value={this.props.text} onKeyUp={this.handleKeyUp} onChange={this.handleChange} disabled={this.props.isDisabled}/>
             </div>
         );
     }
@@ -152,8 +147,7 @@ var Japangolin = React.createClass({
             dataType: "json",
             cache: false,
             success: function (data) {
-                this.setState({ nextPhrase: data });
-                this.saveState();
+                this.setState({ nextPhrase: data }, () => this.saveState());
                 this.render();
             }.bind(this),
             error: function (xhr, status, err) {
@@ -167,10 +161,9 @@ var Japangolin = React.createClass({
             isCurrentFailed: false,
             currentPhrase: this.state.nextPhrase,
             userText: ""
-        });
+        }, () => this.saveState());
 
         this.getNextPhraseFromServer();
-        this.saveState();
     },
     saveState: function() {
         localStorage.setItem("currentPhrase", JSON.stringify(this.state.currentPhrase));
@@ -193,30 +186,64 @@ var Japangolin = React.createClass({
             this.setState({ isCurrentFailed: true, fails: this.state.fails + 1, userText: userInput.toString() }, () => this.saveState());
         }
     },
-    saveUserRomaji: function(userInput) {
-        this.setState({ userText: userInput }, () => this.saveState());
+    saveUserRomaji: function (userInput) {
+        this.s({ userText: userInput }, () => this.saveState());
+    },
+    renderButton: function() {
+        var button = null;
+        if (this.state.isCurrentPassed) {
+            button = <ProceedButton handleClick={this.updateCurrentPhrase } />;
+        }  else if (this.state.isCurrentFailed) {
+            button = <SkipButton handleClick={this.updateCurrentPhrase } />;
+        }
+
+        return button;
+    },
+    renderDetails: function () {
+        var details = null;
+        if (this.state.isCurrentPassed) {
+            var kanjiDetails = null;
+            if (this.state.currentPhrase.Kanji.length > 0) {
+                kanjiDetails = (
+                    <div>
+                        <hr />
+                        <Kanji kanji={this.state.currentPhrase.Kanji } />
+                    </div>
+                );
+            }
+
+            var meaningDetails = null;
+            if (this.state.currentPhrase.Meaning.length > 0) {
+                meaningDetails = (
+                    <div>
+                        <hr />
+                        <Meaning meaning={this.state.currentPhrase.Meaning } />
+                    </div>
+                );
+            }
+
+            details = (
+                <div>
+                    {kanjiDetails}
+                    {meaningDetails}
+                </div>
+            );
+        }
+
+        return details;
     },
     render: function () {
-        var userButton;
-        if (this.state.isCurrentPassed) {
-            userButton = <ProceedButton handleClick={this.updateCurrentPhrase } />;
-        }  else if (this.state.isCurrentFailed) {
-            userButton = <SkipButton handleClick={this.updateCurrentPhrase } />;
-        } else {
-            userButton = null;
-        }
+        var button = this.renderButton();
+        var details = this.renderDetails();
 
         // bootstrap's "container" provides default padding and margin
         return (
             <div className="container"> 
                 <Navigation />
                 <Kana kana={this.state.currentPhrase.Kana} />
-                <UserRomaji initialText={this.state.userText} isDisabled={this.state.currentPhrase == null || this.state.nextPhrase == null} handleInputEntered={this.validateUserRomaji} handleInputChanged={this.saveUserRomaji} />
-                {userButton}
-                <hr />
-                <Kanji kanji={this.state.currentPhrase.Kanji} />
-                <hr />
-                <Meaning meaning={this.state.currentPhrase.Meaning} />
+                <UserRomaji text={this.state.userText} isDisabled={this.state.currentPhrase == null || this.state.nextPhrase == null} handleInputEntered={this.validateUserRomaji} handleInputChanged={this.saveUserRomaji} />
+                {button}
+                {details}
                 <hr />
                 <footer>
                     <p>&copy; 2016 - Wacton</p>
