@@ -1,11 +1,15 @@
 ﻿namespace Wacton.Japangolin.Web
 {
+    using System.Linq;
+    using System.Text;
+
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    using React;
     using React.AspNet;
 
     using Wacton.Japangolin.Domain.JapanesePhrases;
@@ -68,6 +72,11 @@
             // see http://reactjs.net/getting-started/aspnet5.html
             app.UseReact(config =>
             {
+                /* see http://reactjs.net/guides/azure.html
+                 * ReactJS.NET 2.2 did NOT fall back to ClearScript V8 JavaScript engine out-of-the-box for me
+                 * had to copy ClearScript dlls to the correct places via gulp tasks to make things work
+                 * see http://www.samulihaverinen.com/web-development/dotnet/2016/01/19/how-to-run-clearscript-v8-javascript-engine-in-azure/
+                 * (despite the blog post saying this is not needed in 2.2 onwards...) */
                 config.SetAllowMsieEngine(false);
 
                 // If you want to use server-side rendering of React components,
@@ -115,9 +124,34 @@
                         defaults: new { controller = "React", action = "AddComment" });
                 }
             );
+
+            var logger = loggerFactory.CreateLogger("JavaScript engine logger");
+            logger.LogInformation(this.GetAvailableEngines());
         }
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+
+        public string GetAvailableEngines()
+        {
+            var sb = new StringBuilder();
+            var registrations = React.TinyIoC.TinyIoCContainer.Current.ResolveAll<JavaScriptEngineFactory.Registration>();
+            foreach (var registration in registrations.OrderBy(r => r.Priority))
+            {
+                try
+                {
+                    var engine = registration.Factory();
+                    var result = engine.Evaluate<int>("1 + 1");
+                    if (result == 2)
+                    {
+                        sb.AppendLine($"Engine: {engine.Name}, version: {engine.Version}, priority: {registration.Priority}");
+                    }
+
+                }
+                catch { }
+            }
+
+            return sb.ToString();
+        }
     }
 }
