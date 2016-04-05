@@ -9,9 +9,9 @@ gulp.task("copy-v8-runtime-build", function () {
     var dest = "C:\\Users\\willacto\\.dnx\\runtimes\\dnx-clr-win-x86.1.0.0-rc1-update1\\ClearScript.V8";
 
     execLog('if not exist "' + dest + '" mkdir "' + dest + '"');
-    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.Core\\1.5.0\\lib\\net40" "' + dest + '"');
-    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.5.2\\lib\\net40" "' + dest + '"');
-    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.5.2\\content\\ClearScript.V8" "' + dest + '"');
+    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.Core\\1.2.4\\lib\\net40" "' + dest + '"');
+    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.4.1\\lib\\net40" "' + dest + '"');
+    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.4.1\\content\\ClearScript.V8" "' + dest + '"');
 });
 
 gulp.task("copy-v8-runtime-publish", function () {
@@ -19,9 +19,9 @@ gulp.task("copy-v8-runtime-publish", function () {
     var dest = "C:\\Users\\willacto\\AppData\\Local\\Temp\\PublishTemp\\Japangolin.Web81\\approot\\runtimes\\dnx-clr-win-x86.1.0.0-rc1-update1\\ClearScript.V8";
 
     execLog('if not exist "' + dest + '" mkdir "' + dest + '"');
-    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.Core\\1.5.0\\lib\\net40" "' + dest + '"');
-    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.5.2\\lib\\net40" "' + dest + '"');
-    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.5.2\\content\\ClearScript.V8" "' + dest + '"');
+    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.Core\\1.2.4\\lib\\net40" "' + dest + '"');
+    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.4.1\\lib\\net40" "' + dest + '"');
+    execLog('copy /Y "' + packages + 'JavaScriptEngineSwitcher.V8\\1.4.1\\content\\ClearScript.V8" "' + dest + '"');
 });
 
 function execLog(command) {

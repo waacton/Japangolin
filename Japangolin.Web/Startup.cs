@@ -136,7 +136,9 @@
         {
             var sb = new StringBuilder();
             var registrations = React.TinyIoC.TinyIoCContainer.Current.ResolveAll<JavaScriptEngineFactory.Registration>();
-            foreach (var registration in registrations.OrderBy(r => r.Priority))
+
+            //foreach (var registration in registrations.OrderBy(r => r.Priority)) // linq extension method not picked up by VS correctly :S ?
+            foreach (var registration in Enumerable.OrderBy(registrations, r => r.Priority))
             {
                 try
                 {

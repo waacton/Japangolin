@@ -18,17 +18,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "React.AspNet": "2.2.1",
-    "React.Core": "2.2.1",
-    "Microsoft.AspNet.FileProviders.Physical": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
-    "JSPool": "0.3.1",
-    "MsieJavaScriptEngine": "1.7.0",
-    "JavaScriptEngineSwitcher.Core": "1.5.0",
-    "JavaScriptEngineSwitcher.Msie": "1.5.0",
-    "JavaScriptEngineSwitcher.V8": "1.5.2",
-    "ClearScript.Installer": "5.4.1.23392"
+    "React.Core": "2.2.1"
   },
 
   "commands": {

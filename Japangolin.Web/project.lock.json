@@ -3,18 +3,7 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.2": {
-      "ClearScript.Installer/5.4.1.23392": {
-        "type": "package",
-        "compile": {
-          "lib/net45/ClearScript.dll": {},
-          "lib/net45/ClearScript.Installer.dll": {}
-        },
-        "runtime": {
-          "lib/net45/ClearScript.dll": {},
-          "lib/net45/ClearScript.Installer.dll": {}
-        }
-      },
-      "JavaScriptEngineSwitcher.Core/1.5.0": {
+      "JavaScriptEngineSwitcher.Core/1.2.4": {
         "type": "package",
         "compile": {
           "lib/net40/JavaScriptEngineSwitcher.Core.dll": {}
@@ -28,11 +17,11 @@
           }
         }
       },
-      "JavaScriptEngineSwitcher.Msie/1.5.0": {
+      "JavaScriptEngineSwitcher.Msie/1.4.0": {
         "type": "package",
         "dependencies": {
-          "JavaScriptEngineSwitcher.Core": "1.5.0",
-          "MsieJavaScriptEngine": "1.7.0"
+          "JavaScriptEngineSwitcher.Core": "1.2.4",
+          "MsieJavaScriptEngine": "1.6.0"
         },
         "compile": {
           "lib/net40/JavaScriptEngineSwitcher.Msie.dll": {}
@@ -41,10 +30,10 @@
           "lib/net40/JavaScriptEngineSwitcher.Msie.dll": {}
         }
       },
-      "JavaScriptEngineSwitcher.V8/1.5.2": {
+      "JavaScriptEngineSwitcher.V8/1.4.1": {
         "type": "package",
         "dependencies": {
-          "JavaScriptEngineSwitcher.Core": "1.5.0"
+          "JavaScriptEngineSwitcher.Core": "1.2.4"
         },
         "compile": {
           "lib/net40/ClearScript.dll": {},
@@ -1538,7 +1527,7 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "MsieJavaScriptEngine/1.7.0": {
+      "MsieJavaScriptEngine/1.6.0": {
         "type": "package",
         "compile": {
           "lib/net40/MsieJavaScriptEngine.dll": {}
@@ -1835,18 +1824,7 @@
       }
     },
     "DNX,Version=v4.5.2/win7-x86": {
-      "ClearScript.Installer/5.4.1.23392": {
-        "type": "package",
-        "compile": {
-          "lib/net45/ClearScript.dll": {},
-          "lib/net45/ClearScript.Installer.dll": {}
-        },
-        "runtime": {
-          "lib/net45/ClearScript.dll": {},
-          "lib/net45/ClearScript.Installer.dll": {}
-        }
-      },
-      "JavaScriptEngineSwitcher.Core/1.5.0": {
+      "JavaScriptEngineSwitcher.Core/1.2.4": {
         "type": "package",
         "compile": {
           "lib/net40/JavaScriptEngineSwitcher.Core.dll": {}
@@ -1860,11 +1838,11 @@
           }
         }
       },
-      "JavaScriptEngineSwitcher.Msie/1.5.0": {
+      "JavaScriptEngineSwitcher.Msie/1.4.0": {
         "type": "package",
         "dependencies": {
-          "JavaScriptEngineSwitcher.Core": "1.5.0",
-          "MsieJavaScriptEngine": "1.7.0"
+          "JavaScriptEngineSwitcher.Core": "1.2.4",
+          "MsieJavaScriptEngine": "1.6.0"
         },
         "compile": {
           "lib/net40/JavaScriptEngineSwitcher.Msie.dll": {}
@@ -1873,10 +1851,10 @@
           "lib/net40/JavaScriptEngineSwitcher.Msie.dll": {}
         }
       },
-      "JavaScriptEngineSwitcher.V8/1.5.2": {
+      "JavaScriptEngineSwitcher.V8/1.4.1": {
         "type": "package",
         "dependencies": {
-          "JavaScriptEngineSwitcher.Core": "1.5.0"
+          "JavaScriptEngineSwitcher.Core": "1.2.4"
         },
         "compile": {
           "lib/net40/ClearScript.dll": {},
@@ -3373,7 +3351,7 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "MsieJavaScriptEngine/1.7.0": {
+      "MsieJavaScriptEngine/1.6.0": {
         "type": "package",
         "compile": {
           "lib/net40/MsieJavaScriptEngine.dll": {}
@@ -3670,18 +3648,7 @@
       }
     },
     "DNX,Version=v4.5.2/win7-x64": {
-      "ClearScript.Installer/5.4.1.23392": {
-        "type": "package",
-        "compile": {
-          "lib/net45/ClearScript.dll": {},
-          "lib/net45/ClearScript.Installer.dll": {}
-        },
-        "runtime": {
-          "lib/net45/ClearScript.dll": {},
-          "lib/net45/ClearScript.Installer.dll": {}
-        }
-      },
-      "JavaScriptEngineSwitcher.Core/1.5.0": {
+      "JavaScriptEngineSwitcher.Core/1.2.4": {
         "type": "package",
         "compile": {
           "lib/net40/JavaScriptEngineSwitcher.Core.dll": {}
@@ -3695,11 +3662,11 @@
           }
         }
       },
-      "JavaScriptEngineSwitcher.Msie/1.5.0": {
+      "JavaScriptEngineSwitcher.Msie/1.4.0": {
         "type": "package",
         "dependencies": {
-          "JavaScriptEngineSwitcher.Core": "1.5.0",
-          "MsieJavaScriptEngine": "1.7.0"
+          "JavaScriptEngineSwitcher.Core": "1.2.4",
+          "MsieJavaScriptEngine": "1.6.0"
         },
         "compile": {
           "lib/net40/JavaScriptEngineSwitcher.Msie.dll": {}
@@ -3708,10 +3675,10 @@
           "lib/net40/JavaScriptEngineSwitcher.Msie.dll": {}
         }
       },
-      "JavaScriptEngineSwitcher.V8/1.5.2": {
+      "JavaScriptEngineSwitcher.V8/1.4.1": {
         "type": "package",
         "dependencies": {
-          "JavaScriptEngineSwitcher.Core": "1.5.0"
+          "JavaScriptEngineSwitcher.Core": "1.2.4"
         },
         "compile": {
           "lib/net40/ClearScript.dll": {},
@@ -5208,7 +5175,7 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "MsieJavaScriptEngine/1.7.0": {
+      "MsieJavaScriptEngine/1.6.0": {
         "type": "package",
         "compile": {
           "lib/net40/MsieJavaScriptEngine.dll": {}
@@ -5518,59 +5485,37 @@
       "type": "project",
       "path": "../wrap/Wacton.Tovarisch.MVVM/project.json"
     },
-    "ClearScript.Installer/5.4.1.23392": {
+    "JavaScriptEngineSwitcher.Core/1.2.4": {
       "type": "package",
-      "sha512": "ZoEfpxC/slGEcnuDjB5jywvG4WQ3p/4okSsVgJXqQym7Il80bot0zJtSsNYNRiHm/WgocV3Zv2O+r1yDk/+6Mw==",
-      "files": [
-        "ClearScript.Installer.5.4.1.23392.nupkg",
-        "ClearScript.Installer.5.4.1.23392.nupkg.sha512",
-        "ClearScript.Installer.nuspec",
-        "content/ClearScriptV8-32.dll",
-        "content/ClearScriptV8-32.pdb",
-        "content/ClearScriptV8-64.dll",
-        "content/ClearScriptV8-64.pdb",
-        "content/v8-ia32.dll",
-        "content/v8-ia32.pdb",
-        "content/v8-x64.dll",
-        "content/v8-x64.pdb",
-        "lib/net45/ClearScript.dll",
-        "lib/net45/ClearScript.Installer.dll",
-        "lib/net45/ClearScript.pdb",
-        "lib/net45/ClearScript.xml",
-        "tools/install.ps1"
-      ]
-    },
-    "JavaScriptEngineSwitcher.Core/1.5.0": {
-      "type": "package",
-      "sha512": "k7hujCUsRHn9DiUw1hvK/8LfgCWH/CYrqQKqzTR9LUADhOfi1PP50vZvVuyoFF7sTHeb6vIOsxSZUv9/6aKJ1Q==",
+      "sha512": "Ml0C9FDh+PuZItK9PbnOmPx4L8fkvqoewUkQ9S8x4F+mMLr0+nNi/AWsO49qKqdtcgJzt+9Uigz5eU0wnYkEuQ==",
       "files": [
         "content/app.config.transform",
         "content/web.config.transform",
-        "JavaScriptEngineSwitcher.Core.1.5.0.nupkg",
-        "JavaScriptEngineSwitcher.Core.1.5.0.nupkg.sha512",
+        "JavaScriptEngineSwitcher.Core.1.2.4.nupkg",
+        "JavaScriptEngineSwitcher.Core.1.2.4.nupkg.sha512",
         "JavaScriptEngineSwitcher.Core.nuspec",
         "lib/net40/JavaScriptEngineSwitcher.Core.dll",
         "lib/net40/ru-ru/JavaScriptEngineSwitcher.Core.resources.dll",
         "readme.txt"
       ]
     },
-    "JavaScriptEngineSwitcher.Msie/1.5.0": {
+    "JavaScriptEngineSwitcher.Msie/1.4.0": {
       "type": "package",
-      "sha512": "WSb/IKTuLK9to3IwvoNSrc2kRQw+5TickM7+ld+KRPWcyBXaNt0PQnjHN5Uqoj89VQO9hCcj292vR3zCzL/hjA==",
+      "sha512": "hDRy/5kuhnQu7FaSpmzvwZRxjBO4PXFrddMX8VqiYkodMwqQ5TURWmMRjsibh76WWXgiSjI+YiBvZDuXaVwWAg==",
       "files": [
         "content/app.config.transform",
         "content/web.config.transform",
-        "JavaScriptEngineSwitcher.Msie.1.5.0.nupkg",
-        "JavaScriptEngineSwitcher.Msie.1.5.0.nupkg.sha512",
+        "JavaScriptEngineSwitcher.Msie.1.4.0.nupkg",
+        "JavaScriptEngineSwitcher.Msie.1.4.0.nupkg.sha512",
         "JavaScriptEngineSwitcher.Msie.nuspec",
         "lib/net40/JavaScriptEngineSwitcher.Msie.dll",
         "msie-javascript-engine-license.txt",
         "readme.txt"
       ]
     },
-    "JavaScriptEngineSwitcher.V8/1.5.2": {
+    "JavaScriptEngineSwitcher.V8/1.4.1": {
       "type": "package",
-      "sha512": "qU9nifu/P7XedSR0DpeUAM2Eu+A659NpquGmzSqbm95vp8HaUj6huDA/vlan1ovDzix73XAns6p6hb180SD5sw==",
+      "sha512": "dl4+0o9VSd/Z+ibSRxeRKUjhaFtprbslxQhc4c7FWMdq34xaFn/u6rgcLgHUiaZH3VGSbVcRtU87Vs21ytkncQ==",
       "files": [
         "build/JavaScriptEngineSwitcher.V8.props",
         "clearscript-license.txt",
@@ -5580,8 +5525,8 @@
         "content/ClearScript.V8/v8-ia32.dll",
         "content/ClearScript.V8/v8-x64.dll",
         "content/web.config.transform",
-        "JavaScriptEngineSwitcher.V8.1.5.2.nupkg",
-        "JavaScriptEngineSwitcher.V8.1.5.2.nupkg.sha512",
+        "JavaScriptEngineSwitcher.V8.1.4.1.nupkg",
+        "JavaScriptEngineSwitcher.V8.1.4.1.nupkg.sha512",
         "JavaScriptEngineSwitcher.V8.nuspec",
         "lib/net40/ClearScript.dll",
         "lib/net40/JavaScriptEngineSwitcher.V8.dll",
@@ -6746,16 +6691,16 @@
         "Microsoft.Net.Http.Headers.nuspec"
       ]
     },
-    "MsieJavaScriptEngine/1.7.0": {
+    "MsieJavaScriptEngine/1.6.0": {
       "type": "package",
-      "sha512": "9YPmm5JothW+TuiV9BtKyx+elfXWuA9O4uaGgkhSz6M3HzHQKL8Ti/JL3M7Mx4lfIEbE94hsZKzj6+y20fO0/A==",
+      "sha512": "nvtXQfLI9ssZOwTnPg5BZ6R+G5Dvpi6QAzU79E5ljEXGwC/9AB2nrqxAsRhI0lmMLuqEuIRar0Fi81uVEzLmUA==",
       "files": [
         "chakra-host-license.txt",
         "lib/net40/MsieJavaScriptEngine.dll",
         "lib/net40/ru-ru/MsieJavaScriptEngine.resources.dll",
         "microsoft-ajax-minifier-license.txt",
-        "MsieJavaScriptEngine.1.7.0.nupkg",
-        "MsieJavaScriptEngine.1.7.0.nupkg.sha512",
+        "MsieJavaScriptEngine.1.6.0.nupkg",
+        "MsieJavaScriptEngine.1.6.0.nupkg.sha512",
         "MsieJavaScriptEngine.nuspec",
         "readme.txt",
         "sass-and-coffee-license.txt"
@@ -7598,17 +7543,7 @@
       "Microsoft.Extensions.Logging.Console >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
       "React.AspNet >= 2.2.1",
-      "React.Core >= 2.2.1",
-      "Microsoft.AspNet.FileProviders.Physical >= 1.0.0-rc1-final",
-      "Microsoft.AspNet.Mvc.Core >= 6.0.0-rc1-final",
-      "Microsoft.AspNet.Mvc.ViewFeatures >= 6.0.0-rc1-final",
-      "Microsoft.Extensions.DependencyInjection >= 1.0.0-rc1-final",
-      "JSPool >= 0.3.1",
-      "MsieJavaScriptEngine >= 1.7.0",
-      "JavaScriptEngineSwitcher.Core >= 1.5.0",
-      "JavaScriptEngineSwitcher.Msie >= 1.5.0",
-      "JavaScriptEngineSwitcher.V8 >= 1.5.2",
-      "ClearScript.Installer >= 5.4.1.23392"
+      "React.Core >= 2.2.1"
     ],
     "DNX,Version=v4.5.2": [
       "Wacton.Japangolin.Domain >= 1.0.0-*"
