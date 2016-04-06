@@ -137,33 +137,45 @@ var Japangolin = React.createClass({
     },
     componentDidMount: function () {
         if (this.state.currentPhrase == null || this.state.nextPhrase == null) {
-            this.getNextPhraseFromServer();
-            this.updateCurrentPhrase();
+            this.getNextPhraseFromServer(true);
         }
     },
-    getNextPhraseFromServer: function () {
+    getNextPhraseFromServer: function (updateCurrentPhrase) {
         $.ajax({
             url: this.props.url,
             dataType: "json",
             cache: false,
             success: function (data) {
-                this.setState({ nextPhrase: data }, () => this.saveState());
-                this.render();
+                console.log("Setting next phrase: " + JSON.stringify(data));
+                this.setState({ nextPhrase: data }, () => {
+                    if (updateCurrentPhrase) {
+                        console.log("Setting next phrase callback: pushing to current phrase");
+                        this.updateCurrentPhrase();
+                    } else {
+                        console.log("Setting next phrase callback: saving state");
+                        this.saveState();
+                    }
+                });
+                return (data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
     },
-    updateCurrentPhrase: function () {
+    updateCurrentPhrase: function() {
+        console.log("Setting current phrase: " + JSON.stringify(this.state.nextPhrase));
         this.setState({
             isCurrentPassed: false,
             isCurrentFailed: false,
             currentPhrase: this.state.nextPhrase,
             userText: ""
-        }, () => this.saveState());
-
-        this.getNextPhraseFromServer();
+        }, () => {
+            console.log("Setting current phrase callback: saving state");
+            this.saveState();
+        });
+        
+        this.getNextPhraseFromServer(false);
     },
     saveState: function() {
         localStorage.setItem("currentPhrase", JSON.stringify(this.state.currentPhrase));
@@ -187,7 +199,7 @@ var Japangolin = React.createClass({
         }
     },
     saveUserRomaji: function (userInput) {
-        this.s({ userText: userInput }, () => this.saveState());
+        this.setState({ userText: userInput }, () => this.saveState());
     },
     renderButton: function() {
         var button = null;
@@ -240,7 +252,7 @@ var Japangolin = React.createClass({
         return (
             <div className="container"> 
                 <Navigation />
-                <Kana kana={this.state.currentPhrase.Kana} />
+                <Kana kana={this.state.currentPhrase == null ? "Loading..." : this.state.currentPhrase.Kana} />
                 <UserRomaji text={this.state.userText} isDisabled={this.state.currentPhrase == null || this.state.nextPhrase == null} handleInputEntered={this.validateUserRomaji} handleInputChanged={this.saveUserRomaji} />
                 {button}
                 {details}
