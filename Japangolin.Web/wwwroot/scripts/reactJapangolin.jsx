@@ -1,29 +1,4 @@
-﻿var Navigation = React.createClass({
-    render: function() {
-        return (
-            <div className="navbar navbar-default navbar-fixed-top">
-                <div className="container">
-                    <div className="navbar-header">
-                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span className="sr-only">Toggle navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
-                        <a className="navbar-brand">Japangolin</a>
-                    </div>
-                    <div className="navbar-collapse collapse">
-                        <ul className="nav navbar-nav">
-                            <li><a>About</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-});
-
-var Kana = React.createClass({
+﻿var Kana = React.createClass({
     render: function() {
         return (
             <h1>
@@ -123,7 +98,7 @@ var Meaning = React.createClass({
     }
 });
 
-var Japangolin = React.createClass({
+var ReactJapangolin = React.createClass({
     getInitialState: function () {
         return {
             currentPhrase: JSON.parse(localStorage.getItem("currentPhrase")),
@@ -138,30 +113,24 @@ var Japangolin = React.createClass({
     componentDidMount: function () {
         if (this.state.currentPhrase == null || this.state.nextPhrase == null) {
             this.getNextPhraseFromServer(true);
+        } else {
+            document.title = "Japangolin [React] | " + this.state.currentPhrase.Kana;
         }
     },
     getNextPhraseFromServer: function (updateCurrentPhrase) {
-        $.ajax({
-            url: this.props.url,
-            dataType: "json",
-            cache: false,
-            success: function (data) {
-                console.log("Setting next phrase: " + JSON.stringify(data));
-                this.setState({ nextPhrase: data }, () => {
-                    if (updateCurrentPhrase) {
-                        console.log("Setting next phrase callback: pushing to current phrase");
-                        this.updateCurrentPhrase();
-                    } else {
-                        console.log("Setting next phrase callback: saving state");
-                        this.saveState();
-                    }
-                });
-                return (data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+        $.getJSON(this.props.url, function(data) {
+            console.log("Setting next phrase: " + JSON.stringify(data));
+            this.setState({ nextPhrase: data }, () => {
+                if (updateCurrentPhrase) {
+                    console.log("Setting next phrase callback: pushing to current phrase");
+                    this.updateCurrentPhrase();
+                } else {
+                    console.log("Setting next phrase callback: saving state");
+                    this.saveState();
+                }
+            });
+            return (data);
+        }.bind(this));
     },
     updateCurrentPhrase: function() {
         console.log("Setting current phrase: " + JSON.stringify(this.state.nextPhrase));
@@ -171,8 +140,10 @@ var Japangolin = React.createClass({
             currentPhrase: this.state.nextPhrase,
             userText: ""
         }, () => {
+            document.title = "Japangolin [React] | " + this.state.currentPhrase.Kana;
             console.log("Setting current phrase callback: saving state");
             this.saveState();
+            
         });
         
         this.getNextPhraseFromServer(false);
@@ -251,7 +222,6 @@ var Japangolin = React.createClass({
         // bootstrap's "container" provides default padding and margin
         return (
             <div className="container"> 
-                <Navigation />
                 <Kana kana={this.state.currentPhrase == null ? "Loading..." : this.state.currentPhrase.Kana} />
                 <UserRomaji text={this.state.userText} isDisabled={this.state.currentPhrase == null || this.state.nextPhrase == null} handleInputEntered={this.validateUserRomaji} handleInputChanged={this.saveUserRomaji} />
                 {button}
@@ -266,6 +236,6 @@ var Japangolin = React.createClass({
 });
 
 ReactDOM.render(
-  <Japangolin url="api/random" />,
+  <ReactJapangolin url="/api/random" />,
   document.getElementById("content")
 );

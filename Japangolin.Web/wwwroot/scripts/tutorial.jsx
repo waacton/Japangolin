@@ -98,6 +98,6 @@ var Comment = React.createClass({
 });
 
 ReactDOM.render(
-    <CommentBox url="/comments" submitUrl="/comments/new" pollInterval={2000} />,
+    <CommentBox url="/tutorial/get" submitUrl="/tutorial/add" pollInterval={2000} />,
     document.getElementById('content')
 );

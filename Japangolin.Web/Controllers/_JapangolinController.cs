@@ -4,10 +4,10 @@
 
     using Wacton.Japangolin.Domain.JapanesePhrases;
 
-    /* mostly here for future reference */
+    /* here for future reference */
 
     [Route("api/[controller]")]
-    public class JapangolinController : Controller
+    public class _JapangolinController : Controller
     {
         [FromServices]
         public IJapanesePhraseRepository JapanesePhraseRepository { get; set; }

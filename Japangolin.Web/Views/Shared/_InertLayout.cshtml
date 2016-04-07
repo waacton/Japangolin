@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Japangolin | @ViewData["Title"]</title>
+    <title>Japangolin [Inert] | @ViewData["Title"]</title>
 
     <!-- TODO: need asp-fallback-href="<local bootstrap css>" -->
     <!-- TODO: need asp-fallback-src="<local bootstrap js>" -->
@@ -33,11 +33,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand">Japangolin</a>
+                @*<a href="@Url.RouteUrl("inert japangolin route")" class="navbar-brand">Japangolin</a>*@
+                <a asp-controller="Inert" asp-action="InertJapangolin" class="navbar-brand">Japangolin</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="About">About</a></li>
+                    @*<li><a href="@Url.RouteUrl("inert about route")">About</a></li>*@
+                    <li><a asp-controller="Inert" asp-action="InertAbout">About</a></li>
                 </ul>
             </div>
         </div>

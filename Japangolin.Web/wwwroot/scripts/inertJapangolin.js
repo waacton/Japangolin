@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var phraseUpdater = new PhraseUpdater(window, window.document);
+    var phraseUpdater = new InertPhraseUpdater(window, window.document);
     $("#skipButton").click(function () {
         phraseUpdater.updatePhrases();
     });
@@ -18,7 +18,7 @@ $(document).ready(function () {
 });
 /* old non-jQuery code, for curiosity! */
 //window.onload = () => {
-//    var phraseUpdater = new PhraseUpdater(window, window.document);
+//    var phraseUpdater = new inertPhraseUpdater(window, window.document);
 //    document.getElementById("skipButton").onclick = () => { phraseUpdater.updatePhrases(); }
 //    document.getElementById("proceedButton").onclick = () => { phraseUpdater.updatePhrases(); }
 //    document.getElementById("userText").onkeyup = (event) => {

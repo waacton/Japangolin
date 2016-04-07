@@ -1,16 +1,11 @@
-﻿@{
-    Layout = null;
-}
-<html>
+﻿<html>
 <head>
-    <title>Hello React</title>
-
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.css" />
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.eot" />
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.svg" />
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.ttf" />
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff" />
-    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2"/>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2" />
     <link rel="stylesheet" href="@Url.Content("~/css/siteReact.css")" asp-append-version="true" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
@@ -20,7 +15,25 @@
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.28.3/react-bootstrap.min.js"></script>*@
 </head>
 <body>
-    <div id="content"></div>
-    <script src="@Url.Content("~/scripts/japangolin.jsx")"></script>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.RouteUrl("react japangolin route")" class="navbar-brand">Japangolin</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.RouteUrl("react about route")">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<div id="content"></div>
+@RenderBody()
 </body>
 </html>

@@ -100,28 +100,52 @@
             app.UseMvc(
                 routes =>
                 {
-                    // default route
+                    // default route (root path goes to HomeController.Index(), requires Views/Home/Index.html)
                     routes.MapRoute(
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
 
-                    // .../react
-                    // convention based: needs ReactController, View/React/ReactDemo
+                    // .../react/japangolin _____ convention based: /react/home calls ReactController.ReactJapangolin(), requires /Views/React/ReactJapangolin.html
                     routes.MapRoute(
-                        name: "react route",
-                        template: "react",
-                        defaults: new { controller = "React", action = "ReactDemo" });
+                        name: "react japangolin route",
+                        template: "react/japangolin",
+                        defaults: new { controller = "React", action = "ReactJapangolin" });
 
-                    // .../comments
+                    // .../react/about
                     routes.MapRoute(
-                        name: "comments route",
-                        template: "comments",
-                        defaults: new { controller = "React", action = "Comments" });
+                        name: "react about route",
+                        template: "react/about",
+                        defaults: new { controller = "React", action = "ReactAbout" });
 
+                    // .../inert/japangolin
                     routes.MapRoute(
-                        name: "new comment",
-                        template: "comments/new",
-                        defaults: new { controller = "React", action = "AddComment" });
+                        name: "inert japangolin route",
+                        template: "inert/japangolin",
+                        defaults: new { controller = "Inert", action = "InertJapangolin" });
+
+                    // .../inert/about
+                    routes.MapRoute(
+                        name: "inert about route",
+                        template: "inert/about",
+                        defaults: new { controller = "Inert", action = "InertAbout" });
+
+                    // .../tutorial/home
+                    routes.MapRoute(
+                        name: "tutorial main route",
+                        template: "tutorial/main",
+                        defaults: new { controller = "Tutorial", action = "TutorialMain" });
+
+                    // .../tutorial/comments
+                    routes.MapRoute(
+                        name: "tutorial comments route",
+                        template: "tutorial/get",
+                        defaults: new { controller = "Tutorial", action = "Comments" });
+
+                    // .../tutorial/comments/new
+                    routes.MapRoute(
+                        name: "tutorial new comment route",
+                        template: "tutorial/add",
+                        defaults: new { controller = "Tutorial", action = "AddComment" });
                 }
             );
 
