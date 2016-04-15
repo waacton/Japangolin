@@ -1,4 +1,40 @@
-﻿var About = React.createClass({
+﻿var PassFailChart = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <canvas id="countsChart" width="200" height="200"></canvas>
+            </div>
+        );
+    },
+    componentDidMount: function() {
+        this.drawChart();
+    },
+    componentDidUpdate: function() {
+        this.drawChart();
+    },
+    drawChart: function() {
+        var data = [
+            {
+                value: this.props.passes,
+                color: "#5CB85C",
+                highlight: "#449D44",
+                label: "Passes"
+            },
+            {
+                value: this.props.fails,
+                color: "#F0AD4E",
+                highlight: "#EC971F",
+                label: "Fails"
+            }
+        ];
+
+        var canvas = $("#countsChart").get(0);
+        var ctx = (canvas).getContext("2d");
+        var chart = new Chart(ctx).Pie(data);
+    }
+});
+
+var About = React.createClass({
     getInitialState: function () {
         return {
             passes: Number(localStorage.getItem("passes")), // Number(null) -> 0
@@ -21,6 +57,9 @@
                     <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
                     <a href="https://github.com/waacton/Japangolin" style={{marginLeft: 5}}>github.com/waacton/Japangolin</a>
                 </div>
+
+                <hr />
+                <PassFailChart passes={this.state.passes} fails={this.state.fails}/>
 
                 <hr />
                 <footer>
