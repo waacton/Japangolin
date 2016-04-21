@@ -1,8 +1,22 @@
 ﻿var PassFailChart = React.createClass({
     render: function () {
+        var chart = null;
+        if (this.hasChartData()) {
+            chart = <canvas ref="countsChart" width="200" height="200" style={{marginBottom: 10}}></canvas>;
+        }
+
+        var total = this.props.passes + this.props.fails;
+        var percentage = total === 0 ? 0 : Math.round((this.props.passes / total) * 100);
+
+        var passString = `${this.props.passes} ${this.props.passes === 1 ? "pass" : "passes"}`;
+        var failString = `${this.props.fails} ${this.props.fails === 1 ? "fail" : "fails"}`;
+        var summaryString = `${passString}, ${failString} (${percentage}%)`;
+
         return (
             <div>
-                <canvas id="countsChart" width="200" height="200"></canvas>
+                {chart}
+                <br />
+                <p>{summaryString}</p>
             </div>
         );
     },
@@ -12,7 +26,14 @@
     componentDidUpdate: function() {
         this.drawChart();
     },
-    drawChart: function() {
+    hasChartData: function () {
+        return this.props.passes > 0 || this.props.fails > 0;
+    },
+    drawChart: function () {
+        if (!this.hasChartData()) {
+            return;
+        }
+
         var data = [
             {
                 value: this.props.passes,
@@ -28,9 +49,26 @@
             }
         ];
 
-        var canvas = $("#countsChart").get(0);
+        var canvas = this.refs.countsChart;
         var ctx = (canvas).getContext("2d");
         var chart = new Chart(ctx).Pie(data);
+    }
+});
+
+var ClearButton = React.createClass({
+    onClearClick: function(event) {
+        this.props.handleClick();
+        return;
+    },
+    render: function() {
+        return (
+            <div className="row">
+                <div className="col-sm-2">
+                    {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
+                    <input type="button" value="Clear" className="btn btn-primary btn-block" onClick={this.onClearClick}/>
+                </div>
+            </div>
+        );
     }
 });
 
@@ -43,6 +81,14 @@ var About = React.createClass({
     },
     componentDidMount: function () {
         document.title = "Japangolin [React] | About";
+    },
+    clearLocalStorage: function () {
+        console.log("Clearing local storage...");
+        localStorage.clear();
+        this.setState({
+            passes: 0,
+            fails: 0
+        });
     },
     render: function () {
         // bootstrap's "container" provides default padding and margin
@@ -59,7 +105,10 @@ var About = React.createClass({
                 </div>
 
                 <hr />
-                <PassFailChart passes={this.state.passes} fails={this.state.fails}/>
+                <PassFailChart passes={this.state.passes} fails={this.state.fails} />
+
+                <hr />
+                <ClearButton handleClick={this.clearLocalStorage } />
 
                 <hr />
                 <footer>

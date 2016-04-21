@@ -35,7 +35,7 @@ var SkipButton = React.createClass({
     },
     render: function() {
         return (
-            <div className="row" id="skipRow">
+            <div className="row">
                 <div className="col-sm-2">
                     {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
                     <input type="button" value="Skip" className="btn btn-warning btn-block" onClick={this.onSkipClick}/>
@@ -52,7 +52,7 @@ var ProceedButton = React.createClass({
     },
     render: function() {
         return (
-            <div className="row" id="proceedRow">
+            <div className="row">
                 <div className="col-sm-2">
                     {/* uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) */}
                     <input type="button" value="Proceed" className="btn btn-success btn-block" onClick={this.onProceedClick}/>
