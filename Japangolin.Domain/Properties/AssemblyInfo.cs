@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Wacton")]
 [assembly: AssemblyProduct("Wacton.Japangolin.Domain")]
-[assembly: AssemblyCopyright("Copyright © Wacton 2015")]
+[assembly: AssemblyCopyright("Copyright © Wacton 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

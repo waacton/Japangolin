@@ -30,17 +30,17 @@
 
         private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Logger.Default.Error(e.Exception, "Unhandled exception (dispatcher)");
+            Logger.Fatal(e.Exception, "Unhandled exception (dispatcher)");
         }
 
         private static void OnDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Logger.Default.Error((Exception)e.ExceptionObject, "Unhandled exception (domain)");
+            Logger.Fatal((Exception)e.ExceptionObject, "Unhandled exception (domain)");
         }
 
         private static void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            Logger.Default.Error(e.Exception, "Unhandled exception (unobserved task)");
+            Logger.Fatal(e.Exception, "Unhandled exception (unobserved task)");
         }
     }
 }

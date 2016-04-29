@@ -8,7 +8,7 @@
         xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="500" Width="1200"
-        TitleCaps="False" GlowBrush="{DynamicResource AccentColorBrush}"              
+        TitleCaps="False" GlowBrush="{DynamicResource AccentColorBrush}"
         d:DataContext="{Binding Source={StaticResource DesignTimeViewModelLocator}, Path=ShellViewModel}">
 
     <Window.Resources>

@@ -26,7 +26,7 @@
   },
 
   "frameworks": {
-    "dnx452": {
+    "dnx46": {
       "dependencies": {
         "Wacton.Japangolin.Domain": "1.0.0-*"
       }

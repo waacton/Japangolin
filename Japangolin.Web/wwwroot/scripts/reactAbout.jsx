@@ -15,7 +15,6 @@
         return (
             <div>
                 {chart}
-                <br />
                 <p>{summaryString}</p>
             </div>
         );

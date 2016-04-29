@@ -4,6 +4,7 @@
     <!-- this should be referenced by the top-level window to provide access to common resources and apply application-wide styles -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/CommonResources.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/CleanWindowCloseButtonStyle.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
@@ -12,5 +13,5 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
+    
 </ResourceDictionary>

@@ -14,6 +14,7 @@
 
         public IActionResult InertJapangolin()
         {
+            // note: pretty sure this is obsolete after using JavaScript calls from client-side
             var phrase = this.JapanesePhraseRepository.GetRandomPhrase();
             return this.View(phrase);
         }

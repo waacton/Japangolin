@@ -2,7 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
-    "DNX,Version=v4.5.2": {
+    "DNX,Version=v4.6": {
       "JavaScriptEngineSwitcher.Core/1.2.4": {
         "type": "package",
         "compile": {
@@ -1684,11 +1684,17 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System.Numerics"
+        ],
         "compile": {
-          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
+          "ref/net46/_._": {},
+          "ref/net46/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
+          "lib/net46/_._": {},
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -1808,7 +1814,7 @@
       },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2",
+        "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
@@ -1816,14 +1822,14 @@
       },
       "Wacton.Tovarisch/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2"
+        "framework": "DNX,Version=v4.6"
       },
       "Wacton.Tovarisch.MVVM/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2"
+        "framework": ".NETFramework,Version=v4.6"
       }
     },
-    "DNX,Version=v4.5.2/win7-x86": {
+    "DNX,Version=v4.6/win7-x86": {
       "JavaScriptEngineSwitcher.Core/1.2.4": {
         "type": "package",
         "compile": {
@@ -3508,11 +3514,17 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System.Numerics"
+        ],
         "compile": {
-          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
+          "ref/net46/_._": {},
+          "ref/net46/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
+          "lib/net46/_._": {},
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -3632,7 +3644,7 @@
       },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2",
+        "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
@@ -3640,14 +3652,14 @@
       },
       "Wacton.Tovarisch/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2"
+        "framework": "DNX,Version=v4.6"
       },
       "Wacton.Tovarisch.MVVM/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2"
+        "framework": ".NETFramework,Version=v4.6"
       }
     },
-    "DNX,Version=v4.5.2/win7-x64": {
+    "DNX,Version=v4.6/win7-x64": {
       "JavaScriptEngineSwitcher.Core/1.2.4": {
         "type": "package",
         "compile": {
@@ -5332,11 +5344,17 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System.Numerics"
+        ],
         "compile": {
-          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
+          "ref/net46/_._": {},
+          "ref/net46/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
+          "lib/net46/_._": {},
+          "lib/net46/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -5456,7 +5474,7 @@
       },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2",
+        "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
@@ -5464,11 +5482,11 @@
       },
       "Wacton.Tovarisch/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2"
+        "framework": "DNX,Version=v4.6"
       },
       "Wacton.Tovarisch.MVVM/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2"
+        "framework": ".NETFramework,Version=v4.6"
       }
     }
   },
@@ -7545,7 +7563,7 @@
       "React.AspNet >= 2.2.1",
       "React.Core >= 2.2.1"
     ],
-    "DNX,Version=v4.5.2": [
+    "DNX,Version=v4.6": [
       "Wacton.Japangolin.Domain >= 1.0.0-*"
     ]
   }

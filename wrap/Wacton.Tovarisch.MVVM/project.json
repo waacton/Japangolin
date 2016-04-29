@@ -10,6 +10,11 @@
       "bin": {
         "assembly": "../../Dependencies/Wacton.Tovarisch.MVVM.dll"
       }
+    },
+    "net46": {
+      "bin": {
+        "assembly": "../../Dependencies/Wacton.Tovarisch.MVVM.dll"
+      }
     }
   }
 }

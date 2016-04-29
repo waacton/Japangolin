@@ -10,6 +10,16 @@
       "bin": {
         "assembly": "../../Dependencies/Wacton.Tovarisch.dll"
       }
+    },
+    "net46": {
+      "bin": {
+        "assembly": "../../Dependencies/Wacton.Tovarisch.dll"
+      }
+    },
+    "dnx46": {
+      "bin": {
+        "assembly": "../../Dependencies/Wacton.Tovarisch.dll"
+      }
     }
   }
 }

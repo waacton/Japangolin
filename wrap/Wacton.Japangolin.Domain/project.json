@@ -22,6 +22,17 @@
         "Wacton.Tovarisch": "1.0.0-*",
         "Wacton.Tovarisch.MVVM": "1.0.0-*"
       }
+    },
+    "net46": {
+      "wrappedProject": "../../Japangolin.Domain/Japangolin.Domain.csproj",
+      "bin": {
+        "assembly": "../../Japangolin.Domain/obj/{configuration}/Wacton.Japangolin.Domain.dll",
+        "pdb": "../../Japangolin.Domain/obj/{configuration}/Wacton.Japangolin.Domain.pdb"
+      },
+      "dependencies": {
+        "Wacton.Tovarisch": "1.0.0-*",
+        "Wacton.Tovarisch.MVVM": "1.0.0-*"
+      }
     }
   }
 }
