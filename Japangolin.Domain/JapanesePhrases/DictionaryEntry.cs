@@ -12,15 +12,18 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
         public List<string> Kanji { get; }
         public List<string> Kana { get; }
         public List<string> English { get; }
-
-        public List<string> Unprocessed { get; private set; }
+        public List<string> SpeechMarkings { get; }
+        public List<string> FieldMarkings { get; }
+        public List<string> MiscellaneousMarkings { get; }
 
         public DictionaryEntry()
         {
             this.Kanji = new List<string>();
             this.Kana = new List<string>();
             this.English = new List<string>();
-            this.Unprocessed = new List<string>();
+            this.SpeechMarkings = new List<string>();
+            this.FieldMarkings = new List<string>();
+            this.MiscellaneousMarkings = new List<string>();
         }
 
         public void SetIdentifier(int identifier)
@@ -52,10 +55,25 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
             this.English.Add(english);
         }
 
+        public void AddSpeechMarking(string speechMarking)
+        {
+            this.SpeechMarkings.Add(speechMarking);
+        }
+
+        public void AddFieldMarking(string fieldMarking)
+        {
+            this.FieldMarkings.Add(fieldMarking);
+        }
+
+        public void AddMiscellaneousMarking(string miscellaneousMarking)
+        {
+            this.MiscellaneousMarkings.Add(miscellaneousMarking);
+        }
+
         public override string ToString()
         {
             var stringbuilder = new StringBuilder();
-            stringbuilder.Append(this.Identifier.ToString() + ": ");
+            stringbuilder.Append(this.Identifier + ": ");
 
             foreach (var kanji in this.Kanji)
             {

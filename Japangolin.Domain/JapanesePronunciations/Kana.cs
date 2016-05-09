@@ -90,7 +90,7 @@
         private KanaType KanaType { get; set; }
         private Dictionary<Youon, string> YouonRomaji { get; set; }
 
-        private readonly string[] vowels = new[] { "a", "e", "i", "o", "u" };
+        private readonly string[] vowels = { "a", "e", "i", "o", "u" };
 
         public Kana(string romaji, KanaBase kanaBase, KanaType kanaType)
             : base(counter, romaji)
