@@ -1,7 +1,7 @@
 ﻿namespace Wacton.Japangolin.Domain.JapanesePhrases
 {
+    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     using Wacton.Japangolin.Domain.JapanesePronunciations;
     using Wacton.Tovarisch.Enum;
@@ -14,9 +14,14 @@
         private readonly Dictionary<char, Tokushuon> tokushuons = new Dictionary<char, Tokushuon>();
         private readonly Dictionary<char, Sokuon> sokuons = new Dictionary<char, Sokuon>();
         private readonly Dictionary<char, Kurikaeshi> kurikaeshis = new Dictionary<char, Kurikaeshi>();
-        private readonly Dictionary<char, string> punctuation = new Dictionary<char, string>(); 
+        private readonly Dictionary<char, string> punctuations = new Dictionary<char, string>(); 
 
         public Transliterator()
+        {
+            this.Initialise();
+        }
+
+        private void Initialise()
         {
             foreach (var kana in Enumeration.GetAll<Kana>())
             {
@@ -54,133 +59,77 @@
                 this.kurikaeshis.Add(kurikaeshi.GetCharacter(Syllabary.Katakana), kurikaeshi);
             }
 
-            this.punctuation.Add(' ', " ");
-            this.punctuation.Add('・', "-");
-            this.punctuation.Add('、', ", ");
-            this.punctuation.Add('〜', "~");
-        }
-
-        private bool TryGetCharacter(string kanaCharacters, int index, out char character)
-        {
-            if (index >= kanaCharacters.Length)
-            {
-                character = '?';
-                return false;
-            }
-
-            character = kanaCharacters[index];
-            return true;
+            this.punctuations.Add(' ', " ");
+            this.punctuations.Add('・', "-");
+            this.punctuations.Add('、', ", ");
+            this.punctuations.Add('〜', "~");
         }
 
         public string GetRomaji(string kanaCharacters)
         {
             var syllables = new List<string>();
+
             var i = 0;
-            var isRunning = true;
-            while (isRunning)
+            while (i < kanaCharacters.Length)
             {
-                Kana kana = null;
-                var chouon = false;
-                var sokuon = false;
-                Youon youon = null;
-                Tokushuon tokushuon = null;
+                string romaji = null;
 
-                string romaji;
-                char currentKanaCharacter;
-                isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-
-                if (this.punctuation.ContainsKey(currentKanaCharacter) && isRunning)
+                var isPunctuation = Process(kanaCharacters, ref i, this.punctuations, punctuation => romaji = punctuation);
+                if (isPunctuation)
                 {
-                    romaji = this.punctuation[currentKanaCharacter];
-                    i++;
-                    isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
+                    syllables.Add(romaji);
+                    continue;
                 }
-                else
+
+                /* currently no entries contain a kurikaeshi (except the actual kurikaeshi entry, which just confuses things), so ignoring */
+                var syllable = new JapaneseSyllable();
+                Process(kanaCharacters, ref i, this.sokuons, sokuon => syllable.Sokuon = true);
+                Process(kanaCharacters, ref i, this.kanas, kana => syllable.Kana = kana);
+                //Process(kanaCharacters, ref i, this.kurikaeshis, kurikaeshi => syllable.Kurikaeshi = kurikaeshi); 
+                Process(kanaCharacters, ref i, this.youons, youon => syllable.Youon = youon);
+                Process(kanaCharacters, ref i, this.tokushuons, tokushuon => syllable.Tokushuon = tokushuon);
+                Process(kanaCharacters, ref i, this.chouons, chouon => syllable.Chouon = true);
+
+                // if romaji for this syllable is null, bail out
+                // no point in dealing with the other syllables if part of the word is "null"
+                romaji = syllable.GetRomaji();
+                if (romaji == null)
                 {
-                    isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-
-                    if (this.sokuons.ContainsKey(currentKanaCharacter) && isRunning)
-                    {
-                        sokuon = true;
-                        i++;
-                        isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-                    }
-
-                    if (this.kanas.ContainsKey(currentKanaCharacter) && isRunning)
-                    {
-                        kana = this.kanas[currentKanaCharacter];
-                        i++;
-                        isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-                    }
-
-                    //if (this.kurikaeshis.ContainsKey(currentKanaCharacter) && isRunning)
-                    //{
-                    //    kurikaeshi = this.kurikaeshis[currentKanaCharacter];
-                    //    i++;
-                    //    isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-                    //}
-                    
-                    if (this.youons.ContainsKey(currentKanaCharacter) && isRunning)
-                    {
-                        youon = this.youons[currentKanaCharacter];
-                        i++;
-                        isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-                    }
-                    else if (this.tokushuons.ContainsKey(currentKanaCharacter) && isRunning)
-                    {
-                        tokushuon = this.tokushuons[currentKanaCharacter];
-                        i++;
-                        isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-                    }
-
-                    if (this.chouons.ContainsKey(currentKanaCharacter) && isRunning)
-                    {
-                        chouon = true;
-                        i++;
-                        isRunning = this.TryGetCharacter(kanaCharacters, i, out currentKanaCharacter);
-                    }
-
-                    if (kana == null)
-                    {
-                        if (sokuon)
-                        {
-                            romaji = "'";
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                    else
-                    {
-                        var hasYouon = youon != null;
-                        var hasTokushuon = tokushuon != null;
-
-                        if (!hasYouon && !hasTokushuon)
-                        {
-                            romaji = kana.GetRomaji(chouon, sokuon);
-                        }
-                        else if (hasYouon)
-                        {
-                            romaji = kana.GetRomaji(youon, chouon, sokuon);
-                        }
-                        else
-                        {
-                            romaji = kana.GetRomaji(tokushuon, chouon, sokuon);
-                        }
-                    }
+                    return null;
                 }
 
                 syllables.Add(romaji);
             }
 
-            var stringBuilder = new StringBuilder();
-            foreach (var syllable in syllables)
+            return string.Concat(syllables).ToLower();
+        }
+
+        private static bool Process<T>(string kanaCharacters, ref int index, IReadOnlyDictionary<char, T> dictionary, Action<T> onFoundAction)
+        {
+            var character = GetCharacter(kanaCharacters, index);
+            if (!character.HasValue)
             {
-                stringBuilder.Append(syllable);
+                return false;
             }
 
-            return stringBuilder.ToString().ToLower();
+            if (!dictionary.ContainsKey(character.Value))
+            {
+                return false;
+            }
+
+            onFoundAction(dictionary[character.Value]);
+            index++;
+            return true;
+        }
+
+        private static char? GetCharacter(string kanaCharacters, int index)
+        {
+            if (index >= kanaCharacters.Length)
+            {
+                return null;
+            }
+
+            return kanaCharacters[index];
         }
     }
 }

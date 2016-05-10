@@ -85,10 +85,10 @@
         public static readonly Kana Vu = new Kana("Vu", KanaBase.U, KanaType.Dakuon);
 
         private static int counter;
-        private string Romaji { get; set; }
-        private KanaBase KanaBase { get; set; }
-        private KanaType KanaType { get; set; }
-        private Dictionary<Youon, string> YouonRomaji { get; set; }
+        private string Romaji { get; }
+        private KanaBase KanaBase { get; }
+        private KanaType KanaType { get; }
+        private Dictionary<Youon, string> YouonRomaji { get; }
 
         private readonly string[] vowels = { "a", "e", "i", "o", "u" };
 

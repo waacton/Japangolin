@@ -52,7 +52,7 @@
                     var romaji = transliterator.GetRomaji(kana);
                     if (romaji == null)
                     {
-                        unprocessed.Add(kana);
+                        unprocessed.Add(kana); // for debug purposes
                     }
                     else
                     {

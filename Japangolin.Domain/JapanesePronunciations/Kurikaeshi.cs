@@ -6,8 +6,8 @@
 
     public class Kurikaeshi : Enumeration
     {
-        public static readonly Kurikaeshi SeionRepetition = new Kurikaeshi("SeionRepetition", 'ゝ', 'ゞ');
-        public static readonly Kurikaeshi DakutenRepetition = new Kurikaeshi("DakutenRepetition", 'ヽ', 'ヾ');
+        public static readonly Kurikaeshi SeionRepetition = new Kurikaeshi("SeionRepetition", 'ゝ', 'ヽ');
+        public static readonly Kurikaeshi DakutenRepetition = new Kurikaeshi("DakutenRepetition", 'ゞ', 'ヾ');
 
         private static int counter;
         private readonly Dictionary<Syllabary, char> dict;
