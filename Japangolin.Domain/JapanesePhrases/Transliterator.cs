@@ -1,6 +1,5 @@
 ﻿namespace Wacton.Japangolin.Domain.JapanesePhrases
 {
-    using System;
     using System.Collections.Generic;
 
     using Wacton.Japangolin.Domain.JapanesePronunciations;
@@ -72,28 +71,18 @@
             var i = 0;
             while (i < kanaCharacters.Length)
             {
-                string romaji = null;
-
-                var isPunctuation = Process(kanaCharacters, ref i, this.punctuations, punctuation => romaji = punctuation);
-                if (isPunctuation)
+                var punctuation = this.ObtainPunctuation(kanaCharacters, ref i);
+                if (!string.IsNullOrEmpty(punctuation))
                 {
-                    syllables.Add(romaji);
+                    syllables.Add(punctuation);
                     continue;
                 }
 
-                /* currently no entries contain a kurikaeshi (except the actual kurikaeshi entry, which just confuses things), so ignoring */
-                var syllable = new JapaneseSyllable();
-                Process(kanaCharacters, ref i, this.sokuons, sokuon => syllable.Sokuon = true);
-                Process(kanaCharacters, ref i, this.kanas, kana => syllable.Kana = kana);
-                //Process(kanaCharacters, ref i, this.kurikaeshis, kurikaeshi => syllable.Kurikaeshi = kurikaeshi); 
-                Process(kanaCharacters, ref i, this.youons, youon => syllable.Youon = youon);
-                Process(kanaCharacters, ref i, this.tokushuons, tokushuon => syllable.Tokushuon = tokushuon);
-                Process(kanaCharacters, ref i, this.chouons, chouon => syllable.Chouon = true);
-
                 // if romaji for this syllable is null, bail out
                 // no point in dealing with the other syllables if part of the word is "null"
-                romaji = syllable.GetRomaji();
-                if (romaji == null)
+                var syllable = this.ObtainNextSyllable(kanaCharacters, ref i);
+                var romaji = syllable.GetRomaji();
+                if (string.IsNullOrEmpty(romaji))
                 {
                     return null;
                 }
@@ -104,22 +93,42 @@
             return string.Concat(syllables).ToLower();
         }
 
-        private static bool Process<T>(string kanaCharacters, ref int index, IReadOnlyDictionary<char, T> dictionary, Action<T> onFoundAction)
+        private string ObtainPunctuation(string kanaCharacters, ref int i)
+        {
+            return LookupTranslitaration(this.punctuations, kanaCharacters, ref i);
+        }
+
+        private JapaneseSyllable ObtainNextSyllable(string kanaCharacters, ref int i)
+        {
+            // not keen on using object initialiser here
+            // makes it even less obvious that the order these are called are very important
+            // (also: currently no entries contain a kurikaeshi [except the actual kurikaeshi entry, which just confuses things], so ignoring)
+
+            var syllable = new JapaneseSyllable();
+            syllable.Sokuon = LookupTranslitaration(this.sokuons, kanaCharacters, ref i);
+            syllable.Kana = LookupTranslitaration(this.kanas, kanaCharacters, ref i);
+            //syllable.Kurikaeshi = LookupTranslitaration(kanaCharacters, ref i, this.kurikaeshis); 
+            syllable.Youon = LookupTranslitaration(this.youons, kanaCharacters, ref i);
+            syllable.Tokushuon = LookupTranslitaration(this.tokushuons, kanaCharacters, ref i);
+            syllable.Chouon = LookupTranslitaration(this.chouons, kanaCharacters, ref i);
+            return syllable;
+        }
+
+        private static T LookupTranslitaration<T>(IReadOnlyDictionary<char, T> dictionary, string kanaCharacters, ref int index)
         {
             var character = GetCharacter(kanaCharacters, index);
             if (!character.HasValue)
             {
-                return false;
+                return default(T);
             }
 
             if (!dictionary.ContainsKey(character.Value))
             {
-                return false;
+                return default(T);
             }
 
-            onFoundAction(dictionary[character.Value]);
             index++;
-            return true;
+            return dictionary[character.Value];
         }
 
         private static char? GetCharacter(string kanaCharacters, int index)
