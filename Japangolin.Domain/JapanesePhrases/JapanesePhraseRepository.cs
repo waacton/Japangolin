@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using Wacton.Desu;
     using Wacton.Tovarisch.Randomness;
 
     public class JapanesePhraseRepository : IJapanesePhraseRepository
@@ -18,8 +19,8 @@
 
         public void Initialise()
         {
-            var dictionaryParser = new DictionaryParser();
-            var dictionaryEntries = dictionaryParser.GetEntries();
+            var japaneseDictionary = new JapaneseDictionary();
+            var dictionaryEntries = japaneseDictionary.GetEntries();
             this.japanesePhrases = ProcessEntries(dictionaryEntries);
             this.PhraseCount = this.japanesePhrases.Count;
             this.IsInitialised = true;
@@ -35,7 +36,7 @@
             return RandomSelection.SelectOne(this.japanesePhrases);
         }
 
-        private static List<JapanesePhrase> ProcessEntries(IEnumerable<DictionaryEntry> dictionaryEntries)
+        private static List<JapanesePhrase> ProcessEntries(IEnumerable<JapaneseDictionaryEntry> dictionaryEntries)
         {
             var phrases = new List<JapanesePhrase>();
             var unprocessed = new List<string>(); // for debug purposes
@@ -43,7 +44,7 @@
             var transliterator = new Transliterator();
             foreach (var structure in dictionaryEntries)
             {
-                var meaning = structure.English;
+                var meaning = structure.Translations[Gloss.English];
                 var kanji = structure.Kanji;
                 var entryId = structure.Identifier;
 

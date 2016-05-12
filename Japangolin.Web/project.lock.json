@@ -1812,10 +1812,18 @@
           "lib/net45/_._": {}
         }
       },
+      "Wacton.Desu/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Wacton.Tovarisch": "1.0.0"
+        }
+      },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
+          "Wacton.Desu": "1.0.0",
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
         }
@@ -3642,10 +3650,18 @@
           "lib/net45/_._": {}
         }
       },
+      "Wacton.Desu/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Wacton.Tovarisch": "1.0.0"
+        }
+      },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
+          "Wacton.Desu": "1.0.0",
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
         }
@@ -5472,10 +5488,18 @@
           "lib/net45/_._": {}
         }
       },
+      "Wacton.Desu/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Wacton.Tovarisch": "1.0.0"
+        }
+      },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
+          "Wacton.Desu": "1.0.0",
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
         }
@@ -5491,6 +5515,10 @@
     }
   },
   "libraries": {
+    "Wacton.Desu/1.0.0": {
+      "type": "project",
+      "path": "../wrap/Wacton.Desu/project.json"
+    },
     "Wacton.Japangolin.Domain/1.0.0": {
       "type": "project",
       "path": "../wrap/Wacton.Japangolin.Domain/project.json"

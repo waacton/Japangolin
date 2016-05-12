@@ -1,26 +1,27 @@
-namespace Wacton.Japangolin.Domain.JapanesePhrases
+﻿namespace Wacton.Desu
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    public class DictionaryEntry
+    // TODO: needs updating to better reflect JMdict structure (as part of Project Desu)
+    public class JapaneseDictionaryEntry
     {
         private bool isIdentifierSet;
         public int Identifier { get; private set; }
         public List<string> Kanji { get; }
         public List<string> Kana { get; }
-        public List<string> English { get; }
+        public Dictionary<Gloss, List<string>> Translations { get; }
         public List<string> SpeechMarkings { get; }
         public List<string> FieldMarkings { get; }
         public List<string> MiscellaneousMarkings { get; }
 
-        public DictionaryEntry()
+        public JapaneseDictionaryEntry()
         {
             this.Kanji = new List<string>();
             this.Kana = new List<string>();
-            this.English = new List<string>();
+            this.Translations = new Dictionary<Gloss, List<string>>();
             this.SpeechMarkings = new List<string>();
             this.FieldMarkings = new List<string>();
             this.MiscellaneousMarkings = new List<string>();
@@ -50,9 +51,14 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
             }
         }
 
-        public void AddEnglish(string english)
+        public void AddTranslation(Gloss gloss, string translation)
         {
-            this.English.Add(english);
+            if (!this.Translations.ContainsKey(gloss))
+            {
+                this.Translations.Add(gloss, new List<string>());
+            }
+
+            this.Translations[gloss].Add(translation);
         }
 
         public void AddSpeechMarking(string speechMarking)
@@ -85,7 +91,7 @@ namespace Wacton.Japangolin.Domain.JapanesePhrases
                 stringbuilder.Append(kana + " | ");
             }
 
-            stringbuilder.Append(this.English.First());
+            stringbuilder.Append(this.Translations[Gloss.English].First());
             return stringbuilder.ToString();
         }
     }

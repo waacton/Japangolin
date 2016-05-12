@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net46": {
+      "wrappedProject": "../../Desu/Desu.csproj",
+      "bin": {
+        "assembly": "../../Desu/obj/{configuration}/Wacton.Desu.dll",
+        "pdb": "../../Desu/obj/{configuration}/Wacton.Desu.pdb"
+      },
+      "dependencies": {
+        "Wacton.Tovarisch": "1.0.0-*"
+      }
+    }
+  }
+}

@@ -31,7 +31,8 @@
       },
       "dependencies": {
         "Wacton.Tovarisch": "1.0.0-*",
-        "Wacton.Tovarisch.MVVM": "1.0.0-*"
+        "Wacton.Tovarisch.MVVM": "1.0.0-*",
+        "Wacton.Desu": "1.0.0-*"
       }
     }
   }

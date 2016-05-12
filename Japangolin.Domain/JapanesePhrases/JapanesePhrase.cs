@@ -1,6 +1,5 @@
 ﻿namespace Wacton.Japangolin.Domain.JapanesePhrases
 {
-    using System;
     using System.Collections.Generic;
 
     public class JapanesePhrase
