@@ -4,6 +4,6 @@
 
     public interface IJapaneseDictionary
     {
-        IEnumerable<JapaneseDictionaryEntry> GetEntries();
+        IEnumerable<IJapaneseDictionaryEntry> GetEntries();
     }
 }

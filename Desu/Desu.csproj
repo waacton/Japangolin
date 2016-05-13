@@ -44,10 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryElement.cs" />
+    <Compile Include="IJapaneseDictionaryEntry.cs" />
+    <Compile Include="Gloss.cs" />
+    <Compile Include="Sense.cs" />
+    <Compile Include="Reading.cs" />
+    <Compile Include="Kanji.cs" />
+    <Compile Include="PartOfSpeech.cs" />
     <Compile Include="IJapaneseDictionary.cs" />
     <Compile Include="JapaneseDictionaryEntry.cs" />
     <Compile Include="JapaneseDictionary.cs" />
-    <Compile Include="Gloss.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

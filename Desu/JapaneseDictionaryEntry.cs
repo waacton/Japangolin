@@ -1,97 +1,60 @@
 ﻿namespace Wacton.Desu
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    // TODO: needs updating to better reflect JMdict structure (as part of Project Desu)
-    public class JapaneseDictionaryEntry
+    using Wacton.Tovarisch.Collections;
+
+    public class JapaneseDictionaryEntry : IJapaneseDictionaryEntry
     {
-        private bool isIdentifierSet;
-        public int Identifier { get; private set; }
-        public List<string> Kanji { get; }
-        public List<string> Kana { get; }
-        public Dictionary<Gloss, List<string>> Translations { get; }
-        public List<string> SpeechMarkings { get; }
-        public List<string> FieldMarkings { get; }
-        public List<string> MiscellaneousMarkings { get; }
+        public int Sequence { get; set; }
+        public IEnumerable<Kanji> Kanjis { get; private set; }
+        public IEnumerable<Reading> Readings { get; private set; }
+        public IEnumerable<Sense> Senses { get; private set; }
+
+        internal Kanji CurrentKanji => this.Kanjis.Last();
+        internal Reading CurrentReading => this.Readings.Last();
+        internal Sense CurrentSense => this.Senses.Last();
 
         public JapaneseDictionaryEntry()
         {
-            this.Kanji = new List<string>();
-            this.Kana = new List<string>();
-            this.Translations = new Dictionary<Gloss, List<string>>();
-            this.SpeechMarkings = new List<string>();
-            this.FieldMarkings = new List<string>();
-            this.MiscellaneousMarkings = new List<string>();
+            this.Kanjis = new List<Kanji>();
+            this.Readings = new List<Reading>();
+            this.Senses = new List<Sense>();
         }
 
-        public void SetIdentifier(int identifier)
+        internal void StartNewKanji()
         {
-            if (this.isIdentifierSet)
-            {
-                throw new InvalidOperationException("Identifier is already set");
-            }
-
-            this.Identifier = identifier;
-            this.isIdentifierSet = true;
+            this.Kanjis = this.Kanjis.Append(new Kanji());
         }
 
-        public void AddKanji(string kanji)
+        internal void StartNewReading()
         {
-            this.Kanji.Add(kanji);
+            this.Readings = this.Readings.Append(new Reading());
         }
 
-        public void AddKana(string kana)
+        internal void StartNewSense()
         {
-            if (!this.Kana.Contains(kana))
-            {
-                this.Kana.Add(kana);
-            }
-        }
-
-        public void AddTranslation(Gloss gloss, string translation)
-        {
-            if (!this.Translations.ContainsKey(gloss))
-            {
-                this.Translations.Add(gloss, new List<string>());
-            }
-
-            this.Translations[gloss].Add(translation);
-        }
-
-        public void AddSpeechMarking(string speechMarking)
-        {
-            this.SpeechMarkings.Add(speechMarking);
-        }
-
-        public void AddFieldMarking(string fieldMarking)
-        {
-            this.FieldMarkings.Add(fieldMarking);
-        }
-
-        public void AddMiscellaneousMarking(string miscellaneousMarking)
-        {
-            this.MiscellaneousMarkings.Add(miscellaneousMarking);
+            this.Senses = this.Senses.Append(new Sense());
         }
 
         public override string ToString()
         {
             var stringbuilder = new StringBuilder();
-            stringbuilder.Append(this.Identifier + ": ");
+            stringbuilder.Append($"#{this.Sequence} :: ");
 
-            foreach (var kanji in this.Kanji)
+            foreach (var kanji in this.Kanjis)
             {
-                stringbuilder.Append(kanji + " | ");
+                stringbuilder.Append(kanji.Text + " | ");
             }
 
-            foreach (var kana in this.Kana)
+            foreach (var reading in this.Readings)
             {
-                stringbuilder.Append(kana + " | ");
+                stringbuilder.Append(reading.Text + " | ");
             }
 
-            stringbuilder.Append(this.Translations[Gloss.English].First());
+            stringbuilder.Append(this.Senses.First().Glosses.First(gloss => gloss.Language.Equals(Language.English)).Term);
             return stringbuilder.ToString();
         }
     }

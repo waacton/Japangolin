@@ -38,7 +38,7 @@
         /// <summary>
         /// Returns the entries of the Japanese dictionary
         /// </summary>
-        public IEnumerable<JapaneseDictionaryEntry> GetEntries()
+        public IEnumerable<IJapaneseDictionaryEntry> GetEntries()
         {
             return this.IsOverriding
                 ? ParseDictionary(() => File.OpenRead(this.DictionaryFilePath))

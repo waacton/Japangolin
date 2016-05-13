@@ -1,6 +1,7 @@
 ﻿namespace Wacton.Japangolin.Domain.JapanesePhrases
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using Wacton.Desu;
     using Wacton.Tovarisch.Randomness;
@@ -36,20 +37,21 @@
             return RandomSelection.SelectOne(this.japanesePhrases);
         }
 
-        private static List<JapanesePhrase> ProcessEntries(IEnumerable<JapaneseDictionaryEntry> dictionaryEntries)
+        private static List<JapanesePhrase> ProcessEntries(IEnumerable<IJapaneseDictionaryEntry> dictionaryEntries)
         {
             var phrases = new List<JapanesePhrase>();
             var unprocessed = new List<string>(); // for debug purposes
 
             var transliterator = new Transliterator();
-            foreach (var structure in dictionaryEntries)
+            foreach (var entry in dictionaryEntries)
             {
-                var meaning = structure.Translations[Gloss.English];
-                var kanji = structure.Kanji;
-                var entryId = structure.Identifier;
+                var meaning = entry.Senses.First().Glosses.Where(gloss => gloss.Language.Equals(Language.English)).Select(gloss => gloss.Term).ToList();
+                var kanjis = entry.Kanjis.Select(kanji => kanji.Text).ToList();
+                var entryId = entry.Sequence;
 
-                foreach (var kana in structure.Kana)
+                foreach (var reading in entry.Readings)
                 {
+                    var kana = reading.Text;
                     var romaji = transliterator.GetRomaji(kana);
                     if (romaji == null)
                     {
@@ -57,7 +59,7 @@
                     }
                     else
                     {
-                        phrases.Add(new JapanesePhrase(kana, romaji, meaning, kanji, entryId));
+                        phrases.Add(new JapanesePhrase(kana, romaji, meaning, kanjis, entryId));
                     }
                 }
             }
