@@ -43,6 +43,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Field.cs" />
     <Compile Include="EntryElement.cs" />
     <Compile Include="LoanwordGloss.cs" />
     <Compile Include="IJapaneseDictionaryEntry.cs" />

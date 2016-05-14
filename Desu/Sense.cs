@@ -10,7 +10,7 @@
         public List<string> PartsOfSpeech { get; set; } = new List<string>();
         public List<string> CrossReferences { get; set; } = new List<string>();
         public List<string> Antonyms { get; set; } = new List<string>();
-        public List<string> Fields { get; set; } = new List<string>();
+        public List<Field> Fields { get; set; } = new List<Field>();
         public List<string> Miscellanea { get; set; } = new List<string>();
         public List<string> Informations { get; set; } = new List<string>();
         public List<LoanwordGloss> LoanwordSources { get; set; } = new List<LoanwordGloss>();

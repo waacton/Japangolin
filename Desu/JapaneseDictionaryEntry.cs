@@ -8,7 +8,8 @@
 
     public class JapaneseDictionaryEntry : IJapaneseDictionaryEntry
     {
-        public int Sequence { get; set; }
+        public string SequenceString { get; set; }
+        public int Sequence => int.Parse(this.SequenceString);
         public IEnumerable<Kanji> Kanjis { get; private set; }
         public IEnumerable<Reading> Readings { get; private set; }
         public IEnumerable<Sense> Senses { get; private set; }
