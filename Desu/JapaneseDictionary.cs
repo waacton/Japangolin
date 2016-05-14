@@ -120,7 +120,6 @@
                 dictionaryEntries.Add(dictionaryEntry);
             }
 
-            var debug = dictionaryEntries.Where(entry => entry.Senses.Any(sense => sense.Dialects.Any()));
             return dictionaryEntries;
         }
 
