@@ -2,13 +2,17 @@
 {
     public class Gloss
     {
-        public Language Language { get; }
         public string Term { get; }
+        public Language Language { get; }
 
-        public Gloss(Language language, string term)
+        /// <summary> This property appears to be unused (JMdict 1.08) </summary>
+        public string Gender { get; }
+
+        public Gloss(string term, Language language, string gender)
         {
-            this.Language = language;
             this.Term = term;
+            this.Language = language;
+            this.Gender = gender;
         }
 
         public override string ToString()

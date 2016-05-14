@@ -15,6 +15,11 @@
         private static readonly Dictionary<string, EntryElement> EntryElements =
             Enumeration.GetAll<EntryElement>().ToDictionary(element => element.Code, element => element);
 
+        private const string LanguageAttribute = "xml:lang";
+        private const string LoanwordTypeAttribute = "ls_type";
+        private const string LoanwordWaseiAttribute = "ls_wasei";
+        private const string GlossGenderAttribute = "g_gend";
+
         public readonly string DictionaryFilePath;
         public bool IsOverriding => this.DictionaryFilePath != null;
 
@@ -93,7 +98,18 @@
                         }
 
                         var entryElement = EntryElements[elementCode];
-                        entryElement.ReaderAction(dictionaryEntry, reader);
+                        EntryElementData entryElementData = null;
+                        if (entryElement.ExpectsContent)
+                        {
+                            var languageAttribute = reader.GetAttribute(LanguageAttribute);
+                            var loanwordTypeAttribute = reader.GetAttribute(LoanwordTypeAttribute);
+                            var loanwordWaseiAttribute = reader.GetAttribute(LoanwordWaseiAttribute);
+                            var glossGenderAttribute = reader.GetAttribute(GlossGenderAttribute);
+                            var content = reader.ReadElementContentAsString();
+                            entryElementData = new EntryElementData(content, languageAttribute, glossGenderAttribute, loanwordTypeAttribute, loanwordWaseiAttribute);
+                        }
+
+                        entryElement.AddDataToEntry(dictionaryEntry, entryElementData);
                     }
                     else if (reader.NodeType == XmlNodeType.EndElement)
                     {
@@ -104,6 +120,7 @@
                 dictionaryEntries.Add(dictionaryEntry);
             }
 
+            var debug = dictionaryEntries.Where(entry => entry.Senses.Any(sense => sense.Dialects.Any()));
             return dictionaryEntries;
         }
 

@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryElement.cs" />
+    <Compile Include="LoanwordGloss.cs" />
     <Compile Include="IJapaneseDictionaryEntry.cs" />
     <Compile Include="Gloss.cs" />
+    <Compile Include="Dialect.cs" />
+    <Compile Include="EntryElementData.cs" />
     <Compile Include="Sense.cs" />
     <Compile Include="Reading.cs" />
     <Compile Include="Kanji.cs" />

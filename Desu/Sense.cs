@@ -13,12 +13,9 @@
         public List<string> Fields { get; set; } = new List<string>();
         public List<string> Miscellanea { get; set; } = new List<string>();
         public List<string> Informations { get; set; } = new List<string>();
-        public List<Gloss> LoanwordSource { get; set; } = new List<Gloss>();
-        public List<string> Dialects { get; set; } = new List<string>();
+        public List<LoanwordGloss> LoanwordSources { get; set; } = new List<LoanwordGloss>();
+        public List<Dialect> Dialects { get; set; } = new List<Dialect>();
         public List<Gloss> Glosses { get; set; } = new List<Gloss>();
-
-        // TODO: missing some small attributes: ls_type, ls_wasei, g_gend
-        // TODO: loanword gloss to be subtype of gloss, to include partial/full type and wasei bool?
 
         public override string ToString()
         {
