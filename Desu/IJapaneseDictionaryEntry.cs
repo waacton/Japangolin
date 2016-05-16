@@ -5,8 +5,8 @@
     public interface IJapaneseDictionaryEntry
     {
         int Sequence { get; }
-        IEnumerable<Kanji> Kanjis { get; }
-        IEnumerable<Reading> Readings { get; }
-        IEnumerable<Sense> Senses { get; }
+        IEnumerable<IKanji> Kanjis { get; }
+        IEnumerable<IReading> Readings { get; }
+        IEnumerable<ISense> Senses { get; }
     }
 }

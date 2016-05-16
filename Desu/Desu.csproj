@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Wacton.Desu.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Wacton.Desu.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,6 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISense.cs" />
+    <Compile Include="IReading.cs" />
+    <Compile Include="IKanji.cs" />
+    <Compile Include="Miscellaneous.cs" />
+    <Compile Include="Priority.cs" />
+    <Compile Include="ReadingInformation.cs" />
+    <Compile Include="KanjiInformation.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="EntryElement.cs" />
     <Compile Include="LoanwordGloss.cs" />

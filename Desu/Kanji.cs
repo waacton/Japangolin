@@ -2,11 +2,17 @@
 {
     using System.Collections.Generic;
 
-    public class Kanji
+    public class Kanji : IKanji
     {
         public string Text { get; set; }
-        public List<string> Informations { get; set; } = new List<string>();
-        public List<string> Priorities { get; set; } = new List<string>();
+
+        private readonly List<KanjiInformation> informations = new List<KanjiInformation>();
+        internal List<KanjiInformation> GetInformations() => this.informations;
+        public IEnumerable<KanjiInformation> Informations => this.GetInformations();
+
+        private readonly List<Priority> priorities = new List<Priority>();
+        internal List<Priority> GetPriorities() => this.priorities;
+        public IEnumerable<Priority> Priorities => this.GetPriorities();
 
         public override string ToString()
         {

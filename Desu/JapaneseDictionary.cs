@@ -12,6 +12,7 @@
     public class JapaneseDictionary : IJapaneseDictionary
     {
         private const string DictionaryName = "JMdict";
+        private const string EntryElement = "entry";
         private static readonly Dictionary<string, EntryElement> EntryElements =
             Enumeration.GetAll<EntryElement>().ToDictionary(element => element.Code, element => element);
 
@@ -58,7 +59,7 @@
             return assembly.GetManifestResourceStream(resourceName);
         }
 
-        private static IEnumerable<JapaneseDictionaryEntry> ParseDictionary(Func<Stream> openStreamFunction)
+        private static IEnumerable<IJapaneseDictionaryEntry> ParseDictionary(Func<Stream> openStreamFunction)
         {
             using (var stream = openStreamFunction())
             {
@@ -70,14 +71,14 @@
             }
         }
 
-        private static IEnumerable<JapaneseDictionaryEntry> ParseDictionary(XmlReader reader)
+        private static IEnumerable<IJapaneseDictionaryEntry> ParseDictionary(XmlReader reader)
         {
-            var dictionaryEntries = new List<JapaneseDictionaryEntry>();
+            var dictionaryEntries = new List<IJapaneseDictionaryEntry>();
 
             reader.MoveToContent();
             while (reader.Read())
             {
-                if (!reader.IsStartElement() || reader.Name != "entry")
+                if (!reader.IsStartElement() || reader.Name != EntryElement)
                 {
                     continue;
                 }
@@ -113,7 +114,7 @@
                     }
                     else if (reader.NodeType == XmlNodeType.EndElement)
                     {
-                        isEndOfEntry = reader.Name.Equals("entry");
+                        isEndOfEntry = reader.Name.Equals(EntryElement);
                     }
                 }
 

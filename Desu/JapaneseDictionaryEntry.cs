@@ -4,41 +4,40 @@
     using System.Linq;
     using System.Text;
 
-    using Wacton.Tovarisch.Collections;
-
     public class JapaneseDictionaryEntry : IJapaneseDictionaryEntry
     {
-        public string SequenceString { get; set; }
-        public int Sequence => int.Parse(this.SequenceString);
-        public IEnumerable<Kanji> Kanjis { get; private set; }
-        public IEnumerable<Reading> Readings { get; private set; }
-        public IEnumerable<Sense> Senses { get; private set; }
+        public int Sequence { get; set; }
 
-        internal Kanji CurrentKanji => this.Kanjis.Last();
-        internal Reading CurrentReading => this.Readings.Last();
-        internal Sense CurrentSense => this.Senses.Last();
+        private readonly List<Kanji> kanjis = new List<Kanji>();
+        public IEnumerable<IKanji> Kanjis => this.kanjis;
 
-        public JapaneseDictionaryEntry()
-        {
-            this.Kanjis = new List<Kanji>();
-            this.Readings = new List<Reading>();
-            this.Senses = new List<Sense>();
-        }
+        private readonly List<Reading> readings = new List<Reading>();
+        public IEnumerable<IReading> Readings => this.readings;
+
+        private readonly List<Sense> senses = new List<Sense>();
+        public IEnumerable<ISense> Senses => this.senses;
+
 
         internal void StartNewKanji()
         {
-            this.Kanjis = this.Kanjis.Append(new Kanji());
+            this.kanjis.Add(new Kanji());
         }
+
+        internal Kanji GetKanji() => this.kanjis.Last();
 
         internal void StartNewReading()
         {
-            this.Readings = this.Readings.Append(new Reading());
+            this.readings.Add(new Reading());
         }
+
+        internal Reading GetReading() => this.readings.Last();
 
         internal void StartNewSense()
         {
-            this.Senses = this.Senses.Append(new Sense());
+            this.senses.Add(new Sense());
         }
+
+        internal Sense GetSense() => this.senses.Last();
 
         public override string ToString()
         {
