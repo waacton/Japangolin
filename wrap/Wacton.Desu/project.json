@@ -5,7 +5,7 @@
       "wrappedProject": "../../Desu/Desu.csproj",
       "bin": {
         "assembly": "../../Dependencies/Wacton.Desu.dll",
-        "pdb": "../../Desu/obj/{configuration}/Wacton.Desu.pdb"
+        "pdb": "../../Dependencies/Wacton.Desu.pdb"
       },
       "dependencies": {
         "Wacton.Tovarisch": "1.0.0-*"
