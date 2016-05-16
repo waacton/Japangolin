@@ -39,6 +39,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Wacton.Desu, Version=0.1.0.24483, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Wacton.Desu.dll</HintPath>
+    </Reference>
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
     </Reference>
@@ -65,12 +69,6 @@
     <Compile Include="JapanesePhrases\Transliterator.cs" />
     <Compile Include="Commands\UpdateJapanesePhraseCommand.cs" />
     <Compile Include="JapanesePronunciations\Youon.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Desu\Desu.csproj">
-      <Project>{2d36dfd4-8fe3-4166-846d-4a8efcb0178c}</Project>
-      <Name>Desu</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

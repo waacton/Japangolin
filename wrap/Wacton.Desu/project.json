@@ -4,7 +4,7 @@
     "net46": {
       "wrappedProject": "../../Desu/Desu.csproj",
       "bin": {
-        "assembly": "../../Desu/obj/{configuration}/Wacton.Desu.dll",
+        "assembly": "../../Dependencies/Wacton.Desu.dll",
         "pdb": "../../Desu/obj/{configuration}/Wacton.Desu.pdb"
       },
       "dependencies": {
