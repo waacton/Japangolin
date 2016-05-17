@@ -1812,18 +1812,20 @@
           "lib/net45/_._": {}
         }
       },
-      "Wacton.Desu/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6",
-        "dependencies": {
-          "Wacton.Tovarisch": "1.0.0"
+      "Wacton.Desu/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Wacton.Desu.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Wacton.Desu.dll": {}
         }
       },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
-          "Wacton.Desu": "1.0.0",
+          "Wacton.Desu": "2.0.0",
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
         }
@@ -3650,18 +3652,20 @@
           "lib/net45/_._": {}
         }
       },
-      "Wacton.Desu/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6",
-        "dependencies": {
-          "Wacton.Tovarisch": "1.0.0"
+      "Wacton.Desu/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Wacton.Desu.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Wacton.Desu.dll": {}
         }
       },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
-          "Wacton.Desu": "1.0.0",
+          "Wacton.Desu": "2.0.0",
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
         }
@@ -5488,18 +5492,20 @@
           "lib/net45/_._": {}
         }
       },
-      "Wacton.Desu/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6",
-        "dependencies": {
-          "Wacton.Tovarisch": "1.0.0"
+      "Wacton.Desu/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Wacton.Desu.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Wacton.Desu.dll": {}
         }
       },
       "Wacton.Japangolin.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
-          "Wacton.Desu": "1.0.0",
+          "Wacton.Desu": "2.0.0",
           "Wacton.Tovarisch": "1.0.0",
           "Wacton.Tovarisch.MVVM": "1.0.0"
         }
@@ -5515,10 +5521,6 @@
     }
   },
   "libraries": {
-    "Wacton.Desu/1.0.0": {
-      "type": "project",
-      "path": "../wrap/Wacton.Desu/project.json"
-    },
     "Wacton.Japangolin.Domain/1.0.0": {
       "type": "project",
       "path": "../wrap/Wacton.Japangolin.Domain/project.json"
@@ -7571,6 +7573,17 @@
         "System.Threading.4.0.0.nupkg",
         "System.Threading.4.0.0.nupkg.sha512",
         "System.Threading.nuspec"
+      ]
+    },
+    "Wacton.Desu/2.0.0": {
+      "type": "package",
+      "sha512": "RNyav5A7ayZS7bBuswarnnP14yPtl/mSUlrXpq7pvZe5NFmH+hiavEzMqHBIBwBO4IGGE+ZuCWkc34djTeiBxw==",
+      "files": [
+        "lib/net46/Wacton.Desu.dll",
+        "lib/net46/Wacton.Desu.XML",
+        "Wacton.Desu.2.0.0.nupkg",
+        "Wacton.Desu.2.0.0.nupkg.sha512",
+        "Wacton.Desu.nuspec"
       ]
     }
   },
