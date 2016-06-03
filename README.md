@@ -1,12 +1,9 @@
 # Japangolin
-Japanese kana reading trainer.
+Japanese kana learning aid.
 
 ## Playground for:
-- Common library backbone ([Tovarisch](https://gitlab.com/Wacton/Tovarisch))
-- MVVM (Caliburn)
-- Dependency Injection (Ninject)
-- JavaScript
-- TypeScript
+- MVVM ([Caliburn.Micro](http://caliburnmicro.com/))
+- Dependency Injection ([Ninject](http://www.ninject.org/))
 - ASP.NET
-- React
-- ReactJS.NET
+- React / ReactJS.NET
+- Common library backbone ([Wacton.Tovarisch](https://gitlab.com/Wacton/Tovarisch))
