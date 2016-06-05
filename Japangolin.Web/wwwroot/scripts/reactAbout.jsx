@@ -100,7 +100,7 @@ var About = React.createClass({
 
                 <div style={{ marginTop: 5, whiteSpace: "nowrap" }}>
                     <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <a href="https://github.com/waacton/Japangolin" style={{marginLeft: 5}}>github.com/waacton/Japangolin</a>
+                    <a href="https://gitlab.com/Wacton/Japangolin" style={{marginLeft: 5}}>https://gitlab.com/Wacton/Japangolin</a>
                 </div>
 
                 <hr />

@@ -6,6 +6,6 @@
 
         public string Subtitle => "by Wacton";
 
-        public string Link => "https://github.com/waacton/Japangolin";
+        public string Link => "https://gitlab.com/Wacton/Japangolin";
     }
 }
