@@ -52,8 +52,8 @@
             }
         }
 
-        public MainViewModel(Main main, UpdateJapanesePhraseCommand updateJapanesePhraseCommand, ModelChanger modelChanger)
-            : base(modelChanger, main)
+        public MainViewModel(Main main, UpdateJapanesePhraseCommand updateJapanesePhraseCommand, ModelChangeNotifier modelChangeNotifier)
+            : base(modelChangeNotifier, main)
         {
             this.main = main;
             this.updateJapanesePhraseCommand = updateJapanesePhraseCommand;

@@ -3,12 +3,12 @@
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
 
-    public class UpdateJapanesePhraseCommand : ModelCommand
+    public class UpdateJapanesePhraseCommand : ModelChangeCommand
     {
         private readonly Main main;
 
-        public UpdateJapanesePhraseCommand(ModelChanger modelChanger, Main main)
-            : base(modelChanger, main)
+        public UpdateJapanesePhraseCommand(ModelChangeNotifier modelChangeNotifier, Main main)
+            : base(modelChangeNotifier, main)
         {
             this.main = main;
         }

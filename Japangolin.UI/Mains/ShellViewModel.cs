@@ -7,8 +7,8 @@
         public static string WindowTitle { get; set; }
         public MainViewModel MainViewModel { get; }
 
-        public ShellViewModel(MainViewModel mainViewModel, ModelChanger modelChanger)
-            : base(modelChanger)
+        public ShellViewModel(MainViewModel mainViewModel, ModelChangeNotifier modelChangeNotifier)
+            : base(modelChangeNotifier)
         {
             this.MainViewModel = mainViewModel;
         }
