@@ -1,5 +1,5 @@
 # Japangolin
-A Japanese kana learning aid.
+Japanese kana learning aid.
 
 ## Playground for:
 - My library of common tools ([Wacton.Tovarisch](https://gitlab.com/Wacton/Tovarisch))
