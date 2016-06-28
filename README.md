@@ -1,5 +1,5 @@
 # Moved to [GitLab](https://gitlab.com/Wacton/Japangolin)
-Japanese kana learning aid.
+A Japanese kana learning aid.
 
 Playground for:
 - My library of common tools ([Wacton.Tovarisch](https://gitlab.com/Wacton/Tovarisch))
