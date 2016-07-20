@@ -9,15 +9,7 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="500" Width="1200"
         TitleCaps="False" GlowBrush="{DynamicResource AccentColorBrush}"
-        d:DataContext="{Binding Source={StaticResource DesignTimeViewModelLocator}, Path=ShellViewModel}">
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/BaseStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        d:DataContext="{d:DesignInstance Type=mains:DesignTimeShellViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.RowDefinitions>

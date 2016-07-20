@@ -13,4 +13,11 @@
             this.MainViewModel = mainViewModel;
         }
     }
+
+    public class DesignTimeShellViewModel : ShellViewModel
+    {
+        public DesignTimeShellViewModel() : base(new DesignTimeMainViewModel(), null)
+        {
+        }
+    }
 }

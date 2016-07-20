@@ -2,7 +2,6 @@
 {
     using Ninject;
 
-    using Wacton.Japangolin.Domain.DesignTime;
     using Wacton.Japangolin.Domain.JapanesePhrases;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.UI.Mains;
@@ -19,12 +18,6 @@
         {
             kernel.Bind<IJapanesePhraseRepository>().To<JapanesePhraseRepository>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
-        }
-
-        public static void SetupKernelBindingsForDesignTime(IKernel kernel)
-        {
-            SetupKernelBindings(kernel);
-            kernel.Rebind<IJapanesePhraseRepository>().To<DesignTimeJapanesePhraseRepository>().InSingletonScope();
         }
     }
 }

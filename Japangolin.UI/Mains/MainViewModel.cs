@@ -112,4 +112,17 @@
             this.Feedback = Feedback.None;
         }
     }
+
+    public class DesignTimeMainViewModel : MainViewModel
+    {
+        public new string Kana => "ジャッパンゴリン";
+        public new string Romaji { get; set; } = "jappangorin";
+        public new string Kanji => "日本蜥蜴";
+        public new string Meaning => "Japangolin";
+        public new Feedback Feedback => Feedback.Good;
+
+        public DesignTimeMainViewModel() : base(null, null, null)
+        {
+        }
+    }
 }

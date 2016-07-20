@@ -51,7 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DesignTime\DesignTimeJapanesePhraseRepository.cs" />
     <Compile Include="JapanesePhrases\IJapanesePhraseRepository.cs" />
     <Compile Include="JapanesePhrases\JapaneseSyllable.cs" />
     <Compile Include="JapanesePronunciations\Chouon.cs" />
