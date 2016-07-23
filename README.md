@@ -7,3 +7,7 @@ Japanese kana learning aid.
 - Dependency injection via Tovarisch ([Wacton.Tovarisch.MVVM](https://gitlab.com/Wacton/Tovarisch/tree/master/Tovarisch.MVVM) + [Ninject](http://www.ninject.org/))
 - ASP.NET + Razor
 - React + ReactJS.NET
+
+---
+
+<img src="https://gitlab.com/Wacton/Japangolin/raw/master/Japangolin.UI/Resources/Japangolin.png" width="32" height="32">
