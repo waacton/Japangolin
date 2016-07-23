@@ -7,6 +7,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
         mc:Ignorable="d"
+        Icon="pack://application:,,,/Wacton.Japangolin.UI;component/Resources/Japangolin.ico"
         Title="{Binding WindowTitle}" Height="500" Width="1200"
         TitleCaps="False" GlowBrush="{DynamicResource AccentColorBrush}"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeShellViewModel, IsDesignTimeCreatable=True}">
