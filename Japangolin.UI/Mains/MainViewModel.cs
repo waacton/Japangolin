@@ -2,13 +2,13 @@
 {
     using System;
     using System.Linq;
-    using System.Reflection;
     using System.Windows.Input;
 
     using Wacton.Japangolin.Domain.Commands;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.Delegates;
     using Wacton.Tovarisch.MVVM;
+    using Wacton.Tovarisch.UI.MVVM;
 
     public class MainViewModel : ViewModelBase
     {

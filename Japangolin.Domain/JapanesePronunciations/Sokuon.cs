@@ -8,13 +8,11 @@
     {
         public static readonly Sokuon ConsonantGemination = new Sokuon("ConsonantGemination", 'っ', 'ッ');
 
-        private static int counter;
         private readonly Dictionary<Syllabary, char> dict;
 
         public Sokuon(string friendlyString, char hiraganaTokushuon, char katakanaTokushuon)
-            : base(counter, friendlyString)
+            : base(friendlyString)
         {
-            counter++;
             this.dict = new Dictionary<Syllabary, char>();
             this.dict.Add(Syllabary.Hiragana, hiraganaTokushuon);
             this.dict.Add(Syllabary.Katakana, katakanaTokushuon);

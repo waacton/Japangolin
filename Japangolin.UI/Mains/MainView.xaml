@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
-        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeMainViewModel, IsDesignTimeCreatable=True}">

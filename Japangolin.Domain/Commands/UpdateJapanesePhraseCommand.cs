@@ -1,6 +1,5 @@
 ﻿namespace Wacton.Japangolin.Domain.Commands
 {
-    using System.Threading.Tasks;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
 
@@ -14,10 +13,9 @@
             this.main = main;
         }
 
-        protected override Task Execute()
+        protected override void Action()
         {
             this.main.UpdatePhrase();
-            return Task.CompletedTask;
         }
     }
 }

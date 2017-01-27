@@ -13,14 +13,12 @@
         public static readonly Tokushuon O = new Tokushuon("O", 'ぉ', 'ォ');
         public static readonly Tokushuon Wa = new Tokushuon("Wa", 'ゎ', 'ヮ');
 
-        private static int counter;
         private string romaji;
         private readonly Dictionary<Syllabary, char> dict;
 
         public Tokushuon(string romaji, char hiraganaTokushuon, char katakanaTokushuon)
-            : base(counter, romaji)
+            : base(romaji)
         {
-            counter++;
             this.romaji = romaji;
             this.dict = new Dictionary<Syllabary, char>();
             this.dict.Add(Syllabary.Hiragana, hiraganaTokushuon);

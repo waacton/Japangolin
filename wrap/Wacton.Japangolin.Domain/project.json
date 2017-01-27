@@ -8,8 +8,7 @@
         "pdb": "../../Japangolin.Domain/obj/{configuration}/Wacton.Japangolin.Domain.pdb"
       },
       "dependencies": {
-        "Wacton.Tovarisch.MVVM": "1.0.0-*",
-        "Wacton.Tovarisch": "1.0.0-*"
+        "Wacton.Tovarisch": "1.1.0-*"
       }
     },
     "net452": {
@@ -19,8 +18,7 @@
         "pdb": "../../Japangolin.Domain/obj/{configuration}/Wacton.Japangolin.Domain.pdb"
       },
       "dependencies": {
-        "Wacton.Tovarisch": "1.0.0-*",
-        "Wacton.Tovarisch.MVVM": "1.0.0-*"
+        "Wacton.Tovarisch": "1.1.0-*"
       }
     },
     "net46": {
@@ -30,9 +28,8 @@
         "pdb": "../../Japangolin.Domain/obj/{configuration}/Wacton.Japangolin.Domain.pdb"
       },
       "dependencies": {
-        "Wacton.Tovarisch": "1.0.0-*",
-        "Wacton.Tovarisch.MVVM": "1.0.0-*",
-        "Wacton.Desu": "2.0.0"
+        "Wacton.Tovarisch": "1.1.0-*",
+        "Wacton.Desu": "2.1.0"
       }
     }
   }

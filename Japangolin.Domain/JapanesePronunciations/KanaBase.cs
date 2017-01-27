@@ -56,13 +56,11 @@
         public static readonly KanaBase Wo = new KanaBase("Wo", 'を', 'ヲ');
         public static readonly KanaBase N = new KanaBase("N", 'ん', 'ン');
 
-        private static int counter;
         private readonly Dictionary<Syllabary, Dictionary<KanaType, char>> dict; 
 
         public KanaBase(string friendlyString, char hiraganaSeion, char katakanaSeion)
-            : base(counter, friendlyString)
+            : base(friendlyString)
         {
-            counter++;
             this.dict = new Dictionary<Syllabary, Dictionary<KanaType, char>>();
             this.dict.Add(Syllabary.Hiragana, new Dictionary<KanaType, char>());
             this.dict.Add(Syllabary.Katakana, new Dictionary<KanaType, char>());

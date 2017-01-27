@@ -5,7 +5,7 @@
     using Wacton.Japangolin.Domain.JapanesePhrases;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.UI.Mains;
-    using Wacton.Tovarisch.MVVM;
+    using Wacton.Tovarisch.UI;
 
     public class AppBootstrapper : Bootstrapper<ShellViewModel>
     {

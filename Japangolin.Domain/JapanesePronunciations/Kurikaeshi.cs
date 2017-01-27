@@ -9,13 +9,11 @@
         public static readonly Kurikaeshi SeionRepetition = new Kurikaeshi("SeionRepetition", 'ゝ', 'ヽ');
         public static readonly Kurikaeshi DakutenRepetition = new Kurikaeshi("DakutenRepetition", 'ゞ', 'ヾ');
 
-        private static int counter;
         private readonly Dictionary<Syllabary, char> dict;
 
         public Kurikaeshi(string friendlyString, char hiraganaTokushuon, char katakanaTokushuon)
-            : base(counter, friendlyString)
+            : base(friendlyString)
         {
-            counter++;
             this.dict = new Dictionary<Syllabary, char>();
             this.dict.Add(Syllabary.Hiragana, hiraganaTokushuon);
             this.dict.Add(Syllabary.Katakana, katakanaTokushuon);

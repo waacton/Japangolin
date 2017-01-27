@@ -84,7 +84,6 @@
 
         public static readonly Kana Vu = new Kana("Vu", KanaBase.U, KanaType.Dakuon);
 
-        private static int counter;
         private string Romaji { get; }
         private KanaBase KanaBase { get; }
         private KanaType KanaType { get; }
@@ -93,9 +92,8 @@
         private readonly string[] vowels = { "a", "e", "i", "o", "u" };
 
         public Kana(string romaji, KanaBase kanaBase, KanaType kanaType)
-            : base(counter, romaji)
+            : base(romaji)
         {
-            counter++;
             this.Romaji = romaji;
             this.KanaBase = kanaBase;
             this.KanaType = kanaType;

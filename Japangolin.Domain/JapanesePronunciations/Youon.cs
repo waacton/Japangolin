@@ -10,14 +10,12 @@
         public static readonly Youon Yu = new Youon("Yu", 'ゅ', 'ュ');
         public static readonly Youon Yo = new Youon("Yo", 'ょ', 'ョ');
 
-        private static int counter;
         private string romaji;
         private readonly Dictionary<Syllabary, char> dict; 
 
         public Youon(string romaji, char hiraganaYouon, char katakanaYouon)
-            : base(counter, romaji)
+            : base(romaji)
         {
-            counter++;
             this.romaji = romaji;
             this.dict = new Dictionary<Syllabary, char>();
             this.dict.Add(Syllabary.Hiragana, hiraganaYouon);

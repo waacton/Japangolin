@@ -11,7 +11,7 @@
                     <ui:AppBootstrapper x:Key="Bootstrapper" />
                 </ResourceDictionary>
 
-                <ResourceDictionary Source="pack://application:,,,/Wacton.Tovarisch;component/Converters/CommonConverters.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Tovarisch.UI;component/Converters/CommonConverters.xaml" />
 
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Resources/Icons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/CleanWindowCloseButtonStyle.xaml" />

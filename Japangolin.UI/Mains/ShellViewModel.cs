@@ -1,6 +1,7 @@
 ﻿namespace Wacton.Japangolin.UI.Mains
 {
     using Wacton.Tovarisch.MVVM;
+    using Wacton.Tovarisch.UI.MVVM;
 
     public class ShellViewModel : ViewModelBase
     {
