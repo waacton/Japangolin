@@ -111,7 +111,7 @@ var About = React.createClass({
 
                 <hr />
                 <footer>
-                    <p>&copy; 2016 - Wacton</p>
+                    <p>&copy; 2017 - Wacton</p>
                 </footer>
             </div>
         );

@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Wacton")]
 [assembly: AssemblyProduct("Wacton.Japangolin.UI")]
-[assembly: AssemblyCopyright("Copyright © Wacton 2016")]
+[assembly: AssemblyCopyright("Copyright © Wacton 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
