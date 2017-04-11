@@ -29,7 +29,7 @@
       },
       "dependencies": {
         "Wacton.Tovarisch": "1.1.0-*",
-        "Wacton.Desu": "2.1.0"
+        "Wacton.Desu": "3.0.0"
       }
     }
   }

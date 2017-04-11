@@ -3,7 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Wacton.Desu;
+    using Wacton.Desu.Enums;
+    using Wacton.Desu.Japanese;
     using Wacton.Tovarisch.Randomness;
 
     public class JapanesePhraseRepository : IJapanesePhraseRepository
@@ -37,7 +38,7 @@
             return RandomSelection.SelectOne(this.japanesePhrases);
         }
 
-        private static List<JapanesePhrase> ProcessEntries(IEnumerable<IJapaneseDictionaryEntry> dictionaryEntries)
+        private static List<JapanesePhrase> ProcessEntries(IEnumerable<IJapaneseEntry> dictionaryEntries)
         {
             var phrases = new List<JapanesePhrase>();
             var unprocessed = new List<string>(); // for debug purposes
