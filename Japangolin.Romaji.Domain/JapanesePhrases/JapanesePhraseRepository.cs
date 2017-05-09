@@ -9,21 +9,20 @@
 
     public class JapanesePhraseRepository : IJapanesePhraseRepository
     {
-        private readonly IJapaneseDictionary japaneseDictionary;
         private List<JapanesePhrase> japanesePhrases;
 
         public bool IsInitialised { get; private set; }
         public int PhraseCount { get; private set; }
 
-        public JapanesePhraseRepository(IJapaneseDictionary japaneseDictionary)
+        public JapanesePhraseRepository()
         {
-            this.japaneseDictionary = japaneseDictionary;
             this.Initialise();
         }
 
         public void Initialise()
         {
-            var dictionaryEntries = this.japaneseDictionary.GetEntries();
+            var japaneseDictionary = new JapaneseDictionary();
+            var dictionaryEntries = japaneseDictionary.GetEntries();
             this.japanesePhrases = ProcessEntries(dictionaryEntries);
             this.PhraseCount = this.japanesePhrases.Count;
             this.IsInitialised = true;

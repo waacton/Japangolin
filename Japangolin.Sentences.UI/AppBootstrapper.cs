@@ -1,10 +1,10 @@
-﻿namespace Wacton.Japangolin.Romaji.UI
+﻿namespace Wacton.Japangolin.Sentences.UI
 {
     using Ninject;
 
-    using Wacton.Japangolin.Romaji.Domain.JapanesePhrases;
-    using Wacton.Japangolin.Romaji.Domain.Mains;
-    using Wacton.Japangolin.Romaji.UI.Mains;
+    using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Sentences.Domain.Mains;
+    using Wacton.Japangolin.Sentences.UI.Mains;
     using Wacton.Tovarisch.UI;
 
     public class AppBootstrapper : Bootstrapper<ShellViewModel>
@@ -16,7 +16,7 @@
 
         public static void SetupKernelBindings(IKernel kernel)
         {
-            kernel.Bind<IJapanesePhraseRepository>().To<JapanesePhraseRepository>().InSingletonScope();
+            kernel.Bind<IJapaneseDictionary>().To<JapaneseDictionary>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
         }
     }

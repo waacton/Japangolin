@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Romaji.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using Wacton.Desu.Japanese;
     using Wacton.Tovarisch.Randomness;
 
-    public class SentenceMain
+    public class Main
     {
         private readonly List<IJapaneseEntry> japaneseEntries; 
         private IJapaneseEntry japaneseEntry;
@@ -18,7 +18,7 @@
         public string KanaSentence { get; private set; }
         public string KanjiSentence { get; private set; }
 
-        public SentenceMain(IJapaneseDictionary japaneseDictionary)
+        public Main(IJapaneseDictionary japaneseDictionary)
         {
             this.japaneseEntries = japaneseDictionary.GetEntries().ToList();
             this.UpdateSentence();
@@ -29,7 +29,6 @@
             //var nounType = RandomSelection.SelectOne(PartOfSpeech.Nouns);
             var nouns = this.japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon)));
 
-            // ReSharper disable once PossibleMultipleEnumeration
             var noun1 = RandomSelection.SelectOne(nouns);
             var noun2 = RandomSelection.SelectOne(nouns);
 

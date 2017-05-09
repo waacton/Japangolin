@@ -5,7 +5,7 @@
 
     using Wacton.Japangolin.Romaji.Domain.JapanesePhrases;
 
-    public class RomajiMain
+    public class Main
     {
         private readonly IJapanesePhraseRepository japanesePhraseRepository;
         private JapanesePhrase currentJapanesePhrase;
@@ -15,7 +15,7 @@
         public List<string> Kanji => this.currentJapanesePhrase.Kanji;
         public string Meaning => this.currentJapanesePhrase.Meaning.First();
 
-        public RomajiMain(IJapanesePhraseRepository japanesePhraseRepository)
+        public Main(IJapanesePhraseRepository japanesePhraseRepository)
         {
             this.japanesePhraseRepository = japanesePhraseRepository;
             this.UpdatePhrase();

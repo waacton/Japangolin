@@ -5,17 +5,17 @@
 
     public class UpdateJapanesePhraseCommand : ModelChangeCommand
     {
-        private readonly RomajiMain romajiMain;
+        private readonly Main main;
 
-        public UpdateJapanesePhraseCommand(ModelChangeNotifier modelChangeNotifier, RomajiMain romajiMain)
-            : base(modelChangeNotifier, romajiMain)
+        public UpdateJapanesePhraseCommand(ModelChangeNotifier modelChangeNotifier, Main main)
+            : base(modelChangeNotifier, main)
         {
-            this.romajiMain = romajiMain;
+            this.main = main;
         }
 
         protected override void Action()
         {
-            this.romajiMain.UpdatePhrase();
+            this.main.UpdatePhrase();
         }
     }
 }

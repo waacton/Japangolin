@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Romaji.UI
+﻿namespace Wacton.Japangolin.Sentences.UI
 {
     using System;
     using System.Reflection;
@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Threading;
 
-    using Wacton.Japangolin.Romaji.UI.Mains;
+    using Wacton.Japangolin.Sentences.UI.Mains;
     using Wacton.Tovarisch.Logging;
 
     /// <summary>
@@ -25,7 +25,7 @@
         private static void SetWindowTitle()
         {
             var applicationVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            ShellViewModel.WindowTitle = $"Wacton.Japangolin.Romaji ({applicationVersion})";
+            ShellViewModel.WindowTitle = $"Wacton.Japangolin.Sentences ({applicationVersion})";
         }
 
         private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

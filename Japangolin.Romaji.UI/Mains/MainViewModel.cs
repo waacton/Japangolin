@@ -14,23 +14,15 @@
     {
         public static string Title { get; set; }
 
-        private readonly RomajiMain romajiMain;
+        private readonly Main main;
         private readonly UpdateJapanesePhraseCommand updateJapanesePhraseCommand;
 
-        private readonly SentenceMain sentenceMain;
-        private readonly UpdateSentenceCommand updateSentenceCommand;
-
-        public string EnglishSentence => this.sentenceMain.EnglishSentence;
-        public string Help => this.sentenceMain.Help;
-        public string KanaSentence => this.sentenceMain.KanaSentence;
-        public string KanjiSentence => this.sentenceMain.KanjiSentence;
-
-        public string Kana => this.romajiMain.Kana;
+        public string Kana => this.main.Kana;
         public string Romaji { get; set; }
-        public string Kanji => this.romajiMain.Kanji.Any() ? this.romajiMain.Kanji.First() : "<no kanji available>";
-        public string Meaning => this.romajiMain.Meaning;
+        public string Kanji => this.main.Kanji.Any() ? this.main.Kanji.First() : "<no kanji available>";
+        public string Meaning => this.main.Meaning;
 
-        private bool IsRomajiCorrect => this.Romaji != null && this.Romaji.Equals(this.romajiMain.Romaji);
+        private bool IsRomajiCorrect => this.Romaji != null && this.Romaji.Equals(this.main.Romaji);
 
         private Feedback feedback;
         public Feedback Feedback
@@ -60,15 +52,12 @@
             }
         }
 
-        public MainViewModel(RomajiMain romajiMain, UpdateJapanesePhraseCommand updateJapanesePhraseCommand, SentenceMain sentenceMain, UpdateSentenceCommand updateSentenceCommand, ModelChangeNotifier modelChangeNotifier)
-            : base(modelChangeNotifier, romajiMain, sentenceMain)
+        public MainViewModel(Main main, UpdateJapanesePhraseCommand updateJapanesePhraseCommand, ModelChangeNotifier modelChangeNotifier)
+            : base(modelChangeNotifier, main)
         {
-            this.romajiMain = romajiMain;
+            this.main = main;
             this.updateJapanesePhraseCommand = updateJapanesePhraseCommand;
             this.Feedback = Feedback.None;
-
-            this.sentenceMain = sentenceMain;
-            this.updateSentenceCommand = updateSentenceCommand;
         }
 
         public void RomajiEntered(KeyEventArgs e)
@@ -122,11 +111,6 @@
             this.IsFanfare = false;
             this.Feedback = Feedback.None;
         }
-
-        public void NextSentence()
-        {
-            this.updateSentenceCommand.ExecuteAndNotify();
-        }
     }
 
     public class DesignTimeMainViewModel : MainViewModel
@@ -137,7 +121,7 @@
         public new string Meaning => "Japangolin";
         public new Feedback Feedback => Feedback.Good;
 
-        public DesignTimeMainViewModel() : base(null, null, null, null, null)
+        public DesignTimeMainViewModel() : base(null, null, null)
         {
         }
     }

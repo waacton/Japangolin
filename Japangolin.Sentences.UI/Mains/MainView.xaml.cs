@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Romaji.UI.Mains
+﻿namespace Wacton.Japangolin.Sentences.UI.Mains
 {
     /// <summary>
     /// Interaction logic for MainView.xaml
@@ -8,7 +8,6 @@
         public MainView()
         {
             this.InitializeComponent();
-            this.Romaji.Focus();
         }
     }
 }

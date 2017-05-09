@@ -26,21 +26,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding EnglishSentence}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Help}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
-
-        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding KanaSentence}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
-        
-        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding KanjiSentence}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
-
-        <Button Grid.Row="5" Width="100" cal:Message.Attach="NextSentence"/>
-
-        <!--<TextBlock x:Name="Kana" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Kana}" 
+        <TextBlock x:Name="Kana" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Kana}" 
                    FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
 
         <TextBox x:Name="Romaji" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Romaji, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -57,6 +43,6 @@
                    Visibility="{Binding IsFanfare, Converter={StaticResource BoolToNotHiddenConverter}}"/>
 
         <TextBlock x:Name="Feedback" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Text="{Binding Feedback.Text}" 
-                   FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>-->
+                   FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </UserControl>
