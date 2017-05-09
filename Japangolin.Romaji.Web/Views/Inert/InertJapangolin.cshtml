@@ -1,0 +1,42 @@
+﻿<!-- TODO: a view model instead? -->
+@using Wacton.Japangolin.Romaji.Domain.JapanesePhrases
+@model JapanesePhrase
+
+@{
+    ViewData["Title"] = Model.Kana;
+}
+
+<div>
+    <h1 id="kana">Loading...</h1>
+    @*<hr/>
+    <form asp-controller="Home" asp-action="Next" method="post" role="form">
+        <div>
+            <div>
+                <button type="submit" class="btn btn-default">Japangolin?-asp</button>
+            </div>
+        </div>
+    </form>*@
+    <div class="form-group">
+        <input id="userText" type="text" placeholder="Romaji..." class="form-control form-control-lg" style="margin-bottom: 10px"/>
+        <div class="row" id="skipRow" style="display: none">
+            <div class="col-sm-2"> <!-- uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) -->
+                <input id="skipButton" type="button" value="Skip" class="btn btn-warning btn-block"/>
+            </div>
+        </div>
+        <div class="row" id="proceedRow" style="display: none">
+            <div class="col-sm-2"> <!-- uses 2 of 12 columns for sm, md, lg, xl window sizes; defaults to 12 columns for anything smaller (xs) -->
+                <input id="proceedButton" type="button" value="Proceed" class="btn btn-success btn-block"/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+    </div>
+    <div id="kanji" style="display: none">
+    </div>
+    <div id="meanings" style="display: none">
+    </div>
+</div>
+
+<script type="text/javascript" src="@Url.Content("~/scripts/inertJapangolin.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/scripts/inertPhraseUpdater.js")"></script>
