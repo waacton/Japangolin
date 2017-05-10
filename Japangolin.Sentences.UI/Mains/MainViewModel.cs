@@ -1,5 +1,7 @@
 ﻿namespace Wacton.Japangolin.Sentences.UI.Mains
 {
+    using System.Collections.Generic;
+
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
@@ -12,6 +14,7 @@
         private readonly Main main;
         private readonly UpdateSentenceCommand updateSentenceCommand;
 
+        public List<Translation> EnglishWords => this.main.Translations; 
         public string EnglishSentence => this.main.EnglishSentence;
         public string Help => this.main.Help;
         public string KanaSentence => this.main.KanaSentence;
@@ -32,6 +35,7 @@
 
     public class DesignTimeMainViewModel : MainViewModel
     {
+        public new List<Translation> EnglishWords => new List<Translation> { new Translation("Japangolin", "日本蜥蜴", "ジャッパンゴリン") };
         public new string EnglishSentence => "Japangolin";
         public new string Help { get; set; } = "jappangorin";
         public new string KanaSentence => "ジャッパンゴリン";

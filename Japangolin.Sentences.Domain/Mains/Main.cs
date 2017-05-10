@@ -6,6 +6,7 @@
 
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
+    using Wacton.Tovarisch.Collections;
     using Wacton.Tovarisch.Randomness;
 
     public class Main
@@ -18,6 +19,8 @@
         public string KanaSentence { get; private set; }
         public string KanjiSentence { get; private set; }
 
+        public List<Translation> Translations { get; private set; } 
+
         public Main(IJapaneseDictionary japaneseDictionary)
         {
             this.japaneseEntries = japaneseDictionary.GetEntries().ToList();
@@ -26,26 +29,19 @@
 
         public void UpdateSentence()
         {
-            //var nounType = RandomSelection.SelectOne(PartOfSpeech.Nouns);
             var nouns = this.japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon)));
 
-            var noun1 = RandomSelection.SelectOne(nouns);
-            var noun2 = RandomSelection.SelectOne(nouns);
+            var noun1 = this.ConvertToTranslation(RandomSelection.SelectOne(nouns));
+            var noun2 = this.ConvertToTranslation(RandomSelection.SelectOne(nouns));
 
             try
             {
-                var nounEnglish1 = noun1.Senses.First().Glosses.First().Term;
-                var nounKana1 = noun1.Readings.First().Text;
-                var nounKanji1 = noun1.Kanjis.Any() ? noun1.Kanjis.First().Text : nounKana1;
+                this.Translations = new List<Translation> { noun1, new Translation("is"), noun2 };
+                this.EnglishSentence = string.Concat(this.Translations.ToDelimitedString(" "), ".");
+                this.Help = $"[{noun1.English}] => {noun1.Kana}   |   [{noun2.English}] => {noun2.Kana}";
+                this.KanaSentence = $"{noun1.Kana}は{noun2.Kana}です。";
+                this.KanjiSentence = $"{noun1.Kanji}は{noun2.Kanji}です。";
 
-                var nounEnglish2 = noun2.Senses.First().Glosses.First().Term;
-                var nounKana2 = noun2.Readings.First().Text;
-                var nounKanji2 = noun2.Kanjis.Any() ? noun2.Kanjis.First().Text : nounKana2;
-
-                this.EnglishSentence = $"[{nounEnglish1}] is [{nounEnglish2}].";
-                this.Help = $"[{nounEnglish1}] => {nounKana1}   |   [{nounEnglish2}] => {nounKana2}";
-                this.KanaSentence = $"{nounKana1}は{nounKana2}です。";
-                this.KanjiSentence = $"{nounKanji1}は{nounKanji2}です。";
             }
             catch (Exception)
             {
@@ -54,5 +50,13 @@
 
             this.japaneseEntry = RandomSelection.SelectOne(this.japaneseEntries);
         }
+
+        private Translation ConvertToTranslation(IJapaneseEntry japaneseEntry)
+        {
+            var english = japaneseEntry.Senses.First().Glosses.First().Term;
+            var kana = japaneseEntry.Readings.First().Text;
+            var kanji = japaneseEntry.Kanjis.Any() ? japaneseEntry.Kanjis.First().Text : kana;
+            return new Translation(english, kanji, kana);
+        } 
     }
 }

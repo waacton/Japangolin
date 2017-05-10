@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:mains="clr-namespace:Wacton.Japangolin.Sentences.UI.Mains"
+        xmlns:domain="clr-namespace:Wacton.Japangolin.Sentences.Domain.Mains;assembly=Wacton.Japangolin.Sentences.Domain"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeMainViewModel, IsDesignTimeCreatable=True}">
 
@@ -15,7 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -26,11 +27,68 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding EnglishSentence}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+        <ListBox x:Name="ListView" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" ItemsSource="{Binding EnglishWords}" BorderThickness="0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding English}" ToolTip="{Binding Kana}">
+                        <!--<TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding HasJapanese}" Value="True">
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>-->
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="ListBoxItem" >
+                    <Setter Property="Padding" Value="2" />
 
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Help}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+                    <!-- 
+                        overwriting ListBoxItem.IsEnabled according to whether there is Japanese translation for it 
+                        then updating the text color according to the enabled state
+                    
+                        note: intellisense seems to think this binding is on the data context of this view (MainViewModel instead of the Translation items)
+                    -->
+                    <Style.Triggers>
+                        
+                        <DataTrigger Binding="{Binding HasJapanese}" Value="False" d:DataContext="{d:DesignInstance Type=domain:Translation}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Foreground" Value="Orange"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Magenta"/>
+                        </Trigger>
+
+                        <MultiDataTrigger d:DataContext="{d:DesignInstance Type=domain:Translation}">
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=HasJapanese}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            
+                            <Setter Property="Foreground" Value="Cyan" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
         <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding KanaSentence}" 
                    FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
@@ -38,6 +96,6 @@
         <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding KanjiSentence}" 
                    FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
 
-        <Button Grid.Row="5" Width="100" cal:Message.Attach="NextSentence"/>
+        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Width="100" Height="50" FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next"/>
     </Grid>
 </UserControl>
