@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
     <Compile Include="Mains\Main.cs" />
+    <Compile Include="Mains\SentenceNounIsNoun.cs" />
     <Compile Include="Mains\Translation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
