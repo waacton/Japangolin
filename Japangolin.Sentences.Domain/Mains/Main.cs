@@ -10,7 +10,7 @@
     public class Main
     {
         private readonly List<IJapaneseEntry> japaneseEntries;
-        public SentenceNounIsNoun CurrentSentence { get; private set; }
+        public Sentence CurrentSentence { get; private set; }
 
         public Main(IJapaneseDictionary japaneseDictionary)
         {
@@ -22,18 +22,10 @@
         {
             var nouns = this.japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon)));
 
-            var topicNoun = RandomSelection.SelectOne(nouns);
-            var objectNoun = RandomSelection.SelectOne(nouns);
+            var topicNounPhrase = new SimpleNounPhrase(RandomSelection.SelectOne(nouns));
+            var objectNounPhrase = new ModifiedNounPhrase(RandomSelection.SelectOne(nouns), RandomSelection.SelectOne(nouns));
 
-            this.CurrentSentence = new SentenceNounIsNoun(topicNoun, objectNoun);
+            this.CurrentSentence = new Sentence(topicNounPhrase, objectNounPhrase);
         }
-
-        private Translation ConvertToTranslation(IJapaneseEntry japaneseEntry)
-        {
-            var english = japaneseEntry.Senses.First().Glosses.First().Term;
-            var kana = japaneseEntry.Readings.First().Text;
-            var kanji = japaneseEntry.Kanjis.Any() ? japaneseEntry.Kanjis.First().Text : kana;
-            return new Translation(english, kanji, kana);
-        } 
     }
 }

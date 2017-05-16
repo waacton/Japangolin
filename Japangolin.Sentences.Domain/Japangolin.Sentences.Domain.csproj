@@ -48,8 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
+    <Compile Include="Mains\ITranslation.cs" />
+    <Compile Include="Mains\Sentence.cs" />
+    <Compile Include="Mains\VerbNounPhrase.cs" />
+    <Compile Include="Mains\INounPhrase.cs" />
+    <Compile Include="Mains\AdjectiveNounPhrase.cs" />
     <Compile Include="Mains\Main.cs" />
-    <Compile Include="Mains\SentenceNounIsNoun.cs" />
+    <Compile Include="Mains\ModifiedNounPhrase.cs" />
+    <Compile Include="Mains\SimpleNounPhrase.cs" />
     <Compile Include="Mains\Translation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

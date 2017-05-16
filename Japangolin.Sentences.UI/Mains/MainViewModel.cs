@@ -14,11 +14,11 @@
         private readonly Main main;
         private readonly UpdateSentenceCommand updateSentenceCommand;
 
-        private SentenceNounIsNoun currentSentence => this.main.CurrentSentence;
+        private Sentence CurrentSentence => this.main.CurrentSentence;
 
-        public List<Translation> EnglishWords => this.currentSentence.GetTranslations(); 
-        public string KanaSentence => this.currentSentence.GetKana();
-        public string KanjiSentence => this.currentSentence.GetKanji();
+        public List<ITranslation> EnglishWords => this.CurrentSentence.GetEnglishOrderTranslations(); 
+        public string KanaSentence => this.CurrentSentence.GetKana();
+        public string KanjiSentence => this.CurrentSentence.GetKanji();
 
         public MainViewModel(Main main, UpdateSentenceCommand updateSentenceCommand, ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier, main)
