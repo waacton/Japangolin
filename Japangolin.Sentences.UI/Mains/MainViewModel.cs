@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using Wacton.Desu.Japanese;
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
@@ -35,12 +36,24 @@
 
     public class DesignTimeMainViewModel : MainViewModel
     {
-        public new List<Translation> EnglishWords => new List<Translation> { new Translation("Japangolin", "日本蜥蜴", "ジャッパンゴリン") };
+        public new List<ITranslation> EnglishWords => new List<ITranslation> { new DesignTimeTranslation("Japangolin", "日本蜥蜴", "ジャッパンゴリン") };
         public new string KanaSentence => "ジャッパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
         public DesignTimeMainViewModel() : base(null, null, null)
         {
+        }
+    }
+
+    public class DesignTimeTranslation : Translation
+    {
+        public DesignTimeTranslation(string english, string kanji, string kana) : base(english, kanji, kana)
+        {
+        }
+
+        public override string Conjugate(Conjugation conjugation, bool isKana)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
+    <Compile Include="Mains\Conjugation.cs" />
     <Compile Include="Mains\ITranslation.cs" />
     <Compile Include="Mains\Sentence.cs" />
     <Compile Include="Mains\VerbNounPhrase.cs" />

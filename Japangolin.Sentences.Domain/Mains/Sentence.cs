@@ -8,53 +8,32 @@
         public static string TopicMarker = "は";
         public static string ObjectMarker = "です";
 
-        public bool IsAffirmative { get; set; }
-        public bool IsPresent { get; set; }
-        public bool IsLongForm { get; set; }
-
         public INounPhrase TopicNounPhrase { get; }
         public INounPhrase ObjectNounPhrase { get; }
+        public Conjugation Conjugation { get; }
 
-        public Sentence(INounPhrase topicNounPhrase, INounPhrase objectNounPhrase)
+        public Sentence(INounPhrase topicNounPhrase, INounPhrase objectNounPhrase, Conjugation conjugation)
         {
             this.TopicNounPhrase = topicNounPhrase;
             this.ObjectNounPhrase = objectNounPhrase;
-
-            // TODO: not this? :)
-            this.IsAffirmative = true; //RandomSelection.IsSuccessful(0.5);
-            this.IsPresent = true; //RandomSelection.IsSuccessful(0.5);
-            this.IsLongForm = true; //RandomSelection.IsSuccessful(0.5);
+            this.Conjugation = conjugation;
         }
 
         public List<ITranslation> GetEnglishOrderTranslations()
         {
-            EnglishOnlyTranslation englishIs;
-            if (this.IsPresent)
+            string englishString;
+            if (this.Conjugation.IsPresent)
             {
-                if (this.IsAffirmative)
-                {
-                    englishIs = new EnglishOnlyTranslation("is");
-                }
-                else
-                {
-                    englishIs = new EnglishOnlyTranslation("is not");
-                }
+                englishString = this.Conjugation.IsAffirmative ? "is" : "is not";
             }
             else
             {
-                if (this.IsAffirmative)
-                {
-                    englishIs = new EnglishOnlyTranslation("was");
-                }
-                else
-                {
-                    englishIs = new EnglishOnlyTranslation("was not");
-                }
+                englishString = this.Conjugation.IsAffirmative ? "was" : "was not";
             }
 
             var englishTranslations = new List<ITranslation>();
             englishTranslations.AddRange(this.TopicNounPhrase.GetEnglishOrder());
-            englishTranslations.Add(englishIs);
+            englishTranslations.Add(new EnglishOnlyTranslation(englishString));
             englishTranslations.AddRange(this.ObjectNounPhrase.GetEnglishOrder());
             englishTranslations.Add(new EnglishOnlyTranslation("."));
             return englishTranslations;
@@ -66,74 +45,42 @@
             japaneseTranslations.AddRange(this.TopicNounPhrase.GetJapaneseOrder());
             japaneseTranslations.Add(new JapaneseOnlyTranslation(TopicMarker));
             japaneseTranslations.AddRange(this.ObjectNounPhrase.GetJapaneseOrder());
-            japaneseTranslations.Add(new JapaneseOnlyTranslation("です"));
             return japaneseTranslations;
         }
 
-        public string GetKana() => this.ConvertToKana(this.GetJapaneseOrderTranslations());
+        public string GetEnglish() => ConvertToEnglish(this.GetEnglishOrderTranslations());
 
-        public string GetKanji() => this.ConvertToKanji(this.GetJapaneseOrderTranslations());
+        public string GetKana() => ConvertToKana(this.GetJapaneseOrderTranslations(), this.Conjugation);
 
-        private string ConvertToEnglish(List<ITranslation> translations)
+        public string GetKanji() => ConvertToKanji(this.GetJapaneseOrderTranslations(), this.Conjugation);
+
+        private static string ConvertToEnglish(List<ITranslation> translations)
         {
-            return translations.Aggregate(string.Empty, (current, translation) => current + translation.English);
+            return string.Join(" ", translations.Select(translation => translation.English));
         }
 
-        private string ConvertToKana(List<ITranslation> translations)
+        private static string ConvertToKana(List<ITranslation> translations, Conjugation conjugation)
         {
-            return translations.Aggregate(string.Empty, (current, translation) => current + translation.Kana);
+            return ConvertToJapanese(translations, conjugation, true);
         }
 
-        private string ConvertToKanji(List<ITranslation> translations)
+        private static string ConvertToKanji(List<ITranslation> translations, Conjugation conjugation)
         {
-            return translations.Aggregate(string.Empty, (current, translation) => current + translation.Kanji);
+            return ConvertToJapanese(translations, conjugation, false);
         }
 
-        // TODO: this kinda feels like it belongs on the noun phrase class?  ask the noun phrase to conjugate based on affirmative/present/long?
-        public static string ConjugateNoun(string noun, bool isAffirmative, bool isPresent, bool isLongForm)
+        private static string ConvertToJapanese(List<ITranslation> translations, Conjugation conjugation, bool isKana)
         {
-            if (isLongForm)
-            {
-                if (isPresent)
-                {
-                    if (isAffirmative)
-                    {
-                        return $"{noun}です";
-                    }
+            var sentenceEnd = translations.Last();
+            translations.Remove(sentenceEnd);
 
-                    return $"{noun}じゃないです";
-                }
-                else
-                {
-                    if (isAffirmative)
-                    {
-                        return $"{noun}でした";
-                    }
+            var conjugated = sentenceEnd.Conjugate(conjugation, isKana);
+            return string.Concat(string.Join(string.Empty, translations.Select(translation => isKana ? translation.Kana : translation.Kanji)), conjugated);
+        }
 
-                    return $"{noun}じゃなかったです";
-                }
-            }
-            else
-            {
-                if (isPresent)
-                {
-                    if (isAffirmative)
-                    {
-                        return $"{noun}だ";
-                    }
-
-                    return $"{noun}じゃない";
-                }
-                else
-                {
-                    if (isAffirmative)
-                    {
-                        return $"{noun}だった";
-                    }
-
-                    return $"{noun}じゃなかった";
-                }
-            }
+        public override string ToString()
+        {
+            return $"{this.GetEnglish()} | {this.GetKana()}";
         }
     }
 }
