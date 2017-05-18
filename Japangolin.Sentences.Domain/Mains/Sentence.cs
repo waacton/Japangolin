@@ -5,45 +5,29 @@
 
     public class Sentence
     {
-        public static string TopicMarker = "は";
-        public static string ObjectMarker = "です";
-
-        public INounPhrase TopicNounPhrase { get; }
+        public TopicBlock TopicBlock { get; }
         public INounPhrase ObjectNounPhrase { get; }
         public Conjugation Conjugation { get; }
 
-        public Sentence(INounPhrase topicNounPhrase, INounPhrase objectNounPhrase, Conjugation conjugation)
+        public Sentence(TopicBlock topicBlock, INounPhrase objectNounPhrase, Conjugation conjugation)
         {
-            this.TopicNounPhrase = topicNounPhrase;
+            this.TopicBlock = topicBlock;
             this.ObjectNounPhrase = objectNounPhrase;
             this.Conjugation = conjugation;
         }
 
         public List<ITranslation> GetEnglishOrderTranslations()
         {
-            string englishString;
-            if (this.Conjugation.IsPresent)
-            {
-                englishString = this.Conjugation.IsAffirmative ? "is" : "is not";
-            }
-            else
-            {
-                englishString = this.Conjugation.IsAffirmative ? "was" : "was not";
-            }
-
             var englishTranslations = new List<ITranslation>();
-            englishTranslations.AddRange(this.TopicNounPhrase.GetEnglishOrder());
-            englishTranslations.Add(new EnglishOnlyTranslation(englishString));
+            englishTranslations.AddRange(this.TopicBlock.GetEnglishOrder(this.Conjugation));
             englishTranslations.AddRange(this.ObjectNounPhrase.GetEnglishOrder());
-            englishTranslations.Add(new EnglishOnlyTranslation("."));
             return englishTranslations;
         }
 
         public List<ITranslation> GetJapaneseOrderTranslations()
         {
             var japaneseTranslations = new List<ITranslation>();
-            japaneseTranslations.AddRange(this.TopicNounPhrase.GetJapaneseOrder());
-            japaneseTranslations.Add(new JapaneseOnlyTranslation(TopicMarker));
+            japaneseTranslations.AddRange(this.TopicBlock.GetJapaneseOrder());
             japaneseTranslations.AddRange(this.ObjectNounPhrase.GetJapaneseOrder());
             return japaneseTranslations;
         }

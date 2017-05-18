@@ -26,11 +26,11 @@
         {
             var nouns = this.japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon))).ToList();
 
-            var topicNounPhrase = new SimpleNounPhrase(RandomSelection.SelectOne(nouns));
+            var topicBlock = new TopicBlock(new SimpleNounPhrase(RandomSelection.SelectOne(nouns)));
             var objectNounPhrase = new ModifiedNounPhrase(RandomSelection.SelectOne(nouns), RandomSelection.SelectOne(nouns));
             var conjugation = RandomSelection.SelectOne(this.conjugations);
 
-            this.CurrentSentence = new Sentence(topicNounPhrase, objectNounPhrase, conjugation);
+            this.CurrentSentence = new Sentence(topicBlock, objectNounPhrase, conjugation);
         }
     }
 }

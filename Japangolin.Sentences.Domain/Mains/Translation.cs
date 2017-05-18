@@ -56,10 +56,14 @@
                 { Conjugation.LongPresentNegative, s => $"{s}じゃないです" },
                 { Conjugation.LongPastAffirmative, s => $"{s}でした" },
                 { Conjugation.LongPastNegative, s => $"{s}じゃなかったです" },
+                { Conjugation.LongFutureAffirmative, s => $"{s}です" },
+                { Conjugation.LongFutureNegative, s => $"{s}じゃないです" },
                 { Conjugation.ShortPresentAffirmative, s => $"{s}だ" },
                 { Conjugation.ShortPresentNegative, s => $"{s}じゃない" },
                 { Conjugation.ShortPastAffirmative, s => $"{s}だった" },
                 { Conjugation.ShortPastNegative, s => $"{s}じゃなかった" },
+                { Conjugation.ShortFutureAffirmative, s => $"{s}だ" },
+                { Conjugation.ShortFutureNegative, s => $"{s}じゃない" }
             };
 
         public NounTranslation(IJapaneseEntry japaneseEntry) : base(japaneseEntry)
