@@ -4,6 +4,8 @@
 
     public interface INounPhrase
     {
+        Conjugation Conjugation { get; }
+
         List<ITranslation> GetEnglishOrder();
         List<ITranslation> GetJapaneseOrder();
     }

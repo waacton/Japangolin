@@ -13,7 +13,8 @@
         public string English { get; private set; }
         public string Kana { get; private set; }
         public string Kanji { get; private set; }
-        public Conjugation Conjugation { get; private set; }
+
+        public Conjugation Conjugation { get; }
 
         public abstract string EnglishConjugated { get; }
         public abstract string KanaConjugated { get; }

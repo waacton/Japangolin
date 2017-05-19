@@ -12,7 +12,7 @@
     public class Main
     {
         private readonly List<IJapaneseEntry> japaneseEntries;
-        private readonly List<Conjugation> conjugations = Enumeration.GetAll<Conjugation>().Except(new List<Conjugation> { Conjugation.None }).ToList();
+        private readonly List<Conjugation> conjugations = Enumeration.GetAll<Conjugation>().ToList();
 
         public Sentence CurrentSentence { get; private set; }
 
@@ -28,8 +28,8 @@
 
             // TODO: how to deal with all this conjugation getting passed around?
             var conjugation = RandomSelection.SelectOne(this.conjugations);
-            var topicBlock = new TopicBlock(new SimpleNounPhrase(RandomSelection.SelectOne(nouns), conjugation), conjugation);
-            var objectBlock = new ObjectBlock(new SimpleNounPhrase(RandomSelection.SelectOne(nouns), conjugation), conjugation);
+            var topicBlock = new TopicBlock(new SimpleNounPhrase(RandomSelection.SelectOne(nouns), conjugation));
+            var objectBlock = new ObjectBlock(new ModifiedNounPhrase(RandomSelection.SelectOne(nouns), RandomSelection.SelectOne(nouns), conjugation));
 
             this.CurrentSentence = new Sentence(topicBlock, objectBlock, conjugation);
         }

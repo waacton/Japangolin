@@ -36,7 +36,7 @@
 
     public class DesignTimeMainViewModel : MainViewModel
     {
-        public new List<ITranslation> EnglishWords => new List<ITranslation> { new DesignTimeTranslation("Japangolin", "日本蜥蜴", "ジャッパンゴリン", Conjugation.None) };
+        public new List<ITranslation> EnglishWords => new List<ITranslation> { new DesignTimeTranslation("Japangolin", "日本蜥蜴", "ジャッパンゴリン", Conjugation.LongPresentAffirmative) };
         public new string KanaSentence => "ジャッパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 

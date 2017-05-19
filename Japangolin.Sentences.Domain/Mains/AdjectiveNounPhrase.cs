@@ -9,11 +9,13 @@
     {
         public ITranslation Noun { get; }
         public ITranslation Adjective { get; }
+        public Conjugation Conjugation { get; }
 
         public AdjectiveNounPhrase(IJapaneseEntry noun, IJapaneseEntry adjective, Conjugation conjugation)
         {
             this.Noun = new NounTranslation(noun, conjugation);
             this.Adjective = new AdjectiveTranslation(adjective, conjugation);
+            this.Conjugation = conjugation;
         }
 
         public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.Adjective, this.Noun };

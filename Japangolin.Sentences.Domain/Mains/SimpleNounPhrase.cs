@@ -8,10 +8,12 @@
     public class SimpleNounPhrase : INounPhrase
     {
         public ITranslation Noun { get; }
+        public Conjugation Conjugation { get; }
 
         public SimpleNounPhrase(IJapaneseEntry noun, Conjugation conjugation)
         {
             this.Noun = new NounTranslation(noun, conjugation);
+            this.Conjugation = conjugation;
         }
 
         public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.Noun };
