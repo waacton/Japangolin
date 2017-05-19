@@ -9,9 +9,9 @@
     {
         public ITranslation Noun { get; }
 
-        public SimpleNounPhrase(IJapaneseEntry noun)
+        public SimpleNounPhrase(IJapaneseEntry noun, Conjugation conjugation)
         {
-            this.Noun = new NounTranslation(noun);
+            this.Noun = new NounTranslation(noun, conjugation);
         }
 
         public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.Noun };

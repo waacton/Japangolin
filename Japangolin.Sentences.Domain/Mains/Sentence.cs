@@ -6,21 +6,21 @@
     public class Sentence
     {
         public TopicBlock TopicBlock { get; }
-        public INounPhrase ObjectNounPhrase { get; }
+        public ObjectBlock ObjectBlock { get; }
         public Conjugation Conjugation { get; }
 
-        public Sentence(TopicBlock topicBlock, INounPhrase objectNounPhrase, Conjugation conjugation)
+        public Sentence(TopicBlock topicBlock, ObjectBlock objectBlock, Conjugation conjugation)
         {
             this.TopicBlock = topicBlock;
-            this.ObjectNounPhrase = objectNounPhrase;
+            this.ObjectBlock = objectBlock;
             this.Conjugation = conjugation;
         }
 
         public List<ITranslation> GetEnglishOrderTranslations()
         {
             var englishTranslations = new List<ITranslation>();
-            englishTranslations.AddRange(this.TopicBlock.GetEnglishOrder(this.Conjugation));
-            englishTranslations.AddRange(this.ObjectNounPhrase.GetEnglishOrder());
+            englishTranslations.AddRange(this.TopicBlock.GetEnglishOrder());
+            englishTranslations.AddRange(this.ObjectBlock.GetEnglishOrder());
             return englishTranslations;
         }
 
@@ -28,7 +28,7 @@
         {
             var japaneseTranslations = new List<ITranslation>();
             japaneseTranslations.AddRange(this.TopicBlock.GetJapaneseOrder());
-            japaneseTranslations.AddRange(this.ObjectNounPhrase.GetJapaneseOrder());
+            japaneseTranslations.AddRange(this.ObjectBlock.GetJapaneseOrder());
             return japaneseTranslations;
         }
 
@@ -58,7 +58,7 @@
             var sentenceEnd = translations.Last();
             translations.Remove(sentenceEnd);
 
-            var conjugated = sentenceEnd.Conjugate(conjugation, isKana);
+            var conjugated = sentenceEnd.KanaConjugated;
             return string.Concat(string.Join(string.Empty, translations.Select(translation => isKana ? translation.Kana : translation.Kanji)), conjugated);
         }
 

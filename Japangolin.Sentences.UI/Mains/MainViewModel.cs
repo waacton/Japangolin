@@ -36,7 +36,7 @@
 
     public class DesignTimeMainViewModel : MainViewModel
     {
-        public new List<ITranslation> EnglishWords => new List<ITranslation> { new DesignTimeTranslation("Japangolin", "日本蜥蜴", "ジャッパンゴリン") };
+        public new List<ITranslation> EnglishWords => new List<ITranslation> { new DesignTimeTranslation("Japangolin", "日本蜥蜴", "ジャッパンゴリン", Conjugation.None) };
         public new string KanaSentence => "ジャッパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
@@ -47,13 +47,12 @@
 
     public class DesignTimeTranslation : Translation
     {
-        public DesignTimeTranslation(string english, string kanji, string kana) : base(english, kanji, kana)
-        {
-        }
+        public override string EnglishConjugated => this.English;
+        public override string KanaConjugated => this.Kana;
+        public override string KanjiConjugated => this.Kanji;
 
-        public override string Conjugate(Conjugation conjugation, bool isKana)
+        public DesignTimeTranslation(string english, string kanji, string kana, Conjugation conjugation) : base(english, kanji, kana, conjugation)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

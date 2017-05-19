@@ -52,7 +52,6 @@
     <Compile Include="Mains\ITranslation.cs" />
     <Compile Include="Mains\Sentence.cs" />
     <Compile Include="Mains\SentenceBlock.cs" />
-    <Compile Include="Mains\SentenceBlockType.cs" />
     <Compile Include="Mains\TranslationListExtensions.cs" />
     <Compile Include="Mains\VerbNounPhrase.cs" />
     <Compile Include="Mains\INounPhrase.cs" />

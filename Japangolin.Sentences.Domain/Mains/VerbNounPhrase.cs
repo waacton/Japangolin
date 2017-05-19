@@ -10,10 +10,10 @@
         public ITranslation Noun { get; }
         public ITranslation Verb { get; }
 
-        public VerbNounPhrase(IJapaneseEntry noun, IJapaneseEntry verb)
+        public VerbNounPhrase(IJapaneseEntry noun, IJapaneseEntry verb, Conjugation conjugation)
         {
-            this.Noun = new NounTranslation(noun);
-            this.Verb = new VerbTranslation(verb);
+            this.Noun = new NounTranslation(noun, conjugation);
+            this.Verb = new VerbTranslation(verb, conjugation);
         }
 
         public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.Verb, this.Noun };

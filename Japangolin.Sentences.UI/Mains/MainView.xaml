@@ -36,7 +36,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding English}" ToolTip="{Binding Kana}"/>
+                    <TextBlock Text="{Binding EnglishConjugated}" ToolTip="{Binding Kana}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>

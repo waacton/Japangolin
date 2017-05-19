@@ -6,6 +6,8 @@
         string Kana { get; }
         string Kanji { get; }
 
-        string Conjugate(Conjugation conjugation, bool isKana);
+        string EnglishConjugated { get; }
+        string KanaConjugated { get; }
+        string KanjiConjugated { get; }
     }
 }

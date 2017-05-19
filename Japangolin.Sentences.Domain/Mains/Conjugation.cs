@@ -4,6 +4,7 @@
 
     public class Conjugation : Enumeration
     {
+        public static readonly Conjugation None = new Conjugation("None");
         public static readonly Conjugation LongPresentAffirmative = new Conjugation("LongPresentAffirmative");
         public static readonly Conjugation LongPresentNegative = new Conjugation("LongPresentNegative");
         public static readonly Conjugation LongPastAffirmative = new Conjugation("LongPastAffirmative");

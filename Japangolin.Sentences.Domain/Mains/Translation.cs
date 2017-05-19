@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
 
     public abstract class Translation : ITranslation
@@ -14,23 +13,28 @@
         public string English { get; private set; }
         public string Kana { get; private set; }
         public string Kanji { get; private set; }
+        public Conjugation Conjugation { get; private set; }
+
+        public abstract string EnglishConjugated { get; }
+        public abstract string KanaConjugated { get; }
+        public abstract string KanjiConjugated { get; }
 
         public bool HasJapanese => !string.IsNullOrEmpty(this.Kana);
 
-        public Translation(IJapaneseEntry japaneseEntry)
+        public Translation(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
             this.JapaneseEntry = japaneseEntry;
             this.ParseEntry();
+            this.Conjugation = conjugation;
         }
 
-        public Translation(string english, string kanji, string kana)
+        public Translation(string english, string kanji, string kana, Conjugation conjugation)
         {
             this.English = english;
             this.Kanji = kanji;
             this.Kana = kana;
+            this.Conjugation = conjugation;
         }
-
-        public abstract string Conjugate(Conjugation conjugation, bool isKana);
 
         private void ParseEntry()
         {
@@ -44,6 +48,8 @@
             return this.English;
         }
     }
+
+    /* TODO: this dual-conjugation does not make sense, needs thought  */
 
     // -----
 
@@ -66,13 +72,12 @@
                 { Conjugation.ShortFutureNegative, s => $"{s}じゃない" }
             };
 
-        public NounTranslation(IJapaneseEntry japaneseEntry) : base(japaneseEntry)
-        {
-        }
+        public override string EnglishConjugated => this.English;
+        public override string KanaConjugated => Conjugations[this.Conjugation].Invoke(this.Kana);
+        public override string KanjiConjugated => Conjugations[this.Conjugation].Invoke(this.Kanji);
 
-        public override string Conjugate(Conjugation conjugation, bool isKana)
+        public NounTranslation(IJapaneseEntry japaneseEntry, Conjugation conjugation) : base(japaneseEntry, conjugation)
         {
-            return Conjugations[conjugation].Invoke(isKana ? this.Kana : this.Kanji);
         }
     }
 
@@ -80,20 +85,12 @@
 
     public class VerbTranslation : Translation
     {
-        private static readonly Dictionary<Conjugation, Func<string, string>> Conjugations =
-            new Dictionary<Conjugation, Func<string, string>>
-            {
-                { Conjugation.LongPresentAffirmative, s => $"{s}" },
-                { Conjugation.ShortPresentAffirmative, s => $"{s}" }
-            };
+        public override string EnglishConjugated => this.English;
+        public override string KanaConjugated => this.Kana;
+        public override string KanjiConjugated => this.Kanji;
 
-        public VerbTranslation(IJapaneseEntry japaneseEntry) : base(japaneseEntry)
+        public VerbTranslation(IJapaneseEntry japaneseEntry, Conjugation conjugation) : base(japaneseEntry, conjugation)
         {
-        }
-
-        public override string Conjugate(Conjugation conjugation, bool isKana)
-        {
-            throw new NotImplementedException();
         }
     }
 
@@ -101,34 +98,55 @@
 
     public class AdjectiveTranslation : Translation
     {
-        private static readonly Dictionary<Conjugation, Func<string, string>> Conjugations =
-            new Dictionary<Conjugation, Func<string, string>>
+        public override string EnglishConjugated => this.English;
+        public override string KanaConjugated => this.Kana;
+        public override string KanjiConjugated => this.Kanji;
+
+        public AdjectiveTranslation(IJapaneseEntry japaneseEntry, Conjugation conjugation) : base(japaneseEntry, conjugation)
+        {
+        }
+    }
+
+    // -----
+
+    public class ToBeTranslation : Translation
+    {
+        private static readonly Dictionary<Conjugation, string> Prepositions =
+            new Dictionary<Conjugation, string>
             {
-                { Conjugation.LongPresentAffirmative, s => $"{s}" },
-                { Conjugation.ShortPresentAffirmative, s => $"{s}" }
+                { Conjugation.LongPresentAffirmative, "is" },
+                { Conjugation.LongPresentNegative, "is not" },
+                { Conjugation.LongPastAffirmative, "was" },
+                { Conjugation.LongPastNegative, "was not" },
+                { Conjugation.LongFutureAffirmative, "will be" },
+                { Conjugation.LongFutureNegative, "will not be" },
+                { Conjugation.ShortPresentAffirmative, "is" },
+                { Conjugation.ShortPresentNegative, "is not" },
+                { Conjugation.ShortPastAffirmative, "was" },
+                { Conjugation.ShortPastNegative, "was not" },
+                { Conjugation.ShortFutureAffirmative, "will be" },
+                { Conjugation.ShortFutureNegative, "will not be" }
             };
 
-        public AdjectiveTranslation(IJapaneseEntry japaneseEntry) : base(japaneseEntry)
+        public ToBeTranslation(Conjugation conjugation) : base("is", null, null, conjugation)
         {
         }
 
-        public override string Conjugate(Conjugation conjugation, bool isKana)
-        {
-            throw new NotImplementedException();
-        }
+        public override string EnglishConjugated => Prepositions[this.Conjugation];
+        public override string KanaConjugated => this.Kana;
+        public override string KanjiConjugated => this.Kanji;
     }
 
     // -----
 
     public class EnglishOnlyTranslation : Translation
     {
-        public EnglishOnlyTranslation(string english) : base(english, null, null)
-        {
-        }
+        public override string EnglishConjugated => this.English;
+        public override string KanaConjugated => this.Kana;
+        public override string KanjiConjugated => this.Kanji;
 
-        public override string Conjugate(Conjugation conjugation, bool isKana)
+        public EnglishOnlyTranslation(string english, Conjugation conjugation) : base(english, null, null, conjugation)
         {
-            throw new NotImplementedException();
         }
     }
 
@@ -136,13 +154,12 @@
 
     public class JapaneseOnlyTranslation : Translation
     {
-        public JapaneseOnlyTranslation(string kana) : base(null, kana, kana)
-        {
-        }
+        public override string EnglishConjugated => this.English;
+        public override string KanaConjugated => this.Kana;
+        public override string KanjiConjugated => this.Kanji;
 
-        public override string Conjugate(Conjugation conjugation, bool isKana)
+        public JapaneseOnlyTranslation(string kana, Conjugation conjugation) : base(null, kana, kana, conjugation)
         {
-            throw new NotImplementedException();
         }
     }
 }

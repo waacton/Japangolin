@@ -10,14 +10,14 @@
         public ITranslation TargetNoun { get; }
         public ITranslation ModifyingNoun { get; }
 
-        public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun)
+        public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun, Conjugation conjugation)
         {
-            this.TargetNoun = new NounTranslation(targetNoun);
-            this.ModifyingNoun = new NounTranslation(modifyingNoun);
+            this.TargetNoun = new NounTranslation(targetNoun, conjugation);
+            this.ModifyingNoun = new NounTranslation(modifyingNoun, conjugation);
         }
 
         public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.ModifyingNoun, this.TargetNoun };
-        public List<ITranslation> GetJapaneseOrder() => new List<ITranslation> { this.ModifyingNoun, new JapaneseOnlyTranslation("の"), this.TargetNoun };
+        public List<ITranslation> GetJapaneseOrder() => new List<ITranslation> { this.ModifyingNoun, new JapaneseOnlyTranslation("の", Conjugation.None), this.TargetNoun };
 
         public override string ToString()
         {
