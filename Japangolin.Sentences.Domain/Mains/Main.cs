@@ -31,7 +31,7 @@
             var topicBlock = new TopicBlock(new SimpleNounPhrase(RandomSelection.SelectOne(nouns), conjugation));
             var objectBlock = new ObjectBlock(new ModifiedNounPhrase(RandomSelection.SelectOne(nouns), RandomSelection.SelectOne(nouns), conjugation));
 
-            this.CurrentSentence = new Sentence(topicBlock, objectBlock, conjugation);
+            this.CurrentSentence = new Sentence(topicBlock, objectBlock);
         }
     }
 }

@@ -6,7 +6,7 @@
     {
         Conjugation Conjugation { get; }
 
-        List<ITranslation> GetEnglishOrder();
-        List<ITranslation> GetJapaneseOrder();
+        List<IGolin> GolinEnglish();
+        List<IGolin> GolinJapanese();
     }
 }

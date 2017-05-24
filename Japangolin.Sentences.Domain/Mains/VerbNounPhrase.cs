@@ -7,24 +7,24 @@
 
     public class VerbNounPhrase : INounPhrase
     {
-        public ITranslation Noun { get; }
-        public ITranslation Verb { get; }
+        public IGolin Noun { get; }
+        public IGolin Verb { get; }
         public Conjugation Conjugation { get; }
 
         public VerbNounPhrase(IJapaneseEntry noun, IJapaneseEntry verb, Conjugation conjugation)
         {
-            this.Noun = new NounTranslation(noun, conjugation);
-            this.Verb = new VerbTranslation(verb, conjugation);
+            this.Noun = new Noungolin(noun, conjugation);
+            this.Verb = new Verbgolin(verb, conjugation);
             this.Conjugation = conjugation;
         }
 
-        public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.Verb, this.Noun };
-        public List<ITranslation> GetJapaneseOrder() => new List<ITranslation> { this.Verb, this.Noun };
+        public List<IGolin> GolinEnglish() => new List<IGolin> { this.Verb, this.Noun };
+        public List<IGolin> GolinJapanese() => new List<IGolin> { this.Verb, this.Noun };
 
         public override string ToString()
         {
-            var english = string.Join(" ", this.GetEnglishOrder().Select(translation => translation.English));
-            var kana = string.Join(" ", this.GetEnglishOrder().Select(translation => translation.Kana));
+            var english = string.Join(" ", this.GolinEnglish().Select(translation => translation.EnglishBase));
+            var kana = string.Join(" ", this.GolinEnglish().Select(translation => translation.KanaBase));
             return $"{english} | {kana}";
         }
     }

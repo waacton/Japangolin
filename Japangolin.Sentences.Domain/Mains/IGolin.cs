@@ -1,15 +1,17 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
-    public interface ITranslation
+    public interface IGolin
     {
-        string English { get; }
-        string Kana { get; }
-        string Kanji { get; }
+        string EnglishBase { get; }
+        string KanaBase { get; }
+        string KanjiBase { get; }
 
         Conjugation Conjugation { get; }
 
         string EnglishConjugated { get; }
         string KanaConjugated { get; }
         string KanjiConjugated { get; }
+
+        bool IsTranslatable { get; }
     }
 }

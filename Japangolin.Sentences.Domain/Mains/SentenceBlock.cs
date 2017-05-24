@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public abstract class SentenceBlock
     {
@@ -13,52 +14,62 @@
             this.NounPhrase = nounPhrase;
         }
 
-        public abstract List<ITranslation> GetEnglishOrder();
+        public abstract List<IGolin> GolinEnglish();
 
-        public abstract List<ITranslation> GetJapaneseOrder();
+        public abstract List<IGolin> GolinJapanese();
 
     }
 
     public class TopicBlock : SentenceBlock
     {
+        private Topicgolin Topicgolin => new Topicgolin(this.Conjugation);
+
         public TopicBlock(INounPhrase nounPhrase) : base(nounPhrase)
         {
         }
 
-        public override List<ITranslation> GetEnglishOrder()
+        public override List<IGolin> GolinEnglish()
         {
-            var translation = new ToBeTranslation(this.NounPhrase.Conjugation);
-            var englishOrder = this.NounPhrase.GetEnglishOrder();
-            englishOrder.Add(translation);
-            return englishOrder;
+            var golins = this.NounPhrase.GolinEnglish();
+            golins.Add(this.Topicgolin);
+            return golins;
         }
 
-        public override List<ITranslation> GetJapaneseOrder()
+        public override List<IGolin> GolinJapanese()
         {
-            var translation = new JapaneseOnlyTranslation("は", this.NounPhrase.Conjugation);
-            var japaneseOrder = this.NounPhrase.GetEnglishOrder();
-            japaneseOrder.Add(translation);
-            return japaneseOrder;
+            var golins = this.NounPhrase.GolinJapanese();
+            golins.Add(this.Topicgolin);
+            return golins;
         }
     }
 
     public class ObjectBlock : SentenceBlock
     {
+        private IGolin FinalNoun => this.NounPhrase.GolinJapanese().Last();
+
+        private Objectgolin Objectgolin => new Objectgolin(this.Conjugation);
+        private ObjectNoungolin ObjectNoungolin => new ObjectNoungolin(new NounEnglish(this.FinalNoun.EnglishBase, this.Conjugation), new ObjectNounJapanese(this.FinalNoun.KanaBase, this.FinalNoun.KanjiBase, this.Conjugation));
+
         public ObjectBlock(INounPhrase nounPhrase) : base(nounPhrase)
         {
         }
 
-        public override List<ITranslation> GetEnglishOrder()
+        public override List<IGolin> GolinEnglish()
         {
-            var translation = new EnglishOnlyTranslation("a", this.Conjugation);
-            var englishOrder = this.NounPhrase.GetEnglishOrder();
-            englishOrder.Insert(0, translation);
-            return englishOrder;
+            var golins = this.NounPhrase.GolinEnglish();
+            golins.Insert(0, this.Objectgolin);
+            return golins;
         }
 
-        public override List<ITranslation> GetJapaneseOrder()
+        public override List<IGolin> GolinJapanese()
         {
-            return this.NounPhrase.GetJapaneseOrder();
+            // replace the final noun of the noun phrase with one that will conjugate as an object-noun
+            var golins = this.NounPhrase.GolinJapanese();
+            var finalGolin = golins.Last();
+            golins.Remove(finalGolin);
+            golins.Add(this.ObjectNoungolin);
+            return golins;
         }
+
     }
 }

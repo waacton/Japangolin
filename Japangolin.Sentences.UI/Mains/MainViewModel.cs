@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using Wacton.Desu.Japanese;
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
@@ -17,7 +16,10 @@
 
         private Sentence CurrentSentence => this.main.CurrentSentence;
 
-        public List<ITranslation> EnglishWords => this.CurrentSentence.GetEnglishOrderTranslations(); 
+        public List<IGolin> GolinEnglish => this.CurrentSentence.GolinEnglish();
+        public List<IGolin> GolinJapanese => this.CurrentSentence.GolinJapanese();
+
+        public string EnglishSentence => this.CurrentSentence.GetEnglish();
         public string KanaSentence => this.CurrentSentence.GetKana();
         public string KanjiSentence => this.CurrentSentence.GetKanji();
 
@@ -36,7 +38,10 @@
 
     public class DesignTimeMainViewModel : MainViewModel
     {
-        public new List<ITranslation> EnglishWords => new List<ITranslation> { new DesignTimeTranslation("Japangolin", "日本蜥蜴", "ジャッパンゴリン", Conjugation.LongPresentAffirmative) };
+        private readonly ConjugatedEnglish conjugatedEnglish = new ConjugatedEnglish("Japangolin", Conjugation.LongPresentAffirmative);
+        private readonly ConjugatedJapanese conjugatedJapanese = new ConjugatedJapanese("ジャッパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative);
+
+        public new List<IGolin> GolinEnglish => new List<IGolin> { new DesignTimeGolin(this.conjugatedEnglish, this.conjugatedJapanese) };
         public new string KanaSentence => "ジャッパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
@@ -45,13 +50,9 @@
         }
     }
 
-    public class DesignTimeTranslation : Translation
+    public class DesignTimeGolin : Golin
     {
-        public override string EnglishConjugated => this.English;
-        public override string KanaConjugated => this.Kana;
-        public override string KanjiConjugated => this.Kanji;
-
-        public DesignTimeTranslation(string english, string kanji, string kana, Conjugation conjugation) : base(english, kanji, kana, conjugation)
+        public DesignTimeGolin(ConjugatedEnglish conjugatedEnglish, ConjugatedJapanese conjugatedJapanese) : base(conjugatedEnglish, conjugatedJapanese)
         {
         }
     }

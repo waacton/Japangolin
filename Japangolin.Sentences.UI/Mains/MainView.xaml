@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="ListView" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
-                  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" ItemsSource="{Binding EnglishWords}" BorderThickness="0">
+                  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" ItemsSource="{Binding GolinEnglish}" BorderThickness="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -36,7 +36,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding EnglishConjugated}" ToolTip="{Binding Kana}"/>
+                    <TextBlock Text="{Binding EnglishConjugated}" ToolTip="{Binding KanaBase}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
@@ -51,7 +51,7 @@
                     -->
                     <Style.Triggers>
                         
-                        <DataTrigger Binding="{Binding HasJapanese}" Value="False" d:DataContext="{d:DesignInstance Type=domain:Translation}">
+                        <DataTrigger Binding="{Binding IsTranslatable}" Value="False" d:DataContext="{d:DesignInstance Type=domain:IGolin}">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
 
@@ -67,9 +67,9 @@
                             <Setter Property="Foreground" Value="Magenta"/>
                         </Trigger>
 
-                        <MultiDataTrigger d:DataContext="{d:DesignInstance Type=domain:Translation}">
+                        <MultiDataTrigger d:DataContext="{d:DesignInstance Type=domain:IGolin}">
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=HasJapanese}" Value="True" />
+                                <Condition Binding="{Binding Path=IsTranslatable}" Value="True" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             

@@ -5,19 +5,19 @@
 
     public static class TranslationListExtensions
     {
-        public static string ToEnglish(this IEnumerable<ITranslation> translations, string delimiter)
+        public static string ToEnglish(this IEnumerable<IGolin> translations, string delimiter)
         {
-            return string.Join(delimiter, translations.Select(translation => translation.English));
+            return string.Join(delimiter, translations.Select(translation => translation.EnglishBase));
         }
 
-        public static string ToKana(this IEnumerable<ITranslation> translations, string delimiter)
+        public static string ToKana(this IEnumerable<IGolin> translations, string delimiter)
         {
-            return string.Join(delimiter, translations.Select(translation => translation.Kana));
+            return string.Join(delimiter, translations.Select(translation => translation.KanaBase));
         }
 
-        public static string ToKanji(this IEnumerable<ITranslation> translations, string delimiter)
+        public static string ToKanji(this IEnumerable<IGolin> translations, string delimiter)
         {
-            return string.Join(delimiter, translations.Select(translation => translation.Kana));
+            return string.Join(delimiter, translations.Select(translation => translation.KanaBase));
         }
     }
 }

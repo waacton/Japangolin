@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
+    <Compile Include="Mains\ConjugatedJapanese.cs" />
+    <Compile Include="Mains\ConjugatedEnglish.cs" />
     <Compile Include="Mains\Conjugation.cs" />
-    <Compile Include="Mains\ITranslation.cs" />
+    <Compile Include="Mains\IGolin.cs" />
     <Compile Include="Mains\Sentence.cs" />
     <Compile Include="Mains\SentenceBlock.cs" />
     <Compile Include="Mains\TranslationListExtensions.cs" />
@@ -59,7 +61,7 @@
     <Compile Include="Mains\Main.cs" />
     <Compile Include="Mains\ModifiedNounPhrase.cs" />
     <Compile Include="Mains\SimpleNounPhrase.cs" />
-    <Compile Include="Mains\Translation.cs" />
+    <Compile Include="Mains\Golin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

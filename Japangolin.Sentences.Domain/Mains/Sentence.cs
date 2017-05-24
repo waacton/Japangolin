@@ -7,59 +7,48 @@
     {
         public TopicBlock TopicBlock { get; }
         public ObjectBlock ObjectBlock { get; }
-        public Conjugation Conjugation { get; }
 
-        public Sentence(TopicBlock topicBlock, ObjectBlock objectBlock, Conjugation conjugation)
+        public Sentence(TopicBlock topicBlock, ObjectBlock objectBlock)
         {
             this.TopicBlock = topicBlock;
             this.ObjectBlock = objectBlock;
-            this.Conjugation = conjugation;
         }
 
-        public List<ITranslation> GetEnglishOrderTranslations()
+        public List<IGolin> GolinEnglish()
         {
-            var englishTranslations = new List<ITranslation>();
-            englishTranslations.AddRange(this.TopicBlock.GetEnglishOrder());
-            englishTranslations.AddRange(this.ObjectBlock.GetEnglishOrder());
-            return englishTranslations;
+            var golins = new List<IGolin>();
+            golins.AddRange(this.TopicBlock.GolinEnglish());
+            golins.AddRange(this.ObjectBlock.GolinEnglish());
+            return golins;
         }
 
-        public List<ITranslation> GetJapaneseOrderTranslations()
+        public List<IGolin> GolinJapanese()
         {
-            var japaneseTranslations = new List<ITranslation>();
-            japaneseTranslations.AddRange(this.TopicBlock.GetJapaneseOrder());
-            japaneseTranslations.AddRange(this.ObjectBlock.GetJapaneseOrder());
-            return japaneseTranslations;
+            var golins = new List<IGolin>();
+            golins.AddRange(this.TopicBlock.GolinJapanese());
+            golins.AddRange(this.ObjectBlock.GolinJapanese());
+            return golins;
         }
 
-        public string GetEnglish() => ConvertToEnglish(this.GetEnglishOrderTranslations());
+        public string GetEnglish() => ConvertToEnglish(this.GolinEnglish());
 
-        public string GetKana() => ConvertToKana(this.GetJapaneseOrderTranslations(), this.Conjugation);
+        public string GetKana() => ConvertToKana(this.GolinJapanese());
 
-        public string GetKanji() => ConvertToKanji(this.GetJapaneseOrderTranslations(), this.Conjugation);
+        public string GetKanji() => ConvertToKanji(this.GolinJapanese());
 
-        private static string ConvertToEnglish(List<ITranslation> translations)
+        private static string ConvertToEnglish(List<IGolin> golins)
         {
-            return string.Join(" ", translations.Select(translation => translation.English));
+            return string.Join(" ", golins.Select(golin => golin.EnglishConjugated));
         }
 
-        private static string ConvertToKana(List<ITranslation> translations, Conjugation conjugation)
+        private static string ConvertToKana(List<IGolin> golins)
         {
-            return ConvertToJapanese(translations, conjugation, true);
+            return string.Join(" _ ", golins.Select(golin => golin.KanaConjugated));
         }
 
-        private static string ConvertToKanji(List<ITranslation> translations, Conjugation conjugation)
+        private static string ConvertToKanji(List<IGolin> golins)
         {
-            return ConvertToJapanese(translations, conjugation, false);
-        }
-
-        private static string ConvertToJapanese(List<ITranslation> translations, Conjugation conjugation, bool isKana)
-        {
-            var sentenceEnd = translations.Last();
-            translations.Remove(sentenceEnd);
-
-            var conjugated = sentenceEnd.KanaConjugated;
-            return string.Concat(string.Join(string.Empty, translations.Select(translation => isKana ? translation.Kana : translation.Kanji)), conjugated);
+            return string.Join(" _ ", golins.Select(golin => golin.KanjiConjugated));
         }
 
         public override string ToString()

@@ -21,7 +21,7 @@
             //    return;
             //}
 
-            //var wordDefinition = (Translation)e.AddedItems[0];
+            //var wordDefinition = (Golin)e.AddedItems[0];
             //if (!wordDefinition.HasJapanese)
             //{
             //    this.ListView.SelectedIndex = -1;

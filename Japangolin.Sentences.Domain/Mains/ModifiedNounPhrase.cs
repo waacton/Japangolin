@@ -7,24 +7,24 @@
 
     public class ModifiedNounPhrase : INounPhrase
     {
-        public ITranslation TargetNoun { get; }
-        public ITranslation ModifyingNoun { get; }
+        public IGolin TargetNoun { get; }
+        public IGolin ModifyingNoun { get; }
         public Conjugation Conjugation { get; }
 
         public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun, Conjugation conjugation)
         {
-            this.TargetNoun = new NounTranslation(targetNoun, conjugation);
-            this.ModifyingNoun = new NounTranslation(modifyingNoun, conjugation);
+            this.TargetNoun = new Noungolin(targetNoun, conjugation);
+            this.ModifyingNoun = new Noungolin(modifyingNoun, conjugation);
             this.Conjugation = conjugation;
         }
 
-        public List<ITranslation> GetEnglishOrder() => new List<ITranslation> { this.ModifyingNoun, this.TargetNoun };
-        public List<ITranslation> GetJapaneseOrder() => new List<ITranslation> { this.ModifyingNoun, new JapaneseOnlyTranslation("の", this.Conjugation), this.TargetNoun };
+        public List<IGolin> GolinEnglish() => new List<IGolin> { this.ModifyingNoun, this.TargetNoun };
+        public List<IGolin> GolinJapanese() => new List<IGolin> { this.ModifyingNoun, new Possessiongolin(this.Conjugation), this.TargetNoun };
 
         public override string ToString()
         {
-            var english = string.Join(" ", this.GetEnglishOrder().Select(translation => translation.English));
-            var kana = string.Join(" ", this.GetEnglishOrder().Select(translation => translation.Kana));
+            var english = string.Join(" ", this.GolinEnglish().Select(translation => translation.EnglishBase));
+            var kana = string.Join(" ", this.GolinEnglish().Select(translation => translation.KanaBase));
             return $"{english} | {kana}";
         }
     }
