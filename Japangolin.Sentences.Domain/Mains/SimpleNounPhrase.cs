@@ -8,22 +8,19 @@
     public class SimpleNounPhrase : INounPhrase
     {
         public IGolin Noun { get; }
-        public Conjugation Conjugation { get; }
 
         public SimpleNounPhrase(IJapaneseEntry noun, Conjugation conjugation)
         {
-            this.Noun = new Noungolin(noun, conjugation);
-            this.Conjugation = conjugation;
+            this.Noun = GolinFactory.FromConjugatedNoun(noun, conjugation);
+        }
+
+        public SimpleNounPhrase(IJapaneseEntry noun) : this(noun, Conjugation.None)
+        {
         }
 
         public List<IGolin> GolinEnglish() => new List<IGolin> { this.Noun };
         public List<IGolin> GolinJapanese() => new List<IGolin> { this.Noun };
 
-        public override string ToString()
-        {
-            var english = string.Join(" ", this.GolinEnglish().Select(translation => translation.EnglishBase));
-            var kana = string.Join(" ", this.GolinEnglish().Select(translation => translation.KanaBase));
-            return $"{english} | {kana}";
-        }
+        public override string ToString() => this.GetNounPhraseToString();
     }
 }

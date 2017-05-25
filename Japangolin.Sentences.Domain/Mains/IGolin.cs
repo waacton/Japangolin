@@ -6,8 +6,6 @@
         string KanaBase { get; }
         string KanjiBase { get; }
 
-        Conjugation Conjugation { get; }
-
         string EnglishConjugated { get; }
         string KanaConjugated { get; }
         string KanjiConjugated { get; }

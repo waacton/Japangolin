@@ -4,8 +4,6 @@
 
     public interface INounPhrase
     {
-        Conjugation Conjugation { get; }
-
         List<IGolin> GolinEnglish();
         List<IGolin> GolinJapanese();
     }

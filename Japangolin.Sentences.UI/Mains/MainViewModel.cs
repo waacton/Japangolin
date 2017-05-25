@@ -38,10 +38,10 @@
 
     public class DesignTimeMainViewModel : MainViewModel
     {
-        private readonly ConjugatedEnglish conjugatedEnglish = new ConjugatedEnglish("Japangolin", Conjugation.LongPresentAffirmative);
-        private readonly ConjugatedJapanese conjugatedJapanese = new ConjugatedJapanese("ジャッパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative);
+        private readonly English english = new UnconjugatedEnglish("Japangolin");
+        private readonly Japanese japanese = new NounJapanese("ジャッパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative);
 
-        public new List<IGolin> GolinEnglish => new List<IGolin> { new DesignTimeGolin(this.conjugatedEnglish, this.conjugatedJapanese) };
+        public new List<IGolin> GolinEnglish => new List<IGolin> { new DesignTimeGolin(this.english, this.japanese) };
         public new string KanaSentence => "ジャッパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
@@ -52,7 +52,7 @@
 
     public class DesignTimeGolin : Golin
     {
-        public DesignTimeGolin(ConjugatedEnglish conjugatedEnglish, ConjugatedJapanese conjugatedJapanese) : base(conjugatedEnglish, conjugatedJapanese)
+        public DesignTimeGolin(English english, Japanese nounJapanese) : base(english, nounJapanese, true)
         {
         }
     }

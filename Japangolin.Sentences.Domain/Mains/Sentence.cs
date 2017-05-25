@@ -5,6 +5,9 @@
 
     public class Sentence
     {
+        private static readonly string EnglishSpace = " ";
+        private static readonly string JapaneseSpace = "　";
+
         public TopicBlock TopicBlock { get; }
         public ObjectBlock ObjectBlock { get; }
 
@@ -38,17 +41,17 @@
 
         private static string ConvertToEnglish(List<IGolin> golins)
         {
-            return string.Join(" ", golins.Select(golin => golin.EnglishConjugated));
+            return string.Join(EnglishSpace, golins.Select(golin => golin.EnglishConjugated));
         }
 
         private static string ConvertToKana(List<IGolin> golins)
         {
-            return string.Join(" _ ", golins.Select(golin => golin.KanaConjugated));
+            return string.Join(JapaneseSpace, golins.Select(golin => golin.KanaConjugated));
         }
 
         private static string ConvertToKanji(List<IGolin> golins)
         {
-            return string.Join(" _ ", golins.Select(golin => golin.KanjiConjugated));
+            return string.Join(JapaneseSpace, golins.Select(golin => golin.KanjiConjugated));
         }
 
         public override string ToString()

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class ConjugatedJapanese
+    public abstract class Japanese
     {
         public string KanaBase { get; }
         public string KanjiBase { get; }
@@ -12,30 +12,42 @@
         public virtual string KanaConjugated => this.KanaBase;
         public virtual string KanjiConjugated => this.KanjiBase;
 
-        public ConjugatedJapanese(string kanaBase, string kanjiBase, Conjugation conjugation)
+        protected Japanese(string kanaBase, string kanjiBase, Conjugation conjugation)
         {
             this.KanaBase = kanaBase;
             this.KanjiBase = kanjiBase;
             this.Conjugation = conjugation;
         }
 
-        public ConjugatedJapanese(string japaneseBase, Conjugation conjugation) : this(japaneseBase, japaneseBase, conjugation)
+        protected Japanese(string japaneseBase, Conjugation conjugation) : this(japaneseBase, japaneseBase, conjugation)
         {
         }
     }
 
-    public class TopicJapanese : ConjugatedJapanese
+    public class UnconjugatedJapanese : Japanese
     {
-        public TopicJapanese(Conjugation conjugation) : base("は", conjugation)
+        public UnconjugatedJapanese(string kana, string kanji) : base(kana, kanji, Conjugation.None)
+        {
+        }
+
+        public UnconjugatedJapanese(string japanese) : this(japanese, japanese)
         {
         }
     }
 
-    public class ObjectNounJapanese : ConjugatedJapanese
+    public class TopicJapanese : Japanese
+    {
+        public TopicJapanese() : base("は", Conjugation.None)
+        {
+        }
+    }
+
+    public class NounJapanese : Japanese
     {
         private static readonly Dictionary<Conjugation, Func<string, string>> Conjugations =
             new Dictionary<Conjugation, Func<string, string>>
             {
+                { Conjugation.None, s => s },
                 { Conjugation.LongPresentAffirmative, s => $"{s}です" },
                 { Conjugation.LongPresentNegative, s => $"{s}じゃないです" },
                 { Conjugation.LongPastAffirmative, s => $"{s}でした" },
@@ -53,7 +65,7 @@
         public override string KanaConjugated => Conjugations[this.Conjugation].Invoke(this.KanaBase);
         public override string KanjiConjugated => Conjugations[this.Conjugation].Invoke(this.KanjiBase);
 
-        public ObjectNounJapanese(string kana, string kanji, Conjugation conjugation) : base(kana, kanji, conjugation)
+        public NounJapanese(string kana, string kanji, Conjugation conjugation) : base(kana, kanji, conjugation)
         {
         }
     }

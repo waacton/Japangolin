@@ -9,23 +9,16 @@
     {
         public IGolin Noun { get; }
         public IGolin Adjective { get; }
-        public Conjugation Conjugation { get; }
 
         public AdjectiveNounPhrase(IJapaneseEntry noun, IJapaneseEntry adjective, Conjugation conjugation)
         {
-            this.Noun = new Noungolin(noun, conjugation);
-            this.Adjective = new Adjectivegolin(adjective, conjugation);
-            this.Conjugation = conjugation;
+            this.Noun = GolinFactory.FromConjugatedNoun(noun, conjugation);
+            this.Adjective = GolinFactory.FromUnconjugated(adjective);
         }
 
         public List<IGolin> GolinEnglish() => new List<IGolin> { this.Adjective, this.Noun };
         public List<IGolin> GolinJapanese() => new List<IGolin> { this.Adjective, this.Noun };
 
-        public override string ToString()
-        {
-            var english = string.Join(" ", this.GolinEnglish().Select(translation => translation.EnglishBase));
-            var kana = string.Join(" ", this.GolinEnglish().Select(translation => translation.KanaBase));
-            return $"{english} | {kana}";
-        }
+        public override string ToString() => this.GetNounPhraseToString();
     }
 }

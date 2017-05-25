@@ -1,13 +1,10 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     public abstract class SentenceBlock
     {
         public INounPhrase NounPhrase { get; }
-        public Conjugation Conjugation => this.NounPhrase.Conjugation;
 
         public SentenceBlock(INounPhrase nounPhrase)
         {
@@ -22,52 +19,47 @@
 
     public class TopicBlock : SentenceBlock
     {
-        private Topicgolin Topicgolin => new Topicgolin(this.Conjugation);
+        private readonly Conjugation conjugation;
+        private IGolin TopicGolin => GolinFactory.CreateTopic(this.conjugation);
 
-        public TopicBlock(INounPhrase nounPhrase) : base(nounPhrase)
+        public TopicBlock(INounPhrase nounPhrase, Conjugation conjugation) : base(nounPhrase)
         {
+            this.conjugation = conjugation;
         }
 
         public override List<IGolin> GolinEnglish()
         {
             var golins = this.NounPhrase.GolinEnglish();
-            golins.Add(this.Topicgolin);
+            golins.Add(this.TopicGolin);
             return golins;
         }
 
         public override List<IGolin> GolinJapanese()
         {
             var golins = this.NounPhrase.GolinJapanese();
-            golins.Add(this.Topicgolin);
+            golins.Add(this.TopicGolin);
             return golins;
         }
     }
 
     public class ObjectBlock : SentenceBlock
     {
-        private IGolin FinalNoun => this.NounPhrase.GolinJapanese().Last();
-
-        private Objectgolin Objectgolin => new Objectgolin(this.Conjugation);
-        private ObjectNoungolin ObjectNoungolin => new ObjectNoungolin(new NounEnglish(this.FinalNoun.EnglishBase, this.Conjugation), new ObjectNounJapanese(this.FinalNoun.KanaBase, this.FinalNoun.KanjiBase, this.Conjugation));
+        private IGolin ObjectGolin = GolinFactory.CreateObject();
 
         public ObjectBlock(INounPhrase nounPhrase) : base(nounPhrase)
         {
         }
-
+        
         public override List<IGolin> GolinEnglish()
         {
             var golins = this.NounPhrase.GolinEnglish();
-            golins.Insert(0, this.Objectgolin);
+            golins.Insert(0, this.ObjectGolin);
             return golins;
         }
 
         public override List<IGolin> GolinJapanese()
         {
-            // replace the final noun of the noun phrase with one that will conjugate as an object-noun
             var golins = this.NounPhrase.GolinJapanese();
-            var finalGolin = golins.Last();
-            golins.Remove(finalGolin);
-            golins.Add(this.ObjectNoungolin);
             return golins;
         }
 

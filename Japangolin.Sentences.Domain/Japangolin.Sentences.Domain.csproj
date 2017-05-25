@@ -48,13 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
-    <Compile Include="Mains\ConjugatedJapanese.cs" />
-    <Compile Include="Mains\ConjugatedEnglish.cs" />
+    <Compile Include="Mains\GolinFactory.cs" />
+    <Compile Include="Mains\Japanese.cs" />
+    <Compile Include="Mains\English.cs" />
     <Compile Include="Mains\Conjugation.cs" />
     <Compile Include="Mains\IGolin.cs" />
     <Compile Include="Mains\Sentence.cs" />
     <Compile Include="Mains\SentenceBlock.cs" />
-    <Compile Include="Mains\TranslationListExtensions.cs" />
+    <Compile Include="Mains\Extensions.cs" />
     <Compile Include="Mains\VerbNounPhrase.cs" />
     <Compile Include="Mains\INounPhrase.cs" />
     <Compile Include="Mains\AdjectiveNounPhrase.cs" />

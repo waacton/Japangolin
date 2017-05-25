@@ -2,22 +2,28 @@
 {
     using System.Collections.Generic;
 
-    public class ConjugatedEnglish
+    public abstract class English
     {
         public string EnglishBase { get; }
         public Conjugation Conjugation { get; }
 
-        public virtual string EnglishConjugated { get; }
+        public virtual string EnglishConjugated => this.EnglishBase;
 
-        public ConjugatedEnglish(string englishBase, Conjugation conjugation)
+        protected English(string englishBase, Conjugation conjugation)
         {
             this.EnglishBase = englishBase;
             this.Conjugation = conjugation;
-            this.EnglishConjugated = this.EnglishBase;
         }
     }
 
-    public class TopicEnglish : ConjugatedEnglish
+    public class UnconjugatedEnglish : English
+    {
+        public UnconjugatedEnglish(string english) : base(english, Conjugation.None)
+        {
+        }
+    }
+
+    public class TopicEnglish : English
     {
         private static readonly Dictionary<Conjugation, string> Prepositions =
             new Dictionary<Conjugation, string>
@@ -39,13 +45,6 @@
         public override string EnglishConjugated => Prepositions[this.Conjugation];
 
         public TopicEnglish(Conjugation conjugation) : base("is", conjugation)
-        {
-        }
-    }
-
-    public class NounEnglish : ConjugatedEnglish
-    {
-        public NounEnglish(string english, Conjugation conjugation) : base(english, conjugation)
         {
         }
     }
