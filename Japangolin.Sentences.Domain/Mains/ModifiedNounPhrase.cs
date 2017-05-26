@@ -6,7 +6,7 @@
 
     public class ModifiedNounPhrase : INounPhrase
     {
-        private IGolin PossessionGolin = GolinFactory.CreatePossession();
+        private IGolin PossessionMarker = GolinFactory.PossessionMarker();
         public IGolin TargetNoun { get; }
         public IGolin ModifyingNoun { get; }
 
@@ -17,8 +17,12 @@
             this.ModifyingNoun = GolinFactory.FromUnconjugated(modifyingNoun);
         }
 
+        public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun) : this(targetNoun, modifyingNoun, Conjugation.None)
+        {
+        }
+
         public List<IGolin> GolinEnglish() => new List<IGolin> { this.ModifyingNoun, this.TargetNoun };
-        public List<IGolin> GolinJapanese() => new List<IGolin> { this.ModifyingNoun, this.PossessionGolin, this.TargetNoun };
+        public List<IGolin> GolinJapanese() => new List<IGolin> { this.ModifyingNoun, this.PossessionMarker, this.TargetNoun };
 
         public override string ToString() => this.GetNounPhraseToString();
     }

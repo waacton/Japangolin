@@ -11,11 +11,10 @@
             return CreateGolin(english, japanese);
         }
 
-        // TODO: conjugation will be needed here (JP + ENG)
         public static IGolin FromConjugatedVerb(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            var english = new English(japaneseEntry.GetEnglish());
-            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji());
+            var english = new English(japaneseEntry.GetEnglish(), conjugation, ConjugationFunctions.EnglishVerb); // TODO: not quite this
+            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, ConjugationFunctions.JapaneseVerb);
             return CreateGolin(english, japanese);
         }
 
@@ -34,20 +33,31 @@
             return CreateGolin(english, japanese);
         }
 
-        public static IGolin CreateTopic(Conjugation conjugation)
+        public static IGolin TopicPreposition(Conjugation conjugation)
         {
             var english = new English("is", conjugation, ConjugationFunctions.EnglishTopicPrepositions);
-            var japanese = new Japanese("は");
-            return CreateGolin(english, japanese, false);
+            return CreateGolin(english, null, false);
         }
 
-        public static IGolin CreateObject()
+        public static IGolin TopicMarker()
+        {
+            var japanese = new Japanese("は");
+            return CreateGolin(null, japanese, false);
+        }
+
+        public static IGolin ObjectPreposition()
         {
             var english = new English("a");
             return CreateGolin(english, null, false);
         }
 
-        public static IGolin CreatePossession()
+        public static IGolin DirectObjectMarker()
+        {
+            var japanese = new Japanese("を");
+            return CreateGolin(null, japanese, false);
+        }
+
+        public static IGolin PossessionMarker()
         {
             var japanese = new Japanese("の");
             return CreateGolin(null, japanese, false);

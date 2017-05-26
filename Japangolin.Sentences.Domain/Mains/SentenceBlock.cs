@@ -20,7 +20,8 @@
     public class TopicBlock : SentenceBlock
     {
         private readonly Conjugation conjugation;
-        private IGolin TopicGolin => GolinFactory.CreateTopic(this.conjugation);
+        private IGolin TopicPreposition => GolinFactory.TopicPreposition(this.conjugation);
+        private IGolin TopicMarker => GolinFactory.TopicMarker();
 
         public TopicBlock(INounPhrase nounPhrase, Conjugation conjugation) : base(nounPhrase)
         {
@@ -30,36 +31,56 @@
         public override List<IGolin> GolinEnglish()
         {
             var golins = this.NounPhrase.GolinEnglish();
-            golins.Add(this.TopicGolin);
+            golins.Add(this.TopicPreposition);
             return golins;
         }
 
         public override List<IGolin> GolinJapanese()
         {
             var golins = this.NounPhrase.GolinJapanese();
-            golins.Add(this.TopicGolin);
+            golins.Add(this.TopicMarker);
             return golins;
         }
     }
 
     public class ObjectBlock : SentenceBlock
     {
-        private IGolin ObjectGolin = GolinFactory.CreateObject();
+        private IGolin ObjectPreposition = GolinFactory.ObjectPreposition();
+        private IGolin DirectObjectMarker = GolinFactory.DirectObjectMarker();
 
-        public ObjectBlock(INounPhrase nounPhrase) : base(nounPhrase)
+        public IGolin Verb { get; }
+
+        public ObjectBlock(INounPhrase nounPhrase, IGolin verb) : base(nounPhrase)
+        {
+            this.Verb = verb;
+        }
+
+        public ObjectBlock(INounPhrase nounPhrase) : this(nounPhrase, null)
         {
         }
-        
+
         public override List<IGolin> GolinEnglish()
         {
-            var golins = this.NounPhrase.GolinEnglish();
-            golins.Insert(0, this.ObjectGolin);
+            var golins = new List<IGolin>();
+            if (this.Verb != null)
+            {
+                golins.Add(this.Verb);
+            }
+
+            golins.Add(this.ObjectPreposition);
+            golins.AddRange(this.NounPhrase.GolinEnglish());
             return golins;
         }
 
         public override List<IGolin> GolinJapanese()
         {
             var golins = this.NounPhrase.GolinJapanese();
+            if (this.Verb != null)
+            {
+                golins.Add(this.DirectObjectMarker);
+                golins.Add(this.Verb);
+            }
+            
             return golins;
         }
 

@@ -7,6 +7,24 @@
 
     public static class ConjugationFunctions
     {
+        public static readonly Dictionary<Conjugation, Func<string, string>> EnglishTopicPrepositions =
+            new Dictionary<Conjugation, Func<string, string>>
+            {
+                { Conjugation.None, s => "???" },
+                { Conjugation.LongPresentAffirmative, s => "is" },
+                { Conjugation.LongPresentNegative, s => "is not" },
+                { Conjugation.LongPastAffirmative, s => "was" },
+                { Conjugation.LongPastNegative, s => "was not" },
+                { Conjugation.LongFutureAffirmative, s => "will be" },
+                { Conjugation.LongFutureNegative, s => "will not be" },
+                { Conjugation.ShortPresentAffirmative, s => "is" },
+                { Conjugation.ShortPresentNegative, s => "is not" },
+                { Conjugation.ShortPastAffirmative, s => "was" },
+                { Conjugation.ShortPastNegative, s => "was not" },
+                { Conjugation.ShortFutureAffirmative, s => "will be" },
+                { Conjugation.ShortFutureNegative, s => "will not be" }
+            };
+
         public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseNoun =
             new Dictionary<Conjugation, Func<string, string>>
             {
@@ -25,22 +43,40 @@
                 { Conjugation.ShortFutureNegative, s => $"{s}じゃない" }
             };
 
-        public static readonly Dictionary<Conjugation, Func<string, string>> EnglishTopicPrepositions =
+        public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerb =
             new Dictionary<Conjugation, Func<string, string>>
             {
-                { Conjugation.None, s => "???" },
-                { Conjugation.LongPresentAffirmative, s => "is" },
-                { Conjugation.LongPresentNegative, s => "is not" },
-                { Conjugation.LongPastAffirmative, s => "was" },
-                { Conjugation.LongPastNegative, s => "was not" },
-                { Conjugation.LongFutureAffirmative, s => "will be" },
-                { Conjugation.LongFutureNegative, s => "will not be" },
-                { Conjugation.ShortPresentAffirmative, s => "is" },
-                { Conjugation.ShortPresentNegative, s => "is not" },
-                { Conjugation.ShortPastAffirmative, s => "was" },
-                { Conjugation.ShortPastNegative, s => "was not" },
-                { Conjugation.ShortFutureAffirmative, s => "will be" },
-                { Conjugation.ShortFutureNegative, s => "will not be" }
+                { Conjugation.None, s => s },
+                { Conjugation.LongPresentAffirmative, s => $"{s}-IMASU" },
+                { Conjugation.LongPresentNegative, s => $"{s}-IMASEN" },
+                { Conjugation.LongPastAffirmative, s => $"{s}-IMASHITA" },
+                { Conjugation.LongPastNegative, s => $"{s}-IMASENDESHITA" },
+                { Conjugation.LongFutureAffirmative, s => $"{s}-IMASU" },
+                { Conjugation.LongFutureNegative, s => $"{s}-IMASEN" },
+                { Conjugation.ShortPresentAffirmative, s => $"{s}-IMASU" },
+                { Conjugation.ShortPresentNegative, s => $"{s}-IMASEN" },
+                { Conjugation.ShortPastAffirmative, s => $"{s}-IMASHITA" },
+                { Conjugation.ShortPastNegative, s => $"{s}-IMASENDESHITA" },
+                { Conjugation.ShortFutureAffirmative, s => $"{s}-IMASU" },
+                { Conjugation.ShortFutureNegative, s => $"{s}-IMASEN" }
+            };
+
+        public static readonly Dictionary<Conjugation, Func<string, string>> EnglishVerb =
+            new Dictionary<Conjugation, Func<string, string>>
+            {
+                { Conjugation.None, s => s },
+                { Conjugation.LongPresentAffirmative, s => $"{s}-ing" },
+                { Conjugation.LongPresentNegative, s => $"{s}-ing" },
+                { Conjugation.LongPastAffirmative, s => $"{s}-ed" },
+                { Conjugation.LongPastNegative, s => $"{s}-ed" },
+                { Conjugation.LongFutureAffirmative, s => $"{s}" },
+                { Conjugation.LongFutureNegative, s => $"{s}" },
+                { Conjugation.ShortPresentAffirmative, s => $"{s}-ing" },
+                { Conjugation.ShortPresentNegative, s => $"{s}-ing" },
+                { Conjugation.ShortPastAffirmative, s => $"{s}-ed" },
+                { Conjugation.ShortPastNegative, s => $"{s}-ed" },
+                { Conjugation.ShortFutureAffirmative, s => $"{s}" },
+                { Conjugation.ShortFutureNegative, s => $"{s}" }
             };
 
         public static Dictionary<Conjugation, Func<string, string>> Defaults => DefaultConjugationFunctions();
