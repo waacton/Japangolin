@@ -1,5 +1,8 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Wacton.Tovarisch.Enum;
 
     public class Conjugation : Enumeration
@@ -18,8 +21,17 @@
         public static readonly Conjugation ShortFutureAffirmative = new Conjugation("ShortFutureAffirmative");
         public static readonly Conjugation ShortFutureNegative = new Conjugation("ShortFutureNegative");
 
+        
+
         public Conjugation(string displayName) : base(displayName)
         {
+        }
+
+        public static IEnumerable<Conjugation> KnownConjugations()
+        {
+            var allConjugation = GetAll<Conjugation>();
+            var unknownConjugations = new List<Conjugation> { None, LongFutureAffirmative, LongFutureNegative, ShortFutureAffirmative, ShortFutureNegative };
+            return allConjugation.Except(unknownConjugations);
         }
     }
 }

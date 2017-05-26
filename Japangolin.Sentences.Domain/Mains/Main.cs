@@ -7,12 +7,10 @@
     using Wacton.Desu.Japanese;
     using Wacton.Tovarisch.Randomness;
 
-    using Enumeration = Wacton.Tovarisch.Enum.Enumeration;
-
     public class Main
     {
         private readonly List<IJapaneseEntry> japaneseEntries;
-        private readonly List<Conjugation> conjugations = Enumeration.GetAll<Conjugation>().Except(new List<Conjugation> { Conjugation.None }).ToList();
+        private readonly List<Conjugation> conjugations = Conjugation.KnownConjugations().ToList();
 
         public Sentence CurrentSentence { get; private set; }
 

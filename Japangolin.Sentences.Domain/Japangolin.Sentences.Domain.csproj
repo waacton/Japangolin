@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
+    <Compile Include="Mains\ConjugationFunctions.cs" />
     <Compile Include="Mains\GolinFactory.cs" />
     <Compile Include="Mains\Japanese.cs" />
     <Compile Include="Mains\English.cs" />

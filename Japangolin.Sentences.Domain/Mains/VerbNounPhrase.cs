@@ -1,7 +1,6 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using Wacton.Desu.Japanese;
 

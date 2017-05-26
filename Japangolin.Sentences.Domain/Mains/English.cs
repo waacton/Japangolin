@@ -1,50 +1,24 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
+    using System;
     using System.Collections.Generic;
 
-    public abstract class English
+    public class English
     {
         public string EnglishBase { get; }
         public Conjugation Conjugation { get; }
 
-        public virtual string EnglishConjugated => this.EnglishBase;
+        private readonly Dictionary<Conjugation, Func<string, string>> conjugationFunctions;
+        public string EnglishConjugated => this.conjugationFunctions[this.Conjugation].Invoke(this.EnglishBase);
 
-        protected English(string englishBase, Conjugation conjugation)
+        public English(string englishBase, Conjugation conjugation, Dictionary<Conjugation, Func<string, string>> conjugationFunctions)
         {
             this.EnglishBase = englishBase;
             this.Conjugation = conjugation;
+            this.conjugationFunctions = conjugationFunctions;
         }
-    }
 
-    public class UnconjugatedEnglish : English
-    {
-        public UnconjugatedEnglish(string english) : base(english, Conjugation.None)
-        {
-        }
-    }
-
-    public class TopicEnglish : English
-    {
-        private static readonly Dictionary<Conjugation, string> Prepositions =
-            new Dictionary<Conjugation, string>
-            {
-                { Conjugation.LongPresentAffirmative, "is" },
-                { Conjugation.LongPresentNegative, "is not" },
-                { Conjugation.LongPastAffirmative, "was" },
-                { Conjugation.LongPastNegative, "was not" },
-                { Conjugation.LongFutureAffirmative, "will be" },
-                { Conjugation.LongFutureNegative, "will not be" },
-                { Conjugation.ShortPresentAffirmative, "is" },
-                { Conjugation.ShortPresentNegative, "is not" },
-                { Conjugation.ShortPastAffirmative, "was" },
-                { Conjugation.ShortPastNegative, "was not" },
-                { Conjugation.ShortFutureAffirmative, "will be" },
-                { Conjugation.ShortFutureNegative, "will not be" }
-            };
-
-        public override string EnglishConjugated => Prepositions[this.Conjugation];
-
-        public TopicEnglish(Conjugation conjugation) : base("is", conjugation)
+        public English(string englishBase) : this(englishBase, Conjugation.None, ConjugationFunctions.Defaults)
         {
         }
     }
