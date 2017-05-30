@@ -8,6 +8,10 @@ Japanese learning aid.
 - ASP.NET + Razor
 - React + ReactJS.NET
 
+...
+
+- My sketchy understanding of some basic Japanese
+
 ---
 
 <img src="https://gitlab.com/Wacton/Japangolin/raw/master/Japangolin.Romaji.UI/Resources/Japangolin.png" width="32" height="32">
