@@ -4,9 +4,9 @@
 
     public abstract class SentenceBlock
     {
-        public INounPhrase NounPhrase { get; }
+        public NounPhrase NounPhrase { get; }
 
-        public SentenceBlock(INounPhrase nounPhrase)
+        public SentenceBlock(NounPhrase nounPhrase)
         {
             this.NounPhrase = nounPhrase;
         }
@@ -14,16 +14,16 @@
         public abstract List<IGolin> GolinEnglish();
 
         public abstract List<IGolin> GolinJapanese();
-
     }
 
     public class TopicBlock : SentenceBlock
     {
         private readonly Conjugation conjugation;
+
         private IGolin TopicPreposition => GolinFactory.TopicPreposition(this.conjugation);
         private IGolin TopicMarker => GolinFactory.TopicMarker();
 
-        public TopicBlock(INounPhrase nounPhrase, Conjugation conjugation) : base(nounPhrase)
+        public TopicBlock(NounPhrase nounPhrase, Conjugation conjugation) : base(nounPhrase)
         {
             this.conjugation = conjugation;
         }
@@ -50,12 +50,12 @@
 
         public IGolin Verb { get; }
 
-        public ObjectBlock(INounPhrase nounPhrase, IGolin verb) : base(nounPhrase)
+        public ObjectBlock(NounPhrase nounPhrase, IGolin verb) : base(nounPhrase)
         {
             this.Verb = verb;
         }
 
-        public ObjectBlock(INounPhrase nounPhrase) : this(nounPhrase, null)
+        public ObjectBlock(NounPhrase nounPhrase) : this(nounPhrase, null)
         {
         }
 

@@ -4,22 +4,17 @@
 
     using Wacton.Desu.Japanese;
 
-    public class SimpleNounPhrase : INounPhrase
+    public class SimpleNounPhrase : NounPhrase
     {
-        public IGolin Noun { get; }
-
-        public SimpleNounPhrase(IJapaneseEntry noun, Conjugation conjugation)
+        public SimpleNounPhrase(IJapaneseEntry noun, Conjugation conjugation) : base(noun, conjugation)
         {
-            this.Noun = GolinFactory.FromConjugatedNoun(noun, conjugation);
         }
 
         public SimpleNounPhrase(IJapaneseEntry noun) : this(noun, Conjugation.None)
         {
         }
 
-        public List<IGolin> GolinEnglish() => new List<IGolin> { this.Noun };
-        public List<IGolin> GolinJapanese() => new List<IGolin> { this.Noun };
-
-        public override string ToString() => this.GetNounPhraseToString();
+        public override List<IGolin> GolinEnglish() => new List<IGolin> { this.Noun };
+        public override List<IGolin> GolinJapanese() => new List<IGolin> { this.Noun };
     }
 }

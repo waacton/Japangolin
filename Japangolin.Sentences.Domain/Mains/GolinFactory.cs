@@ -4,30 +4,26 @@
 
     public static class GolinFactory
     {
-        public static IGolin FromConjugatedNoun(IJapaneseEntry japaneseEntry, Conjugation conjugation)
+        public static IGolin Noun(IJapaneseEntry japaneseEntry) => Noun(japaneseEntry, Conjugation.None);
+        public static IGolin Noun(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
             var english = new English(japaneseEntry.GetEnglish());
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, ConjugationFunctions.JapaneseNoun);
             return CreateGolin(english, japanese);
         }
 
-        public static IGolin FromConjugatedVerb(IJapaneseEntry japaneseEntry, Conjugation conjugation)
+        public static IGolin Verb(IJapaneseEntry japaneseEntry) => Verb(japaneseEntry, Conjugation.None);
+        public static IGolin Verb(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            var english = new English(japaneseEntry.GetEnglish(), conjugation, ConjugationFunctions.EnglishVerb); // TODO: not quite this
+            var english = new English(japaneseEntry.GetEnglish(), conjugation, ConjugationFunctions.EnglishVerb); // TODO: not quite this?
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, ConjugationFunctions.JapaneseVerb);
             return CreateGolin(english, japanese);
         }
 
-        // TODO: conjugation will be needed here (JP)
-        public static IGolin FromConjugatedAdjective(IJapaneseEntry japaneseEntry, Conjugation conjugation)
+        public static IGolin Adjective(IJapaneseEntry japaneseEntry) => Adjective(japaneseEntry, Conjugation.None);
+        public static IGolin Adjective(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            var english = new English(japaneseEntry.GetEnglish());
-            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji());
-            return CreateGolin(english, japanese);
-        }
-
-        public static IGolin FromUnconjugated(IJapaneseEntry japaneseEntry)
-        {
+            // TODO: conjugation will be needed here (JP)
             var english = new English(japaneseEntry.GetEnglish());
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji());
             return CreateGolin(english, japanese);

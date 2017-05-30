@@ -44,20 +44,18 @@
         {
             var targetNoun = RandomSelection.SelectOne(nouns);
             var modifyingNoun = RandomSelection.SelectOne(nouns);
+            var nounPhrase = new ModifiedNounPhrase(targetNoun, modifyingNoun);
 
             var hasVerb = RandomSelection.IsSuccessful(0.5);
             if (hasVerb)
             {
                 var verb = RandomSelection.SelectOne(verbs);
-                var englishVerb = new English(verb.GetEnglish(), conjugation, ConjugationFunctions.EnglishVerb);
-                var japaneseVerb = new Japanese(verb.GetKana(), verb.GetKanji(), conjugation, ConjugationFunctions.JapaneseVerb);
-                var verbGolin = new Golin(englishVerb, japaneseVerb, true);
-                var nounPhrase = new ModifiedNounPhrase(targetNoun, modifyingNoun);
+                var verbGolin = GolinFactory.Verb(verb, conjugation);
                 return new ObjectBlock(nounPhrase, verbGolin);
             }
             else
             {
-                var nounPhrase = new ModifiedNounPhrase(targetNoun, modifyingNoun, conjugation);
+                nounPhrase.SetConjugation(conjugation);
                 return new ObjectBlock(nounPhrase);
             }
         }

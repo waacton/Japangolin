@@ -4,20 +4,16 @@
 
     using Wacton.Desu.Japanese;
 
-    public class AdjectiveNounPhrase : INounPhrase
+    public class AdjectiveNounPhrase : NounPhrase
     {
-        public IGolin Noun { get; }
         public IGolin Adjective { get; }
 
-        public AdjectiveNounPhrase(IJapaneseEntry noun, IJapaneseEntry adjective, Conjugation conjugation)
+        public AdjectiveNounPhrase(IJapaneseEntry noun, IJapaneseEntry adjective, Conjugation conjugation) : base(noun, conjugation)
         {
-            this.Noun = GolinFactory.FromConjugatedNoun(noun, conjugation);
-            this.Adjective = GolinFactory.FromUnconjugated(adjective);
+            this.Adjective = GolinFactory.Adjective(adjective);
         }
 
-        public List<IGolin> GolinEnglish() => new List<IGolin> { this.Adjective, this.Noun };
-        public List<IGolin> GolinJapanese() => new List<IGolin> { this.Adjective, this.Noun };
-
-        public override string ToString() => this.GetNounPhraseToString();
+        public override List<IGolin> GolinEnglish() => new List<IGolin> { this.Adjective, this.Noun };
+        public override List<IGolin> GolinJapanese() => new List<IGolin> { this.Adjective, this.Noun };
     }
 }

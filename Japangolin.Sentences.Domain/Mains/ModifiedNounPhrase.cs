@@ -4,26 +4,21 @@
 
     using Wacton.Desu.Japanese;
 
-    public class ModifiedNounPhrase : INounPhrase
+    public class ModifiedNounPhrase : NounPhrase
     {
-        private IGolin PossessionMarker = GolinFactory.PossessionMarker();
-        public IGolin TargetNoun { get; }
         public IGolin ModifyingNoun { get; }
+        private IGolin PossessionMarker = GolinFactory.PossessionMarker();
 
-
-        public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun, Conjugation conjugation)
+        public ModifiedNounPhrase(IJapaneseEntry noun, IJapaneseEntry modifyingNoun, Conjugation conjugation) : base(noun, conjugation)
         {
-            this.TargetNoun = GolinFactory.FromConjugatedNoun(targetNoun, conjugation);
-            this.ModifyingNoun = GolinFactory.FromUnconjugated(modifyingNoun);
+            this.ModifyingNoun = GolinFactory.Noun(modifyingNoun);
         }
 
         public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun) : this(targetNoun, modifyingNoun, Conjugation.None)
         {
         }
 
-        public List<IGolin> GolinEnglish() => new List<IGolin> { this.ModifyingNoun, this.TargetNoun };
-        public List<IGolin> GolinJapanese() => new List<IGolin> { this.ModifyingNoun, this.PossessionMarker, this.TargetNoun };
-
-        public override string ToString() => this.GetNounPhraseToString();
+        public override List<IGolin> GolinEnglish() => new List<IGolin> { this.ModifyingNoun, this.Noun };
+        public override List<IGolin> GolinJapanese() => new List<IGolin> { this.ModifyingNoun, this.PossessionMarker, this.Noun };
     }
 }

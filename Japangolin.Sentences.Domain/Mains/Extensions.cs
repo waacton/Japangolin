@@ -23,7 +23,7 @@
 
         private static readonly string EnglishSpace = " ";
         private static readonly string JapaneseSpace = "　";
-        public static string GetNounPhraseToString(this INounPhrase nounPhrase)
+        public static string GetNounPhraseToString(this NounPhrase nounPhrase)
         {
             var english = string.Join(EnglishSpace, nounPhrase.GolinEnglish().Select(translation => translation.EnglishBase));
             var kana = string.Join(JapaneseSpace, nounPhrase.GolinJapanese().Select(translation => translation.KanaBase));

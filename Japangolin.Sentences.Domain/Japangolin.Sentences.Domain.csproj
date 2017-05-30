@@ -57,8 +57,8 @@
     <Compile Include="Mains\Sentence.cs" />
     <Compile Include="Mains\SentenceBlock.cs" />
     <Compile Include="Mains\Extensions.cs" />
+    <Compile Include="Mains\NounPhrase.cs" />
     <Compile Include="Mains\VerbNounPhrase.cs" />
-    <Compile Include="Mains\INounPhrase.cs" />
     <Compile Include="Mains\AdjectiveNounPhrase.cs" />
     <Compile Include="Mains\Main.cs" />
     <Compile Include="Mains\ModifiedNounPhrase.cs" />
