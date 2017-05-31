@@ -3,60 +3,65 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
     using Wacton.Tovarisch.Randomness;
 
     public class Main
     {
-        private readonly List<IJapaneseEntry> japaneseEntries;
+        private readonly IEnumerable<IJapaneseEntry> japaneseEntries;
         private readonly List<Conjugation> conjugations = Conjugation.KnownConjugations().ToList();
 
         public Sentence CurrentSentence { get; private set; }
 
         public Main(IJapaneseDictionary japaneseDictionary)
         {
-            this.japaneseEntries = japaneseDictionary.GetEntries().ToList();
+            this.japaneseEntries = japaneseDictionary.GetEntries();
             this.UpdateSentence();
         }
 
         public void UpdateSentence()
         {
-            var nouns = this.japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon))).ToList();
-            var verbs = this.japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.Verb1))).ToList();
-
             var conjugation = RandomSelection.SelectOne(this.conjugations);
 
-            var topicBlock = GetTopicBlock(nouns, conjugation);
-            var objectBlock = GetObjectBlock(nouns, verbs, conjugation);
+            var topicBlock = GetTopicBlock(this.japaneseEntries, conjugation);
+            var objectBlock = GetObjectBlock(this.japaneseEntries, conjugation);
 
             this.CurrentSentence = new Sentence(topicBlock, objectBlock);
         }
 
-        private static TopicBlock GetTopicBlock(List<IJapaneseEntry> nouns, Conjugation conjugation)
+        private static TopicBlock GetTopicBlock(IEnumerable<IJapaneseEntry> japaneseEntries, Conjugation conjugation)
         {
-            var noun = RandomSelection.SelectOne(nouns);
-            var nounPhrase = new SimpleNounPhrase(noun);
+            var nounPhrase = CreateNounPhrase(japaneseEntries, false);
             nounPhrase.SetConjugation(conjugation);
             return new TopicBlock(nounPhrase, conjugation);
         }
 
-        private static ObjectBlock GetObjectBlock(List<IJapaneseEntry> nouns, List<IJapaneseEntry> verbs, Conjugation conjugation)
+        private static ObjectBlock GetObjectBlock(IEnumerable<IJapaneseEntry> japaneseEntries, Conjugation conjugation)
         {
-            var targetNoun = RandomSelection.SelectOne(nouns);
-            var modifyingNoun = RandomSelection.SelectOne(nouns);
-            var nounPhrase = new ModifiedNounPhrase(targetNoun, modifyingNoun);
+            var nounPhrase = CreateNounPhrase(japaneseEntries, true);
 
             var hasVerb = RandomSelection.IsSuccessful(0.5);
             if (hasVerb)
             {
-                var verb = RandomSelection.SelectOne(verbs);
+                var verb = RandomSelection.SelectOne(japaneseEntries.GetVerbs());
                 var verbGolin = GolinFactory.Verb(verb, conjugation);
                 return new ObjectBlock(nounPhrase, verbGolin);
             }
 
             nounPhrase.SetConjugation(conjugation);
             return new ObjectBlock(nounPhrase);
+        }
+
+        private static NounPhrase CreateNounPhrase(IEnumerable<IJapaneseEntry> japaneseEntries, bool isModified)
+        {
+            var noun = RandomSelection.SelectOne(japaneseEntries.GetNouns());
+            if (!isModified)
+            {
+                return new SimpleNounPhrase(noun);
+            }
+
+            var modifyingNoun = RandomSelection.SelectOne(japaneseEntries.GetNouns());
+            return new ModifiedNounPhrase(noun, modifyingNoun);
         }
     }
 }
