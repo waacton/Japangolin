@@ -6,11 +6,7 @@
 
     public class SimpleNounPhrase : NounPhrase
     {
-        public SimpleNounPhrase(IJapaneseEntry noun, Conjugation conjugation) : base(noun, conjugation)
-        {
-        }
-
-        public SimpleNounPhrase(IJapaneseEntry noun) : this(noun, Conjugation.None)
+        public SimpleNounPhrase(IJapaneseEntry noun) : base(noun)
         {
         }
 

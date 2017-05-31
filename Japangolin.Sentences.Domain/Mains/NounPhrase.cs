@@ -7,18 +7,13 @@
     public abstract class NounPhrase
     {
         private readonly IJapaneseEntry noun;
-        private Conjugation conjugation;
+        private Conjugation conjugation = Conjugation.None;
 
         public IGolin Noun => GolinFactory.Noun(this.noun, this.conjugation);
 
-        protected NounPhrase(IJapaneseEntry noun, Conjugation conjugation)
+        protected NounPhrase(IJapaneseEntry noun)
         {
             this.noun = noun;
-            this.conjugation = conjugation;
-        }
-
-        protected NounPhrase(IJapaneseEntry noun) : this(noun, Conjugation.None)
-        {
         }
 
         public void SetConjugation(Conjugation newConjugation)

@@ -8,7 +8,7 @@
     {
         public IGolin Adjective { get; }
 
-        public AdjectiveNounPhrase(IJapaneseEntry noun, IJapaneseEntry adjective, Conjugation conjugation) : base(noun, conjugation)
+        public AdjectiveNounPhrase(IJapaneseEntry noun, IJapaneseEntry adjective) : base(noun)
         {
             this.Adjective = GolinFactory.Adjective(adjective);
         }

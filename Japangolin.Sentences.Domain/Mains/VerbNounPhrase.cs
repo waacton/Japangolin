@@ -8,7 +8,7 @@
     {
         public IGolin Verb { get; }
 
-        public VerbNounPhrase(IJapaneseEntry noun, IJapaneseEntry verb, Conjugation conjugation) : base(noun, conjugation)
+        public VerbNounPhrase(IJapaneseEntry noun, IJapaneseEntry verb) : base(noun)
         {
             this.Verb = GolinFactory.Verb(verb);
         }

@@ -37,6 +37,7 @@
         {
             var noun = RandomSelection.SelectOne(nouns);
             var nounPhrase = new SimpleNounPhrase(noun);
+            nounPhrase.SetConjugation(conjugation);
             return new TopicBlock(nounPhrase, conjugation);
         }
 
@@ -53,11 +54,9 @@
                 var verbGolin = GolinFactory.Verb(verb, conjugation);
                 return new ObjectBlock(nounPhrase, verbGolin);
             }
-            else
-            {
-                nounPhrase.SetConjugation(conjugation);
-                return new ObjectBlock(nounPhrase);
-            }
+
+            nounPhrase.SetConjugation(conjugation);
+            return new ObjectBlock(nounPhrase);
         }
     }
 }

@@ -9,13 +9,9 @@
         public IGolin ModifyingNoun { get; }
         private IGolin PossessionMarker = GolinFactory.PossessionMarker();
 
-        public ModifiedNounPhrase(IJapaneseEntry noun, IJapaneseEntry modifyingNoun, Conjugation conjugation) : base(noun, conjugation)
+        public ModifiedNounPhrase(IJapaneseEntry noun, IJapaneseEntry modifyingNoun) : base(noun)
         {
             this.ModifyingNoun = GolinFactory.Noun(modifyingNoun);
-        }
-
-        public ModifiedNounPhrase(IJapaneseEntry targetNoun, IJapaneseEntry modifyingNoun) : this(targetNoun, modifyingNoun, Conjugation.None)
-        {
         }
 
         public override List<IGolin> GolinEnglish() => new List<IGolin> { this.ModifyingNoun, this.Noun };
