@@ -1,5 +1,5 @@
 # Japangolin
-Japanese kana learning aid.
+Japanese learning aid.
 
 ## Playground for:
 - My library of common tools ([Wacton.Tovarisch](https://gitlab.com/Wacton/Tovarisch))
@@ -7,6 +7,10 @@ Japanese kana learning aid.
 - Dependency injection via Tovarisch ([Wacton.Tovarisch.MVVM](https://gitlab.com/Wacton/Tovarisch/tree/master/Tovarisch/MVVM) / [Wacton.Tovarisch.UI.MVVM](https://gitlab.com/Wacton/Tovarisch/tree/master/Tovarisch.UI/MVVM) + [Ninject](http://www.ninject.org/))
 - ASP.NET + Razor
 - React + ReactJS.NET
+
+...
+
+- My sketchy understanding of some basic Japanese
 
 ---
 
