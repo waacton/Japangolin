@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Sentences.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Sentences.UI", "Japangolin.Sentences.UI\Japangolin.Sentences.UI.csproj", "{2291019F-1A6F-43BD-B097-801140A226CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Romaji.Xamarin", "Japangolin.Romaji.Xamarin\Japangolin.Romaji.Xamarin.csproj", "{41C98642-67E2-4C49-88AD-6B38789DE79B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Romaji.Android", "Japangolin.Romaji.Android\Japangolin.Romaji.Android.csproj", "{41C98642-67E2-4C49-88AD-6B38789DE79B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

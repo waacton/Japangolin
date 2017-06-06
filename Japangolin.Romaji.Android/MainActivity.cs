@@ -1,13 +1,13 @@
-﻿namespace Japangolin.Romaji.Xamarin
+﻿namespace Japangolin.Romaji.Android
 {
-    using System;
+    using global::Android.App;
+    using global::Android.Content;
+    using global::Android.OS;
+    using global::Android.Widget;
 
-    using Android.App;
-    using Android.Content;
-    using Android.OS;
-    using Android.Widget;
+    using Uri = global::Android.Net.Uri;
 
-    [Activity(Label = "Japangolin.Romaji.Xamarin", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Japangolin (Android)", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
@@ -15,24 +15,24 @@
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
+            this.SetContentView(Resource.Layout.Main);
 
             // Get the UI controls from the loaded layout:
-            EditText phoneNumberText = FindViewById<EditText>(Resource.Id.PhoneNumberText);
-            Button translateButton = FindViewById<Button>(Resource.Id.TranslateButton);
-            Button callButton = FindViewById<Button>(Resource.Id.CallButton);
+            var phoneNumberText = this.FindViewById<EditText>(Resource.Id.PhoneNumberText);
+            var translateButton = this.FindViewById<Button>(Resource.Id.TranslateButton);
+            var callButton = this.FindViewById<Button>(Resource.Id.CallButton);
 
             // Disable the "Call" button
             callButton.Enabled = false;
 
             // Add code to translate number
-            string translatedNumber = string.Empty;
+            var translatedNumber = string.Empty;
 
-            translateButton.Click += (object sender, EventArgs e) =>
+            translateButton.Click += (sender, e) =>
             {
                 // Translate user's alphanumeric phone number to numeric
                 translatedNumber = PhonewordTranslator.ToNumber(phoneNumberText.Text);
-                if (String.IsNullOrWhiteSpace(translatedNumber))
+                if (string.IsNullOrWhiteSpace(translatedNumber))
                 {
                     callButton.Text = "Call";
                     callButton.Enabled = false;
@@ -44,18 +44,20 @@
                 }
             };
 
-            callButton.Click += (object sender, EventArgs e) =>
+            callButton.Click += (sender, e) =>
             {
                 // On "Call" button click, try to dial phone number.
                 var callDialog = new AlertDialog.Builder(this);
                 callDialog.SetMessage("Call " + translatedNumber + "?");
-                callDialog.SetNeutralButton("Call", delegate {
+
+                callDialog.SetNeutralButton("Call", (o, args) => {
                     // Create intent to dial phone
                     var callIntent = new Intent(Intent.ActionCall);
-                    callIntent.SetData(Android.Net.Uri.Parse("tel:" + translatedNumber));
-                    StartActivity(callIntent);
+                    callIntent.SetData(Uri.Parse("tel:" + translatedNumber));
+                    this.StartActivity(callIntent);
                 });
-                callDialog.SetNegativeButton("Cancel", delegate { });
+
+                callDialog.SetNegativeButton("Cancel", (o, args) => { });
 
                 // Show the alert dialog to the user and wait for response.
                 callDialog.Show();

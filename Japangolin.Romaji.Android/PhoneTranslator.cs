@@ -1,4 +1,4 @@
-﻿namespace Japangolin.Romaji.Xamarin
+﻿namespace Japangolin.Romaji.Android
 {
     using System.Text;
 

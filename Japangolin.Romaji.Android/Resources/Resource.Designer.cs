@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Japangolin.Romaji.Xamarin.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Japangolin.Romaji.Android.Resource", IsApplication=true)]
 
-namespace Japangolin.Romaji.Xamarin
+namespace Japangolin.Romaji.Android
 {
 	
 	
