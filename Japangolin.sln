@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{25F255C2-1A79-4E8C-BAE6-A9B9B025AEE7}"
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\Wacton.Tovarisch.dll = Dependencies\Wacton.Tovarisch.dll
+		Dependencies\Wacton.Tovarisch.Logging.dll = Dependencies\Wacton.Tovarisch.Logging.dll
 		Dependencies\Wacton.Tovarisch.UI.dll = Dependencies\Wacton.Tovarisch.UI.dll
 	EndProjectSection
 EndProject

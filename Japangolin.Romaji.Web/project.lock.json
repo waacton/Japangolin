@@ -1826,7 +1826,7 @@
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Wacton.Desu": "3.0.0",
-          "Wacton.Tovarisch": "1.0.0"
+          "Wacton.Tovarisch": "1.1.0"
         }
       },
       "Wacton.Tovarisch/1.1.0": {
@@ -3661,7 +3661,7 @@
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Wacton.Desu": "3.0.0",
-          "Wacton.Tovarisch": "1.0.0"
+          "Wacton.Tovarisch": "1.1.0"
         }
       },
       "Wacton.Tovarisch/1.1.0": {
@@ -5496,7 +5496,7 @@
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Wacton.Desu": "3.0.0",
-          "Wacton.Tovarisch": "1.0.0"
+          "Wacton.Tovarisch": "1.1.0"
         }
       },
       "Wacton.Tovarisch/1.1.0": {

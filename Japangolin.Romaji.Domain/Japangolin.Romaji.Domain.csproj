@@ -43,7 +43,7 @@
       <HintPath>..\packages\Wacton.Desu.3.0.0\lib\net46\Wacton.Desu.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Wacton.Tovarisch, Version=4.0.0.30801, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Wacton.Tovarisch, Version=1.1.1.19153, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
     </Reference>

@@ -80,6 +80,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
     </Reference>
+    <Reference Include="Wacton.Tovarisch.Logging">
+      <HintPath>..\Dependencies\Wacton.Tovarisch.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Wacton.Tovarisch.UI">
       <HintPath>..\Dependencies\Wacton.Tovarisch.UI.dll</HintPath>
     </Reference>
