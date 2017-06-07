@@ -43,24 +43,43 @@
                 { Conjugation.ShortFutureNegative, s => $"{s}じゃない" }
             };
 
-        public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerb =
+        public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerbRu =
             new Dictionary<Conjugation, Func<string, string>>
             {
                 { Conjugation.None, s => s },
-                { Conjugation.LongPresentAffirmative, s => $"{s}-IMASU" },
-                { Conjugation.LongPresentNegative, s => $"{s}-IMASEN" },
-                { Conjugation.LongPastAffirmative, s => $"{s}-IMASHITA" },
-                { Conjugation.LongPastNegative, s => $"{s}-IMASENDESHITA" },
-                { Conjugation.LongFutureAffirmative, s => $"{s}-IMASU" },
-                { Conjugation.LongFutureNegative, s => $"{s}-IMASEN" },
-                { Conjugation.ShortPresentAffirmative, s => $"{s}-IMASU" },
-                { Conjugation.ShortPresentNegative, s => $"{s}-IMASEN" },
-                { Conjugation.ShortPastAffirmative, s => $"{s}-IMASHITA" },
-                { Conjugation.ShortPastNegative, s => $"{s}-IMASENDESHITA" },
-                { Conjugation.ShortFutureAffirmative, s => $"{s}-IMASU" },
-                { Conjugation.ShortFutureNegative, s => $"{s}-IMASEN" }
+                { Conjugation.LongPresentAffirmative, s => $"{s.Remove(s.Length - 1)}ます" }, // drop ru, add masu
+                { Conjugation.LongPresentNegative, s => $"{s.Remove(s.Length - 1)}ません" }, // drop ru, add masen
+                { Conjugation.LongPastAffirmative, s => $"{s.Remove(s.Length - 1)}ました" }, // drop ru, add mashita (as present, masu -> mashita)
+                { Conjugation.LongPastNegative, s => $"{s.Remove(s.Length - 1)}ませんでした" }, // drop ru, add masendeshita (as present, masen -> masen deshita)
+                { Conjugation.LongFutureAffirmative, s => $"{s.Remove(s.Length - 1)}ます ???" }, // same as present ???
+                { Conjugation.LongFutureNegative, s => $"{s.Remove(s.Length - 1)}ません ???" }, // same as present ???
+                { Conjugation.ShortPresentAffirmative, s => $"{s}" }, // same as dictionary
+                { Conjugation.ShortPresentNegative, s => $"{s.Remove(s.Length - 1)}ない" }, // drop ru, add nai
+                { Conjugation.ShortPastAffirmative, s => $"{s.Remove(s.Length - 1)}た" }, // convert to te-form but te becomes ta
+                { Conjugation.ShortPastNegative, s => $"{s.Remove(s.Length - 1)}なかった" }, // // drop ru, add nakatta (as present, nai -> nakatta)
+                { Conjugation.ShortFutureAffirmative, s => $"{s} ???" }, // same as present ???
+                { Conjugation.ShortFutureNegative, s => $"{s.Remove(s.Length - 1)}ない ???" } // same as present ???
             };
 
+        public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerbU =
+            new Dictionary<Conjugation, Func<string, string>>
+            {
+                { Conjugation.None, s => s },
+                { Conjugation.LongPresentAffirmative, s => $"{s}-IMASU-U" },
+                { Conjugation.LongPresentNegative, s => $"{s}-IMASEN-U" },
+                { Conjugation.LongPastAffirmative, s => $"{s}-IMASHITA-U" },
+                { Conjugation.LongPastNegative, s => $"{s}-IMASENDESHITA-U" },
+                { Conjugation.LongFutureAffirmative, s => $"{s}-IMASU-U" },
+                { Conjugation.LongFutureNegative, s => $"{s}-IMASEN-U" },
+                { Conjugation.ShortPresentAffirmative, s => $"{s}-IMASU-U" },
+                { Conjugation.ShortPresentNegative, s => $"{s}-IMASEN-U" },
+                { Conjugation.ShortPastAffirmative, s => $"{s}-IMASHITA-U" },
+                { Conjugation.ShortPastNegative, s => $"{s}-IMASENDESHITA-U" },
+                { Conjugation.ShortFutureAffirmative, s => $"{s}-IMASU-U" },
+                { Conjugation.ShortFutureNegative, s => $"{s}-IMASEN-U" }
+            };
+
+        // TODO: make this better?
         public static readonly Dictionary<Conjugation, Func<string, string>> EnglishVerb =
             new Dictionary<Conjugation, Func<string, string>>
             {

@@ -37,10 +37,15 @@
         {
             if (nouns == null)
             {
-                nouns = japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon))).ToList();
+                nouns = japaneseEntries.Where(entry => entry.IsPartOfSpeech(PartOfSpeech.NounCommon)).ToList();
             }
 
             return nouns;
+        }
+
+        private static bool IsNoun(IJapaneseEntry entry)
+        {
+            return entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon));
         }
 
         private static List<IJapaneseEntry> verbs;
@@ -48,10 +53,20 @@
         {
             if (verbs == null)
             {
-                verbs = japaneseEntries.Where(entry => entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.Verb1))).ToList();
+                verbs = japaneseEntries.Where(entry => entry.IsAnyPartOfSpeech(PartsOfSpeech.AllVerbs)).ToList();
             }
 
             return verbs;
+        }
+
+        public static bool IsPartOfSpeech(this IJapaneseEntry entry, PartOfSpeech partOfSpeech)
+        {
+            return entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(partOfSpeech));
+        }
+
+        public static bool IsAnyPartOfSpeech(this IJapaneseEntry entry, IEnumerable<PartOfSpeech> partsOfSpeech)
+        {
+            return entry.Senses.Any(sense => sense.PartsOfSpeech.Intersect(partsOfSpeech).Any());
         }
     }
 }
