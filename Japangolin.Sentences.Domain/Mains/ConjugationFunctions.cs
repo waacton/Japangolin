@@ -61,6 +61,7 @@
                 { Conjugation.ShortFutureNegative, s => $"{JapaneseVerbRu[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
             };
 
+        // TODO: handle the 5 basic types of u-verb + te-form conjugations.  messy?
         public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerbU =
             new Dictionary<Conjugation, Func<string, string>>
             {

@@ -35,6 +35,7 @@
             return new TopicBlock(nounPhrase, conjugation);
         }
 
+        // TODO: object block that is only an ADJ (not just NOUN / VERB + NOUN)
         private static ObjectBlock GetObjectBlock(IEnumerable<IJapaneseEntry> japaneseEntries, Conjugation conjugation)
         {
             var nounPhrase = CreateNounPhrase(japaneseEntries, true);
