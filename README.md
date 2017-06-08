@@ -1,4 +1,4 @@
-# Japangolin
+# Japangolin / ジャパンゴリン
 Japanese learning aid.
 
 ## Playground for:
