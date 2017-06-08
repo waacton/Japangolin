@@ -39,10 +39,10 @@
     public class DesignTimeMainViewModel : MainViewModel
     {
         private readonly English english = new English("Japangolin");
-        private readonly Japanese japanese = new Japanese("ジャッパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative, ConjugationFunctions.JapaneseNoun);
+        private readonly Japanese japanese = new Japanese("ジャパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative, ConjugationFunctions.JapaneseNoun);
 
         public new List<IGolin> GolinEnglish => new List<IGolin> { new DesignTimeGolin(this.english, this.japanese) };
-        public new string KanaSentence => "ジャッパンゴリン";
+        public new string KanaSentence => "ジャパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
         public DesignTimeMainViewModel() : base(null, null, null)

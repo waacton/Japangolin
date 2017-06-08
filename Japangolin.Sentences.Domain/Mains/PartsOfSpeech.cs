@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain
+﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
     using System.Collections.Generic;
     using System.Linq;

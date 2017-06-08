@@ -32,7 +32,6 @@
         private static TopicBlock GetTopicBlock(IEnumerable<IJapaneseEntry> japaneseEntries, Conjugation conjugation)
         {
             var nounPhrase = CreateNounPhrase(japaneseEntries, false);
-            nounPhrase.SetConjugation(conjugation);
             return new TopicBlock(nounPhrase, conjugation);
         }
 

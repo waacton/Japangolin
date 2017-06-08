@@ -64,7 +64,7 @@
     <Compile Include="Mains\ModifiedNounPhrase.cs" />
     <Compile Include="Mains\SimpleNounPhrase.cs" />
     <Compile Include="Mains\Golin.cs" />
-    <Compile Include="PartsOfSpeech.cs" />
+    <Compile Include="Mains\PartsOfSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
