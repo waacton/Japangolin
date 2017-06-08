@@ -98,6 +98,42 @@
                 { Conjugation.ShortFutureNegative, s => $"{EnglishVerb[Conjugation.LongFutureNegative](s)}" }
             };
 
+        public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseAdjectiveI =
+            new Dictionary<Conjugation, Func<string, string>>
+            {
+                { Conjugation.None, s => s },
+                { Conjugation.LongPresentAffirmative, s => $"{s}です" }, // add desu
+                { Conjugation.LongPresentNegative, s => $"{s.Remove(s.Length - 1)}くないです" }, // drop i, add kunaidesu
+                { Conjugation.LongPastAffirmative, s => $"{s.Remove(s.Length - 1)}かったです" }, // drop i, add kattadesu
+                { Conjugation.LongPastNegative, s => $"{s.Remove(s.Length - 1)}くなかったです" }, // drop i, add kunakattadesu
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentAffirmative](s)}？？？" }, // same as present ???
+                { Conjugation.LongFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentNegative](s)}？？？" }, // same as present ???
+                { Conjugation.ShortPresentAffirmative, s => $"{s}" }, // same as dictionary
+                { Conjugation.ShortPresentNegative, s => $"{s.Remove(s.Length - 1)}くない" }, // long kundaidesu ~> kunai
+                { Conjugation.ShortPastAffirmative, s => $"{s.Remove(s.Length - 1)}かった" }, // long kattadesu ~> katta
+                { Conjugation.ShortPastNegative, s => $"{s.Remove(s.Length - 1)}くなかった" }, // long kunakattadesu ~> kunakatta
+                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
+            };
+
+        public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseAdjectiveNa =
+            new Dictionary<Conjugation, Func<string, string>>
+            {
+                { Conjugation.None, s => s },
+                { Conjugation.LongPresentAffirmative, s => $"{JapaneseNoun[Conjugation.LongPresentAffirmative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.LongPresentNegative, s => $"{JapaneseNoun[Conjugation.LongPresentNegative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.LongPastAffirmative, s => $"{JapaneseNoun[Conjugation.LongPastAffirmative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.LongPastNegative, s => $"{JapaneseNoun[Conjugation.LongPastNegative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseNoun[Conjugation.LongFutureAffirmative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun ???
+                { Conjugation.LongFutureNegative, s => $"{JapaneseNoun[Conjugation.LongFutureNegative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun ???
+                { Conjugation.ShortPresentAffirmative, s => $"{JapaneseNoun[Conjugation.ShortPresentAffirmative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.ShortPresentNegative, s => $"{JapaneseNoun[Conjugation.ShortPresentNegative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.ShortPastAffirmative, s => $"{JapaneseNoun[Conjugation.ShortPastAffirmative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.ShortPastNegative, s => $"{JapaneseNoun[Conjugation.ShortPastNegative](s.Remove(s.Length - 1))}" }, // drop na, conjugate as noun
+                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveNa[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseAdjectiveNa[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
+            };
+
         public static Dictionary<Conjugation, Func<string, string>> Defaults => DefaultConjugationFunctions();
         private static Dictionary<Conjugation, Func<string, string>> DefaultConjugationFunctions()
         {
