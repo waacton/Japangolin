@@ -110,7 +110,7 @@
                 { Conjugation.LongFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentAffirmative](s)}？？？" }, // same as present ???
                 { Conjugation.LongFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentNegative](s)}？？？" }, // same as present ???
                 { Conjugation.ShortPresentAffirmative, s => $"{s}" }, // same as dictionary
-                { Conjugation.ShortPresentNegative, s => $"{s.Remove(s.Length - 1)}くない" }, // long kundaidesu ~> kunai
+                { Conjugation.ShortPresentNegative, s => $"{s.Remove(s.Length - 1)}くない" }, // long kunaidesu ~> kunai
                 { Conjugation.ShortPastAffirmative, s => $"{s.Remove(s.Length - 1)}かった" }, // long kattadesu ~> katta
                 { Conjugation.ShortPastNegative, s => $"{s.Remove(s.Length - 1)}くなかった" }, // long kunakattadesu ~> kunakatta
                 { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???

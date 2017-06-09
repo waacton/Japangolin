@@ -55,6 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdjectiveNaTests.cs" />
+    <Compile Include="AdjectiveITests.cs" />
+    <Compile Include="VerbRuTests.cs" />
     <Compile Include="NounTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
