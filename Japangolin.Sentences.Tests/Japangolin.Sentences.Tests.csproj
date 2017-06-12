@@ -55,9 +55,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjectiveNaTests.cs" />
-    <Compile Include="AdjectiveITests.cs" />
-    <Compile Include="VerbRuTests.cs" />
+    <Compile Include="AdjectiveなTests.cs" />
+    <Compile Include="AdjectiveいTests.cs" />
+    <Compile Include="VerbGodanぶTests.cs" />
+    <Compile Include="VerbGodanむTests.cs" />
+    <Compile Include="VerbGodanぬTests.cs" />
+    <Compile Include="VerbGodanくTests.cs" />
+    <Compile Include="VerbGodanぐTests.cs" />
+    <Compile Include="VerbGodanすTests.cs" />
+    <Compile Include="VerbGodanるTests.cs" />
+    <Compile Include="VerbGodanつTests.cs" />
+    <Compile Include="VerbIchidanTests.cs" />
+    <Compile Include="VerbGodanうTests.cs" />
     <Compile Include="NounTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

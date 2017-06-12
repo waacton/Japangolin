@@ -5,7 +5,7 @@
     using Wacton.Japangolin.Sentences.Domain.Mains;
 
     [TestFixture]
-    public class AdjectiveNaTests
+    public class AdjectiveなTests
     {
         private const string Kana = "きれいな";
         private const string Kanji = "綺麗な";

@@ -5,7 +5,7 @@
     using Wacton.Japangolin.Sentences.Domain.Mains;
 
     [TestFixture]
-    public class VerbsRuTests
+    public class VerbIchidanTests
     {
         private const string Kana = "たべる";
         private const string Kanji = "食べる";
@@ -96,7 +96,7 @@
         private static IGolin CreateGolin(Conjugation conjugation)
         {
             var english = new English(Translation);
-            var japanese = new Japanese(Kana, Kanji, conjugation, ConjugationFunctions.JapaneseVerbRu);
+            var japanese = new Japanese(Kana, Kanji, conjugation, ConjugationFunctions.JapaneseVerbIchidan);
             return new Golin(english, japanese, true);
         }
     }

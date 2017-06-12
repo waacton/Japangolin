@@ -15,8 +15,8 @@
         public static IGolin Verb(IJapaneseEntry japaneseEntry) => Verb(japaneseEntry, Conjugation.None);
         public static IGolin Verb(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            var isVerbRu = japaneseEntry.IsAnyPartOfSpeech(PartsOfSpeech.VerbsRu);
-            var conjugationFunction = isVerbRu ? ConjugationFunctions.JapaneseVerbRu : ConjugationFunctions.JapaneseVerbU;
+            var isVerbIchidan = japaneseEntry.IsAnyPartOfSpeech(PartsOfSpeech.VerbsIchidan);
+            var conjugationFunction = isVerbIchidan ? ConjugationFunctions.JapaneseVerbIchidan : ConjugationFunctions.JapaneseVerbGodan;
             var english = new English(japaneseEntry.GetEnglish(), conjugation, ConjugationFunctions.EnglishVerb);
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunction);
             return CreateGolin(english, japanese);
