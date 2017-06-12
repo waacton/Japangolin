@@ -43,11 +43,6 @@
             return nouns;
         }
 
-        private static bool IsNoun(IJapaneseEntry entry)
-        {
-            return entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(PartOfSpeech.NounCommon));
-        }
-
         private static List<IJapaneseEntry> verbs;
         public static List<IJapaneseEntry> GetVerbs(this IEnumerable<IJapaneseEntry> japaneseEntries)
         {
@@ -57,6 +52,17 @@
             }
 
             return verbs;
+        }
+
+        private static List<IJapaneseEntry> adjectives;
+        public static List<IJapaneseEntry> GetAdjectives(this IEnumerable<IJapaneseEntry> japaneseEntries)
+        {
+            if (adjectives == null)
+            {
+                adjectives = japaneseEntries.Where(entry => entry.IsAnyPartOfSpeech(PartsOfSpeech.AllAdjectives)).ToList();
+            }
+
+            return adjectives;
         }
 
         public static bool IsPartOfSpeech(this IJapaneseEntry entry, PartOfSpeech partOfSpeech)

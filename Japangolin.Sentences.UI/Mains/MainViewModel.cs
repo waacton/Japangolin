@@ -14,7 +14,7 @@
         private readonly Main main;
         private readonly UpdateSentenceCommand updateSentenceCommand;
 
-        private Sentence CurrentSentence => this.main.CurrentSentence;
+        private Sentence CurrentSentence => this.main.Sentence;
 
         public List<IGolin> GolinEnglish => this.CurrentSentence.GolinEnglish();
         public List<IGolin> GolinJapanese => this.CurrentSentence.GolinJapanese();

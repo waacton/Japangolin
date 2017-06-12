@@ -1,5 +1,6 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
 {
+    using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
 
     public static class GolinFactory
@@ -17,7 +18,7 @@
         {
             var isVerbIchidan = japaneseEntry.IsAnyPartOfSpeech(PartsOfSpeech.VerbsIchidan);
             var conjugationFunction = isVerbIchidan ? ConjugationFunctions.JapaneseVerbIchidan : ConjugationFunctions.JapaneseVerbGodan;
-            var english = new English(japaneseEntry.GetEnglish(), conjugation, ConjugationFunctions.EnglishVerb);
+            var english = new English(japaneseEntry.GetEnglish());
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunction);
             return CreateGolin(english, japanese);
         }
@@ -25,15 +26,17 @@
         public static IGolin Adjective(IJapaneseEntry japaneseEntry) => Adjective(japaneseEntry, Conjugation.None);
         public static IGolin Adjective(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            // TODO: conjugation will be needed here (JP)
+            var isAdjectiveI = japaneseEntry.IsPartOfSpeech(PartOfSpeech.AdjectiveI);
+            var conjugationFunction = isAdjectiveI ? ConjugationFunctions.JapaneseAdjectiveI : ConjugationFunctions.JapaneseAdjectiveNa;
             var english = new English(japaneseEntry.GetEnglish());
-            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji());
+            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunction);
             return CreateGolin(english, japanese);
         }
 
-        public static IGolin TopicPreposition(Conjugation conjugation)
+        public static IGolin TopicPreposition(Conjugation conjugation, bool isVerbInSentence)
         {
-            var english = new English("is", conjugation, ConjugationFunctions.EnglishTopicPrepositions);
+            var conjugationFunction = isVerbInSentence ? ConjugationFunctions.EnglishTopicPrepositionsWithVerb : ConjugationFunctions.EnglishTopicPrepositionsWithoutVerb;
+            var english = new English("is", conjugation, conjugationFunction);
             return CreateGolin(english, null, false);
         }
 
