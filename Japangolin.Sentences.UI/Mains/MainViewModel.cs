@@ -1,6 +1,7 @@
 ﻿namespace Wacton.Japangolin.Sentences.UI.Mains
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
@@ -35,6 +36,12 @@
         public void NextSentence()
         {
             this.updateSentenceCommand.ExecuteAndNotify();
+        }
+
+        public void GoogleTranslate()
+        {
+            var url = $"https://translate.google.com/#ja/en/{this.KanjiSentence}";
+            Process.Start(url);
         }
     }
 

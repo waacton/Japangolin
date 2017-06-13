@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -87,5 +88,7 @@
                    FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
 
         <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Width="100" Height="50" FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next"/>
+        
+        <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Width="100" Height="50" FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?"/>
     </Grid>
 </UserControl>
