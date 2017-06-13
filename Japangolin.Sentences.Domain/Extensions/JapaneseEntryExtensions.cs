@@ -8,19 +8,48 @@
 
     public static class JapaneseEntryExtensions
     {
-        public static string GetEnglish(this IJapaneseEntry japaneseEntry)
-        {
-            return japaneseEntry.Senses.First().Glosses.First().Term;
-        }
+        /* 
+         * NOTE: if using senses other than the main, the parts-of-speech are inherited from the main unless otherwise specified
+         * the JMdict DTD contains this description:
+         * 
+         *  "In general where there are multiple senses in an entry, 
+         *   the part-of-speech of an earlier sense will apply to later senses 
+         *   unless there is a new part-of-speech indicated."
+         *   
+         */
+        private static ISense GetMainSense(IJapaneseEntry japaneseEntry) => japaneseEntry.Senses.First();
+        private static IReading GetMainReading(IJapaneseEntry japaneseEntry) => japaneseEntry.Readings.First();
+        private static IKanji GetMainKanji(IJapaneseEntry japaneseEntry) => japaneseEntry.Kanjis.FirstOrDefault();
 
         public static string GetKana(this IJapaneseEntry japaneseEntry)
         {
-            return japaneseEntry.Readings.First().Text;
+            return GetMainReading(japaneseEntry).Text;
         }
 
         public static string GetKanji(this IJapaneseEntry japaneseEntry)
         {
-            return japaneseEntry.Kanjis.Any() ? japaneseEntry.Kanjis.First().Text : japaneseEntry.GetKana();
+            var mainKanji = GetMainKanji(japaneseEntry);
+            return mainKanji != null ? mainKanji.Text : japaneseEntry.GetKana();
+        }
+
+        public static string GetEnglish(this IJapaneseEntry japaneseEntry)
+        {
+            return GetMainSense(japaneseEntry).Glosses.First().Term;
+        }
+
+        public static IEnumerable<PartOfSpeech> GetPartsOfSpeech(this IJapaneseEntry japaneseEntry)
+        {
+            return GetMainSense(japaneseEntry).PartsOfSpeech;
+        }
+
+        public static bool IsPartOfSpeech(this IJapaneseEntry japaneseEntry, PartOfSpeech partOfSpeech)
+        {
+            return GetMainSense(japaneseEntry).PartsOfSpeech.Contains(partOfSpeech);
+        }
+
+        public static bool IsAnyPartOfSpeech(this IJapaneseEntry japaneseEntry, IEnumerable<PartOfSpeech> partsOfSpeech)
+        {
+            return GetMainSense(japaneseEntry).PartsOfSpeech.Intersect(partsOfSpeech).Any();
         }
 
         private static List<IJapaneseEntry> nouns;
@@ -54,16 +83,6 @@
             }
 
             return adjectives;
-        }
-
-        public static bool IsPartOfSpeech(this IJapaneseEntry entry, PartOfSpeech partOfSpeech)
-        {
-            return entry.Senses.Any(sense => sense.PartsOfSpeech.Contains(partOfSpeech));
-        }
-
-        public static bool IsAnyPartOfSpeech(this IJapaneseEntry entry, IEnumerable<PartOfSpeech> partsOfSpeech)
-        {
-            return entry.Senses.Any(sense => sense.PartsOfSpeech.Intersect(partsOfSpeech).Any());
         }
     }
 }

@@ -61,7 +61,7 @@
 
     public class DesignTimeGolin : Golin
     {
-        public DesignTimeGolin(English english, Japanese nounJapanese) : base(english, nounJapanese, true)
+        public DesignTimeGolin(English english, Japanese nounJapanese) : base(english, nounJapanese, "DesignTimeInformation")
         {
         }
     }

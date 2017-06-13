@@ -14,13 +14,15 @@
         public string KanjiBase => this.japanese?.KanjiBase;
         public string KanjiConjugated => this.japanese?.KanjiConjugated;
 
-        public bool IsTranslatable { get; }
+        public string TranslationInformation { get; }
 
-        public Golin(English english, Japanese japanese, bool isTranslatable)
+        public bool IsTranslatable => !string.IsNullOrWhiteSpace(this.TranslationInformation);
+
+        public Golin(English english, Japanese japanese, string translationInformation = null)
         {
             this.english = english;
             this.japanese = japanese;
-            this.IsTranslatable = isTranslatable;
+            this.TranslationInformation = translationInformation;
         }
 
         public override string ToString() => $"{this.EnglishBase ?? " - "} | {this.KanaBase ?? " - "}";

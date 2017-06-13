@@ -98,7 +98,7 @@
         {
             var english = new English(Translation);
             var japanese = new Japanese(Kana, Kanji, conjugation, ConjugationFunctions.JapaneseVerbGodan);
-            return new Golin(english, japanese, true);
+            return new Golin(english, japanese);
         }
     }
 }

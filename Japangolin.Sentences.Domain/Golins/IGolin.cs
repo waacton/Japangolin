@@ -10,6 +10,8 @@
         string KanaConjugated { get; }
         string KanjiConjugated { get; }
 
+        string TranslationInformation { get; }
+
         bool IsTranslatable { get; }
     }
 }
