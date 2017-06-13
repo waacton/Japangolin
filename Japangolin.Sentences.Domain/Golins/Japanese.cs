@@ -1,7 +1,9 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.Golins
 {
     using System;
     using System.Collections.Generic;
+
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
 
     public class Japanese
     {

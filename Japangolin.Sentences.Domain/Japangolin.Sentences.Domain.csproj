@@ -48,37 +48,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\UpdateSentenceCommand.cs" />
-    <Compile Include="Mains\ConjugationFunctions.cs" />
-    <Compile Include="Mains\GolinFactory.cs" />
-    <Compile Include="Mains\Japanese.cs" />
-    <Compile Include="Mains\English.cs" />
-    <Compile Include="Mains\Conjugation.cs" />
-    <Compile Include="Mains\IGolin.cs" />
-    <Compile Include="Mains\ObjectBlockType.cs" />
-    <Compile Include="Mains\NounPhraseType.cs" />
-    <Compile Include="Mains\ObjectAdjectiveBlock.cs" />
-    <Compile Include="Mains\NounPhraseFactory.cs" />
-    <Compile Include="Mains\ObjectBlockFactory.cs" />
-    <Compile Include="Mains\ObjectVerbBlock.cs" />
-    <Compile Include="Mains\ObjectNounBlock.cs" />
-    <Compile Include="Mains\ObjectBlock.cs" />
+    <Compile Include="Conjugations\ConjugationFunctions.cs" />
+    <Compile Include="Golins\GolinFactory.cs" />
+    <Compile Include="Golins\Japanese.cs" />
+    <Compile Include="Golins\English.cs" />
+    <Compile Include="Conjugations\Conjugation.cs" />
+    <Compile Include="Golins\IGolin.cs" />
+    <Compile Include="SentenceBlocks\ObjectBlockType.cs" />
+    <Compile Include="NounPhrases\NounPhraseType.cs" />
+    <Compile Include="SentenceBlocks\ObjectAdjectiveBlock.cs" />
+    <Compile Include="NounPhrases\NounPhraseFactory.cs" />
+    <Compile Include="SentenceBlocks\ObjectBlockFactory.cs" />
+    <Compile Include="SentenceBlocks\ObjectVerbBlock.cs" />
+    <Compile Include="SentenceBlocks\ObjectNounBlock.cs" />
+    <Compile Include="SentenceBlocks\ObjectBlock.cs" />
     <Compile Include="Mains\Sentence.cs" />
-    <Compile Include="Mains\SentenceBlock.cs" />
-    <Compile Include="Mains\Extensions.cs" />
-    <Compile Include="Mains\NounPhrase.cs" />
-    <Compile Include="Mains\TopicBlock.cs" />
-    <Compile Include="Mains\VerbNounPhrase.cs" />
-    <Compile Include="Mains\AdjectiveNounPhrase.cs" />
+    <Compile Include="SentenceBlocks\SentenceBlock.cs" />
+    <Compile Include="Extensions\JapaneseEntryExtensions.cs" />
+    <Compile Include="NounPhrases\NounPhrase.cs" />
+    <Compile Include="SentenceBlocks\TopicBlock.cs" />
+    <Compile Include="NounPhrases\VerbNounPhrase.cs" />
+    <Compile Include="NounPhrases\AdjectiveNounPhrase.cs" />
     <Compile Include="Mains\Main.cs" />
-    <Compile Include="Mains\ModifiedNounPhrase.cs" />
-    <Compile Include="Mains\SimpleNounPhrase.cs" />
-    <Compile Include="Mains\Golin.cs" />
-    <Compile Include="Mains\PartsOfSpeech.cs" />
+    <Compile Include="NounPhrases\ModifiedNounPhrase.cs" />
+    <Compile Include="NounPhrases\SimpleNounPhrase.cs" />
+    <Compile Include="Golins\Golin.cs" />
+    <Compile Include="Extensions\PartsOfSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

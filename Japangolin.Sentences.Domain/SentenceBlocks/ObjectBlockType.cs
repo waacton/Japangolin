@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.SentenceBlocks
 {
     public enum ObjectBlockType
     {

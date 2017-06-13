@@ -1,9 +1,13 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.SentenceBlocks
 {
     using System;
     using System.Collections.Generic;
 
     using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+    using Wacton.Japangolin.Sentences.Domain.Extensions;
+    using Wacton.Japangolin.Sentences.Domain.Golins;
+    using Wacton.Japangolin.Sentences.Domain.NounPhrases;
     using Wacton.Tovarisch.Randomness;
 
     public static class ObjectBlockFactory

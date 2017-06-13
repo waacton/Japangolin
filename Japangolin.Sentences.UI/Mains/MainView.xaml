@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:mains="clr-namespace:Wacton.Japangolin.Sentences.UI.Mains"
-        xmlns:domain="clr-namespace:Wacton.Japangolin.Sentences.Domain.Mains;assembly=Wacton.Japangolin.Sentences.Domain"
+        xmlns:golins="clr-namespace:Wacton.Japangolin.Sentences.Domain.Golins;assembly=Wacton.Japangolin.Sentences.Domain"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeMainViewModel, IsDesignTimeCreatable=True}">
 
@@ -51,7 +51,7 @@
                     -->
                     <Style.Triggers>
                         
-                        <DataTrigger Binding="{Binding IsTranslatable}" Value="False" d:DataContext="{d:DesignInstance Type=domain:IGolin}">
+                        <DataTrigger Binding="{Binding IsTranslatable}" Value="False" d:DataContext="{d:DesignInstance Type=golins:IGolin}">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
 
@@ -67,7 +67,7 @@
                             <Setter Property="Foreground" Value="Magenta"/>
                         </Trigger>
 
-                        <MultiDataTrigger d:DataContext="{d:DesignInstance Type=domain:IGolin}">
+                        <MultiDataTrigger d:DataContext="{d:DesignInstance Type=golins:IGolin}">
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=IsTranslatable}" Value="True" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />

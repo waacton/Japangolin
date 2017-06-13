@@ -5,6 +5,9 @@
     using System.Linq;
 
     using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+    using Wacton.Japangolin.Sentences.Domain.NounPhrases;
+    using Wacton.Japangolin.Sentences.Domain.SentenceBlocks;
     using Wacton.Tovarisch.Randomness;
 
     public class Main

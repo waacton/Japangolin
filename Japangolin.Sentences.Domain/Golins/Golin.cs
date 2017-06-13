@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.Golins
 {
     public class Golin : IGolin
     {

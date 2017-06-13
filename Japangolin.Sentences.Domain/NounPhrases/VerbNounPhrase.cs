@@ -1,8 +1,9 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.NounPhrases
 {
     using System.Collections.Generic;
 
     using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Sentences.Domain.Golins;
 
     public class VerbNounPhrase : NounPhrase
     {

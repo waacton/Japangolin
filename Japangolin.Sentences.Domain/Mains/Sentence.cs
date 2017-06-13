@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using Wacton.Japangolin.Sentences.Domain.Golins;
+    using Wacton.Japangolin.Sentences.Domain.SentenceBlocks;
+
     public class Sentence
     {
         private static readonly string EnglishSpace = " ";

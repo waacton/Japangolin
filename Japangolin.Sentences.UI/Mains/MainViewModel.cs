@@ -3,6 +3,8 @@
     using System.Collections.Generic;
 
     using Wacton.Japangolin.Sentences.Domain.Commands;
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+    using Wacton.Japangolin.Sentences.Domain.Golins;
     using Wacton.Japangolin.Sentences.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.UI.MVVM;

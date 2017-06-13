@@ -1,8 +1,7 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.NounPhrases
 {
     public enum NounPhraseType
     {
-        None,
         Simple,
         Modified,
         Verb,

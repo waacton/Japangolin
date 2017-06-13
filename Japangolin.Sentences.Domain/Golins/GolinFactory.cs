@@ -1,7 +1,9 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.Golins
 {
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+    using Wacton.Japangolin.Sentences.Domain.Extensions;
 
     public static class GolinFactory
     {

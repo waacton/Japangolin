@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.Conjugations
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -20,8 +20,6 @@
         public static readonly Conjugation ShortPastNegative = new Conjugation("ShortPastNegative");
         public static readonly Conjugation ShortFutureAffirmative = new Conjugation("ShortFutureAffirmative");
         public static readonly Conjugation ShortFutureNegative = new Conjugation("ShortFutureNegative");
-
-        
 
         public Conjugation(string displayName) : base(displayName)
         {

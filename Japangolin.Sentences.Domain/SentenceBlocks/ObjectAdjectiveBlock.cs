@@ -1,6 +1,8 @@
-﻿namespace Wacton.Japangolin.Sentences.Domain.Mains
+﻿namespace Wacton.Japangolin.Sentences.Domain.SentenceBlocks
 {
     using System.Collections.Generic;
+
+    using Wacton.Japangolin.Sentences.Domain.Golins;
 
     public class ObjectAdjectiveBlock : ObjectBlock
     {

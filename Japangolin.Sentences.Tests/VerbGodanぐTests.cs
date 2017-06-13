@@ -2,7 +2,8 @@
 {
     using NUnit.Framework;
 
-    using Wacton.Japangolin.Sentences.Domain.Mains;
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+    using Wacton.Japangolin.Sentences.Domain.Golins;
 
     [TestFixture]
     public class VerbGodanぐTests
