@@ -69,32 +69,13 @@
         {
             var english = new English(japaneseEntry.GetEnglish());
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunctions);
-            var translationInformation = GetTranslationInformation(japaneseEntry);
+            var translationInformation = japaneseEntry.GetPartsOfSpeech().ToDelimitedString(", ");
             return CreateGolin(english, japanese, translationInformation);
         }
 
         private static IGolin CreateGolin(English english, Japanese japanese, string translationInformation = null)
         {
             return new Golin(english, japanese, translationInformation);
-        }
-
-        private static string GetTranslationInformation(IJapaneseEntry japaneseEntry)
-        {
-            var stringBuilder = new StringBuilder();
-
-            var kana = japaneseEntry.GetKana();
-            var kanji = japaneseEntry.GetKanji();
-            var partsOfSpeech = japaneseEntry.GetPartsOfSpeech();
-
-            stringBuilder.AppendLine(kana);
-            if (kanji != kana)
-            {
-                stringBuilder.AppendLine(kanji);
-            }
-
-            stringBuilder.Append(partsOfSpeech.ToDelimitedString(", "));
-
-            return stringBuilder.ToString();
         }
     }
 }

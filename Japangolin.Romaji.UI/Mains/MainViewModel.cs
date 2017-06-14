@@ -12,8 +12,6 @@
 
     public class MainViewModel : ViewModelBase
     {
-        public static string Title { get; set; }
-
         private readonly Main main;
         private readonly UpdateJapanesePhraseCommand updateJapanesePhraseCommand;
 

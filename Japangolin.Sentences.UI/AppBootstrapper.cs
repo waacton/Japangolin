@@ -18,6 +18,7 @@
         {
             kernel.Bind<IJapaneseDictionary>().To<JapaneseDictionary>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
+            kernel.Bind<TranslationViewModel>().ToSelf().InSingletonScope();
         }
     }
 }

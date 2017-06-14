@@ -25,11 +25,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="ListView" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
-                  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" ItemsSource="{Binding GolinEnglish}" BorderThickness="0">
+        <ListBox x:Name="ListView" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" 
+                  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -48,7 +47,7 @@
                         overwriting ListBoxItem.IsEnabled according to whether there is Japanese translation for it 
                         then updating the text color according to the enabled state
                     
-                        note: intellisense seems to think this binding is on the data context of this view (MainViewModel instead of the Translation items)
+                        note: intellisense seems to think this binding is on the data context of this view (MainViewModel instead of the IGolin items)
                     -->
                     <Style.Triggers>
                         
@@ -81,14 +80,18 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding KanaSentence}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding KanaSentence}" 
+                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         
-        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding KanjiSentence}" 
-                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding KanjiSentence}" 
+                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Width="100" Height="50" FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next"/>
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Width="100" Height="50" 
+                FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next"/>
         
-        <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Width="100" Height="50" FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?"/>
+        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Width="100" Height="50" 
+                FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?"/>
+
+        <mains:TranslationView Grid.Row="0" Grid.RowSpan="8" Grid.Column="3" DataContext="{Binding TranslationViewModel}" Background="{DynamicResource WindowTitleColorBrush}"/>
     </Grid>
 </UserControl>

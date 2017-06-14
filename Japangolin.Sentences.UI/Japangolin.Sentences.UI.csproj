@@ -106,6 +106,10 @@
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mains\ShellViewModel.cs" />
+    <Compile Include="Mains\TranslationView.xaml.cs">
+      <DependentUpon>TranslationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mains\TranslationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -144,6 +148,10 @@
     <Page Include="Mains\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mains\TranslationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -12,8 +12,6 @@
 
     public class MainViewModel : ViewModelBase
     {
-        public static string Title { get; set; }
-
         private readonly Main main;
         private readonly UpdateSentenceCommand updateSentenceCommand;
 
@@ -26,11 +24,27 @@
         public string KanaSentence => this.CurrentSentence.GetKana();
         public string KanjiSentence => this.CurrentSentence.GetKanji();
 
-        public MainViewModel(Main main, UpdateSentenceCommand updateSentenceCommand, ModelChangeNotifier modelChangeNotifier)
+        private IGolin selectedGolin;
+        public IGolin SelectedGolin
+        {
+            get
+            {
+                return this.selectedGolin;
+            }
+            set
+            {
+                this.selectedGolin = value;
+                this.TranslationViewModel.Update(this.selectedGolin);
+            }
+        }
+        public TranslationViewModel TranslationViewModel { get; }
+
+        public MainViewModel(Main main, UpdateSentenceCommand updateSentenceCommand, TranslationViewModel translationViewModel, ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier, main)
         {
             this.main = main;
             this.updateSentenceCommand = updateSentenceCommand;
+            this.TranslationViewModel = translationViewModel;
         }
 
         public void NextSentence()
@@ -54,7 +68,7 @@
         public new string KanaSentence => "ジャパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
-        public DesignTimeMainViewModel() : base(null, null, null)
+        public DesignTimeMainViewModel() : base(null, null, new DesignTimeTranslationViewModel(), null)
         {
         }
     }
