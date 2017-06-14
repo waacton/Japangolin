@@ -57,7 +57,7 @@
         {
             if (nouns == null)
             {
-                nouns = japaneseEntries.Where(entry => entry.IsPartOfSpeech(PartOfSpeech.NounCommon)).ToList();
+                nouns = japaneseEntries.Where(entry => entry.IsAnyPartOfSpeech(PartsOfSpeech.AllNouns)).ToList();
             }
 
             return nouns;
