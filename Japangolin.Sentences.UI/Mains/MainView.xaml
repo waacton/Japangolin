@@ -22,14 +22,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" 
-                  FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left">
+        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" 
+                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -80,19 +78,19 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding KanaSentence}" 
-                   FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding KanaSentence}" 
+                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"/>
         
-        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding KanjiSentence}" 
-                   FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding KanjiSentence}" 
+                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"/>
 
-        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Width="100" Height="50" 
-                FontSize="16" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next"/>
+        <Button Grid.Row="5" Grid.Column="0" Width="100" Height="50" 
+                FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="20"/>
         
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Width="100" Height="50" 
-                FontSize="16" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?"/>
+        <Button Grid.Row="6" Grid.Column="0" Width="100" Height="50" 
+                FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?" Margin="20"/>
 
-        <materialDesign:ColorZone Grid.Row="0" Grid.RowSpan="8" Grid.Column="3" Mode="Accent" VerticalAlignment="Stretch">
+        <materialDesign:ColorZone Grid.Row="0" Grid.RowSpan="8" Grid.Column="1" Mode="Accent" VerticalAlignment="Stretch">
             <mains:TranslationView DataContext="{Binding TranslationViewModel}" />
         </materialDesign:ColorZone>
     </Grid>

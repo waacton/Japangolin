@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
