@@ -37,6 +37,7 @@
                 this.TranslationViewModel.Update(this.selectedGolin);
             }
         }
+
         public TranslationViewModel TranslationViewModel { get; }
 
         public MainViewModel(Main main, UpdateSentenceCommand updateSentenceCommand, TranslationViewModel translationViewModel, ModelChangeNotifier modelChangeNotifier)

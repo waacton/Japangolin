@@ -8,6 +8,10 @@
     {
         public IGolin Golin { get; private set; }
 
+        public bool HasGolin => this.Golin != null;
+
+        public string DefaultMessage => "Select a golin to see its translation here";
+
         public string EnglishBase => this.Golin?.EnglishBase;
         public string KanaBase => this.Golin?.KanaBase;
         public string KanjiBase => this.Golin?.KanjiBase;
