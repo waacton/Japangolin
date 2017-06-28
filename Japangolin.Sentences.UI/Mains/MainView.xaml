@@ -6,6 +6,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:mains="clr-namespace:Wacton.Japangolin.Sentences.UI.Mains"
         xmlns:golins="clr-namespace:Wacton.Japangolin.Sentences.Domain.Golins;assembly=Wacton.Japangolin.Sentences.Domain"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeMainViewModel, IsDesignTimeCreatable=True}">
 
@@ -27,7 +28,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="ListView" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" 
+        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" 
                   FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -40,7 +41,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
-                <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="ListBoxItem" >
+                <Style BasedOn="{StaticResource CustomForegroundListBoxItem}" TargetType="ListBoxItem" >
                     <Setter Property="Padding" Value="2" />
 
                     <!-- 
@@ -53,28 +54,28 @@
                         
                         <DataTrigger Binding="{Binding IsTranslatable}" Value="False" d:DataContext="{d:DesignInstance Type=golins:IGolin}">
                             <Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="Foreground" Value="Black"/>
                         </DataTrigger>
 
                         <Trigger Property="IsEnabled" Value="True">
-                            <Setter Property="Foreground" Value="Orange"/>
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="Magenta"/>
+                            <Setter Property="Foreground" Value="White"/>
                         </Trigger>
 
-                        <MultiDataTrigger d:DataContext="{d:DesignInstance Type=golins:IGolin}">
+                        <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=IsTranslatable}" Value="True" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsMouseOver}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsEnabled}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True" />
                             </MultiDataTrigger.Conditions>
-                            
-                            <Setter Property="Foreground" Value="Cyan" />
+
+                            <Setter Property="Foreground" Value="White" />
                         </MultiDataTrigger>
+
+                        
                     </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
@@ -92,6 +93,8 @@
         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Width="100" Height="50" 
                 FontSize="12" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?"/>
 
-        <mains:TranslationView Grid.Row="0" Grid.RowSpan="8" Grid.Column="3" DataContext="{Binding TranslationViewModel}" Background="{DynamicResource WindowTitleColorBrush}"/>
+        <materialDesign:ColorZone Grid.Row="0" Grid.RowSpan="8" Grid.Column="3" Mode="Accent" VerticalAlignment="Stretch">
+            <mains:TranslationView DataContext="{Binding TranslationViewModel}"/>
+        </materialDesign:ColorZone>
     </Grid>
 </UserControl>

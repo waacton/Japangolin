@@ -9,10 +9,10 @@
     
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="{Binding EnglishBase}" Foreground="{DynamicResource WhiteBrush}" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding KanaBase}" Foreground="{DynamicResource WhiteBrush}" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding KanjiBase}" Foreground="{DynamicResource WhiteBrush}" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding TranslationInformation}" Foreground="{DynamicResource WhiteBrush}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding EnglishBase}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding KanaBase}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding KanjiBase}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding TranslationInformation}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
     

@@ -7,21 +7,23 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
+                <!-- specify what to run once App() (App.xaml.cs) has finished construction: AppBootstrapper -->
                 <ResourceDictionary>
                     <ui:AppBootstrapper x:Key="Bootstrapper" />
                 </ResourceDictionary>
 
+                <!-- add resources for controls to use into the application's resource dictionary -->
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Tovarisch.UI;component/Converters/CommonConverters.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Bespokes.xaml" />
 
-                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Resources/Icons.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/CleanWindowCloseButtonStyle.xaml" />
+                <!-- apply Material control styles as defaults -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Steel.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <!-- use tweaked or overridden Material styles with custom default styles where desired (but should still be "based on" Material styles) -->
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Overrides.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 

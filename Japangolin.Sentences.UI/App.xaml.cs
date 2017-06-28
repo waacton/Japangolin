@@ -7,6 +7,7 @@
     using System.Windows.Threading;
 
     using Wacton.Japangolin.Sentences.UI.Mains;
+    using Wacton.Japangolin.Sentences.UI.Themes;
     using Wacton.Tovarisch.Logging;
 
     /// <summary>
@@ -20,6 +21,12 @@
             AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
             TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
             SetWindowTitle();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Stylist.SetStyle(Swatch.Amber, Swatch.Blue, false);
+            base.OnStartup(e);
         }
 
         private static void SetWindowTitle()
