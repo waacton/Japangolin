@@ -1,5 +1,8 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Golins
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Golin : IGolin
     {
         private readonly English english;
@@ -14,11 +17,11 @@
         public string KanjiBase => this.japanese?.KanjiBase;
         public string KanjiConjugated => this.japanese?.KanjiConjugated;
 
-        public string TranslationInformation { get; }
+        public IEnumerable<string> TranslationInformation { get; }
 
-        public bool IsTranslatable => !string.IsNullOrWhiteSpace(this.TranslationInformation);
+        public bool IsTranslatable => this.TranslationInformation != null && this.TranslationInformation.Any();
 
-        public Golin(English english, Japanese japanese, string translationInformation = null)
+        public Golin(English english, Japanese japanese, IEnumerable<string> translationInformation = null)
         {
             this.english = english;
             this.japanese = japanese;

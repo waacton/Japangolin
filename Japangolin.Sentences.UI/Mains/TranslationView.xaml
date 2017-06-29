@@ -8,17 +8,35 @@
              d:DataContext="{d:DesignInstance Type=mains:DesignTimeTranslationViewModel, IsDesignTimeCreatable=True}">
     
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding HasGolin, Converter={StaticResource BoolToNotCollapsedConverter}}">
-            <TextBlock Text="{Binding EnglishBase}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8" />
-            <TextBlock Text="{Binding KanaBase}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8,0" />
-            <TextBlock Text="{Binding KanjiBase}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8,0"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{Binding EnglishBase}" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
+                   Margin="16" FontSize="18" FontWeight="Bold" />
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <TextBlock Text="{Binding KanaBase}" 
+                       VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
+                       Margin="16,4" FontSize="32" />
+            <TextBlock Text="{Binding KanjiBase}" 
+                       VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
+                       Margin="16,4" FontSize="32"
                        Visibility="{Binding HasKanji, Converter={StaticResource BoolToNotCollapsedConverter}}" />
-            <TextBlock Text="{Binding TranslationInformation}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8" />
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding HasGolin, Converter={StaticResource BoolToCollapsedConverter}}">
-            <TextBlock Text="{Binding DefaultMessage}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8" />
-        </StackPanel>
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding TranslationInformation}"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                 Margin="16" FontSize="14" FontWeight="Light" Foreground="{DynamicResource PrimaryHueDarkBrush}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" TextAlignment="Center" TextWrapping="Wrap" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
     
 </UserControl>

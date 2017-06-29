@@ -2,12 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
     using Wacton.Japangolin.Sentences.Domain.Extensions;
-    using Wacton.Tovarisch.Collections;
 
     public static class GolinFactory
     {
@@ -68,11 +68,11 @@
         {
             var english = new English(japaneseEntry.GetEnglish());
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunctions);
-            var translationInformation = japaneseEntry.GetPartsOfSpeech().ToDelimitedString(", ");
+            var translationInformation = japaneseEntry.GetPartsOfSpeech().Select(partOfSpeech => partOfSpeech.ToString());
             return CreateGolin(english, japanese, translationInformation);
         }
 
-        private static IGolin CreateGolin(English english, Japanese japanese, string translationInformation = null)
+        private static IGolin CreateGolin(English english, Japanese japanese, IEnumerable<string> translationInformation = null)
         {
             return new Golin(english, japanese, translationInformation);
         }

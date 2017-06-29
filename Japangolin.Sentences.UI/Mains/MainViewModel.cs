@@ -35,18 +35,28 @@
             set
             {
                 this.selectedGolin = value;
-                this.TranslationViewModel.Update(this.selectedGolin);
+                this.translationViewModel.Update(this.selectedGolin);
+                this.NotifyOfPropertyChange(nameof(this.TranslationViewModel));
             }
         }
 
-        public TranslationViewModel TranslationViewModel { get; }
+        private bool HasSelectedGolin => this.SelectedGolin != null;
+        private readonly TranslationViewModel translationViewModel;
+        private readonly NoTranslationViewModel noTranslationViewModel;
+        public TranslationViewModel TranslationViewModel => this.HasSelectedGolin ? this.translationViewModel : this.noTranslationViewModel;
 
-        public MainViewModel(Main main, UpdateSentenceCommand updateSentenceCommand, TranslationViewModel translationViewModel, ModelChangeNotifier modelChangeNotifier)
+        public MainViewModel(
+            Main main,
+            UpdateSentenceCommand updateSentenceCommand,
+            TranslationViewModel translationViewModel,
+            NoTranslationViewModel noTranslationViewModel,
+            ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier, main)
         {
             this.main = main;
             this.updateSentenceCommand = updateSentenceCommand;
-            this.TranslationViewModel = translationViewModel;
+            this.translationViewModel = translationViewModel;
+            this.noTranslationViewModel = noTranslationViewModel;
         }
 
         public void NextSentence()
@@ -75,14 +85,14 @@
         public new string KanaSentence => "ジャパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
-        public DesignTimeMainViewModel() : base(null, null, new DesignTimeTranslationViewModel(), null)
+        public DesignTimeMainViewModel() : base(null, null, new DesignTimeTranslationViewModel(), new DesignTimeNoTranslationViewModel(), null)
         {
         }
     }
 
     public class DesignTimeGolin : Golin
     {
-        public DesignTimeGolin(English english, Japanese nounJapanese) : base(english, nounJapanese, "DesignTimeInformation")
+        public DesignTimeGolin(English english, Japanese nounJapanese) : base(english, nounJapanese, new List<string> { "DesignTimeInformation" })
         {
         }
     }

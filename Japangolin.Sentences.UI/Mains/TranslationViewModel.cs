@@ -1,5 +1,7 @@
 ﻿namespace Wacton.Japangolin.Sentences.UI.Mains
 {
+    using System.Collections.Generic;
+
     using Wacton.Japangolin.Sentences.Domain.Golins;
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.UI.MVVM;
@@ -8,14 +10,10 @@
     {
         public IGolin Golin { get; private set; }
 
-        public bool HasGolin => this.Golin != null;
-
-        public string DefaultMessage => "Select a golin to see its translation";
-
         public string EnglishBase => this.Golin?.EnglishBase;
         public string KanaBase => this.Golin?.KanaBase;
         public string KanjiBase => this.Golin?.KanjiBase;
-        public string TranslationInformation => this.Golin?.TranslationInformation;
+        public IEnumerable<string> TranslationInformation => this.Golin?.TranslationInformation;
 
         public bool HasKanji => this.KanjiBase != this.KanaBase;
 
