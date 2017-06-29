@@ -125,7 +125,7 @@
             if (this.UserInput == this.KanaSentence || this.UserInput == this.KanjiSentence)
             {
                 this.IsCompleted = true;
-                snackbarMessage = $"(☞ﾟヮﾟ)☞ {this.UserInput} is correct!";
+                snackbarMessage = $"(☞ﾟヮﾟ)☞ correct! 「{this.UserInput}」";
             }
             else if (this.UserInput.ToLower() == "japangolin")
             {
@@ -134,10 +134,15 @@
             }
             else
             {
-                snackbarMessage = $"(╯°□°)╯︵ ┻━┻ {this.UserInput} is incorrect.";
+                snackbarMessage = $"(╯°□°)╯︵ ┻━┻ incorrect.  「{this.UserInput}」";
             }
 
             this.SnackbarMessageQueue.Enqueue(snackbarMessage);
+        }
+
+        public void GiveUpSentence()
+        {
+            this.IsCompleted = true;
         }
 
         public void NextSentence()

@@ -122,7 +122,7 @@
                     Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}">
             <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="CheckSentence" Content="Check" Margin="0,0,8,0"
                     Style="{StaticResource MaterialDesignRaisedAccentButton}" IsEnabled="{Binding HasUserInput}"/>
-            <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Give up" Margin="8,0,8,0"
+            <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="GiveUpSentence" Content="Give up" Margin="8,0,8,0"
                     Style="{StaticResource MaterialDesignRaisedButton}" />
         </StackPanel>
 
