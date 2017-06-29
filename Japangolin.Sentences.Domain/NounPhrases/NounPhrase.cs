@@ -12,16 +12,18 @@
         private readonly IJapaneseEntry noun;
         private Conjugation conjugation = Conjugation.None;
 
-        public IGolin Noun => GolinFactory.Noun(this.noun, this.conjugation);
+        public IGolin Noun { get; private set; }
 
         protected NounPhrase(IJapaneseEntry noun)
         {
             this.noun = noun;
+            this.Noun = GolinFactory.Noun(this.noun, this.conjugation);
         }
 
         public void SetConjugation(Conjugation newConjugation)
         {
             this.conjugation = newConjugation;
+            this.Noun = GolinFactory.Noun(this.noun, this.conjugation);
         }
 
         public abstract List<IGolin> GolinEnglish();

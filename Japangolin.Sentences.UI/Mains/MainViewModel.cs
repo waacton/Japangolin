@@ -35,14 +35,15 @@
             set
             {
                 this.selectedGolin = value;
-                this.translationViewModel.Update(this.selectedGolin);
-                this.NotifyOfPropertyChange(nameof(this.TranslationViewModel));
+                this.NotifyOfPropertyChange(nameof(this.SelectedGolin));
+                this.UpdateTranslationViewModel(this.selectedGolin);
             }
         }
 
-        private bool HasSelectedGolin => this.SelectedGolin != null;
         private readonly TranslationViewModel translationViewModel;
         private readonly NoTranslationViewModel noTranslationViewModel;
+
+        private bool HasSelectedGolin => this.SelectedGolin != null;
         public TranslationViewModel TranslationViewModel => this.HasSelectedGolin ? this.translationViewModel : this.noTranslationViewModel;
 
         public MainViewModel(
@@ -73,6 +74,12 @@
         {
             var url = $"https://translate.google.com/#ja/en/{this.KanjiSentence}";
             Process.Start(url);
+        }
+
+        private void UpdateTranslationViewModel(IGolin golin)
+        {
+            this.translationViewModel.Update(golin);
+            this.NotifyOfPropertyChange(nameof(this.TranslationViewModel));
         }
     }
 

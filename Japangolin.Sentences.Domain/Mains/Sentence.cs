@@ -5,6 +5,7 @@
 
     using Wacton.Japangolin.Sentences.Domain.Golins;
     using Wacton.Japangolin.Sentences.Domain.SentenceBlocks;
+    using Wacton.Tovarisch.Collections;
 
     public class Sentence
     {
@@ -44,17 +45,17 @@
 
         private static string ConvertToEnglish(List<IGolin> golins)
         {
-            return string.Join(EnglishSpace, golins.Select(golin => golin.EnglishConjugated));
+            return golins.Select(golin => golin.EnglishConjugated).ToDelimitedString(EnglishSpace);
         }
 
         private static string ConvertToKana(List<IGolin> golins)
         {
-            return string.Join(JapaneseSpace, golins.Select(golin => golin.KanaConjugated));
+            return golins.Select(golin => golin.KanaConjugated).ToDelimitedString(string.Empty);
         }
 
         private static string ConvertToKanji(List<IGolin> golins)
         {
-            return string.Join(JapaneseSpace, golins.Select(golin => golin.KanjiConjugated));
+            return golins.Select(golin => golin.KanjiConjugated).ToDelimitedString(string.Empty);
         }
 
         public override string ToString()
