@@ -1,5 +1,7 @@
 ﻿namespace Wacton.Japangolin.Sentences.UI
 {
+    using MaterialDesignThemes.Wpf;
+
     using Ninject;
 
     using Wacton.Desu.Japanese;
@@ -19,6 +21,8 @@
             kernel.Bind<IJapaneseDictionary>().To<JapaneseDictionary>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
             kernel.Bind<TranslationViewModel>().ToSelf().InSingletonScope();
+            kernel.Bind<NoTranslationViewModel>().ToSelf().InSingletonScope();
+            kernel.Bind<ISnackbarMessageQueue>().To<SnackbarMessageQueue>().InSingletonScope();
         }
     }
 }

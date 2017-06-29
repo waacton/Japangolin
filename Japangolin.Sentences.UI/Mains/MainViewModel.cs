@@ -1,8 +1,11 @@
 ﻿namespace Wacton.Japangolin.Sentences.UI.Mains
 {
+    using MaterialDesignThemes.Wpf;
+
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Windows;
+    using System.Windows.Input;
 
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
@@ -54,8 +57,11 @@
             {
                 this.userInput = value;
                 this.NotifyOfPropertyChange(nameof(this.UserInput));
+                this.NotifyOfPropertyChange(nameof(this.HasUserInput));
             }
         }
+
+        public bool HasUserInput => !string.IsNullOrEmpty(this.UserInput);
 
         private bool isCompleted;
         public bool IsCompleted
@@ -71,11 +77,28 @@
             }
         }
 
+        public ISnackbarMessageQueue SnackbarMessageQueue { get; }
+
+        private bool isCheatModeEnabled;
+        public bool IsCheatModeEnabled
+        {
+            get
+            {
+                return this.isCheatModeEnabled;
+            }
+            set
+            {
+                this.isCheatModeEnabled = value;
+                this.NotifyOfPropertyChange(nameof(this.IsCheatModeEnabled));
+            }
+        }
+
         public MainViewModel(
             Main main,
             UpdateSentenceCommand updateSentenceCommand,
             TranslationViewModel translationViewModel,
             NoTranslationViewModel noTranslationViewModel,
+            ISnackbarMessageQueue snackbarMessageQueue,
             ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier, main)
         {
@@ -83,14 +106,38 @@
             this.updateSentenceCommand = updateSentenceCommand;
             this.translationViewModel = translationViewModel;
             this.noTranslationViewModel = noTranslationViewModel;
+            this.SnackbarMessageQueue = snackbarMessageQueue;
+        }
+
+        public void UserInputEntered(KeyEventArgs e)
+        {
+            if (!e.Key.Equals(Key.Enter))
+            {
+                return;
+            }
+
+            this.CheckSentence();
         }
 
         public void CheckSentence()
         {
+            string snackbarMessage;
             if (this.UserInput == this.KanaSentence || this.UserInput == this.KanjiSentence)
             {
                 this.IsCompleted = true;
+                snackbarMessage = $"(☞ﾟヮﾟ)☞ {this.UserInput} is correct!";
             }
+            else if (this.UserInput.ToLower() == "japangolin")
+            {
+                snackbarMessage = "↑ ↑ ↓ ↓ ← → ← → b a";
+                this.IsCheatModeEnabled = true;
+            }
+            else
+            {
+                snackbarMessage = $"(╯°□°)╯︵ ┻━┻ {this.UserInput} is incorrect.";
+            }
+
+            this.SnackbarMessageQueue.Enqueue(snackbarMessage);
         }
 
         public void NextSentence()
@@ -128,7 +175,7 @@
         public new string KanaSentence => "ジャパンゴリン";
         public new string KanjiSentence => "日本蜥蜴";
 
-        public DesignTimeMainViewModel() : base(null, null, new DesignTimeTranslationViewModel(), new DesignTimeNoTranslationViewModel(), null)
+        public DesignTimeMainViewModel() : base(null, null, new DesignTimeTranslationViewModel(), new DesignTimeNoTranslationViewModel(), null, null)
         {
         }
     }
