@@ -9,14 +9,15 @@
     
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding HasGolin, Converter={StaticResource BoolToNotCollapsedConverter}}">
-            <TextBlock Text="{Binding EnglishBase}" FontSize="16" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
-            <TextBlock Text="{Binding KanaBase}" FontSize="16" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
-            <TextBlock Text="{Binding KanjiBase}" FontSize="16" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
-            <TextBlock Text="{Binding TranslationInformation}" FontSize="16" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+            <TextBlock Text="{Binding EnglishBase}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8" />
+            <TextBlock Text="{Binding KanaBase}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8,0" />
+            <TextBlock Text="{Binding KanjiBase}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8,0"
+                       Visibility="{Binding HasKanji, Converter={StaticResource BoolToNotCollapsedConverter}}" />
+            <TextBlock Text="{Binding TranslationInformation}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8" />
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding HasGolin, Converter={StaticResource BoolToCollapsedConverter}}">
-            <TextBlock Text="{Binding DefaultMessage}" FontSize="16" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+            <TextBlock Text="{Binding DefaultMessage}" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="8" />
         </StackPanel>
     </Grid>
     

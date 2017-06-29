@@ -17,8 +17,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -27,7 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" 
-                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20">
+                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -35,7 +33,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding EnglishConjugated}" ToolTip="{Binding TranslationInformation}"/>
+                    <TextBlock Text="{Binding EnglishConjugated}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
@@ -56,42 +54,45 @@
                         </DataTrigger>
 
                         <Trigger Property="IsEnabled" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource SecondaryAccentBrush}" />
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource SecondaryAccentBrush}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryAccentBrush}"/>
                         </Trigger>
-
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" Value="True" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False" />
-                            </MultiDataTrigger.Conditions>
-
-                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
-                        </MultiDataTrigger>
 
                     </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding KanaSentence}" 
-                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding KanaSentence}" 
+                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16"/>
         
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding KanjiSentence}" 
-                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding KanjiSentence}" 
+                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16"/>
 
-        <Button Grid.Row="5" Grid.Column="0" Width="100" Height="50" 
-                FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="20"/>
-        
-        <Button Grid.Row="6" Grid.Column="0" Width="100" Height="50" 
-                FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="GoogleTranslate" Content="Google?" Margin="20"/>
+        <Button Grid.Row="4" Grid.Column="0" Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="16"
+                Style="{StaticResource MaterialDesignRaisedAccentButton}" />
 
-        <materialDesign:ColorZone Grid.Row="0" Grid.RowSpan="8" Grid.Column="1" Mode="Accent" VerticalAlignment="Stretch">
+        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,16">
+            <Button cal:Message.Attach="CopyAnswer" HorizontalAlignment="Left"
+                    ToolTip="COPY ANSWER" Margin="16,0,8,0"
+                    Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                <materialDesign:PackIcon Kind="ContentCopy" Height="24" Width="24" />
+            </Button>
+
+            <Button cal:Message.Attach="GoogleTranslate" HorizontalAlignment="Left" 
+                    ToolTip="GOOGLE TRANSLATE" Margin="8,0,16,0"
+                    Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                <materialDesign:PackIcon Kind="GoogleTranslate" Height="24" Width="24" />
+            </Button>
+        </StackPanel>
+
+        <materialDesign:Card Grid.Row="0" Grid.RowSpan="6" Grid.Column="1" VerticalAlignment="Stretch" Margin="16">
             <mains:TranslationView DataContext="{Binding TranslationViewModel}" />
-        </materialDesign:ColorZone>
+        </materialDesign:Card>
+
     </Grid>
 </UserControl>

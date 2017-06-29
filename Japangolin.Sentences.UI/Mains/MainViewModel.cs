@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Windows;
 
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
@@ -51,6 +52,11 @@
         public void NextSentence()
         {
             this.updateSentenceCommand.ExecuteAndNotify();
+        }
+
+        public void CopyAnswer()
+        {
+            Clipboard.SetText(this.KanjiSentence);
         }
 
         public void GoogleTranslate()

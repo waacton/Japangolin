@@ -25,7 +25,7 @@
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Stylist.SetStyle(Swatch.Amber, Swatch.Blue, false);
+            Stylist.SetStyle(Swatch.Grey, Swatch.Red, false);
             base.OnStartup(e);
         }
 

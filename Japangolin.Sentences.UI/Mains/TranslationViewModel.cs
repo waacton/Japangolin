@@ -10,12 +10,14 @@
 
         public bool HasGolin => this.Golin != null;
 
-        public string DefaultMessage => "Select a golin to see its translation here";
+        public string DefaultMessage => "Select a golin to see its translation";
 
         public string EnglishBase => this.Golin?.EnglishBase;
         public string KanaBase => this.Golin?.KanaBase;
         public string KanjiBase => this.Golin?.KanjiBase;
         public string TranslationInformation => this.Golin?.TranslationInformation;
+
+        public bool HasKanji => this.KanjiBase != this.KanaBase;
 
         public TranslationViewModel(ModelChangeNotifier modelChangeNotifier) : base(modelChangeNotifier)
         {
