@@ -16,7 +16,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
-                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16">
+                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,16,16,4">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -38,7 +37,7 @@
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
                 <Style BasedOn="{StaticResource CustomForegroundListBoxItem}" TargetType="ListBoxItem" >
-                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="Padding" Value="2" /> <!-- padding needed here for spacing between English words -->
 
                     <!-- 
                         overwriting ListBoxItem.IsEnabled according to whether there is Japanese translation for it 
@@ -67,8 +66,13 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding UserInput}"
+                 materialDesign:HintAssist.Hint="Japanese translation"
+                 Margin="16,4,16,16" Padding="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"
+                 Style="{StaticResource MaterialDesignTextBox}" />
+
         <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding GolinJapanese}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
-                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16">
+                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,4,16,16">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -81,7 +85,7 @@
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
                 <Style BasedOn="{StaticResource CustomForegroundListBoxItem}" TargetType="ListBoxItem" >
-                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="Padding" Value="0" /> <!-- no padding needed here since there are no spaces between Japanese words -->
 
                     <!-- 
                         overwriting ListBoxItem.IsEnabled according to whether there is Japanese translation for it 
@@ -110,16 +114,10 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <!--<TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding KanaSentence}" 
-                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16"/>
-        
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding KanjiSentence}" 
-                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16"/>-->
-
-        <Button Grid.Row="4" Grid.Column="0" Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="16"
+        <Button Grid.Row="3" Grid.Column="0" Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="16,32,16,16"
                 Style="{StaticResource MaterialDesignRaisedAccentButton}" />
 
-        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,16">
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,16">
             <Button cal:Message.Attach="CopyAnswer" HorizontalAlignment="Left"
                     ToolTip="Copy answer" Margin="16,0,8,0"
                     Style="{StaticResource MaterialDesignFloatingActionLightButton}">
@@ -133,7 +131,7 @@
             </Button>
         </StackPanel>
 
-        <materialDesign:Card Grid.Row="0" Grid.RowSpan="6" Grid.Column="1" VerticalAlignment="Stretch" Margin="16">
+        <materialDesign:Card Grid.Row="0" Grid.RowSpan="5" Grid.Column="1" VerticalAlignment="Stretch" Margin="16">
             <ContentControl Content="{Binding TranslationViewModel}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type mains:NoTranslationViewModel}">

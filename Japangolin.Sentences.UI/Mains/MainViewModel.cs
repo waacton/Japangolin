@@ -46,6 +46,17 @@
         private bool HasSelectedGolin => this.SelectedGolin != null;
         public TranslationViewModel TranslationViewModel => this.HasSelectedGolin ? this.translationViewModel : this.noTranslationViewModel;
 
+        private string userInput;
+        public string UserInput
+        {
+            get { return this.userInput; }
+            set
+            {
+                this.userInput = value;
+                this.NotifyOfPropertyChange(nameof(this.UserInput));
+            }
+        }
+
         public MainViewModel(
             Main main,
             UpdateSentenceCommand updateSentenceCommand,
@@ -63,6 +74,8 @@
         public void NextSentence()
         {
             this.updateSentenceCommand.ExecuteAndNotify();
+            this.UserInput = string.Empty;
+            this.SelectedGolin = null;
         }
 
         public void CopyAnswer()

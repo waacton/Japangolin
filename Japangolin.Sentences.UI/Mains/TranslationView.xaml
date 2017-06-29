@@ -19,13 +19,13 @@
                    Margin="16" FontSize="18" FontWeight="Bold" />
 
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <TextBlock Text="{Binding KanaBase}" 
-                       VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
-                       Margin="16,4" FontSize="32" />
             <TextBlock Text="{Binding KanjiBase}" 
                        VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
                        Margin="16,4" FontSize="32"
                        Visibility="{Binding HasKanji, Converter={StaticResource BoolToNotCollapsedConverter}}" />
+            <TextBlock Text="{Binding KanaBase}" 
+                       VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
+                       Margin="16,4" FontSize="32" />
         </StackPanel>
 
         <ItemsControl Grid.Row="2" ItemsSource="{Binding TranslationInformation}"
