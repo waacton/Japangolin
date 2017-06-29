@@ -69,10 +69,12 @@
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding UserInput}"
                  materialDesign:HintAssist.Hint="Japanese translation"
                  Margin="16,4,16,16" Padding="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"
-                 Style="{StaticResource MaterialDesignTextBox}" />
+                 Style="{StaticResource MaterialDesignTextBox}" 
+                 Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}" />
 
         <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding GolinJapanese}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
-                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,4,16,16">
+                 FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,4,16,16"
+                 Visibility="{Binding IsCompleted, Converter={StaticResource BoolToNotHiddenConverter}}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -114,22 +116,64 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <Button Grid.Row="3" Grid.Column="0" Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="16,32,16,16"
-                Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,32,16,16" 
+                    Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}">
+            <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="CheckSentence" Content="Check" Margin="0,0,8,0"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+            <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Give up" Margin="8,0,8,0"
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
+        </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,16">
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,32,16,16" 
+                    Visibility="{Binding IsCompleted, Converter={StaticResource BoolToNotHiddenConverter}}">
+            <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="0,0,8,0"
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="16,0,16,16">
             <Button cal:Message.Attach="CopyAnswer" HorizontalAlignment="Left"
-                    ToolTip="Copy answer" Margin="16,0,8,0"
+                    ToolTip="Copy answer" Margin="0,0,8,0"
                     Style="{StaticResource MaterialDesignFloatingActionLightButton}">
                 <materialDesign:PackIcon Kind="ContentCopy" Height="24" Width="24" />
             </Button>
 
             <Button cal:Message.Attach="GoogleTranslate" HorizontalAlignment="Left" 
-                    ToolTip="Google translate" Margin="8,0,16,0"
+                    ToolTip="Google translate" Margin="8,0,8,0"
                     Style="{StaticResource MaterialDesignFloatingActionLightButton}">
                 <materialDesign:PackIcon Kind="GoogleTranslate" Height="24" Width="24" />
             </Button>
         </StackPanel>
+
+        <!--<Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Background="{DynamicResource MaterialDesignSelection}" 
+                    Padding="8 0 8 0"                >
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock TextWrapping="WrapWithOverflow" Style="{DynamicResource MaterialDesignSubheadingTextBlock}">Example 3.</TextBlock>
+                    <TextBlock TextWrapping="WrapWithOverflow">In many real world scenario, notification display must deal with threading, queuing, and potentially heavy usage. A MessageQueue can be set to handle much of this for you, gicing the following benefits:</TextBlock>
+                    <TextBlock TextWrapping="WrapWithOverflow" Margin="0 8 0 0" Text=" • Messages can be queued from any thread"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text=" • Message will auto hide after a time out period"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text=" • Notification will not time out if mouse is over it"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text=" • Can be paired with a DialogHost so timeout will pause if a active dialog"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text=" • Duplicate within a short period will be discarded"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text=" • A single message queue can be shared acros multiple Windows"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" Text=" • Works with code-behind and MVVM"/>
+                    <Grid Margin="0 16 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="MessageTextBox" VerticalAlignment="Top"
+                                     Grid.Column="0">Hello World</TextBox>
+                        <Button Click="SnackBar3_OnClick" Margin="16 0 0 0"
+                                    Grid.Column="1">Send</Button>
+                    </Grid>
+
+
+                </StackPanel>
+                <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
+                                             x:Name="SnackbarThree" />
+            </Grid>
+        </Border>-->
 
         <materialDesign:Card Grid.Row="0" Grid.RowSpan="5" Grid.Column="1" VerticalAlignment="Stretch" Margin="16">
             <ContentControl Content="{Binding TranslationViewModel}">

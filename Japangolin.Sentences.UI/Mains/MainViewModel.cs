@@ -57,6 +57,20 @@
             }
         }
 
+        private bool isCompleted;
+        public bool IsCompleted
+        {
+            get
+            {
+                return this.isCompleted;
+            }
+            set
+            {
+                this.isCompleted = value;
+                this.NotifyOfPropertyChange(nameof(this.IsCompleted));
+            }
+        }
+
         public MainViewModel(
             Main main,
             UpdateSentenceCommand updateSentenceCommand,
@@ -71,11 +85,20 @@
             this.noTranslationViewModel = noTranslationViewModel;
         }
 
+        public void CheckSentence()
+        {
+            if (this.UserInput == this.KanaSentence || this.UserInput == this.KanjiSentence)
+            {
+                this.IsCompleted = true;
+            }
+        }
+
         public void NextSentence()
         {
             this.updateSentenceCommand.ExecuteAndNotify();
             this.UserInput = string.Empty;
             this.SelectedGolin = null;
+            this.IsCompleted = false;
         }
 
         public void CopyAnswer()

@@ -1,8 +1,7 @@
 ﻿namespace Wacton.Japangolin.Sentences.UI.Mains
 {
-    using System.Windows.Controls;
-
-    using Wacton.Japangolin.Sentences.Domain.Mains;
+    using System.Threading.Tasks;
+    using System.Windows;
 
     /// <summary>
     /// Interaction logic for MainView.xaml
@@ -14,18 +13,14 @@
             this.InitializeComponent();
         }
 
-        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (e.AddedItems.Count <= 0)
-            //{
-            //    return;
-            //}
+        //private void SnackBar3_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    //use the message queue to send a message.
+        //    var messageQueue = SnackbarThree.MessageQueue;
+        //    var message = MessageTextBox.Text;
 
-            //var wordDefinition = (Golin)e.AddedItems[0];
-            //if (!wordDefinition.HasJapanese)
-            //{
-            //    this.ListView.SelectedIndex = -1;
-            //}
-        }
+        //    //the message queue can be called from any thread
+        //    Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+        //}
     }
 }
