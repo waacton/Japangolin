@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mains="clr-namespace:Wacton.Japangolin.Sentences.UI.Mains"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Icon="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Resources/Japangolin.ico"
         Title="{Binding WindowTitle}" Height="500" Width="1200"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        cal:Message.Attach="[Event KeyUp] = [Action KeypressDetected($eventArgs)]"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeShellViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>

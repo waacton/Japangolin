@@ -121,23 +121,19 @@
 
         public void CheckSentence()
         {
-            string snackbarMessage;
             if (this.UserInput == this.KanaSentence || this.UserInput == this.KanjiSentence)
             {
                 this.IsCompleted = true;
-                snackbarMessage = $"(☞ﾟヮﾟ)☞ correct! 「{this.UserInput}」";
+                this.ShowSnackbarMessage($"(☞ﾟヮﾟ)☞ correct! 「{this.UserInput}」");
             }
             else if (this.UserInput.ToLower() == "japangolin")
             {
-                snackbarMessage = "↑ ↑ ↓ ↓ ← → ← → b a";
-                this.IsCheatModeEnabled = true;
+                this.CheatCodeEntered();
             }
             else
             {
-                snackbarMessage = $"(╯°□°)╯︵ ┻━┻ incorrect.  「{this.UserInput}」";
+                this.ShowSnackbarMessage($"(╯°□°)╯︵ ┻━┻ incorrect.  「{this.UserInput}」");
             }
-
-            this.SnackbarMessageQueue.Enqueue(snackbarMessage);
         }
 
         public void GiveUpSentence()
@@ -151,6 +147,12 @@
             this.UserInput = string.Empty;
             this.SelectedGolin = null;
             this.IsCompleted = false;
+        }
+
+        public void CheatCodeEntered()
+        {
+            this.IsCheatModeEnabled = true;
+            this.ShowSnackbarMessage("↑ ↑ ↓ ↓ ← → ← → b a");
         }
 
         public void CopyAnswer()
@@ -168,6 +170,11 @@
         {
             this.translationViewModel.Update(golin);
             this.NotifyOfPropertyChange(nameof(this.TranslationViewModel));
+        }
+
+        private void ShowSnackbarMessage(string message)
+        {
+            this.SnackbarMessageQueue.Enqueue(message);
         }
     }
 
