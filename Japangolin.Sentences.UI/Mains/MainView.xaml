@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeMainViewModel, IsDesignTimeCreatable=True}">
 
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=UserInputTextBox}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -66,12 +66,11 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}"
+        <TextBox x:Name="UserInputTextBox" Grid.Row="2" Grid.Column="0" Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}"
                  materialDesign:HintAssist.Hint="Japanese translation"
                  Margin="16,4,16,16" Padding="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"
                  Style="{StaticResource MaterialDesignTextBox}" 
-                 Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}"
-                 cal:Message.Attach="[Event KeyUp] = [Action UserInputEntered($eventArgs)]">
+                 Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}">
         </TextBox>
 
         <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding GolinJapanese}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"

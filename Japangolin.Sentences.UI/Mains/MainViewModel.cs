@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Windows;
-    using System.Windows.Input;
 
     using Wacton.Japangolin.Sentences.Domain.Commands;
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
@@ -107,16 +106,6 @@
             this.translationViewModel = translationViewModel;
             this.noTranslationViewModel = noTranslationViewModel;
             this.SnackbarMessageQueue = snackbarMessageQueue;
-        }
-
-        public void UserInputEntered(KeyEventArgs e)
-        {
-            if (!e.Key.Equals(Key.Enter))
-            {
-                return;
-            }
-
-            this.CheckSentence();
         }
 
         public void CheckSentence()
