@@ -19,6 +19,10 @@
         private readonly UpdateSentenceCommand updateSentenceCommand;
 
         private Sentence CurrentSentence => this.main.Sentence;
+        private Conjugation CurrentConjugation => this.main.Conjugation;
+
+        // TODO: a touch hacky
+        public string PolitenessForm => this.CurrentConjugation.DisplayName.ToLower().StartsWith("long") ? "[polite]" : "[casual]"; 
 
         public List<IGolin> GolinEnglish => this.CurrentSentence.GolinEnglish();
         public List<IGolin> GolinJapanese => this.CurrentSentence.GolinJapanese();
@@ -141,15 +145,33 @@
         public void CheatCodeEntered()
         {
             this.IsCheatModeEnabled = true;
+            this.translationViewModel.IsCheatModeEnabled = true;
             this.ShowSnackbarMessage("↑ ↑ ↓ ↓ ← → ← → b a");
         }
 
-        public void CopyAnswer()
+        public void DisableCheatMode()
+        {
+            this.IsCheatModeEnabled = false;
+            this.translationViewModel.IsCheatModeEnabled = false;
+        }
+
+        public void CopyAnswerKana()
+        {
+            Clipboard.SetText(this.KanaSentence);
+        }
+
+        public void GoogleTranslateKana()
+        {
+            var url = $"https://translate.google.com/#ja/en/{this.KanaSentence}";
+            Process.Start(url);
+        }
+
+        public void CopyAnswerKanji()
         {
             Clipboard.SetText(this.KanjiSentence);
         }
 
-        public void GoogleTranslate()
+        public void GoogleTranslateKanji()
         {
             var url = $"https://translate.google.com/#ja/en/{this.KanjiSentence}";
             Process.Start(url);
@@ -170,7 +192,7 @@
     public class DesignTimeMainViewModel : MainViewModel
     {
         private readonly English english = new English("Japangolin");
-        private readonly Japanese japanese = new Japanese("ジャパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative, ConjugationFunctions.JapaneseNoun);
+        private readonly Japanese japanese = new Japanese("ジャパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative, ConjugationFunctions.JapaneseNoun, ConjugationInformations.JapaneseNoun);
 
         public new List<IGolin> GolinEnglish => new List<IGolin> { new DesignTimeGolin(this.english, this.japanese) };
         public new string KanaSentence => "ジャパンゴリン";

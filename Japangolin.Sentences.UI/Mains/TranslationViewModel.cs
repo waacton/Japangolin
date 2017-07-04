@@ -17,6 +17,23 @@
 
         public bool HasKanji => this.KanjiBase != this.KanaBase;
 
+        public string ConjugationNote => $"Conjugation: {this.Golin?.Conjugation?.DisplayName}";
+        public string ConjugationInformation => this.Golin?.ConjugationInformation;
+
+        private bool isCheatModeEnabled;
+        public bool IsCheatModeEnabled
+        {
+            get
+            {
+                return this.isCheatModeEnabled;
+            }
+            set
+            {
+                this.isCheatModeEnabled = value;
+                this.NotifyOfPropertyChange(nameof(this.IsCheatModeEnabled));
+            }
+        }
+
         public TranslationViewModel(ModelChangeNotifier modelChangeNotifier) : base(modelChangeNotifier)
         {
         }

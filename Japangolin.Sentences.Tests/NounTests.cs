@@ -20,8 +20,6 @@
             Assert.That(golin.KanjiConjugated, Is.EqualTo("人"));
         }
 
-        // TODO: add conjugation comments to the golin object, can show to user if confused about conjugation rules
-
         [Test]
         public void ConjugateLongPresentAffirmative()
         {
@@ -97,7 +95,7 @@
         private static IGolin CreateGolin(Conjugation conjugation)
         {
             var english = new English(Translation);
-            var japanese = new Japanese(Kana, Kanji, conjugation, ConjugationFunctions.JapaneseNoun);
+            var japanese = new Japanese(Kana, Kanji, conjugation, ConjugationFunctions.JapaneseNoun, ConjugationInformations.JapaneseNoun);
             return new Golin(english, japanese);
         }
     }

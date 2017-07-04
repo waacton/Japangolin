@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+
     public class Golin : IGolin
     {
         private readonly English english;
@@ -18,8 +20,10 @@
         public string KanjiConjugated => this.japanese?.KanjiConjugated;
 
         public IEnumerable<string> TranslationInformation { get; }
-
         public bool IsTranslatable => this.TranslationInformation != null && this.TranslationInformation.Any();
+
+        public Conjugation Conjugation => this.japanese?.Conjugation;
+        public string ConjugationInformation => this.japanese?.ConjugationInformation;
 
         public Golin(English english, Japanese japanese, IEnumerable<string> translationInformation = null)
         {

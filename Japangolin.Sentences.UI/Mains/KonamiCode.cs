@@ -14,7 +14,7 @@
         {
             if (this.IsComplete)
             {
-                return;
+                this.Reset();
             }
 
             var firstKonamiKey = this.konamiKeys[0];

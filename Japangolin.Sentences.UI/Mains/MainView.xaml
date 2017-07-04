@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -23,8 +24,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
-                  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,16,16,4">
+        <TextBlock Grid.Row="1" Text="{Binding PolitenessForm}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Margin="18,4,16,4" FontSize="18" FontWeight="Light" FontStyle="Italic" />
+
+        <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding GolinEnglish}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
+                  FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16,4">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -66,15 +70,16 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <TextBox x:Name="UserInputTextBox" Grid.Row="2" Grid.Column="0" Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}"
+        <TextBox x:Name="UserInputTextBox" Grid.Row="3" Grid.Column="0" Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}"
                  materialDesign:HintAssist.Hint="Japanese translation"
-                 Margin="16,4,16,16" Padding="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"
+                 Margin="16,4,16,16" Padding="0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" 
                  Style="{StaticResource MaterialDesignTextBox}" 
                  Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}">
         </TextBox>
 
-        <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding GolinJapanese}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
-                 FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,4,16,16"
+        <!-- margin calculated from snoop, to match up with the user input text box -->
+        <ListBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding GolinJapanese}" SelectedItem="{Binding SelectedGolin}" IsSynchronizedWithCurrentItem="True"
+                 FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16,3,16,16"
                  Visibility="{Binding IsCompleted, Converter={StaticResource BoolToNotHiddenConverter}}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -117,7 +122,7 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,32,16,16" 
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,32,16,16" 
                     Visibility="{Binding IsCompleted, Converter={StaticResource BoolToHiddenConverter}}">
             <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="CheckSentence" Content="Check" Margin="0,0,8,0"
                     Style="{StaticResource MaterialDesignRaisedAccentButton}" IsEnabled="{Binding HasUserInput}"/>
@@ -125,7 +130,7 @@
                     Style="{StaticResource MaterialDesignRaisedButton}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,32,16,16" 
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,32,16,16" 
                     Visibility="{Binding IsCompleted, Converter={StaticResource BoolToNotHiddenConverter}}">
             <Button Width="100" Height="50" FontSize="18" HorizontalAlignment="Left" cal:Message.Attach="NextSentence" Content="Next" Margin="0,0,8,0"
                     Style="{StaticResource MaterialDesignRaisedAccentButton}" />
@@ -133,20 +138,38 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="16,16,16,0"
                     Visibility="{Binding IsCheatModeEnabled, Converter={StaticResource BoolToNotHiddenConverter}}">
-            <Button cal:Message.Attach="CopyAnswer" HorizontalAlignment="Left"
-                    ToolTip="Copy answer" Margin="0,0,8,0"
+            <Button cal:Message.Attach="CopyAnswerKana" HorizontalAlignment="Left"
+                    ToolTip="Copy answer (kana)" Margin="0,0,8,0"
                     Style="{StaticResource MaterialDesignFloatingActionLightButton}">
                 <materialDesign:PackIcon Kind="ContentCopy" Height="24" Width="24" />
             </Button>
 
-            <Button cal:Message.Attach="GoogleTranslate" HorizontalAlignment="Left" 
-                    ToolTip="Google translate" Margin="8,0,8,0"
+            <Button cal:Message.Attach="GoogleTranslateKana" HorizontalAlignment="Left" 
+                    ToolTip="Google translate (kana)" Margin="8,0,8,0"
                     Style="{StaticResource MaterialDesignFloatingActionLightButton}">
                 <materialDesign:PackIcon Kind="GoogleTranslate" Height="24" Width="24" />
             </Button>
+
+            <Button cal:Message.Attach="CopyAnswerKanji" HorizontalAlignment="Left"
+                    ToolTip="Copy answer (kanji)" Margin="8,0,8,0"
+                    Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                <materialDesign:PackIcon Kind="ContentCopy" Height="24" Width="24" />
+            </Button>
+
+            <Button cal:Message.Attach="GoogleTranslateKanji" HorizontalAlignment="Left" 
+                    ToolTip="Google translate (kanji)" Margin="8,0,8,0"
+                    Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                <materialDesign:PackIcon Kind="GoogleTranslate" Height="24" Width="24" />
+            </Button>
+
+            <Button cal:Message.Attach="DisableCheatMode" HorizontalAlignment="Left"
+                    ToolTip="Disable cheat mode" Margin="8,0,8,0"
+                    Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
+                <materialDesign:PackIcon Kind="Undo" Height="24" Width="24" />
+            </Button>
         </StackPanel>
 
-        <materialDesign:Card Grid.Row="0" Grid.RowSpan="5" Grid.Column="1" VerticalAlignment="Stretch" Margin="16">
+        <materialDesign:Card Grid.Row="0" Grid.RowSpan="6" Grid.Column="1" VerticalAlignment="Stretch" Margin="16">
             <ContentControl Content="{Binding TranslationViewModel}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type mains:NoTranslationViewModel}">
@@ -159,8 +182,7 @@
             </ContentControl>
         </materialDesign:Card>
 
-        <materialDesign:Snackbar Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" 
+        <materialDesign:Snackbar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" 
                                  MessageQueue="{Binding SnackbarMessageQueue}" />
-
     </Grid>
 </UserControl>

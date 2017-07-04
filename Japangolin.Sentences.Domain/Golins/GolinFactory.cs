@@ -14,23 +14,25 @@
         public static IGolin Noun(IJapaneseEntry japaneseEntry) => Noun(japaneseEntry, Conjugation.None);
         public static IGolin Noun(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            return CreateGolin(japaneseEntry, conjugation, ConjugationFunctions.JapaneseNoun);
+            return CreateGolin(japaneseEntry, conjugation, ConjugationFunctions.JapaneseNoun, ConjugationInformations.JapaneseNoun);
         }
 
         public static IGolin Verb(IJapaneseEntry japaneseEntry) => Verb(japaneseEntry, Conjugation.None);
         public static IGolin Verb(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
             var isVerbIchidan = japaneseEntry.IsAnyPartOfSpeech(PartsOfSpeech.VerbsIchidan);
-            var conjugationFunction = isVerbIchidan ? ConjugationFunctions.JapaneseVerbIchidan : ConjugationFunctions.JapaneseVerbGodan;
-            return CreateGolin(japaneseEntry, conjugation, conjugationFunction);
+            var conjugationFunctions = isVerbIchidan ? ConjugationFunctions.JapaneseVerbIchidan : ConjugationFunctions.JapaneseVerbGodan;
+            var conjugationInformations = isVerbIchidan ? ConjugationInformations.JapaneseVerbIchidan : ConjugationInformations.JapaneseVerbGodan;
+            return CreateGolin(japaneseEntry, conjugation, conjugationFunctions, conjugationInformations);
         }
 
         public static IGolin Adjective(IJapaneseEntry japaneseEntry) => Adjective(japaneseEntry, Conjugation.None);
         public static IGolin Adjective(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
             var isAdjectiveI = japaneseEntry.IsPartOfSpeech(PartOfSpeech.AdjectiveI);
-            var conjugationFunction = isAdjectiveI ? ConjugationFunctions.JapaneseAdjectiveI : ConjugationFunctions.JapaneseAdjectiveNa;
-            return CreateGolin(japaneseEntry, conjugation, conjugationFunction);
+            var conjugationFunctions = isAdjectiveI ? ConjugationFunctions.JapaneseAdjectiveI : ConjugationFunctions.JapaneseAdjectiveNa;
+            var conjugationInformations = isAdjectiveI ? ConjugationInformations.JapaneseAdjectiveI : ConjugationInformations.JapaneseAdjectiveNa;
+            return CreateGolin(japaneseEntry, conjugation, conjugationFunctions, conjugationInformations);
         }
 
         public static IGolin TopicPreposition(Conjugation conjugation, bool isVerbInSentence)
@@ -64,10 +66,12 @@
             return CreateGolin(null, japanese);
         }
 
-        private static IGolin CreateGolin(IJapaneseEntry japaneseEntry, Conjugation conjugation, Dictionary<Conjugation, Func<string, string>> conjugationFunctions)
+        private static IGolin CreateGolin(IJapaneseEntry japaneseEntry, Conjugation conjugation, 
+                                          Dictionary<Conjugation, Func<string, string>> conjugationFunctions, 
+                                          Dictionary<Conjugation, Func<string>> conjugationInformations)
         {
             var english = new English(japaneseEntry.GetEnglish());
-            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunctions);
+            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunctions, conjugationInformations);
             var translationInformation = japaneseEntry.GetPartsOfSpeech().Select(partOfSpeech => partOfSpeech.ToString());
             return CreateGolin(english, japanese, translationInformation);
         }

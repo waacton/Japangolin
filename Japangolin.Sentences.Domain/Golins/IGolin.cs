@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+
     public interface IGolin
     {
         string EnglishBase { get; }
@@ -13,7 +15,9 @@
         string KanjiConjugated { get; }
 
         IEnumerable<string> TranslationInformation { get; }
-
         bool IsTranslatable { get; }
+
+        Conjugation Conjugation { get; }
+        string ConjugationInformation { get; }
     }
 }

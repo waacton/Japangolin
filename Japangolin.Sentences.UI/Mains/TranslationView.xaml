@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mains="clr-namespace:Wacton.Japangolin.Sentences.UI.Mains"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=mains:DesignTimeTranslationViewModel, IsDesignTimeCreatable=True}">
     
@@ -12,6 +13,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="{Binding EnglishBase}" 
@@ -37,6 +39,19 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <materialDesign:ColorZone Grid.Row="3" Mode="PrimaryLight" Visibility="{Binding IsCheatModeEnabled, Converter={StaticResource BoolToNotCollapsedConverter}}">
+            <StackPanel Orientation="Vertical" Margin="16">
+                <TextBlock Text="{Binding ConjugationNote}" 
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
+                           FontSize="10" FontWeight="Normal" />
+                
+                <TextBlock Text="{Binding ConjugationInformation}" 
+                           HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
+                           FontSize="10" FontWeight="Light" />
+            </StackPanel>
+        </materialDesign:ColorZone>
+        
     </Grid>
     
 </UserControl>
