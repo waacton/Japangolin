@@ -1,26 +1,25 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Golins
 {
-    using System;
-    using System.Collections.Generic;
-
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
 
     public class English
     {
         public string EnglishBase { get; }
+        public WordClass WordClass { get; }
         public Conjugation Conjugation { get; }
 
-        private readonly Dictionary<Conjugation, Func<string, string>> conjugationFunctions;
-        public string EnglishConjugated => this.conjugationFunctions[this.Conjugation].Invoke(this.EnglishBase);
+        public string EnglishConjugated => this.WordClass.GetConjugation(this.EnglishBase, this.Conjugation);
 
-        public English(string englishBase, Conjugation conjugation, Dictionary<Conjugation, Func<string, string>> conjugationFunctions)
+        public string ConjugationInformation => this.WordClass.GetConjugationInformation(this.Conjugation);
+
+        public English(string englishBase, WordClass wordClass, Conjugation conjugation)
         {
             this.EnglishBase = englishBase;
+            this.WordClass = wordClass;
             this.Conjugation = conjugation;
-            this.conjugationFunctions = conjugationFunctions;
         }
 
-        public English(string englishBase) : this(englishBase, Conjugation.None, ConjugationFunctions.Defaults)
+        public English(string englishBase) : this(englishBase, WordClass.None, Conjugation.None)
         {
         }
     }

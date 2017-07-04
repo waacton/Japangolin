@@ -1,6 +1,5 @@
 ﻿namespace Wacton.Japangolin.Sentences.Domain.Golins
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -14,31 +13,29 @@
         public static IGolin Noun(IJapaneseEntry japaneseEntry) => Noun(japaneseEntry, Conjugation.None);
         public static IGolin Noun(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
-            return CreateGolin(japaneseEntry, conjugation, ConjugationFunctions.JapaneseNoun, ConjugationInformations.JapaneseNoun);
+            return CreateGolin(japaneseEntry, conjugation, WordClass.JapaneseNoun);
         }
 
         public static IGolin Verb(IJapaneseEntry japaneseEntry) => Verb(japaneseEntry, Conjugation.None);
         public static IGolin Verb(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
             var isVerbIchidan = japaneseEntry.IsAnyPartOfSpeech(PartsOfSpeech.VerbsIchidan);
-            var conjugationFunctions = isVerbIchidan ? ConjugationFunctions.JapaneseVerbIchidan : ConjugationFunctions.JapaneseVerbGodan;
-            var conjugationInformations = isVerbIchidan ? ConjugationInformations.JapaneseVerbIchidan : ConjugationInformations.JapaneseVerbGodan;
-            return CreateGolin(japaneseEntry, conjugation, conjugationFunctions, conjugationInformations);
+            var wordClass = isVerbIchidan ? WordClass.JapaneseVerbIchidan : WordClass.JapaneseVerbGodan;
+            return CreateGolin(japaneseEntry, conjugation, wordClass);
         }
 
         public static IGolin Adjective(IJapaneseEntry japaneseEntry) => Adjective(japaneseEntry, Conjugation.None);
         public static IGolin Adjective(IJapaneseEntry japaneseEntry, Conjugation conjugation)
         {
             var isAdjectiveI = japaneseEntry.IsPartOfSpeech(PartOfSpeech.AdjectiveI);
-            var conjugationFunctions = isAdjectiveI ? ConjugationFunctions.JapaneseAdjectiveI : ConjugationFunctions.JapaneseAdjectiveNa;
-            var conjugationInformations = isAdjectiveI ? ConjugationInformations.JapaneseAdjectiveI : ConjugationInformations.JapaneseAdjectiveNa;
-            return CreateGolin(japaneseEntry, conjugation, conjugationFunctions, conjugationInformations);
+            var wordClass = isAdjectiveI ? WordClass.JapaneseAdjectiveI : WordClass.JapaneseAdjectiveNa;
+            return CreateGolin(japaneseEntry, conjugation, wordClass);
         }
 
         public static IGolin TopicPreposition(Conjugation conjugation, bool isVerbInSentence)
         {
-            var conjugationFunction = isVerbInSentence ? ConjugationFunctions.EnglishTopicPrepositionsWithVerb : ConjugationFunctions.EnglishTopicPrepositionsWithoutVerb;
-            var english = new English("is", conjugation, conjugationFunction);
+            var wordClass = isVerbInSentence ? WordClass.EnglishTopicPrepositionsWithVerb : WordClass.EnglishTopicPrepositionsWithoutVerb;
+            var english = new English("is", wordClass, conjugation);
             return CreateGolin(english, null);
         }
 
@@ -66,12 +63,10 @@
             return CreateGolin(null, japanese);
         }
 
-        private static IGolin CreateGolin(IJapaneseEntry japaneseEntry, Conjugation conjugation, 
-                                          Dictionary<Conjugation, Func<string, string>> conjugationFunctions, 
-                                          Dictionary<Conjugation, Func<string>> conjugationInformations)
+        private static IGolin CreateGolin(IJapaneseEntry japaneseEntry, Conjugation conjugation, WordClass wordClass)
         {
             var english = new English(japaneseEntry.GetEnglish());
-            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), conjugation, conjugationFunctions, conjugationInformations);
+            var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), wordClass, conjugation);
             var translationInformation = japaneseEntry.GetPartsOfSpeech().Select(partOfSpeech => partOfSpeech.ToString());
             return CreateGolin(english, japanese, translationInformation);
         }

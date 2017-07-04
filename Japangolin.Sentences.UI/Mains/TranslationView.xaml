@@ -42,7 +42,7 @@
 
         <materialDesign:ColorZone Grid.Row="3" Mode="PrimaryLight" Visibility="{Binding IsCheatModeEnabled, Converter={StaticResource BoolToNotCollapsedConverter}}">
             <StackPanel Orientation="Vertical" Margin="16">
-                <TextBlock Text="{Binding ConjugationNote}" 
+                <TextBlock Text="{Binding ConjugationDescription}" 
                            HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
                            FontSize="10" FontWeight="Normal" />
                 

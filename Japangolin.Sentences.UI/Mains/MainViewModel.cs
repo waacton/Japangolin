@@ -21,8 +21,7 @@
         private Sentence CurrentSentence => this.main.Sentence;
         private Conjugation CurrentConjugation => this.main.Conjugation;
 
-        // TODO: a touch hacky
-        public string PolitenessForm => this.CurrentConjugation.DisplayName.ToLower().StartsWith("long") ? "[polite]" : "[casual]"; 
+        public string ConjugationDescription => $"[{this.CurrentConjugation.Description.ToLower()}]";
 
         public List<IGolin> GolinEnglish => this.CurrentSentence.GolinEnglish();
         public List<IGolin> GolinJapanese => this.CurrentSentence.GolinJapanese();
@@ -114,6 +113,11 @@
 
         public void CheckSentence()
         {
+            if (this.UserInput == null)
+            {
+                return;
+            }
+
             if (this.UserInput == this.KanaSentence || this.UserInput == this.KanjiSentence)
             {
                 this.IsCompleted = true;
@@ -192,7 +196,7 @@
     public class DesignTimeMainViewModel : MainViewModel
     {
         private readonly English english = new English("Japangolin");
-        private readonly Japanese japanese = new Japanese("ジャパンゴリン", "日本蜥蜴", Conjugation.LongPresentAffirmative, ConjugationFunctions.JapaneseNoun, ConjugationInformations.JapaneseNoun);
+        private readonly Japanese japanese = new Japanese("ジャパンゴリン", "日本蜥蜴", WordClass.JapaneseNoun, Conjugation.LongPresentAffirmative);
 
         public new List<IGolin> GolinEnglish => new List<IGolin> { new DesignTimeGolin(this.english, this.japanese) };
         public new string KanaSentence => "ジャパンゴリン";

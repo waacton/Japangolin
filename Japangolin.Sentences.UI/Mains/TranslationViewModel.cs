@@ -17,7 +17,7 @@
 
         public bool HasKanji => this.KanjiBase != this.KanaBase;
 
-        public string ConjugationNote => $"Conjugation: {this.Golin?.Conjugation?.DisplayName}";
+        public string ConjugationDescription => $"Conjugation: {this.Golin?.Conjugation?.Description.ToLower()}";
         public string ConjugationInformation => this.Golin?.ConjugationInformation;
 
         private bool isCheatModeEnabled;

@@ -5,7 +5,6 @@
 
     using Wacton.Tovarisch.Enum;
 
-    // TODO: combine together with ConjugationFunctions
     public static class ConjugationInformations
     {
         public static readonly Dictionary<Conjugation, Func<string>> JapaneseNoun =

@@ -95,7 +95,7 @@
         private static IGolin CreateGolin(Conjugation conjugation)
         {
             var english = new English(Translation);
-            var japanese = new Japanese(Kana, Kanji, conjugation, ConjugationFunctions.JapaneseNoun, ConjugationInformations.JapaneseNoun);
+            var japanese = new Japanese(Kana, Kanji, WordClass.JapaneseNoun, conjugation);
             return new Golin(english, japanese);
         }
     }
