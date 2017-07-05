@@ -13,7 +13,7 @@
         public static readonly Dictionary<Conjugation, Func<string, string>> EnglishTopicPrepositionsWithoutVerb =
             new Dictionary<Conjugation, Func<string, string>>
             {
-                { Conjugation.None, s => "???" },
+                { Conjugation.None, s => string.Empty },
                 { Conjugation.LongPresentAffirmative, s => "is" },
                 { Conjugation.LongPresentNegative, s => "is not" },
                 { Conjugation.LongPastAffirmative, s => "was" },
@@ -31,7 +31,7 @@
         public static readonly Dictionary<Conjugation, Func<string, string>> EnglishTopicPrepositionsWithVerb =
             new Dictionary<Conjugation, Func<string, string>>
             {
-                { Conjugation.None, s => "???" },
+                { Conjugation.None, s => string.Empty },
                 { Conjugation.LongPresentAffirmative, s => "does" },
                 { Conjugation.LongPresentNegative, s => "does not" },
                 { Conjugation.LongPastAffirmative, s => "did" },
@@ -54,14 +54,14 @@
                 { Conjugation.LongPresentNegative, s => $"{s}じゃないです" }, // add janaidesu (colloquial of ja arimasen)
                 { Conjugation.LongPastAffirmative, s => $"{s}でした" }, // add deshita
                 { Conjugation.LongPastNegative, s => $"{s}じゃなかったです" }, // add janakattadesu
-                { Conjugation.LongFutureAffirmative, s => $"{JapaneseNoun[Conjugation.LongPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.LongFutureNegative, s => $"{JapaneseNoun[Conjugation.LongPresentNegative](s)}？？？" }, // same as present ???
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseNoun[Conjugation.LongPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.LongFutureNegative, s => $"{JapaneseNoun[Conjugation.LongPresentNegative](s)}" }, // same as present 
                 { Conjugation.ShortPresentAffirmative, s => $"{s}だ" }, // add da [long: desu ~> short: da]
                 { Conjugation.ShortPresentNegative, s => $"{s}じゃない" }, // add janai [long: janaidesu ~> short: janai (drop desu)]
                 { Conjugation.ShortPastAffirmative, s => $"{s}だった" }, // add datta [long: deshita ~> short: datta]
                 { Conjugation.ShortPastNegative, s => $"{s}じゃなかった" }, // add janakatta [long: janakattadesu ~> short: janakatta (drop desu)]
-                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseNoun[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.ShortFutureNegative, s => $"{JapaneseNoun[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
+                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseNoun[Conjugation.ShortPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseNoun[Conjugation.ShortPresentNegative](s)}" } // same as present 
             };
 
         public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerbIchidan =
@@ -72,14 +72,14 @@
                 { Conjugation.LongPresentNegative, s => $"{VerbIchidanFormI(s)}ません" }, // drop ru, add masen
                 { Conjugation.LongPastAffirmative, s => $"{VerbIchidanFormI(s)}ました" }, // drop ru, add mashita
                 { Conjugation.LongPastNegative, s => $"{VerbIchidanFormI(s)}ませんでした" }, // drop ru, add masendeshita
-                { Conjugation.LongFutureAffirmative, s => $"{JapaneseVerbIchidan[Conjugation.LongPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.LongFutureNegative, s => $"{JapaneseVerbIchidan[Conjugation.LongPresentNegative](s)}？？？" }, // same as present ???
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseVerbIchidan[Conjugation.LongPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.LongFutureNegative, s => $"{JapaneseVerbIchidan[Conjugation.LongPresentNegative](s)}" }, // same as present 
                 { Conjugation.ShortPresentAffirmative, s => $"{s}" }, // dictionary form
                 { Conjugation.ShortPresentNegative, s => $"{VerbIchidanFormI(s)}ない" }, // drop ru, add nai
                 { Conjugation.ShortPastAffirmative, s => $"{VerbIchidanFormTa(s)}" }, // te-form, te becomes ta
                 { Conjugation.ShortPastNegative, s => $"{VerbIchidanFormI(s)}なかった" }, // drop ru, add nakatta [short-present: nai ~> short-past: nakatta]
-                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseVerbIchidan[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.ShortFutureNegative, s => $"{JapaneseVerbIchidan[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
+                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseVerbIchidan[Conjugation.ShortPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseVerbIchidan[Conjugation.ShortPresentNegative](s)}" } // same as present 
             };
 
         public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseVerbGodan =
@@ -90,14 +90,14 @@
                 { Conjugation.LongPresentNegative, s => $"{VerbGodanFormI(s)}ません" }, // ~u becomes ~i, add masen
                 { Conjugation.LongPastAffirmative, s => $"{VerbGodanFormI(s)}ました" }, // ~u becomes ~i, add mashita
                 { Conjugation.LongPastNegative, s => $"{VerbGodanFormI(s)}ませんでした" }, // ~u becomes ~i, add masendeshita
-                { Conjugation.LongFutureAffirmative, s => $"{JapaneseVerbGodan[Conjugation.LongPresentAffirmative](s)} ？？？" }, // same as present ???
-                { Conjugation.LongFutureNegative, s => $"{JapaneseVerbGodan[Conjugation.LongPresentNegative](s)} ？？？" }, // same as present ???
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseVerbGodan[Conjugation.LongPresentAffirmative](s)} " }, // same as present 
+                { Conjugation.LongFutureNegative, s => $"{JapaneseVerbGodan[Conjugation.LongPresentNegative](s)} " }, // same as present 
                 { Conjugation.ShortPresentAffirmative, s => s }, // dictionary form
                 { Conjugation.ShortPresentNegative, s => $"{VerbGodanFormA(s)}ない" }, // ~u becomes ~a, add nai 
                 { Conjugation.ShortPastAffirmative, s => $"{VerbGodanFormTa(s)}" }, // te-form, te becomes ta
                 { Conjugation.ShortPastNegative, s => $"{VerbGodanFormA(s)}なかった" }, // ~u becomes ~a, add nakatta [short-present: nai ~> short-past: nakatta]
-                { Conjugation.ShortFutureAffirmative,s => $"{JapaneseVerbGodan[Conjugation.ShortPresentAffirmative](s)} ？？？" }, // same as present ???
-                { Conjugation.ShortFutureNegative, s => $"{JapaneseVerbGodan[Conjugation.ShortPresentNegative](s)} ？？？" } // same as present ???
+                { Conjugation.ShortFutureAffirmative,s => $"{JapaneseVerbGodan[Conjugation.ShortPresentAffirmative](s)} " }, // same as present 
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseVerbGodan[Conjugation.ShortPresentNegative](s)} " } // same as present 
             };
 
         public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseAdjectiveI =
@@ -108,14 +108,14 @@
                 { Conjugation.LongPresentNegative, s => $"{AdjectiveForm(s, true)}くないです" }, // drop i, add kunaidesu
                 { Conjugation.LongPastAffirmative, s => $"{AdjectiveForm(s, true)}かったです" }, // drop i, add kattadesu
                 { Conjugation.LongPastNegative, s => $"{AdjectiveForm(s, true)}くなかったです" }, // drop i, add kunakattadesu
-                { Conjugation.LongFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.LongFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentNegative](s)}？？？" }, // same as present ???
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.LongFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.LongPresentNegative](s)}" }, // same as present 
                 { Conjugation.ShortPresentAffirmative, s => $"{s}" }, // dictionary form
                 { Conjugation.ShortPresentNegative, s => $"{AdjectiveForm(s, true)}くない" }, // add kunai [long: kunaidesu ~> short: kunai (drop desu)]
                 { Conjugation.ShortPastAffirmative, s => $"{AdjectiveForm(s, true)}かった" }, // add katta [long: kattadesu ~> short: katta (drop desu)]
                 { Conjugation.ShortPastNegative, s => $"{AdjectiveForm(s, true)}くなかった" }, // add kunakatta [long: kunakattadesu ~> short: kunakatta (drop desu)]
-                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.ShortFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
+                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseAdjectiveI[Conjugation.ShortPresentNegative](s)}" } // same as present 
             };
 
         public static readonly Dictionary<Conjugation, Func<string, string>> JapaneseAdjectiveNa =
@@ -126,14 +126,14 @@
                 { Conjugation.LongPresentNegative, s => $"{JapaneseNoun[Conjugation.LongPresentNegative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
                 { Conjugation.LongPastAffirmative, s => $"{JapaneseNoun[Conjugation.LongPastAffirmative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
                 { Conjugation.LongPastNegative, s => $"{JapaneseNoun[Conjugation.LongPastNegative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
-                { Conjugation.LongFutureAffirmative, s => $"{JapaneseNoun[Conjugation.LongFutureAffirmative](AdjectiveForm(s, false))} ？？？" }, // drop na, conjugate as noun ???
-                { Conjugation.LongFutureNegative, s => $"{JapaneseNoun[Conjugation.LongFutureNegative](AdjectiveForm(s, false))} ？？？" }, // drop na, conjugate as noun ???
+                { Conjugation.LongFutureAffirmative, s => $"{JapaneseNoun[Conjugation.LongFutureAffirmative](AdjectiveForm(s, false))} " }, // drop na, conjugate as noun 
+                { Conjugation.LongFutureNegative, s => $"{JapaneseNoun[Conjugation.LongFutureNegative](AdjectiveForm(s, false))} " }, // drop na, conjugate as noun 
                 { Conjugation.ShortPresentAffirmative, s => $"{JapaneseNoun[Conjugation.ShortPresentAffirmative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
                 { Conjugation.ShortPresentNegative, s => $"{JapaneseNoun[Conjugation.ShortPresentNegative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
                 { Conjugation.ShortPastAffirmative, s => $"{JapaneseNoun[Conjugation.ShortPastAffirmative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
                 { Conjugation.ShortPastNegative, s => $"{JapaneseNoun[Conjugation.ShortPastNegative](AdjectiveForm(s, false))}" }, // drop na, conjugate as noun
-                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveNa[Conjugation.ShortPresentAffirmative](s)}？？？" }, // same as present ???
-                { Conjugation.ShortFutureNegative, s => $"{JapaneseAdjectiveNa[Conjugation.ShortPresentNegative](s)}？？？" } // same as present ???
+                { Conjugation.ShortFutureAffirmative, s => $"{JapaneseAdjectiveNa[Conjugation.ShortPresentAffirmative](s)}" }, // same as present 
+                { Conjugation.ShortFutureNegative, s => $"{JapaneseAdjectiveNa[Conjugation.ShortPresentNegative](s)}" } // same as present 
             };
 
         public static Dictionary<Conjugation, Func<string, string>> Defaults => DefaultConjugationFunctions();

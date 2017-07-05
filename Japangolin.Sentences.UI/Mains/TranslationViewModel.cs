@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
     using Wacton.Japangolin.Sentences.Domain.Golins;
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.UI.MVVM;
@@ -17,8 +18,12 @@
 
         public bool HasKanji => this.KanjiBase != this.KanaBase;
 
-        public string ConjugationDescription => $"Conjugation: {this.Golin?.Conjugation?.Description.ToLower()}";
+        private Conjugation Conjugation => this.Golin?.Conjugation;
+        public string ConjugationDescription => $"<{this.Golin?.Conjugation?.Description.ToLower()}>";
         public string ConjugationInformation => this.Golin?.ConjugationInformation;
+
+        private bool HasConjugation => this.Conjugation != null && !this.Conjugation.Equals(Conjugation.None);
+        public bool IsShowingConjugationInformation => this.IsCheatModeEnabled && this.HasConjugation;
 
         private bool isCheatModeEnabled;
         public bool IsCheatModeEnabled
@@ -31,6 +36,7 @@
             {
                 this.isCheatModeEnabled = value;
                 this.NotifyOfPropertyChange(nameof(this.IsCheatModeEnabled));
+                this.NotifyOfPropertyChange(nameof(this.IsShowingConjugationInformation));
             }
         }
 
