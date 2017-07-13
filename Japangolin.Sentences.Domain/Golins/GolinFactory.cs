@@ -67,7 +67,7 @@
         {
             var english = new English(japaneseEntry.GetEnglish());
             var japanese = new Japanese(japaneseEntry.GetKana(), japaneseEntry.GetKanji(), wordClass, conjugation);
-            var translationInformation = japaneseEntry.GetPartsOfSpeech().Select(partOfSpeech => partOfSpeech.ToString());
+            var translationInformation = japaneseEntry.GetPartsOfSpeech().Select(partOfSpeech => partOfSpeech.Description.ToLower());
             return CreateGolin(english, japanese, translationInformation);
         }
 

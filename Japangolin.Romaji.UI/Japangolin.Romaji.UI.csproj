@@ -72,8 +72,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wacton.Desu, Version=3.0.0.20277, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wacton.Desu.3.0.0\lib\net46\Wacton.Desu.dll</HintPath>
+    <Reference Include="Wacton.Desu, Version=3.1.0.28171, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wacton.Desu.3.1.0\lib\net46\Wacton.Desu.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Wacton.Tovarisch, Version=1.1.1.19153, Culture=neutral, processorArchitecture=MSIL">
