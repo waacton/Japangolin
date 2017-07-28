@@ -5,6 +5,7 @@
 
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
+    using Wacton.Desu.Romaji;
     using Wacton.Tovarisch.Randomness;
 
     public class JapanesePhraseRepository : IJapanesePhraseRepository
@@ -53,15 +54,18 @@
                 foreach (var reading in entry.Readings)
                 {
                     var kana = reading.Text;
-                    var romaji = transliterator.GetRomaji(kana);
-                    if (romaji == null)
+                    string romaji;
+                    try
+                    {
+                        romaji = transliterator.GetRomaji(kana);
+                    }
+                    catch (TransliterationException)
                     {
                         unprocessed.Add(kana); // for debug purposes
+                        continue;
                     }
-                    else
-                    {
-                        phrases.Add(new JapanesePhrase(kana, romaji, meaning, kanjis, entryId));
-                    }
+
+                    phrases.Add(new JapanesePhrase(kana, romaji, meaning, kanjis, entryId));
                 }
             }
 

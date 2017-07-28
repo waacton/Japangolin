@@ -8,7 +8,7 @@
         "pdb": "../../Japangolin.Romaji.Domain/obj/{configuration}/Wacton.Japangolin.Romaji.Domain.pdb"
       },
       "dependencies": {
-        "Wacton.Desu": "3.1.0",
+        "Wacton.Desu": "3.2.0",
         "Wacton.Tovarisch": "1.1.0-*"
       }
     }
