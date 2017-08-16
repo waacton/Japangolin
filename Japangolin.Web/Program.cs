@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -11,6 +12,7 @@ namespace ReactDemo
         {
             var japaneseDictionary = new JapaneseDictionary();
             var entries = japaneseDictionary.GetEntries();
+            var entry = entries.ToList().Last();
 
             BuildWebHost(args).Run();
         }
