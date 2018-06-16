@@ -226,7 +226,8 @@
             return baseForm + godanSuffix;
         }
 
-        // NOTE: the japanese dictionary behind this application does not include "na" in the dictionary form, so no need to remove anything
+        // NOTE: the japanese dictionary behind this application does not include "na" in the dictionary form of na-adjectives, 
+        // so no need to remove anything
         private static string AdjectiveForm(string dictionaryForm, bool isAdjectiveI)
         {
             return isAdjectiveI ? dictionaryForm.Remove(dictionaryForm.Length - 1) : dictionaryForm;

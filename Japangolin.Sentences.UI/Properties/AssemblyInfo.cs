@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Wacton.Japangolin.Sentences.UI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Wacton")]
+[assembly: AssemblyCompany("William Acton")]
 [assembly: AssemblyProduct("Wacton.Japangolin.Sentences.UI")]
-[assembly: AssemblyCopyright("Copyright © Wacton 2017")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

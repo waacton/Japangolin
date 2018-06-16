@@ -8,16 +8,17 @@
     [TestFixture]
     public class AdjectiveなTests
     {
-        private const string Kana = "きれいな";
-        private const string Kanji = "綺麗な";
+        // dictionary used in Wacton.Desu does not present na-adjectives dictionary form with trailing "na"
+        private const string Kana = "きれい"; // not きれいな
+        private const string Kanji = "綺麗"; // not 綺麗な
         private const string Translation = "beautiful";
 
         [Test]
         public void ConjugateNone()
         {
             var golin = CreateGolin(Conjugation.None);
-            Assert.That(golin.KanaConjugated, Is.EqualTo("きれいな"));
-            Assert.That(golin.KanjiConjugated, Is.EqualTo("綺麗な"));
+            Assert.That(golin.KanaConjugated, Is.EqualTo("きれい"));
+            Assert.That(golin.KanjiConjugated, Is.EqualTo("綺麗"));
         }
 
         [Test]

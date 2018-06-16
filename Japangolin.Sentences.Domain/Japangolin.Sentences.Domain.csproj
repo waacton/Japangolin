@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wacton.Japangolin.Sentences.Domain</RootNamespace>
     <AssemblyName>Wacton.Japangolin.Sentences.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,9 +39,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wacton.Desu, Version=3.2.0.17214, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wacton.Desu.3.2.0\lib\net46\Wacton.Desu.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Wacton.Desu">
+      <HintPath>..\..\Desu\Desu\bin\Debug\netstandard2.0\Wacton.Desu.dll</HintPath>
     </Reference>
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
@@ -80,9 +80,6 @@
     <Compile Include="Golins\Golin.cs" />
     <Compile Include="Extensions\PartsOfSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

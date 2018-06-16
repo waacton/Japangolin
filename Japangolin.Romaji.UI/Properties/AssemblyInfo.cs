@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Wacton.Japangolin.Romaji.UI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Wacton")]
+[assembly: AssemblyCompany("William Acton")]
 [assembly: AssemblyProduct("Wacton.Japangolin.Romaji.UI")]
-[assembly: AssemblyCopyright("Copyright © Wacton 2017")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

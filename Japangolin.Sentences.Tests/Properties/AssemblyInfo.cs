@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Wacton.Japangolin.Sentences.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Wacton")]
+[assembly: AssemblyCompany("William Acton")]
 [assembly: AssemblyProduct("Wacton.Japangolin.Sentences.Tests")]
-[assembly: AssemblyCopyright("Copyright © Wacton 2017")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
