@@ -39,8 +39,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wacton.Desu">
-      <HintPath>..\..\Desu\Desu\bin\Debug\netstandard2.0\Wacton.Desu.dll</HintPath>
+    <Reference Include="Wacton.Desu, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wacton.Desu.4.0.0\lib\netstandard2.0\Wacton.Desu.dll</HintPath>
     </Reference>
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
@@ -80,6 +80,13 @@
     <Compile Include="Golins\Golin.cs" />
     <Compile Include="Extensions\PartsOfSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Desu.ico" />
+    <Content Include="Resources\Desu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
