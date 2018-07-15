@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Japangolin.Sentences.Domain\Japangolin.Sentences.Domain.csproj">
-      <Project>{479e58b7-1bcb-4f48-9d4e-745a0f76a33a}</Project>
+      <Project>{88afab87-87d5-49d4-9e59-364a273eb172}</Project>
       <Name>Japangolin.Sentences.Domain</Name>
     </ProjectReference>
   </ItemGroup>

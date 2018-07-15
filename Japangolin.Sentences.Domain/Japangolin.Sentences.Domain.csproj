@@ -1,99 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{479E58B7-1BCB-4F48-9D4E-745A0F76A33A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wacton.Japangolin.Sentences.Domain</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Wacton.Japangolin.Sentences.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Wacton.Desu, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wacton.Desu.4.0.0\lib\netstandard2.0\Wacton.Desu.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Wacton.Desu" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Commands\UpdateSentenceCommand.cs" />
-    <Compile Include="Conjugations\Formality.cs" />
-    <Compile Include="Conjugations\Polarity.cs" />
-    <Compile Include="Conjugations\Tense.cs" />
-    <Compile Include="Conjugations\WordClass.cs" />
-    <Compile Include="Conjugations\ConjugationInformations.cs" />
-    <Compile Include="Conjugations\ConjugationFunctions.cs" />
-    <Compile Include="Golins\GolinFactory.cs" />
-    <Compile Include="Golins\Japanese.cs" />
-    <Compile Include="Golins\English.cs" />
-    <Compile Include="Conjugations\Conjugation.cs" />
-    <Compile Include="Golins\IGolin.cs" />
-    <Compile Include="SentenceBlocks\ObjectBlockType.cs" />
-    <Compile Include="NounPhrases\NounPhraseType.cs" />
-    <Compile Include="SentenceBlocks\ObjectAdjectiveBlock.cs" />
-    <Compile Include="NounPhrases\NounPhraseFactory.cs" />
-    <Compile Include="SentenceBlocks\ObjectBlockFactory.cs" />
-    <Compile Include="SentenceBlocks\ObjectVerbBlock.cs" />
-    <Compile Include="SentenceBlocks\ObjectNounBlock.cs" />
-    <Compile Include="SentenceBlocks\ObjectBlock.cs" />
-    <Compile Include="Mains\Sentence.cs" />
-    <Compile Include="SentenceBlocks\SentenceBlock.cs" />
-    <Compile Include="Extensions\JapaneseEntryExtensions.cs" />
-    <Compile Include="NounPhrases\NounPhrase.cs" />
-    <Compile Include="SentenceBlocks\TopicBlock.cs" />
-    <Compile Include="NounPhrases\VerbNounPhrase.cs" />
-    <Compile Include="NounPhrases\AdjectiveNounPhrase.cs" />
-    <Compile Include="Mains\Main.cs" />
-    <Compile Include="NounPhrases\ModifiedNounPhrase.cs" />
-    <Compile Include="NounPhrases\SimpleNounPhrase.cs" />
-    <Compile Include="Golins\Golin.cs" />
-    <Compile Include="Extensions\PartsOfSpeech.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Desu.ico" />
-    <Content Include="Resources\Desu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
