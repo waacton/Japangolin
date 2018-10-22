@@ -6,7 +6,7 @@
     using Wacton.Japangolin.Sentences.Domain.Golins;
 
     [TestFixture]
-    public class VerbGodanうTests
+    public class VerbGodanくTests
     {
         private const string Kana = "かく";
         private const string Kanji = "書く";

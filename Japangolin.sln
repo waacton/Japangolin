@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Sentences.Tests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Japangolin.Sentences.Domain", "Japangolin.Sentences.Domain\Japangolin.Sentences.Domain.csproj", "{88AFAB87-87D5-49D4-9E59-364A273EB172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConjugationsUI", "ConjugationsUI\ConjugationsUI.csproj", "{322E1002-66FB-4A07-9D45-D2934B7B7376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{88AFAB87-87D5-49D4-9E59-364A273EB172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88AFAB87-87D5-49D4-9E59-364A273EB172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88AFAB87-87D5-49D4-9E59-364A273EB172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@
     public enum Formality
     {
         None,
-        Polite,
-        Casual
+        Long,
+        Short
     }
 }
