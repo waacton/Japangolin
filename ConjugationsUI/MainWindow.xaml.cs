@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using Wacton.Desu.Enums;
-using Wacton.Desu.Japanese;
-using Wacton.Desu.Romaji;
-using Wacton.Japangolin.Sentences.Domain.Conjugations;
-using Wacton.Japangolin.Sentences.Domain.Extensions;
-using Wacton.Japangolin.Sentences.Domain.Golins;
-using Wacton.Tovarisch.Randomness;
-
-namespace ConjugationsUI
+﻿namespace ConjugationsUI
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+
+    using Wacton.Desu.Enums;
+    using Wacton.Desu.Japanese;
+    using Wacton.Desu.Romaji;
+    using Wacton.Japangolin.Sentences.Domain.Conjugations;
+    using Wacton.Japangolin.Sentences.Domain.Extensions;
+    using Wacton.Tovarisch.Randomness;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -72,21 +72,45 @@ namespace ConjugationsUI
 
         private void UpdateWord()
         {
-            this.currentEntry = RandomSelection.SelectOne(japaneseEntries);
-            var reading = this.currentEntry.Readings.First().Text;
+            // TODO: handle words that are not nouns / adjectives / verbs
+            // TODO: make sure all JLPT N5 words are covered (manual check of sequence #s?)
+            // TODO: select word > select grammar or conjugation if feasible
+            // TODO: add valid word classes to grammars
 
-            var partOfSpeech = this.currentEntry.GetPartsOfSpeech().First();
-            var wordClass = GetWordClass(partOfSpeech);
+            var useGrammar = RandomSelection.IsSuccessful(0.5);
+            if (useGrammar)
+            {
+                var grammar = RandomSelection.SelectOne(Grammar.GetAll<Grammar>());
 
-            // TODO: randomly choose either conjugation or grammar
-            var tense = RandomSelection.SelectOne(tenses);
-            var polarity = RandomSelection.SelectOne(polarities);
-            var formality = RandomSelection.SelectOne(formalities);
-            var conjugation = ConjugationFunctions2.Get(reading, wordClass, tense, polarity, formality);
+                var entries = new IJapaneseEntry[grammar.RequiredWordDataCount];
+                var wordDatas = new WordData[grammar.RequiredWordDataCount];
+                for (var i = 0; i < wordDatas.Length; i++)
+                {
+                    var entry = RandomSelection.SelectOne(japaneseEntries);
+                    var reading = entry.Readings.First().Text;
+                    var partOfSpeech = entry.GetPartsOfSpeech().First();
+                    var wordClass = GetWordClass(partOfSpeech);
 
-            var grammar = "ください";
-            var conjugationForGrammar = ConjugationFunctions2.GetTe(reading, wordClass);
-            var fullGrammar = string.Concat(conjugationForGrammar, grammar);
+                    entries[i] = entry;
+                    wordDatas[i] = new WordData { Text = reading, Class = wordClass };
+                }
+
+                var conjugatedGrammar = grammar.Conjugate(wordDatas);
+                this.currentEntry = entries[0];
+            }
+            else
+            {
+                var entry = RandomSelection.SelectOne(japaneseEntries);
+                var reading = entry.Readings.First().Text;
+                var partOfSpeech = entry.GetPartsOfSpeech().First();
+                var wordClass = GetWordClass(partOfSpeech);
+
+                var tense = RandomSelection.SelectOne(tenses);
+                var polarity = RandomSelection.SelectOne(polarities);
+                var formality = RandomSelection.SelectOne(formalities);
+                var conjugation = ConjugationFunctions2.Get(reading, wordClass, tense, polarity, formality);
+                this.currentEntry = RandomSelection.SelectOne(japaneseEntries);
+            }
 
             this.OnPropertyChanged(nameof(this.English));
             this.OnPropertyChanged(nameof(this.KanjiBase));
