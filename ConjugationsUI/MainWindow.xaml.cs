@@ -3,10 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Windows;
+    using System.Windows.Input;
 
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
@@ -20,20 +22,30 @@
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public string English => this.currentEntry.GetEnglish();
-        public string KanjiBase => this.currentEntry.GetKanji();
-        public string KanaBase => this.currentEntry.GetKana();
-        public string RomajiBase => this.transliterator.GetRomaji(this.KanaBase);
+        // TODO: view model!
+        public string MainEnglish => this.mainEntry.GetEnglish();
+        public string ConjugationDescription { get; private set; }
+        public string GrammarDescription { get; private set; }
+        public string AuxEnglish => string.Join(":", this.auxEntries.Select(entry => entry.GetEnglish()));
+        public string AnswerKana { get; private set; }
+
+        public string InputKana { get; set; }
+        private bool IsAnswerCorrect => this.InputKana != null && this.InputKana.Equals(this.AnswerKana);
+
+        public bool HasConjugationDescription => this.ConjugationDescription != null;
+        public bool HasGrammarDescription => this.GrammarDescription != null;
+        public bool HasAuxEnglish => this.auxEntries.Count() > 0;
 
         private List<IJapaneseEntry> japaneseEntries;
-        private IJapaneseEntry currentEntry;
+
+        private IJapaneseEntry mainEntry;
+        private List<IJapaneseEntry> auxEntries = new List<IJapaneseEntry>();
 
         private List<WordClass> wordClasses = new List<WordClass> { WordClass.JapaneseNoun, WordClass.JapaneseAdjectiveNa, WordClass.JapaneseAdjectiveI, WordClass.JapaneseVerbIchidan, WordClass.JapaneseVerbGodan};
         private List<Tense> tenses = new List<Tense> { Tense.Present, Tense.Past };
         private List<Polarity> polarities = new List<Polarity> { Polarity.Affirmative, Polarity.Negative };
         private List<Formality> formalities = new List<Formality> { Formality.Long, Formality.Short };
 
-        private List<Conjugation> conjugations = Conjugation.KnownConjugations().ToList();
         private Transliterator transliterator = new Transliterator();
 
         public MainWindow()
@@ -63,6 +75,16 @@
             this.UpdateWord();
 
             InitializeComponent();
+            this.Input.Focus();
+            this.SetUserInputLanguage();
+        }
+
+        public void InputEntered(KeyEventArgs e)
+        {
+            if (this.IsAnswerCorrect)
+            {
+                this.UpdateWord();
+            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -72,50 +94,80 @@
 
         private void UpdateWord()
         {
-            // TODO: handle words that are not nouns / adjectives / verbs
-            // TODO: make sure all JLPT N5 words are covered (manual check of sequence #s?)
-            // TODO: select word > select grammar or conjugation if feasible
+            // TODO: make sure all JLPT N5 words are covered (manual check of sequence #s + preprocess?)
             // TODO: add valid word classes to grammars
 
-            var useGrammar = RandomSelection.IsSuccessful(0.5);
-            if (useGrammar)
-            {
-                var grammar = RandomSelection.SelectOne(Grammar.GetAll<Grammar>());
+            this.mainEntry = RandomSelection.SelectOne(japaneseEntries);
+            this.ConjugationDescription = null;
+            this.GrammarDescription = null;
+            this.auxEntries.Clear();
+            this.AnswerKana = null;
+            this.InputKana = null;
 
-                var entries = new IJapaneseEntry[grammar.RequiredWordDataCount];
-                var wordDatas = new WordData[grammar.RequiredWordDataCount];
-                for (var i = 0; i < wordDatas.Length; i++)
+            var mainWordData = this.GetWordData(this.mainEntry);
+            if (mainWordData.Class == WordClass.None) // no conjugation
+            {
+                this.AnswerKana = mainWordData.Text;
+            }
+            else // use standalone or grammar conjugation
+            {
+                var useGrammar = RandomSelection.IsSuccessful(0.5);
+                if (useGrammar)
                 {
-                    var entry = RandomSelection.SelectOne(japaneseEntries);
-                    var reading = entry.Readings.First().Text;
-                    var partOfSpeech = entry.GetPartsOfSpeech().First();
-                    var wordClass = GetWordClass(partOfSpeech);
+                    var grammar = RandomSelection.SelectOne(Grammar.GetAll<Grammar>());
 
-                    entries[i] = entry;
-                    wordDatas[i] = new WordData { Text = reading, Class = wordClass };
+                    var wordDatas = new WordData[grammar.RequiredWordDataCount];
+                    wordDatas[0] = mainWordData;
+                    if (grammar.RequiredWordDataCount > 1)
+                    {
+                        for (var i = 1; i < wordDatas.Length; i++)
+                        {
+                            IJapaneseEntry auxEntry = null;
+                            WordData auxWordData = null;
+
+                            var sameWordClass = false;
+                            while (!sameWordClass)
+                            {
+                                auxEntry = RandomSelection.SelectOne(japaneseEntries);
+                                auxWordData = this.GetWordData(auxEntry);
+                                sameWordClass = auxWordData.Class == mainWordData.Class;
+                            }
+
+                            this.auxEntries.Add(auxEntry);
+                            wordDatas[i] = auxWordData;
+                        }
+                    }
+
+                    this.GrammarDescription = grammar.DisplayName;
+                    this.AnswerKana = grammar.Conjugate(wordDatas);
                 }
-
-                var conjugatedGrammar = grammar.Conjugate(wordDatas);
-                this.currentEntry = entries[0];
-            }
-            else
-            {
-                var entry = RandomSelection.SelectOne(japaneseEntries);
-                var reading = entry.Readings.First().Text;
-                var partOfSpeech = entry.GetPartsOfSpeech().First();
-                var wordClass = GetWordClass(partOfSpeech);
-
-                var tense = RandomSelection.SelectOne(tenses);
-                var polarity = RandomSelection.SelectOne(polarities);
-                var formality = RandomSelection.SelectOne(formalities);
-                var conjugation = ConjugationFunctions2.Get(reading, wordClass, tense, polarity, formality);
-                this.currentEntry = RandomSelection.SelectOne(japaneseEntries);
+                else
+                {
+                    var tense = RandomSelection.SelectOne(tenses);
+                    var polarity = RandomSelection.SelectOne(polarities);
+                    var formality = RandomSelection.SelectOne(formalities);
+                    this.ConjugationDescription = $"{tense}:{polarity}:{formality}";
+                    this.AnswerKana = ConjugationFunctions2.Get(mainWordData.Text, mainWordData.Class, tense, polarity, formality);
+                }
             }
 
-            this.OnPropertyChanged(nameof(this.English));
-            this.OnPropertyChanged(nameof(this.KanjiBase));
-            this.OnPropertyChanged(nameof(this.KanaBase));
-            this.OnPropertyChanged(nameof(this.RomajiBase));
+            this.OnPropertyChanged(nameof(this.MainEnglish));
+            this.OnPropertyChanged(nameof(this.ConjugationDescription));
+            this.OnPropertyChanged(nameof(this.HasConjugationDescription));
+            this.OnPropertyChanged(nameof(this.GrammarDescription));
+            this.OnPropertyChanged(nameof(this.HasGrammarDescription));
+            this.OnPropertyChanged(nameof(this.AuxEnglish));
+            this.OnPropertyChanged(nameof(this.HasAuxEnglish));
+            this.OnPropertyChanged(nameof(this.AnswerKana));
+            this.OnPropertyChanged(nameof(this.InputKana));
+        }
+
+        private WordData GetWordData(IJapaneseEntry japaneseEntry)
+        {
+            var reading = japaneseEntry.Readings.First().Text;
+            var partOfSpeech = japaneseEntry.GetPartsOfSpeech().First();
+            var wordClass = GetWordClass(partOfSpeech);
+            return new WordData { Text = reading, Class = wordClass };
         }
 
         public static readonly List<PartOfSpeech> Nouns = new List<PartOfSpeech> { PartOfSpeech.NounCommon, PartOfSpeech.NounAdverbial, PartOfSpeech.NounNo, PartOfSpeech.NounSuru, PartOfSpeech.NounTemporal };
@@ -132,7 +184,23 @@
             if (AdjectivesI.Contains(partOfSpeech)) { return WordClass.JapaneseAdjectiveI; }
             if (VerbsRu.Contains(partOfSpeech)) { return WordClass.JapaneseVerbIchidan; }
             if (VerbsU.Contains(partOfSpeech)) { return WordClass.JapaneseVerbGodan; }
-            throw new InvalidOperationException();
+            return WordClass.None; // TODO: handle this better
+        }
+
+        private void SetUserInputLanguage()
+        {
+            var japaeseCultureInfo = new CultureInfo("ja-JP");
+
+            var availableInputLanguages = InputLanguageManager.Current.AvailableInputLanguages;
+            if (availableInputLanguages == null)
+            {
+                return;
+            }
+
+            if (availableInputLanguages.Cast<CultureInfo>().Contains(japaeseCultureInfo))
+            {
+                InputLanguageManager.SetInputLanguage(this.Input, japaeseCultureInfo);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

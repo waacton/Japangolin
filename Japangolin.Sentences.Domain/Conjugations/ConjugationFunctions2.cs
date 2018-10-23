@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    // TODO: review naming and structure
     public class ConjugationFunctions2
     {
         /* some useful stuff can be found at https://en.wikipedia.org/wiki/Japanese_verb_conjugation */
@@ -33,7 +34,7 @@
             Set(Noun,            Tense.Past,     Polarity.Affirmative,   Formality.Short,   x => $"{x}だった");
             Set(Noun,            Tense.Past,     Polarity.Negative,      Formality.Long,    x => $"{x}じゃなかったです");
             Set(Noun,            Tense.Past,     Polarity.Negative,      Formality.Short,   x => $"{x}じゃなかった");
-            StemsByWordClass.Add(WordClass.JapaneseNoun,                                    x => $"TODO: {x}");
+            StemsByWordClass.Add(WordClass.JapaneseNoun,                                    x => $"{x}");
             TeFormsByWordClass.Add(WordClass.JapaneseNoun,                                  x => $"{NounFormTe(x)}");
             ConjugationsByWordClass.Add(WordClass.JapaneseNoun, Noun);
 
@@ -46,7 +47,7 @@
             Set(AdjectiveNa,     Tense.Past,     Polarity.Affirmative,   Formality.Short,   x => $"{AdjectiveForm(x, false)}だった");
             Set(AdjectiveNa,     Tense.Past,     Polarity.Negative,      Formality.Long,    x => $"{AdjectiveForm(x, false)}じゃなかったです");
             Set(AdjectiveNa,     Tense.Past,     Polarity.Negative,      Formality.Short,   x => $"{AdjectiveForm(x, false)}じゃなかった");
-            StemsByWordClass.Add(WordClass.JapaneseAdjectiveNa,                             x => $"TODO: {x}");
+            StemsByWordClass.Add(WordClass.JapaneseAdjectiveNa,                             x => $"{AdjectiveForm(x, false)}");
             TeFormsByWordClass.Add(WordClass.JapaneseAdjectiveNa,                           x => $"{AdjectiveNaFormTe(x)}");
             ConjugationsByWordClass.Add(WordClass.JapaneseAdjectiveNa, AdjectiveNa);
 
@@ -59,7 +60,7 @@
             Set(AdjectiveI,     Tense.Past,     Polarity.Affirmative,   Formality.Short,    x => $"{AdjectiveForm(x, true)}かった");
             Set(AdjectiveI,     Tense.Past,     Polarity.Negative,      Formality.Long,     x => $"{AdjectiveForm(x, true)}くなかったです");
             Set(AdjectiveI,     Tense.Past,     Polarity.Negative,      Formality.Short,    x => $"{AdjectiveForm(x, true)}くなかった");
-            StemsByWordClass.Add(WordClass.JapaneseAdjectiveI,                              x => $"TODO: {x}");
+            StemsByWordClass.Add(WordClass.JapaneseAdjectiveI,                              x => $"{AdjectiveForm(x, true)}");
             TeFormsByWordClass.Add(WordClass.JapaneseAdjectiveI,                            x => $"{AdjectiveIFormTe(x)}");
             ConjugationsByWordClass.Add(WordClass.JapaneseAdjectiveI, AdjectiveI);
 
@@ -72,7 +73,7 @@
             Set(VerbRu,          Tense.Past,     Polarity.Affirmative,   Formality.Short,   x => $"{VerbIchidanFormTa(x)}");
             Set(VerbRu,          Tense.Past,     Polarity.Negative,      Formality.Long,    x => $"{VerbIchidanFormI(x)}ませんでした");
             Set(VerbRu,          Tense.Past,     Polarity.Negative,      Formality.Short,   x => $"{VerbIchidanFormI(x)}なかった");
-            StemsByWordClass.Add(WordClass.JapaneseVerbIchidan,                             x => $"TODO: {x}");
+            StemsByWordClass.Add(WordClass.JapaneseVerbIchidan,                             x => $"{VerbIchidanFormI(x)}");
             TeFormsByWordClass.Add(WordClass.JapaneseVerbIchidan,                           x => $"{VerbIchidanFormTe(x)}");
             ConjugationsByWordClass.Add(WordClass.JapaneseVerbIchidan, VerbRu);
 
@@ -85,7 +86,7 @@
             Set(VerbU,          Tense.Past,     Polarity.Affirmative,   Formality.Short,    x => $"{VerbGodanFormTa(x)}");
             Set(VerbU,          Tense.Past,     Polarity.Negative,      Formality.Long,     x => $"{VerbGodanFormI(x)}ませんでした");
             Set(VerbU,          Tense.Past,     Polarity.Negative,      Formality.Short,    x => $"{VerbGodanFormA(x)}なかった");
-            StemsByWordClass.Add(WordClass.JapaneseVerbGodan,                               x => $"TODO: {x}");
+            StemsByWordClass.Add(WordClass.JapaneseVerbGodan,                               x => $"{VerbGodanFormI(x)}");
             TeFormsByWordClass.Add(WordClass.JapaneseVerbGodan,                             x => $"{VerbGodanFormTe(x)}");
             ConjugationsByWordClass.Add(WordClass.JapaneseVerbGodan, VerbU);
         }

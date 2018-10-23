@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="350" Width="525">
@@ -13,26 +14,27 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Text="{Binding English}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="2" Text="{Binding KanjiBase}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="3" Text="{Binding KanaBase}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="4" Text="{Binding RomajiBase}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="5" Text="{Binding CurrentConjugation}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+        <TextBlock Grid.Row="1" Text="{Binding MainEnglish}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+        <TextBlock Grid.Row="2" Text="{Binding ConjugationDescription}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
+                   Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}" />
+        <TextBlock Grid.Row="2" Text="{Binding GrammarDescription}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
+                   Visibility="{Binding HasGrammarDescription, Converter={StaticResource BoolToNotHiddenConverter}}" />
+        <TextBlock Grid.Row="3" Text="{Binding AuxEnglish}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
+                   Visibility="{Binding HasAuxEnglish, Converter={StaticResource BoolToNotHiddenConverter}}" />
 
-        <TextBlock Grid.Row="7" Text="{Binding KanjiConjugated}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="8" Text="{Binding KanaConjugated}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="9" Text="{Binding RomajiConjugated}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+        <TextBox x:Name="Input" 
+                 Grid.Row="5" Text="{Binding InputKana, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="10, 0"
+                 cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" />
 
-        <Button Content="Next" Grid.Row="11" Click="ButtonBase_OnClick" Margin="10,0" />
+        <Button Content="Next" Grid.Row="8" Click="ButtonBase_OnClick" Margin="10,0" />
     </Grid>
 </Window>
