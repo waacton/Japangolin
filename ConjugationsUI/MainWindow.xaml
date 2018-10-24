@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        Icon="pack://application:,,,/ConjugationsUI;component/Resources/Japangolin.ico"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Grid x:Name="Grid">
         <Grid.RowDefinitions>
@@ -33,8 +43,11 @@
         <TextBox x:Name="Input" 
                  Grid.Row="5" Text="{Binding InputKana, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="10, 0"
-                 cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" />
+                 cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" 
+                 materialDesign:HintAssist.Hint="Japanese translation"
+                 Style="{DynamicResource MaterialDesignTextBox}" />
 
-        <Button Content="Next" Grid.Row="8" Click="ButtonBase_OnClick" Margin="10,0" />
+        <Button Content="Next" Grid.Row="8" Click="ButtonBase_OnClick" Margin="10,0" 
+                Style="{DynamicResource MaterialDesignRaisedAccentButton}"/>
     </Grid>
 </Window>

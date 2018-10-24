@@ -13,12 +13,12 @@
 
                 <!-- add resources for controls to use into the application's resource dictionary -->
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Tovarisch.UI;component/Converters/CommonConverters.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Bespokes.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/ConjugationsUI;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ConjugationsUI;component/Styles/Bespokes.xaml" />
 
                 <!-- apply Material control styles as defaults -->
-                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
                 <!-- use tweaked or overridden Material styles with custom default styles where desired (but should still be "based on" Material styles) -->
                 <!--<ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Defaults.xaml" />

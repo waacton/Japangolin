@@ -75,7 +75,6 @@
             this.UpdateWord();
 
             InitializeComponent();
-            this.Input.Focus();
             this.SetUserInputLanguage();
         }
 
@@ -90,6 +89,7 @@
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             this.UpdateWord();
+            this.Input.Focus(); // does not work in constructor due to some timing issue - attempt fix when refactor for view models
         }
 
         private void UpdateWord()
