@@ -14,9 +14,6 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <TextBlock Grid.Row="0" Text="{Binding English}" 
-                       HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
-                       Margin="16,4" FontSize="18" FontWeight="Bold" />
             <TextBlock Text="{Binding Kanji}" 
                        VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
                        Margin="16,4" FontSize="18"
@@ -25,28 +22,6 @@
                        VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
                        Margin="16,4" FontSize="18" />
         </StackPanel>
-
-        <!--<ItemsControl Grid.Row="2" ItemsSource="{Binding TranslationInformation}"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                 Margin="16" FontSize="14" FontWeight="Light" Foreground="{DynamicResource PrimaryHueDarkBrush}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" TextAlignment="Center" TextWrapping="Wrap" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
-
-        <!--<materialDesign:ColorZone Grid.Row="3" Mode="PrimaryLight" Visibility="{Binding IsShowingConjugationInformation, Converter={StaticResource BoolToNotCollapsedConverter}}">
-            <StackPanel Orientation="Vertical" Margin="16">
-                <TextBlock Text="{Binding ConjugationDescription}" 
-                           HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
-                           FontSize="10" FontWeight="Normal" FontStyle="Italic" />
-
-                <TextBlock Text="{Binding ConjugationInformation}" 
-                           HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
-                           FontSize="10" FontWeight="Light" />
-            </StackPanel>
-        </materialDesign:ColorZone>-->
 
     </Grid>
 

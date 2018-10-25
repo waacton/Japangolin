@@ -8,7 +8,7 @@
         xmlns:mains="clr-namespace:ConjugationsUI.Mains"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="450" Width="450" MinWidth="450" MinHeight="450"
+        Title="MainWindow" Height="300" Width="500" MinHeight="300" MinWidth="500" 
         Icon="pack://application:,,,/ConjugationsUI;component/Resources/Japangolin.ico"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -22,27 +22,49 @@
     <Grid x:Name="Grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="1" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
-                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="2"
-                 cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" /> 
-        <TextBox Grid.Row="2" Text="{Binding ConjugationDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
-                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="2"
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Row="0" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
+                 cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" />
+            <TextBox Grid.Row="1" Text="{Binding ConjugationDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
                  Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}"
                  cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
-        <TextBox Grid.Row="2" Text="{Binding GrammarDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+            <TextBox Grid.Row="1" Text="{Binding GrammarDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                  IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" Padding="2"
                  Visibility="{Binding HasGrammarDescription, Converter={StaticResource BoolToNotHiddenConverter}}" 
                  cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
 
-        <Grid Grid.Row="4">
+            <materialDesign:Card Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Stretch" Margin="16, 4">
+                <ContentControl Content="{Binding DetailViewModel}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type mains:NoDetailViewModel}">
+                            <mains:NoDetailView />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type mains:DetailViewModel}">
+                            <mains:DetailView />
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </materialDesign:Card>
+        </Grid>
+
+        
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -70,17 +92,5 @@
             </Button>
         </Grid>
 
-        <materialDesign:Card Grid.Row="6" VerticalAlignment="Stretch" Margin="16">
-            <ContentControl Content="{Binding DetailViewModel}">
-                <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type mains:NoDetailViewModel}">
-                        <mains:NoDetailView />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type mains:DetailViewModel}">
-                        <mains:DetailView />
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-        </materialDesign:Card>
     </Grid>
 </Window>
