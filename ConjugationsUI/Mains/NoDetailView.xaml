@@ -9,7 +9,7 @@
 
     <Grid>
 
-        <TextBlock Text="Select a golin to see the translation" 
+        <TextBlock Text="Select a word to see details" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
                    Margin="16" FontWeight="Light" FontSize="14"/>
 

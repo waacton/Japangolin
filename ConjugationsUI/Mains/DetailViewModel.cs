@@ -5,20 +5,18 @@
 
     public class DetailViewModel : ViewModelBase
     {
-        public string English { get; private set; }
-        public string Kana { get; private set; }
-        public string Kanji { get; private set; }
-        public bool HasKanji => this.Kanji != this.Kana;
+        public string FirstDetail { get; private set; }
+        public string SecondDetail { get; private set; }
+        public bool HasSecondDetail => this.SecondDetail != null;
 
         public DetailViewModel(ModelChangeNotifier modelChangeNotifier) : base(modelChangeNotifier)
         {
         }
 
-        public void Update(string english, string kana, string kanji)
+        public void Update(string firstDetail, string secondDetail = null)
         {
-            this.English = english;
-            this.Kana = kana;
-            this.Kanji = kanji;
+            this.FirstDetail = firstDetail;
+            this.SecondDetail = secondDetail;
             this.NotifyAllPropertyBindings();
         }
     }

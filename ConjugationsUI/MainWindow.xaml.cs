@@ -39,7 +39,9 @@
         public bool HasGrammarDescription => this.GrammarDescription != null;
         public bool HasAuxEnglish => this.auxEntries.Count() > 0;
 
-        public DetailViewModel DetailViewModel { get; }
+        public DetailViewModel DetailViewModel { get; private set; }
+        private DetailViewModel detailViewModel;
+        private NoDetailViewModel noDetailViewModel;
 
         private List<IJapaneseEntry> japaneseEntries;
 
@@ -77,7 +79,8 @@
                                          entry.Readings.Any(r => r.Text == jlpt[1])))
                 .ToList();
 
-            this.DetailViewModel = new DetailViewModel(new ModelChangeNotifier());
+            this.detailViewModel = new DetailViewModel(new ModelChangeNotifier());
+            this.noDetailViewModel = new NoDetailViewModel(new ModelChangeNotifier());
             this.UpdateWord();
 
             InitializeComponent();
@@ -94,7 +97,9 @@
 
         public void MainEnglishSelected()
         {
-            this.DetailViewModel.Update(this.mainEntry.GetEnglish(), this.mainEntry.GetKana(), this.mainEntry.GetKanji());
+            this.detailViewModel.Update(this.mainEntry.GetKana(), this.mainEntry.GetKanji());
+            this.DetailViewModel = detailViewModel;
+            this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
         // TODO!
@@ -102,12 +107,15 @@
         {
             if (this.HasConjugationDescription)
             {
-                this.DetailViewModel.Update(this.ConjugationDescription, null, null);
+                this.detailViewModel.Update(this.ConjugationDescription);
             }
             else
             {
-                this.DetailViewModel.Update(this.GrammarDescription, null, null);
+                this.detailViewModel.Update(this.GrammarDescription);
             }
+
+            this.DetailViewModel = detailViewModel;
+            this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -127,7 +135,7 @@
             this.auxEntries.Clear();
             this.AnswerKana = null;
             this.InputKana = null;
-            this.DetailViewModel.Update(null, null, null); // TODO: improve
+            this.DetailViewModel = this.noDetailViewModel;
 
             var mainWordData = this.GetWordData(this.mainEntry);
             if (mainWordData.Class == WordClass.None) // no conjugation
@@ -185,6 +193,7 @@
             this.OnPropertyChanged(nameof(this.HasAuxEnglish));
             this.OnPropertyChanged(nameof(this.AnswerKana));
             this.OnPropertyChanged(nameof(this.InputKana));
+            this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
         private WordData GetWordData(IJapaneseEntry japaneseEntry)

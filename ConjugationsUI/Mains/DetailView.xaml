@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mains="clr-namespace:ConjugationsUI.Mains"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=mains:DesignTimeDetailViewModel, IsDesignTimeCreatable=True}">
 
@@ -14,13 +13,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <TextBlock Text="{Binding Kanji}" 
-                       VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
-                       Margin="16,4" FontSize="18"
-                       Visibility="{Binding HasKanji, Converter={StaticResource BoolToNotCollapsedConverter}}" />
-            <TextBlock Text="{Binding Kana}" 
+            <TextBlock Text="{Binding FirstDetail}" 
                        VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
                        Margin="16,4" FontSize="18" />
+            <TextBlock Text="{Binding SecondDetail}" 
+                       VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
+                       Margin="16,4" FontSize="18" 
+                       Visibility="{Binding HasSecondDetail, Converter={StaticResource BoolToNotCollapsedConverter}}" />
         </StackPanel>
 
     </Grid>
