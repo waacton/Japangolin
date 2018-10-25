@@ -8,22 +8,8 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
 
-        <!--<ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Controls/CustomForegroundListBoxItemStyle.xaml"/>-->
+        <!-- the following styles become available for use via the application's resources -->
+        <ResourceDictionary Source="pack://application:,,,/ConjugationsUI;component/Styles/Controls/CustomSelectTextBoxStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
-    <!--<Style x:Key="CenteredTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
-        <Setter Property="TextAlignment" Value="Center" />
-    </Style>-->
-
-
-    <!-- THE FOLLOWING STYLES ARE NOT USED IN THE SKELETON APP, BUT HAVE BEEN FOUND TO BE USEFUL -->
-    
-
-    <!-- default content alignments for list box item to fix a WPF binding error -->
-    <!-- see http://stackoverflow.com/questions/3958173/listboxitem-produces-system-windows-data-error-4-binding-error -->
-    <!--Style x:Key="ExplicitContentAlignmentListBoxItem" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-    </Style>-->
 
 </ResourceDictionary>

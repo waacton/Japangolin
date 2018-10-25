@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mains="clr-namespace:ConjugationsUI.Mains"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="350" Width="525"
+        Title="MainWindow" Height="450" Width="450" MinWidth="450" MinHeight="450"
         Icon="pack://application:,,,/ConjugationsUI;component/Resources/Japangolin.ico"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -20,34 +21,66 @@
 
     <Grid x:Name="Grid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="32"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Text="{Binding MainEnglish}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-        <TextBlock Grid.Row="2" Text="{Binding ConjugationDescription}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                   Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}" />
-        <TextBlock Grid.Row="2" Text="{Binding GrammarDescription}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                   Visibility="{Binding HasGrammarDescription, Converter={StaticResource BoolToNotHiddenConverter}}" />
-        <TextBlock Grid.Row="3" Text="{Binding AuxEnglish}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"
-                   Visibility="{Binding HasAuxEnglish, Converter={StaticResource BoolToNotHiddenConverter}}" />
+        <TextBox Grid.Row="1" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="2"
+                 cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" /> 
+        <TextBox Grid.Row="2" Text="{Binding ConjugationDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="2"
+                 Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}"
+                 cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
+        <TextBox Grid.Row="2" Text="{Binding GrammarDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" Padding="2"
+                 Visibility="{Binding HasGrammarDescription, Converter={StaticResource BoolToNotHiddenConverter}}" 
+                 cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
 
-        <TextBox x:Name="Input" 
-                 Grid.Row="5" Text="{Binding InputKana, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="10, 0"
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="Input" 
+                 Grid.Row="0" Text="{Binding InputKana, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="16, 4"
                  cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" 
-                 materialDesign:HintAssist.Hint="Japanese translation"
+                 materialDesign:HintAssist.Hint="Enter Japanese"
                  Style="{DynamicResource MaterialDesignTextBox}" />
 
-        <Button Content="Next" Grid.Row="8" Click="ButtonBase_OnClick" Margin="10,0" 
-                Style="{DynamicResource MaterialDesignRaisedAccentButton}"/>
+            <TextBlock Grid.Row="1" Text="{Binding AnswerKana}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 4"
+                       Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}" />
+
+            <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Click="ButtonBase_OnClick" ToolTip="Skip" 
+                    Height="60" Width="60" Margin="0"
+                    Style="{StaticResource MaterialDesignFlatButton}" 
+                    Foreground="{DynamicResource SecondaryAccentBrush}">
+                <materialDesign:PackIcon Kind="ChevronDoubleRight" Height="24" Width="24" />
+            </Button>
+        </Grid>
+
+        <materialDesign:Card Grid.Row="6" VerticalAlignment="Stretch" Margin="16">
+            <ContentControl Content="{Binding DetailViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type mains:NoDetailViewModel}">
+                        <mains:NoDetailView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type mains:DetailViewModel}">
+                        <mains:DetailView />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </materialDesign:Card>
     </Grid>
 </Window>

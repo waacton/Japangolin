@@ -85,9 +85,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Mains\DetailView.xaml.cs">
+      <DependentUpon>DetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mains\NoDetailViewModel.cs" />
+    <Compile Include="Mains\DetailViewModel.cs" />
+    <Compile Include="Mains\NoDetailView.xaml.cs">
+      <DependentUpon>NoDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\Stylist.cs" />
     <Compile Include="Themes\Swatch.cs" />
     <Compile Include="WordData.cs" />
+    <Page Include="Mains\DetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mains\NoDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,7 +125,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Controls\CustomForegroundListBoxItemStyle.xaml">
+    <Page Include="Styles\Controls\CustomSelectTextBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

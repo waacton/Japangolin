@@ -10,11 +10,14 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using ConjugationsUI.Mains;
+
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
     using Wacton.Desu.Romaji;
     using Wacton.Japangolin.Sentences.Domain.Conjugations;
     using Wacton.Japangolin.Sentences.Domain.Extensions;
+    using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.Randomness;
 
     /// <summary>
@@ -35,6 +38,8 @@
         public bool HasConjugationDescription => this.ConjugationDescription != null;
         public bool HasGrammarDescription => this.GrammarDescription != null;
         public bool HasAuxEnglish => this.auxEntries.Count() > 0;
+
+        public DetailViewModel DetailViewModel { get; }
 
         private List<IJapaneseEntry> japaneseEntries;
 
@@ -72,6 +77,7 @@
                                          entry.Readings.Any(r => r.Text == jlpt[1])))
                 .ToList();
 
+            this.DetailViewModel = new DetailViewModel(new ModelChangeNotifier());
             this.UpdateWord();
 
             InitializeComponent();
@@ -83,6 +89,24 @@
             if (this.IsAnswerCorrect)
             {
                 this.UpdateWord();
+            }
+        }
+
+        public void MainEnglishSelected()
+        {
+            this.DetailViewModel.Update(this.mainEntry.GetEnglish(), this.mainEntry.GetKana(), this.mainEntry.GetKanji());
+        }
+
+        // TODO!
+        public void DescriptionSelected()
+        {
+            if (this.HasConjugationDescription)
+            {
+                this.DetailViewModel.Update(this.ConjugationDescription, null, null);
+            }
+            else
+            {
+                this.DetailViewModel.Update(this.GrammarDescription, null, null);
             }
         }
 
@@ -103,6 +127,7 @@
             this.auxEntries.Clear();
             this.AnswerKana = null;
             this.InputKana = null;
+            this.DetailViewModel.Update(null, null, null); // TODO: improve
 
             var mainWordData = this.GetWordData(this.mainEntry);
             if (mainWordData.Class == WordClass.None) // no conjugation
