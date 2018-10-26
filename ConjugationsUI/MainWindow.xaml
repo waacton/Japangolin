@@ -40,13 +40,8 @@
             <TextBox Grid.Row="0" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                  IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="8, 8"
                  cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" />
-            <TextBox Grid.Row="1" Text="{Binding ConjugationDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+            <TextBox Grid.Row="1" Text="{Binding Description, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                  IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="8, 8"
-                 Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}"
-                 cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
-            <TextBox Grid.Row="1" Text="{Binding GrammarDescription, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
-                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" Padding="8, 8"
-                 Visibility="{Binding HasGrammarDescription, Converter={StaticResource BoolToNotHiddenConverter}}" 
                  cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
 
             <materialDesign:Card Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Stretch" Margin="16, 4">
