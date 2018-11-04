@@ -22,6 +22,7 @@
         private readonly string format;
         private readonly Func<string, WordClass, string>[] conjugationFunctions;
 
+        public string Details { get; private set; }
         public int RequiredWordDataCount { get; private set; }
 
         public Grammar(string displayName, string format, params Func<string, WordClass, string>[] conjugationFunctions) : base(displayName)
@@ -29,6 +30,13 @@
             this.format = format;
             this.conjugationFunctions = conjugationFunctions;
             this.RequiredWordDataCount = this.format.Count(character => character.Equals('{')); // naive!
+
+            this.Details = this.format;
+            for (var i = 0; i < this.RequiredWordDataCount; i++)
+            {
+                var conjugationName = GetConjugationName(conjugationFunctions[i]);
+                this.Details = this.Details.Replace("{" + i + "}", conjugationName);
+            }
 
             if (this.conjugationFunctions.Length != this.RequiredWordDataCount)
             {
@@ -49,5 +57,14 @@
 
             return string.Format(this.format, conjugatedWords);
         }
+
+        private static string GetConjugationName(Func<string, WordClass, string> conjugationFunction)
+        {
+            if (conjugationFunction == Dictionary) { return "｛dict｝"; }
+            if (conjugationFunction == Stem) { return "｛stem｝"; }
+            if (conjugationFunction == Te) { return "｛～て｝"; }
+            throw new InvalidOperationException();
+        }
+
     }
 }

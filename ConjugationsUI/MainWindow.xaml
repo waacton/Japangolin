@@ -40,7 +40,7 @@
             <TextBox Grid.Row="0" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                  IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="8, 8"
                  cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" />
-            <TextBox Grid.Row="1" Text="{Binding Description, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+            <TextBox Grid.Row="1" Text="{Binding DescriptionEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                  IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="8, 8"
                  cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
 

@@ -27,7 +27,8 @@
     {
         // TODO: view model!
         public string MainEnglish => this.mainEntry.GetEnglish();
-        public string Description { get; private set; }
+        public string DescriptionEnglish { get; private set; }
+        public string DescriptionJapanese { get; private set; }
         public string AnswerKana { get; private set; }
 
         public string InputKana { get; set; }
@@ -84,7 +85,7 @@
         // TODO!
         public void DescriptionSelected()
         {
-            this.detailViewModel.Update(this.Description);
+            this.detailViewModel.Update(this.DescriptionJapanese);
 
             this.DetailViewModel = detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
@@ -102,7 +103,8 @@
             // TODO: add valid word classes to grammars
 
             this.mainEntry = RandomSelection.SelectOne(japaneseEntries);
-            this.Description = null;
+            this.DescriptionEnglish = null;
+            this.DescriptionJapanese = null;
             this.AnswerKana = null;
             this.InputKana = null;
             this.DetailViewModel = this.noDetailViewModel;
@@ -142,10 +144,13 @@
                         }
                     }
 
-                    this.Description = grammar.DisplayName;
+                    this.DescriptionEnglish = grammar.DisplayName;
+                    this.DescriptionJapanese = grammar.Details;
+
                     if (grammar.RequiredWordDataCount > 1)
                     {
-                        this.Description += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetEnglish()))}";
+                        this.DescriptionEnglish += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetEnglish()))}";
+                        this.DescriptionJapanese += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetKana()))}";
                     }
 
                     this.AnswerKana = grammar.Conjugate(wordDatas);
@@ -155,13 +160,15 @@
                     var tense = RandomSelection.SelectOne(tenses);
                     var polarity = RandomSelection.SelectOne(polarities);
                     var formality = RandomSelection.SelectOne(formalities);
-                    this.Description = $"{tense.ToString().ToLower()}, {polarity.ToString().ToLower()}, {formality.ToString().ToLower()}";
+                    this.DescriptionEnglish = $"{tense.ToString().ToLower()}, {polarity.ToString().ToLower()}, {formality.ToString().ToLower()}";
+                    this.DescriptionJapanese = ConjugationInformations2.Get(mainWordData.Class, tense, polarity, formality);
                     this.AnswerKana = ConjugationFunctions2.Get(mainWordData.Text, mainWordData.Class, tense, polarity, formality);
                 }
             }
 
             this.OnPropertyChanged(nameof(this.MainEnglish));
-            this.OnPropertyChanged(nameof(this.Description));
+            this.OnPropertyChanged(nameof(this.DescriptionEnglish));
+            this.OnPropertyChanged(nameof(this.DescriptionJapanese));
             this.OnPropertyChanged(nameof(this.AnswerKana));
             this.OnPropertyChanged(nameof(this.InputKana));
             this.OnPropertyChanged(nameof(this.DetailViewModel));
