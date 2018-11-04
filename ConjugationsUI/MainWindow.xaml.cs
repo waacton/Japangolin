@@ -52,24 +52,10 @@
         {
             var japaneseDictionary = new JapaneseDictionary();
 
-            var rawData = File.ReadAllLines("../../JLPTN5.csv");
-            var jlptList = new List<string[]>();
-            foreach (var data in rawData)
-            {
-                var splitData = data.Split(',');
-                var kanji = splitData[0];
-                var kana = splitData[1];
-
-                if (!string.IsNullOrEmpty(kanji))
-                {
-                    jlptList.Add(new string[] { kanji, kana });
-                }
-            }
-
+            var rawData = File.ReadAllLines("../../JLPTN5_sequences.csv");
+            var jlptSequenceNumbers = rawData.Select(data => int.Parse(data)).ToList();
             this.japaneseEntries = japaneseDictionary.GetEntries()
-                .Where(entry =>
-                    jlptList.Any(jlpt => entry.Kanjis.Any(k => k.Text == jlpt[0]) &&
-                                         entry.Readings.Any(r => r.Text == jlpt[1])))
+                .Where(entry => jlptSequenceNumbers.Contains(entry.Sequence))
                 .ToList();
 
             this.detailViewModel = new DetailViewModel(new ModelChangeNotifier());
