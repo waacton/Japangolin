@@ -7,6 +7,7 @@
     using System.IO;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Input;
 
@@ -26,7 +27,7 @@
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         // TODO: view model!
-        public string MainEnglish => this.mainEntry.GetEnglish();
+        public string MainEnglish => this.mainEntry.GetEnglish().ToLower();
         public string ModifierEnglish { get; private set; }
         public string ModifierJapanese { get; private set; }
         public string AnswerKana { get; private set; }
@@ -49,6 +50,8 @@
         private List<Formality> formalities = new List<Formality> { Formality.Long, Formality.Short };
 
         private Transliterator transliterator = new Transliterator();
+
+        private Regex pascalCaseRegex = new Regex(@"(?!^)(?=[A-Z])");
 
         public MainWindow()
         {
@@ -145,13 +148,13 @@
                         }
                     }
 
-                    this.ModifierEnglish = grammar.DisplayName;
+                    this.ModifierEnglish = this.pascalCaseRegex.Replace(grammar.DisplayName, " ").ToLower();
                     this.ModifierJapanese = grammar.Details;
 
                     if (grammar.RequiredWordDataCount > 1)
                     {
-                        this.ModifierEnglish += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetEnglish()))}";
-                        this.ModifierJapanese += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetKana()))}";
+                        this.ModifierEnglish += $"{Environment.NewLine}+  {string.Join(", ", auxEntries.Select(entry => entry.GetEnglish()))}";
+                        this.ModifierJapanese += $"{Environment.NewLine}＋　{string.Join("、", auxEntries.Select(entry => entry.GetKana()))}";
                     }
 
                     this.AnswerKana = grammar.Conjugate(wordDatas);
