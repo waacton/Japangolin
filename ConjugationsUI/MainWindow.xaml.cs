@@ -27,9 +27,10 @@
     {
         // TODO: view model!
         public string MainEnglish => this.mainEntry.GetEnglish();
-        public string DescriptionEnglish { get; private set; }
-        public string DescriptionJapanese { get; private set; }
+        public string ModifierEnglish { get; private set; }
+        public string ModifierJapanese { get; private set; }
         public string AnswerKana { get; private set; }
+        public bool HasModifier => this.ModifierEnglish != null;
 
         public string InputKana { get; set; }
         private bool IsAnswerCorrect => this.InputKana != null && this.InputKana.Equals(this.AnswerKana);
@@ -85,7 +86,7 @@
         // TODO!
         public void DescriptionSelected()
         {
-            this.detailViewModel.Update(this.DescriptionJapanese);
+            this.detailViewModel.Update(this.ModifierJapanese);
 
             this.DetailViewModel = detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
@@ -103,8 +104,8 @@
             // TODO: add valid word classes to grammars
 
             this.mainEntry = RandomSelection.SelectOne(japaneseEntries);
-            this.DescriptionEnglish = null;
-            this.DescriptionJapanese = null;
+            this.ModifierEnglish = null;
+            this.ModifierJapanese = null;
             this.AnswerKana = null;
             this.InputKana = null;
             this.DetailViewModel = this.noDetailViewModel;
@@ -144,13 +145,13 @@
                         }
                     }
 
-                    this.DescriptionEnglish = grammar.DisplayName;
-                    this.DescriptionJapanese = grammar.Details;
+                    this.ModifierEnglish = grammar.DisplayName;
+                    this.ModifierJapanese = grammar.Details;
 
                     if (grammar.RequiredWordDataCount > 1)
                     {
-                        this.DescriptionEnglish += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetEnglish()))}";
-                        this.DescriptionJapanese += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetKana()))}";
+                        this.ModifierEnglish += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetEnglish()))}";
+                        this.ModifierJapanese += $" + {string.Join(" + ", auxEntries.Select(entry => entry.GetKana()))}";
                     }
 
                     this.AnswerKana = grammar.Conjugate(wordDatas);
@@ -160,16 +161,17 @@
                     var tense = RandomSelection.SelectOne(tenses);
                     var polarity = RandomSelection.SelectOne(polarities);
                     var formality = RandomSelection.SelectOne(formalities);
-                    this.DescriptionEnglish = $"{tense.ToString().ToLower()}, {polarity.ToString().ToLower()}, {formality.ToString().ToLower()}";
-                    this.DescriptionJapanese = ConjugationInformations2.Get(mainWordData.Class, tense, polarity, formality);
+                    this.ModifierEnglish = $"{tense.ToString().ToLower()}, {polarity.ToString().ToLower()}, {formality.ToString().ToLower()}";
+                    this.ModifierJapanese = ConjugationInformations2.Get(mainWordData.Class, tense, polarity, formality);
                     this.AnswerKana = ConjugationFunctions2.Get(mainWordData.Text, mainWordData.Class, tense, polarity, formality);
                 }
             }
 
             this.OnPropertyChanged(nameof(this.MainEnglish));
-            this.OnPropertyChanged(nameof(this.DescriptionEnglish));
-            this.OnPropertyChanged(nameof(this.DescriptionJapanese));
+            this.OnPropertyChanged(nameof(this.ModifierEnglish));
+            this.OnPropertyChanged(nameof(this.ModifierJapanese));
             this.OnPropertyChanged(nameof(this.AnswerKana));
+            this.OnPropertyChanged(nameof(this.HasModifier));
             this.OnPropertyChanged(nameof(this.InputKana));
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }

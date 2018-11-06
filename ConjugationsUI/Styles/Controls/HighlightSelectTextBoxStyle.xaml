@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- 
-        Custom Select Text Box:
+        Highlight Select Text Box:
         * intended for read-only TextBox that looks "selected" when in focus
         * hover and focused use current theme colours
         (see https://stackoverflow.com/questions/3832085/wpf-textbox-border-when-selected)
@@ -13,7 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="CustomSelectTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+    <Style x:Key="HighlightSelectTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">

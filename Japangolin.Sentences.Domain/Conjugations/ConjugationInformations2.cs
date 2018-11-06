@@ -53,7 +53,7 @@
 
             AdjectiveI = new string[2, 2, 2];
             Set(AdjectiveI, Tense.Present, Polarity.Affirmative, Formality.Long, $"＋です");
-            Set(AdjectiveI, Tense.Present, Polarity.Affirmative, Formality.Short, $"＋だ");
+            Set(AdjectiveI, Tense.Present, Polarity.Affirmative, Formality.Short, $"｛dict｝");
             Set(AdjectiveI, Tense.Present, Polarity.Negative, Formality.Long, $"{AdjectiveForm(true)}　＋くないです");
             Set(AdjectiveI, Tense.Present, Polarity.Negative, Formality.Short, $"{AdjectiveForm(true)}　＋くない");
             Set(AdjectiveI, Tense.Past, Polarity.Affirmative, Formality.Long, $"{AdjectiveForm(true)}　＋かったです");

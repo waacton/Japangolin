@@ -8,7 +8,7 @@
         xmlns:mains="clr-namespace:ConjugationsUI.Mains"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="300" Width="500" MinHeight="300" MinWidth="500" 
+        Title="MainWindow" Height="400" Width="600" MinHeight="400" MinWidth="600" 
         Icon="pack://application:,,,/ConjugationsUI;component/Resources/Japangolin.ico"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -31,20 +31,28 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Row="0" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
-                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="8, 8"
-                 cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" />
-            <TextBox Grid.Row="1" Text="{Binding DescriptionEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
-                 IsReadOnly="True" Style="{DynamicResource CustomSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="8, 8"
-                 cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
+            <TextBlock Grid.Row="0" Text="Word" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0" 
+                       Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+            <TextBox Grid.Row="1" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0"
+                     IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
+                     cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" />
+            <TextBlock Grid.Row="2" Text="Modifier" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0"
+                       Foreground="{DynamicResource PrimaryHueMidBrush}" 
+                       Visibility="{Binding HasModifier, Converter={StaticResource BoolToNotHiddenConverter}}" />
+            <TextBox Grid.Row="3" Text="{Binding ModifierEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0"
+                     IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
+                     Visibility="{Binding HasModifier, Converter={StaticResource BoolToNotHiddenConverter}}" 
+                     cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
 
-            <materialDesign:Card Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Stretch" Margin="16, 4">
+            <materialDesign:Card Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" VerticalAlignment="Stretch" Margin="16, 4">
                 <ContentControl Content="{Binding DetailViewModel}">
                     <ContentControl.Resources>
                         <DataTemplate DataType="{x:Type mains:NoDetailViewModel}">
@@ -58,7 +66,6 @@
             </materialDesign:Card>
         </Grid>
 
-        
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -71,13 +78,14 @@
 
             <TextBox x:Name="Input" 
                  Grid.Row="0" Text="{Binding InputKana, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="16, 4"
+                 FontSize="18" VerticalAlignment="Center" Margin="16, 4"
                  cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" 
                  materialDesign:HintAssist.Hint="Enter Japanese"
                  Style="{DynamicResource MaterialDesignTextBox}" />
 
-            <TextBlock Grid.Row="1" Text="{Binding AnswerKana}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 4"
-                       Visibility="{Binding HasConjugationDescription, Converter={StaticResource BoolToNotHiddenConverter}}" />
+            <TextBox Grid.Row="1" Text="{Binding AnswerKana, Mode=OneWay}" 
+                     FontSize="18" VerticalAlignment="Center" Margin="16, 4"
+                     IsReadOnly="True" Style="{DynamicResource InvisibleTextBox}"  />
 
             <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Click="ButtonBase_OnClick" ToolTip="Skip" 
                     Height="60" Width="60" Margin="0"
