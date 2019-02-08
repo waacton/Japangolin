@@ -44,11 +44,6 @@
 
         private WordData mainEntry;
 
-        private List<WordClass> wordClasses = new List<WordClass> { WordClass.JapaneseNoun, WordClass.JapaneseAdjectiveNa, WordClass.JapaneseAdjectiveI, WordClass.JapaneseVerbIchidan, WordClass.JapaneseVerbGodan};
-        private List<Tense> tenses = new List<Tense> { Tense.Present, Tense.Past };
-        private List<Polarity> polarities = new List<Polarity> { Polarity.Affirmative, Polarity.Negative };
-        private List<Formality> formalities = new List<Formality> { Formality.Long, Formality.Short };
-
         private Transliterator transliterator = new Transliterator();
 
         private Regex pascalCaseRegex = new Regex(@"(?!^)(?=[A-Z])");

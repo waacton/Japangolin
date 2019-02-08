@@ -26,7 +26,7 @@
         public static readonly Func<WordClass, Conjugator> PastAffirmativeShort 
             = wordClass => Conjugators.Get(wordClass, Tense.Past, Polarity.Affirmative, Formality.Short);
         public static readonly Func<WordClass, Conjugator> PastNegativeLong 
-            = wordClass => Conjugators.Get(wordClass, Tense.Past, Polarity.Affirmative, Formality.Long);
+            = wordClass => Conjugators.Get(wordClass, Tense.Past, Polarity.Negative, Formality.Long);
         public static readonly Func<WordClass, Conjugator> PastNegativeShort 
             = wordClass => Conjugators.Get(wordClass, Tense.Past, Polarity.Negative, Formality.Short);
 
