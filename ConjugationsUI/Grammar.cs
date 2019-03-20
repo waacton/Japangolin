@@ -113,7 +113,7 @@
         // applies to BecausePolite and ExplainImplicit
 
         public static readonly Grammar BecausePolite = new Grammar("BecausePolite", "{0}ので", (Na, All)); // https://wp.stolaf.edu/japanese/grammar-index/genki-i-ii-grammar-index/node-genki-i-chapter-12/
-        public static readonly Grammar ExplainImplicit = new Grammar("ExplainImplicit", "{0}あとで", (Na, All)); // https://wp.stolaf.edu/japanese/grammar-index/genki-i-ii-grammar-index/n-desu-genki-i-chapter-12/
+        public static readonly Grammar ExplainImplicit = new Grammar("ExplainImplicit", "{0}んです", (Na, All)); // https://wp.stolaf.edu/japanese/grammar-index/genki-i-ii-grammar-index/n-desu-genki-i-chapter-12/
 
         //public static readonly Grammar Must = new Grammar("Must", "{0}", ShortPastAffirmative); // short negative -い...
         //public static readonly Grammar Probably = new Grammar("Probably", "{0}", ShortPastAffirmative); // replaces だ　for noun, adjective-な
