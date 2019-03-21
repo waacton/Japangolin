@@ -25,9 +25,11 @@
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         // TODO: view model!
+
         public string MainEnglish => this.mainEntry.English.ToLower();
         public string ModifierEnglish { get; private set; }
         public string ModifierJapanese { get; private set; }
+        public string ModifierVariation { get; private set; }
         public string AnswerKana { get; private set; }
         public bool HasModifier => this.ModifierEnglish != null;
 
@@ -137,6 +139,7 @@
 
             this.ModifierEnglish = this.pascalCaseRegex.Replace(grammar.DisplayName, " ").ToLower();
             this.ModifierJapanese = grammar.Information(wordDatas);
+            this.ModifierVariation = grammar.Variation;
 
             if (grammar.RequiredWordDataCount > 1)
             {
@@ -149,6 +152,7 @@
             this.OnPropertyChanged(nameof(this.MainEnglish));
             this.OnPropertyChanged(nameof(this.ModifierEnglish));
             this.OnPropertyChanged(nameof(this.ModifierJapanese));
+            this.OnPropertyChanged(nameof(this.ModifierVariation));
             this.OnPropertyChanged(nameof(this.AnswerKana));
             this.OnPropertyChanged(nameof(this.HasModifier));
             this.OnPropertyChanged(nameof(this.InputKana));
