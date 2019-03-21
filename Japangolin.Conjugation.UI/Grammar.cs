@@ -129,7 +129,7 @@
         public int RequiredWordDataCount { get; private set; }
 
         // TODO: make this a property on the grammar (likely linked with IModifier implementation)
-        public bool IsHighLevel => !this.DisplayName.StartsWith("Form:") && !this.DisplayName.StartsWith("Conjugate:");
+        public bool IsHighLevel => this.Variation == "Grammar";
 
         public Grammar(string displayName, string variation, string format, params (Func<WordClass, Conjugator> conjugatorByWordClass, List<WordClass> wordClasses)[] conjugations)
             : base(displayName)

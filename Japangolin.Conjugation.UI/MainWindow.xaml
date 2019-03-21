@@ -42,17 +42,39 @@
             <TextBlock Grid.Row="0" Text="{Binding ModifierVariation}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0"
                        Foreground="{DynamicResource PrimaryHueMidBrush}" 
                        Visibility="{Binding HasModifier, Converter={StaticResource BoolToNotHiddenConverter}}" />
-            <TextBox Grid.Row="1" Text="{Binding ModifierEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0"
+            <TextBox Grid.Row="1" Text="{Binding ModifierEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                      IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
                      Visibility="{Binding HasModifier, Converter={StaticResource BoolToNotHiddenConverter}}" 
-                     cal:Message.Attach="[Event GotFocus] = [Action DescriptionSelected]" />
+                     cal:Message.Attach="[Event GotFocus] = [Action ModifierSelected]" />
 
-            <TextBlock Grid.Row="2" Text="Word" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0" 
+            <TextBlock Grid.Row="2" Text="{Binding WordsTitle}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0" 
                        Foreground="{DynamicResource PrimaryHueMidBrush}"/>
-            <TextBox Grid.Row="3" Text="{Binding MainEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0"
-                     IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
-                     cal:Message.Attach="[Event GotFocus] = [Action MainEnglishSelected]" />
-            
+
+            <ListBox Grid.Row="3" ItemsSource="{Binding Words}" SelectedItem="{Binding SelectedWord, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" Margin="16, 2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Path=., Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                 IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
+                                 cal:Message.Attach="[Event GotFocus] = [Action WordSelected($this)]" 
+                                 cal:Action.TargetWithoutContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}" />
+                        <!-- caliburn doesn't know the right data context from the data template, so provide it (https://stackoverflow.com/questions/13587368/no-target-found-for-method-thrown-by-caliburn-message-attach) -->
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <!-- removes all styling from item container (https://stackoverflow.com/questions/16477552/wpf-remove-highlight-effect-from-listviewitem) -->
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
 
             <materialDesign:Card Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" VerticalAlignment="Stretch" Margin="16, 4">
                 <ContentControl Content="{Binding DetailViewModel}">

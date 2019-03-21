@@ -25,10 +25,12 @@
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         // TODO: view model!
+        private List<WordData> wordDatas;
+        public List<string> Words => this.wordDatas.Select(word => word.English.ToLower()).ToList();
+        public string WordsTitle => this.Words.Count == 1 ? "Word" : "Words";
 
-        public string MainEnglish => this.mainEntry.English.ToLower();
+        private Grammar modifier;
         public string ModifierEnglish { get; private set; }
-        public string ModifierJapanese { get; private set; }
         public string ModifierVariation { get; private set; }
         public string AnswerKana { get; private set; }
         public bool HasModifier => this.ModifierEnglish != null;
@@ -41,11 +43,7 @@
         private NoDetailViewModel noDetailViewModel;
 
         private List<IJapaneseEntry> japaneseEntries;
-
-        private WordData mainEntry;
-
         private Transliterator transliterator = new Transliterator();
-
         private Regex pascalCaseRegex = new Regex(@"(?!^)(?=[A-Z])");
 
         public MainWindow()
@@ -60,7 +58,7 @@
 
             this.detailViewModel = new DetailViewModel(new ModelChangeNotifier());
             this.noDetailViewModel = new NoDetailViewModel(new ModelChangeNotifier());
-            this.UpdateWord();
+            this.Refresh();
 
             InitializeComponent();
             this.SetUserInputLanguage();
@@ -70,29 +68,31 @@
         {
             if (this.IsAnswerCorrect)
             {
-                this.UpdateWord();
+                this.Refresh();
             }
         }
 
-        public void MainEnglishSelected()
+        public void ModifierSelected()
         {
-            this.detailViewModel.Update(this.mainEntry.Kana, this.mainEntry.Kanji);
-            this.DetailViewModel = detailViewModel;
+            var modifierJapanese = this.modifier.Information(this.wordDatas.ToArray());
+
+            this.detailViewModel.Update(modifierJapanese);
+            this.DetailViewModel = this.detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
-        // TODO!
-        public void DescriptionSelected()
+        public void WordSelected(string selectedWord)
         {
-            this.detailViewModel.Update(this.ModifierJapanese);
+            var selectedWordData = this.wordDatas.Single(word => word.English.ToLower() == selectedWord);
 
-            this.DetailViewModel = detailViewModel;
+            this.detailViewModel.Update(selectedWordData.Kana, selectedWordData.Kanji);
+            this.DetailViewModel = this.detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            this.UpdateWord();
+            this.Refresh();
             this.Input.Focus(); // does not work in constructor due to some timing issue - attempt fix when refactor for view models
         }
 
@@ -111,50 +111,36 @@
             return wordData;
         }
 
-        private void UpdateWord()
+        private void Refresh()
         {
             // TODO: make sure all JLPT N5 words are covered (manual check of sequence #s + preprocess?)
             // TODO: add valid word classes to grammars
 
             this.ModifierEnglish = null;
-            this.ModifierJapanese = null;
             this.AnswerKana = null;
             this.InputKana = null;
             this.DetailViewModel = this.noDetailViewModel;
 
-            var grammar = RandomSelection.SelectOne(Grammar.GetAll<Grammar>());
-            var requiredWordClasses = grammar.GetRequiredWordClasses();
+            this.modifier = RandomSelection.SelectOne(Grammar.GetAll<Grammar>());
+            var requiredWordClasses = this.modifier.GetRequiredWordClasses();
 
-            this.mainEntry = GetRandomEntry(requiredWordClasses[0]);
-            var wordDatas = new WordData[grammar.RequiredWordDataCount];
-            wordDatas[0] = this.mainEntry;
-
-            if (grammar.RequiredWordDataCount > 1)
+            this.wordDatas = new List<WordData>();
+            for (var i = 0; i < this.modifier.RequiredWordDataCount; i++)
             {
-                for (var i = 1; i < wordDatas.Length; i++)
-                {
-                    wordDatas[i] = GetRandomEntry(requiredWordClasses[i]);
-                }
+                wordDatas.Add(GetRandomEntry(requiredWordClasses[i]));
             }
 
-            this.ModifierEnglish = this.pascalCaseRegex.Replace(grammar.DisplayName, " ").ToLower();
-            this.ModifierJapanese = grammar.Information(wordDatas);
-            this.ModifierVariation = grammar.Variation;
+            this.ModifierEnglish = this.pascalCaseRegex.Replace(this.modifier.DisplayName, " ").ToLower();
+            this.ModifierVariation = this.modifier.Variation;
 
-            if (grammar.RequiredWordDataCount > 1)
-            {
-                this.ModifierEnglish += $"{Environment.NewLine}+  {string.Join(", ", wordDatas.Skip(1).Select(wordData => wordData.English))}";
-                this.ModifierJapanese += $"{Environment.NewLine}＋　{string.Join("、", wordDatas.Skip(1).Select(wordData => wordData.Kana))}";
-            }
+            this.AnswerKana = this.modifier.Conjugate(wordDatas.ToArray());
 
-            this.AnswerKana = grammar.Conjugate(wordDatas);
-
-            this.OnPropertyChanged(nameof(this.MainEnglish));
             this.OnPropertyChanged(nameof(this.ModifierEnglish));
-            this.OnPropertyChanged(nameof(this.ModifierJapanese));
             this.OnPropertyChanged(nameof(this.ModifierVariation));
+            this.OnPropertyChanged(nameof(this.Words));
+            this.OnPropertyChanged(nameof(this.WordsTitle));
             this.OnPropertyChanged(nameof(this.AnswerKana));
-            this.OnPropertyChanged(nameof(this.HasModifier));
+            this.OnPropertyChanged(nameof(this.HasModifier)); // TODO: needed?
             this.OnPropertyChanged(nameof(this.InputKana));
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }

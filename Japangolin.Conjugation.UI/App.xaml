@@ -21,8 +21,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
                 <!-- use tweaked or overridden Material styles with custom default styles where desired (but should still be "based on" Material styles) -->
-                <!--<ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Overrides.xaml" />-->
+                <!-- <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Defaults.xaml" /> -->
+                <!-- <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Sentences.UI;component/Styles/Overrides.xaml" /> -->
 
             </ResourceDictionary.MergedDictionaries>
 
