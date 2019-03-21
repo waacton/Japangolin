@@ -89,8 +89,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Conjugation.cs" />
-    <Compile Include="ConjugationFunctions.cs" />
-    <Compile Include="ConjugationInformations.cs" />
     <Compile Include="Conjugator.cs" />
     <Compile Include="Conjugators.cs" />
     <Compile Include="Formality.cs" />
@@ -213,9 +211,6 @@
     <Resource Include="Resources\Japangolin.ico" />
     <Resource Include="Resources\Japangolin.png" />
     <SplashScreen Include="Resources\SplashScreen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Japangolin.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

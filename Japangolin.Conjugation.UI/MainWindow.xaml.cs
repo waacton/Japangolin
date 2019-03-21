@@ -164,12 +164,12 @@
         private WordClass GetWordClass(PartOfSpeech partOfSpeech)
         {
             if (partOfSpeech == null) { throw new InvalidOperationException(); }
-            if (Nouns.Contains(partOfSpeech)) { return WordClass.JapaneseNoun; }
-            if (AdjectivesNa.Contains(partOfSpeech)) { return WordClass.JapaneseAdjectiveNa; }
-            if (AdjectivesI.Contains(partOfSpeech)) { return WordClass.JapaneseAdjectiveI; }
-            if (VerbsRu.Contains(partOfSpeech)) { return WordClass.JapaneseVerbIchidan; }
-            if (VerbsU.Contains(partOfSpeech)) { return WordClass.JapaneseVerbGodan; }
-            return WordClass.None; // TODO: handle this better
+            if (Nouns.Contains(partOfSpeech)) { return WordClass.Noun; }
+            if (AdjectivesNa.Contains(partOfSpeech)) { return WordClass.AdjectiveNa; }
+            if (AdjectivesI.Contains(partOfSpeech)) { return WordClass.AdjectiveI; }
+            if (VerbsRu.Contains(partOfSpeech)) { return WordClass.VerbRu; }
+            if (VerbsU.Contains(partOfSpeech)) { return WordClass.VerbU; }
+            return WordClass.Unknown; // TODO: handle this better
         }
 
         private void SetUserInputLanguage()

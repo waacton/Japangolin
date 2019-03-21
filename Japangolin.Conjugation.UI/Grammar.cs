@@ -42,7 +42,7 @@
             string information = shortForm.DetailedInfo;
 
             // note: this change only happens with present affirmative short (～だ　⇒　～な)
-            if (wordClass == WordClass.JapaneseNoun || wordClass == WordClass.JapaneseAdjectiveNa)
+            if (wordClass == WordClass.Noun || wordClass == WordClass.AdjectiveNa)
             {
                 function = text =>
                 {
@@ -60,9 +60,9 @@
         // TODO: rename word classes
         // TODO: allow grammars to take different tense / polarity / formality if the grammar allows (as it stands is enough for current practice)
         //       e.g. ～んです works with present, past, affirmative, negative
-        public static readonly List<WordClass> Nouns = new List<WordClass> { WordClass.JapaneseNoun };
-        public static readonly List<WordClass> Adjectives = new List<WordClass> { WordClass.JapaneseAdjectiveNa, WordClass.JapaneseAdjectiveI };
-        public static readonly List<WordClass> Verbs = new List<WordClass> { WordClass.JapaneseVerbIchidan, WordClass.JapaneseVerbGodan };
+        public static readonly List<WordClass> Nouns = new List<WordClass> { WordClass.Noun };
+        public static readonly List<WordClass> Adjectives = new List<WordClass> { WordClass.AdjectiveNa, WordClass.AdjectiveI };
+        public static readonly List<WordClass> Verbs = new List<WordClass> { WordClass.VerbRu, WordClass.VerbU };
         public static readonly List<WordClass> AdjectivesAndVerbs = Adjectives.Concat(Verbs).ToList();
         public static readonly List<WordClass> All = Nouns.Concat(Adjectives).Concat(Verbs).ToList();
 

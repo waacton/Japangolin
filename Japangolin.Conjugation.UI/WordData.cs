@@ -1,7 +1,5 @@
 ﻿namespace Wacton.Japangolin.Conjugation
 {
-    using Wacton.Japangolin.Conjugation;
-
     public class WordData
     {
         public string Kana { get; set; }
