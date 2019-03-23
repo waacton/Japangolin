@@ -96,7 +96,7 @@
     <Compile Include="Forms.cs" />
     <Compile Include="GrammarBase.cs" />
     <Compile Include="GrammarForm.cs" />
-    <Compile Include="GrammarSentence.cs" />
+    <Compile Include="GrammarPhrase.cs" />
     <Compile Include="Infos.cs" />
     <Compile Include="JapaneseEntryExtensions.cs" />
     <Compile Include="Mains\DetailView.xaml.cs">

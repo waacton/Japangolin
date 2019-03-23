@@ -195,7 +195,7 @@
             var grammars = new List<GrammarBase>();
             grammars.AddRange(GrammarForm.GetAll<GrammarForm>());
             grammars.AddRange(GrammarConjugate.GetAll<GrammarConjugate>());
-            grammars.AddRange(GrammarSentence.GetAll<GrammarSentence>());
+            grammars.AddRange(GrammarPhrase.GetAll<GrammarPhrase>());
             return grammars;
         }
 
