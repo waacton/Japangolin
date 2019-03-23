@@ -6,12 +6,12 @@
     public class WordClassConjugator
     {
         public List<WordClass> WordClasses { get; private set; }
-        public Func<WordClass, Conjugator> ConjugatorByWordClass { get; private set; }
+        public Func<WordClass, Conjugator> Conjugator { get; private set; }
 
-        public WordClassConjugator(List<WordClass> wordClasses, Func<WordClass, Conjugator> conjugatorByWordClass)
+        public WordClassConjugator(List<WordClass> wordClasses, Func<WordClass, Conjugator> conjugator)
         {
             this.WordClasses = wordClasses;
-            this.ConjugatorByWordClass = conjugatorByWordClass;
+            this.Conjugator = conjugator;
         }
 
         public string Conjugate(string text, WordClass wordClass)
@@ -21,7 +21,7 @@
                 throw new InvalidOperationException($"Cannot conjugate {text} - this conjugator is not expecting {wordClass}");
             }
 
-            return this.ConjugatorByWordClass(wordClass).Conjugate(text);
+            return this.Conjugator(wordClass).Conjugate(text);
         }
 
         public Conjugator GetConjugator(WordClass wordClass)
@@ -31,9 +31,9 @@
                 throw new InvalidOperationException($"This conjugator is not expecting {wordClass}");
             }
 
-            return this.ConjugatorByWordClass(wordClass);
+            return this.Conjugator(wordClass);
         }
 
-        public override string ToString() => string.Join(" | ", this.WordClasses);
+        public override string ToString() => string.Join(", ", this.WordClasses);
     }
 }

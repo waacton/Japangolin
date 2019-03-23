@@ -6,7 +6,7 @@
 
     using Wacton.Tovarisch.Enum;
 
-    public abstract class ModifierBase : Enumeration, IModifier
+    public abstract class GrammarBase : Enumeration
     {
         private readonly string format;
         private readonly WordClassConjugator[] conjugators;
@@ -16,7 +16,7 @@
 
         public int RequiredWordDataCount { get; }
 
-        public ModifierBase(string displayName, string format, params WordClassConjugator[] conjugators)
+        public GrammarBase(string displayName, string format, params WordClassConjugator[] conjugators)
             : base(displayName)
         {
             this.format = format;
@@ -29,9 +29,9 @@
             }
         }
 
-        public List<List<WordClass>> GetRequiredWordClasses()
+        public List<WordClass> GetRequiredWordClasses(int wordIndex)
         {
-            return this.conjugators.Select(conjugation => conjugation.WordClasses).ToList();
+            return this.conjugators[wordIndex].WordClasses;
         }
 
         public string Conjugate(params WordData[] wordDatas)

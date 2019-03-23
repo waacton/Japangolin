@@ -39,13 +39,13 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding ModifierVariation}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0"
+            <TextBlock Grid.Row="0" Text="{Binding GrammarVariation}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0"
                        Foreground="{DynamicResource PrimaryHueMidBrush}" 
-                       Visibility="{Binding HasModifier, Converter={StaticResource BoolToNotHiddenConverter}}" />
-            <TextBox Grid.Row="1" Text="{Binding ModifierEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
+                       Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}" />
+            <TextBox Grid.Row="1" Text="{Binding GrammarEnglish, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                      IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
-                     Visibility="{Binding HasModifier, Converter={StaticResource BoolToNotHiddenConverter}}" 
-                     cal:Message.Attach="[Event GotFocus] = [Action ModifierSelected]" />
+                     Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}" 
+                     cal:Message.Attach="[Event GotFocus] = [Action GrammarSelected]" />
 
             <TextBlock Grid.Row="2" Text="{Binding WordsTitle}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0" 
                        Foreground="{DynamicResource PrimaryHueMidBrush}"/>

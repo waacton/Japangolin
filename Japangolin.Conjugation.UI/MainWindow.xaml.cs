@@ -29,12 +29,12 @@
         public List<string> Words => this.wordDatas.Select(word => word.English.ToLower()).ToList();
         public string WordsTitle => this.Words.Count == 1 ? "Word" : "Words";
 
-        private List<ModifierBase> allModifiers = GetAllModifiers();
-        private ModifierBase modifier;
-        public string ModifierEnglish { get; private set; }
-        public string ModifierVariation { get; private set; }
+        private List<GrammarBase> allGrammars = GetAllGrammars();
+        private GrammarBase grammar;
+        public string GrammarEnglish { get; private set; }
+        public string GrammarVariation { get; private set; }
         public string AnswerKana { get; private set; }
-        public bool HasModifier => this.ModifierEnglish != null;
+        public bool HasGrammar => this.GrammarEnglish != null;
 
         public string InputKana { get; set; }
         private bool IsAnswerCorrect => this.InputKana != null && this.InputKana.Equals(this.AnswerKana);
@@ -73,11 +73,11 @@
             }
         }
 
-        public void ModifierSelected()
+        public void GrammarSelected()
         {
-            var modifierJapanese = this.modifier.Information(this.wordDatas.ToArray());
+            var grammarJapanese = this.grammar.Information(this.wordDatas.ToArray());
 
-            this.detailViewModel.Update(modifierJapanese);
+            this.detailViewModel.Update(grammarJapanese);
             this.DetailViewModel = this.detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
@@ -85,8 +85,9 @@
         public void WordSelected(string selectedWord)
         {
             var selectedWordData = this.wordDatas.Single(word => word.English.ToLower() == selectedWord);
+            var wordClassDetail = this.pascalCaseRegex.Replace(selectedWordData.Class.ToString(), "-").ToLower();
 
-            this.detailViewModel.Update(selectedWordData.Kana, selectedWordData.Kanji);
+            this.detailViewModel.Update(selectedWordData.Kana, selectedWordData.Kanji, wordClassDetail);
             this.DetailViewModel = this.detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
@@ -117,31 +118,31 @@
             // TODO: make sure all JLPT N5 words are covered (manual check of sequence #s + preprocess?)
             // TODO: add valid word classes to grammars
 
-            this.ModifierEnglish = null;
+            this.GrammarEnglish = null;
             this.AnswerKana = null;
             this.InputKana = null;
             this.DetailViewModel = this.noDetailViewModel;
 
-            this.modifier = RandomSelection.SelectOne(this.allModifiers);
-            var requiredWordClasses = this.modifier.GetRequiredWordClasses();
+            this.grammar = RandomSelection.SelectOne(this.allGrammars);
 
             this.wordDatas = new List<WordData>();
-            for (var i = 0; i < this.modifier.RequiredWordDataCount; i++)
+            for (var i = 0; i < this.grammar.RequiredWordDataCount; i++)
             {
-                wordDatas.Add(GetRandomEntry(requiredWordClasses[i]));
+                var requiredWordClasses = this.grammar.GetRequiredWordClasses(i);
+                wordDatas.Add(GetRandomEntry(requiredWordClasses));
             }
 
-            this.ModifierEnglish = this.pascalCaseRegex.Replace(this.modifier.DisplayName, " ").ToLower();
-            this.ModifierVariation = this.modifier.Variation;
+            this.GrammarEnglish = this.pascalCaseRegex.Replace(this.grammar.DisplayName, " ").ToLower();
+            this.GrammarVariation = this.grammar.Variation;
 
-            this.AnswerKana = this.modifier.Conjugate(wordDatas.ToArray());
+            this.AnswerKana = this.grammar.Conjugate(wordDatas.ToArray());
 
-            this.OnPropertyChanged(nameof(this.ModifierEnglish));
-            this.OnPropertyChanged(nameof(this.ModifierVariation));
+            this.OnPropertyChanged(nameof(this.GrammarEnglish));
+            this.OnPropertyChanged(nameof(this.GrammarVariation));
             this.OnPropertyChanged(nameof(this.Words));
             this.OnPropertyChanged(nameof(this.WordsTitle));
             this.OnPropertyChanged(nameof(this.AnswerKana));
-            this.OnPropertyChanged(nameof(this.HasModifier)); // TODO: needed?
+            this.OnPropertyChanged(nameof(this.HasGrammar)); // TODO: needed?
             this.OnPropertyChanged(nameof(this.InputKana));
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
@@ -189,13 +190,13 @@
             }
         }
 
-        private static List<ModifierBase> GetAllModifiers()
+        private static List<GrammarBase> GetAllGrammars()
         {
-            var modifiers = new List<ModifierBase>();
-            modifiers.AddRange(ModifierForm.GetAll<ModifierForm>());
-            modifiers.AddRange(ModifierConj.GetAll<ModifierConj>());
-            modifiers.AddRange(ModifierGrammar.GetAll<ModifierGrammar>());
-            return modifiers;
+            var grammars = new List<GrammarBase>();
+            grammars.AddRange(GrammarForm.GetAll<GrammarForm>());
+            grammars.AddRange(GrammarConjugate.GetAll<GrammarConjugate>());
+            grammars.AddRange(GrammarSentence.GetAll<GrammarSentence>());
+            return grammars;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

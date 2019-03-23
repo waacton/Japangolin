@@ -123,8 +123,8 @@
             Func<string, string> function, string detailedInfo)
         {
             // TODO: consider special cases like ～た and ～ない forms
-            var abstractInfo 
-                = $"{(tense == Tense.Present ? "🔙" : "🔜")}{(polarity == Polarity.Affirmative ? "➕" : "ー")}{(formality == Formality.Long ? "🙇" : "🗣")}";
+            var abstractInfo = 
+                $"{(tense == Tense.Present ? "🔜" : "🔙")}{(polarity == Polarity.Affirmative ? "➕" : "ー")}{(formality == Formality.Long ? "🙇" : "🗣")}";
             conjugationMatrix[(int)tense - 1, (int)polarity - 1, (int)formality - 1] = new Conjugator(function, detailedInfo, abstractInfo);
         }
     }
