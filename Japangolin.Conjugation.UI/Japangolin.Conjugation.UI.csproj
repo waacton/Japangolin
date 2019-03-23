@@ -92,8 +92,12 @@
     <Compile Include="Conjugator.cs" />
     <Compile Include="Conjugators.cs" />
     <Compile Include="Formality.cs" />
+    <Compile Include="ModifierConj.cs" />
     <Compile Include="Forms.cs" />
-    <Compile Include="Grammar.cs" />
+    <Compile Include="ModifierBase.cs" />
+    <Compile Include="IModifier.cs" />
+    <Compile Include="ModifierForm.cs" />
+    <Compile Include="ModifierGrammar.cs" />
     <Compile Include="Infos.cs" />
     <Compile Include="JapaneseEntryExtensions.cs" />
     <Compile Include="Mains\DetailView.xaml.cs">

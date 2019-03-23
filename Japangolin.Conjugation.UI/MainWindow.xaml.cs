@@ -29,7 +29,8 @@
         public List<string> Words => this.wordDatas.Select(word => word.English.ToLower()).ToList();
         public string WordsTitle => this.Words.Count == 1 ? "Word" : "Words";
 
-        private Grammar modifier;
+        private List<ModifierBase> allModifiers = GetAllModifiers();
+        private ModifierBase modifier;
         public string ModifierEnglish { get; private set; }
         public string ModifierVariation { get; private set; }
         public string AnswerKana { get; private set; }
@@ -121,7 +122,7 @@
             this.InputKana = null;
             this.DetailViewModel = this.noDetailViewModel;
 
-            this.modifier = RandomSelection.SelectOne(Grammar.GetAll<Grammar>());
+            this.modifier = RandomSelection.SelectOne(this.allModifiers);
             var requiredWordClasses = this.modifier.GetRequiredWordClasses();
 
             this.wordDatas = new List<WordData>();
@@ -186,6 +187,15 @@
             {
                 InputLanguageManager.SetInputLanguage(this.Input, japaeseCultureInfo);
             }
+        }
+
+        private static List<ModifierBase> GetAllModifiers()
+        {
+            var modifiers = new List<ModifierBase>();
+            modifiers.AddRange(ModifierForm.GetAll<ModifierForm>());
+            modifiers.AddRange(ModifierConj.GetAll<ModifierConj>());
+            modifiers.AddRange(ModifierGrammar.GetAll<ModifierGrammar>());
+            return modifiers;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
