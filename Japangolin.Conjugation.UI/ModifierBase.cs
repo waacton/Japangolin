@@ -9,21 +9,21 @@
     public abstract class ModifierBase : Enumeration, IModifier
     {
         private readonly string format;
-        private readonly (Func<WordClass, Conjugator> conjugatorByWordClass, List<WordClass> wordClasses)[] conjugations;
+        private readonly WordClassConjugator[] conjugators;
 
         public abstract string Variation { get; }
         public abstract bool IsHighLevel { get; }
 
         public int RequiredWordDataCount { get; }
 
-        public ModifierBase(string displayName, string format, params (Func<WordClass, Conjugator> conjugatorByWordClass, List<WordClass> wordClasses)[] conjugations)
+        public ModifierBase(string displayName, string format, params WordClassConjugator[] conjugators)
             : base(displayName)
         {
             this.format = format;
-            this.conjugations = conjugations;
+            this.conjugators = conjugators;
             this.RequiredWordDataCount = this.format.Count(character => character.Equals('{')); // naive!
 
-            if (this.conjugations.Length != this.RequiredWordDataCount)
+            if (this.conjugators.Length != this.RequiredWordDataCount)
             {
                 throw new InvalidOperationException();
             }
@@ -31,7 +31,7 @@
 
         public List<List<WordClass>> GetRequiredWordClasses()
         {
-            return this.conjugations.Select(conjugation => conjugation.wordClasses).ToList();
+            return this.conjugators.Select(conjugation => conjugation.WordClasses).ToList();
         }
 
         public string Conjugate(params WordData[] wordDatas)
@@ -42,7 +42,7 @@
             }
 
             var conjugatedWords = wordDatas
-                .Select((wordData, i) => this.conjugations[i].conjugatorByWordClass(wordData.Class).Conjugate(wordData.Kana))
+                .Select((wordData, i) => this.conjugators[i].Conjugate(wordData.Kana, wordData.Class))
                 .ToArray();
 
             return string.Format(this.format, conjugatedWords);
@@ -58,9 +58,8 @@
             var information = this.format;
             for (var i = 0; i < this.RequiredWordDataCount; i++)
             {
-                var conjugatorByWordClass = conjugations[i].conjugatorByWordClass;
                 var wordClass = wordDatas[i].Class;
-                var conjugator = conjugatorByWordClass(wordClass);
+                var conjugator = conjugators[i].GetConjugator(wordClass);
                 var wordInfo = this.IsHighLevel ? conjugator.AbstractInfo : conjugator.DetailedInfo;
                 information = information.Replace("{" + i + "}", "｛" + wordInfo + "｝");
             }
@@ -115,14 +114,9 @@
             return new Conjugator(function, information, "short（な）");
         }
 
-        // TODO: split enums into forms / conjugations / grammars (IModifier?)
-        // TODO: rename word classes
-        // TODO: allow grammars to take different tense / polarity / formality if the grammar allows (as it stands is enough for current practice)
-        //       e.g. ～んです works with present, past, affirmative, negative
-        protected static readonly List<WordClass> Nouns = new List<WordClass> { WordClass.Noun };
-        protected static readonly List<WordClass> Adjectives = new List<WordClass> { WordClass.AdjectiveNa, WordClass.AdjectiveI };
-        protected static readonly List<WordClass> Verbs = new List<WordClass> { WordClass.VerbRu, WordClass.VerbU };
-        protected static readonly List<WordClass> AdjectivesAndVerbs = Adjectives.Concat(Verbs).ToList();
-        protected static readonly List<WordClass> All = Nouns.Concat(Adjectives).Concat(Verbs).ToList();
+        protected static WordClassConjugator GetConj(List<WordClass> wordClasses, Func<WordClass, Conjugator> conjugator)
+        {
+            return new WordClassConjugator(wordClasses, conjugator);
+        }
     }
 }

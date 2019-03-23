@@ -113,6 +113,8 @@
     <Compile Include="Tense.cs" />
     <Compile Include="Themes\Stylist.cs" />
     <Compile Include="Themes\Swatch.cs" />
+    <Compile Include="WordClassConjugator.cs" />
+    <Compile Include="WordClasses.cs" />
     <Compile Include="WordClass.cs" />
     <Compile Include="WordData.cs" />
     <Page Include="Mains\DetailView.xaml">
