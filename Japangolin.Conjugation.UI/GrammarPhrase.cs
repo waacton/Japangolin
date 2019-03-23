@@ -2,7 +2,7 @@
 {
     public class GrammarPhrase : GrammarBase
     {
-        public override string Variation => "Grammar";
+        public override string Variation => "Phrase";
         public override bool IsHighLevel => true;
 
         /* 
