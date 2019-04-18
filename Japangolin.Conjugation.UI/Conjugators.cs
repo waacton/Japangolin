@@ -3,20 +3,20 @@
     using System;
     using System.Collections.Generic;
 
-    // TODO: review naming and structure
-    public class Conjugators
+    // TODO: explicitly handle irregularities? (e.g. adjective-i いい conjugates as よく)
+    public static class Conjugators
     {
         /* some useful stuff can be found at https://en.wikipedia.org/wiki/Japanese_verb_conjugation */
 
-        public static readonly Conjugator[,,] Noun;
-        public static readonly Conjugator[,,] AdjectiveNa;
-        public static readonly Conjugator[,,] AdjectiveI;
-        public static readonly Conjugator[,,] VerbRu;
-        public static readonly Conjugator[,,] VerbU;
-        public static readonly Dictionary<WordClass, Conjugator[,,]> ConjugationsByWordClass;
-        public static readonly Dictionary<WordClass, Conjugator> DictByWordClass;
-        public static readonly Dictionary<WordClass, Conjugator> StemsByWordClass;
-        public static readonly Dictionary<WordClass, Conjugator> TeFormsByWordClass;
+        private static readonly Conjugator[,,] Noun;
+        private static readonly Conjugator[,,] AdjectiveNa;
+        private static readonly Conjugator[,,] AdjectiveI;
+        private static readonly Conjugator[,,] VerbRu;
+        private static readonly Conjugator[,,] VerbU;
+        private static readonly Dictionary<WordClass, Conjugator[,,]> ConjugationsByWordClass;
+        private static readonly Dictionary<WordClass, Conjugator> DictByWordClass;
+        private static readonly Dictionary<WordClass, Conjugator> StemsByWordClass;
+        private static readonly Dictionary<WordClass, Conjugator> TeFormsByWordClass;
 
         static Conjugators()
         {
@@ -103,7 +103,6 @@
             return ConjugationsByWordClass[wordClass][(int)tense - 1, (int)polarity - 1, (int)formality - 1];
         }
 
-        // TODO: merge into another matrix with enum?
         public static Conjugator GetDict(WordClass wordClass)
         {
             return DictByWordClass[wordClass];
@@ -124,7 +123,7 @@
         {
             // TODO: consider special cases like ～た and ～ない forms
             var abstractInfo = 
-                $"{(tense == Tense.Present ? "🔜" : "🔙")}{(polarity == Polarity.Affirmative ? "➕" : "ー")}{(formality == Formality.Long ? "🙇" : "🗣")}";
+                $"{(tense == Tense.Present ? "🔜" : "🔙")}{(polarity == Polarity.Affirmative ? "✔" : "❌")}{(formality == Formality.Long ? "🙇" : "🗣")}";
             conjugationMatrix[(int)tense - 1, (int)polarity - 1, (int)formality - 1] = new Conjugator(function, detailedInfo, abstractInfo);
         }
     }

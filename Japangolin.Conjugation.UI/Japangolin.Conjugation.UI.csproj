@@ -88,13 +88,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Conjugation.cs" />
     <Compile Include="Conjugator.cs" />
+    <Compile Include="ConjugatorFuncs.cs" />
     <Compile Include="Conjugators.cs" />
     <Compile Include="Formality.cs" />
-    <Compile Include="GrammarConjugate.cs" />
     <Compile Include="Forms.cs" />
     <Compile Include="GrammarBase.cs" />
+    <Compile Include="WordClassesExtensions.cs" />
     <Compile Include="GrammarForm.cs" />
     <Compile Include="GrammarPhrase.cs" />
     <Compile Include="Infos.cs" />
@@ -216,6 +216,9 @@
     <Resource Include="Resources\Japangolin.ico" />
     <Resource Include="Resources\Japangolin.png" />
     <SplashScreen Include="Resources\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_checklist.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

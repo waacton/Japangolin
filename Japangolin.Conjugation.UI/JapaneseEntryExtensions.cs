@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Conjugation.Extensions
+﻿namespace Wacton.Japangolin.Conjugation
 {
     using System.Collections.Generic;
     using System.Linq;

@@ -14,7 +14,6 @@
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
     using Wacton.Desu.Romaji;
-    using Wacton.Japangolin.Conjugation.Extensions;
     using Wacton.Japangolin.Conjugation.Mains;
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.Randomness;
@@ -116,7 +115,6 @@
         private void Refresh()
         {
             // TODO: make sure all JLPT N5 words are covered (manual check of sequence #s + preprocess?)
-            // TODO: add valid word classes to grammars
 
             this.GrammarEnglish = null;
             this.AnswerKana = null;
@@ -194,7 +192,6 @@
         {
             var grammars = new List<GrammarBase>();
             grammars.AddRange(GrammarForm.GetAll<GrammarForm>());
-            grammars.AddRange(GrammarConjugate.GetAll<GrammarConjugate>());
             grammars.AddRange(GrammarPhrase.GetAll<GrammarPhrase>());
             return grammars;
         }

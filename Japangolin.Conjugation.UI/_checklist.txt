@@ -1,0 +1,133 @@
+﻿Using the following website as a general guide to the content of Genki
+https://wp.stolaf.edu/japanese/grammar-index/genki-i-ii-grammar-index/
+
+--------------------
+
+Genki I
+✅ Adjectives ( Genki I Chapter 5) >>> Conjugators (adj-na, adj-i)
+✅ aru, iru ( Genki I Chapter 4) >>> ThereExistsNonLiving & ThereExistsLiving
+✅ Basic verb conjugation ( Genki I Chapter 3) >>> Conjugators (verb-ru, verb-u)
+✅ Comparison ( Genki I Chapter 10) >>> ComparisonTwo & ComparisonGroup
+✅ Connecting nouns with ya ( Genki I Chapter 11)
+⏹ Counting ( Genki I Chapter 5) >>> n/a
+⏹ Counting people ( Genki I Chapter 7) >>> n/a
+⏹ dare-no + noun ( Genki I Chapter 2) >>> n/a
+⏹ Degree expressions ( Genki I Chapter 5) >>> n/a
+✅ Describing two activities ( Genki I Chapter 6) >>> Joining
+⏹ Descriptions ( Genki I Chapter 7) >>> n/a
+✅ -desho ( Genki I Chapter 12)　>>> Probably & ProbablyNot
+⏹ desu ( Genki I Chapter 1) >>> covered by 'PresentAffirmativeLong'
+⏹ doko-kani, doko-nimo ( Genki I Chapter 10) >>> n/a
+⏹ Duration of time ( Genki I Chapter 4) >>> n/a
+⏹ Frequency adverbs ( Genki I Chapter 3) >>> n/a
+✅ ho ga ii desu ( Genki I Chapter 12) >>> BetterToDo & BetterNotToDo
+✅ -kara ( Genki I Chapter 6)　>>> Because & BecausePolite
+✅ -kara (explanation within sentence) ( Genki I Chapter 9) >>> Because & BecausePolite
+⏹ koko, soko, asoko, doko ( Genki I Chapter 2) >>> n/a
+⏹ kono, sono, ano, dono ( Genki I Chapter 2) >>> n/a
+⏹ kore, sore, are, dore ( Genki I Chapter 2) >>> n/a
+✅ -kotoga-aru ( Genki I Chapter 11) >>> HaveHadExperience
+⏹ Location words ( Genki I Chapter 4) >>> n/a
+✅ mada-te-imasen ( Genki I Chapter 9) >>> HaveNotYet
+✅ masenka ( Genki I Chapter 3) >>> Invitation
+✅ masho ( Genki I Chapter 5) >>> LetsDo & ShallWe
+✅ -mashoka ( Genki I Chapter 6) >>> Offer
+✅ -n-desu ( Genki I Chapter 12) >>> ExplainImplicit
+✅ -nai-de-kudasai ( Genki I Chapter 8) >>> PleaseDoNot
+✅ -nakucha-ikemasen ( Genki I Chapter 12) >>> Must
+⏹ nanika, nanimo ( Genki I Chapter 8) >>> n/a
+✅ naru (to become) ( Genki I Chapter 10) >>> Become
+✅ -ni iku ( Genki I Chapter 7) >>> PurposeOfMovement
+⏹ no as a pronoun ( Genki I Chapter 10)
+⏹ ” no ” with nouns ( Genki I Chapter 1)
+✅ -node ( Genki I Chapter 12) >>> BecauseFormal
+⏹ Noun + mo ( Genki I Chapter 2) >>> n/a
+⏹ Noun + ja-arimasen ( Genki I Chapter 2) >>> n/a
+⏹ Particles ( Genki I Chapter 3) >>> n/a
+⏹ Particle de ( Genki I Chapter 10) >>> n/a
+⏹ Particle ga ( Genki I Chapter 8) >>> n/a
+⏹ Particle mo ( Genki I Chapter 4) >>> n/a
+⏹ Particles ne, yo ( Genki I Chapter 2) >>> n/a
+⏹ Particle to ( Genki I Chapter 4) >>> n/a
+⏹ Particle wa ( Genki I Chapter 3) >>> n/a
+✅ Past tense ( Genki I Chapter 4) >>> Conjugators
+✅ Present tense ( Genki I Chapter 3) >>> Conjugators
+⏹ Qualifying nouns with verbs and adjectives ( Genki I Chapter 9)
+⏹ Question Sentences ( Genki I Chapter 1)
+✅ Short forms ( Genki I Chapter 8) >>> Conjugators
+✅ Short form (past) ( Genki I Chapter 9) >>> Conjugators
+✅ -sugiru ( Genki I Chapter 12) >>> TooMuch
+⏹ suki, kirai ( Genki I Chapter 5) >>> n/a
+✅ -tai ( Genki I Chapter 11) >>> WantToDo
+⏹ takusan ( Genki I Chapter 4)
+✅ -tari-tarisuru ( Genki I Chapter 11) >>> SuchThingsAs
+✅ te -form ( Genki I Chapter 6) >>> Conjugators
+✅ te -form joining sentences ( Genki I Chapter 7) >>> Joining
+✅ -teiru ( Genki I Chapter 7) >>> OngoingAction
+✅ -tekudasai ( Genki I Chapter 6) >>> Request
+✅ -temoiidesu, -tewaikemasen ( Genki I Chapter 6) >>> Permission & Forbidden
+⏹ Time reference ( Genki I Chapter 3)
+✅ -tsumorida ( Genki I Chapter 10) >>> PlanningToDo
+✅ Verbs as nouns ( Genki I Chapter 8) >>> LikeDoing & GoodAtDoing & BadAtDoing
+⏹ Word order ( Genki I Chapter 3)
+
+--------------------
+
+Genki II
+☐ Adjective + suru ( Genki II Chapter 21)
+☐ ageru, kureru, morau ( Genki II Chapter 14)
+☐ -aidani ( Genki II Chapter 21)
+☐ -ba ( Genki II Chapter 22)
+☐ -bayokatta-desu ( Genki II Chapter 18)
+☐ Causative passive sentences ( Genki II Chapter 23)
+☐ Causative sentences ( Genki II Chapter 22)
+☐ Extra modest expressions ( Genki II Chapter 20)
+☐ Frequency of events over a period of time ( Genki II Chapter 13)
+☐ Giving respectful advice ( Genki II Chapter 19)
+☐ -hazudesu ( Genki II Chapter 19)
+☐ Honorific Verbs ( keigo ) ( Genki II Chapter 19)
+☐ hoshi ( Genki II Chapter 14)
+☐ Humble expressions ( Genki II Chapter 20)
+☐ kamoshiremasen ( Genki II Chapter 14)
+☐ -kata ( Genki II Chapter 23)
+☐ -kotonisuru ( Genki II Chapter 23)
+☐ -kuretearigato ( Genki II Chapter 19)
+✅ -maeni/-tekara ( Genki II Chapter 17)
+☐ -mare ( Genki II Chapter 23)
+☐ -mitaidesu ( Genki II Chapter 17)
+☐ -nagara ( Genki II Chapter 18)
+☐ -naide ( Genki II Chapter 20)
+☐ -nakutemoiidesu ( Genki II Chapter 17)
+☐ Name toiu item ( Genki II Chapter 20)
+☐ nara ( Genki II Chapter 13)
+☐ -noni ( Genki II Chapter 21)
+☐ -noyona/-noyoni ( Genki II Chapter 22)
+☐ Number + mo /number + shika + negative ( Genki II Chapter 14)
+☐ Passive sentences ( Genki II Chapter 21)
+☐ Potential verbs ( Genki II Chapter 13)
+☐ Questions within larger sentences ( Genki II Chapter 20)
+☐ Respect language review ( Genki II Chapter 20)
+☐ -shi ( Genki II Chapter 13)
+☐ -so-desu (I hear) ( Genki II Chapter 17)
+☐ -so-desu (Looks like) ( Genki II Chapter 13)
+☐ -tara ( Genki II Chapter 17)
+☐ -tara-dodesuka ( Genki II Chapter 14)
+☐ -tearu ( Genki II Chapter 21)
+☐ -tehoshi ( Genki II Chapter 21)
+☐ -teitadakemasen ( Genki II Chapter 16)
+☐ -tekureru/ageru/morau ( Genki II Chapter 16)
+☐ -temiru ( Genki II Chapter 13)
+☐ -temo ( Genki II Chapter 23)
+☐ -teoku ( Genki II Chapter 15)
+☐ -teshimau ( Genki II Chapter 18)
+☐ -te-sumimasen-deshita ( Genki II Chapter 16)
+☐ -teyokattadesu ( Genki II Chapter 19)
+☐ -to ( Genki II Chapter 18)
+☐ -toii ( Genki II Chapter 16)
+☐ -toki ( Genki II Chapter 16)
+☐ Transitive pairs ( Genki II Chapter 18)
+☐ -tte@ (`‚Á‚Ä) ( Genki II Chapter 17)
+☐ Using sentences to qualify nouns ( Genki II Chapter 15)
+☐ Verb stem + nasai ( Genki II Chapter 22)
+☐ Volitional Form ( Genki II Chapter 15)
+☐ -yasui/-nikui ( Genki II Chapter 20)
