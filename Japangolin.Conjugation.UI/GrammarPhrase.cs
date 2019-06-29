@@ -53,12 +53,13 @@
         public static readonly GrammarPhrase GoodAtDoing = new GrammarPhrase("GoodAtDoing", "{0}のがじょうずです", WordClasses.Verbs.Link(ConjugatorFuncs.PresentAffirmativeShort)); // dict
         public static readonly GrammarPhrase BadAtDoing = new GrammarPhrase("BadAtDoing", "{0}のがへたです", WordClasses.Verbs.Link(ConjugatorFuncs.PresentAffirmativeShort)); // dict
         public static readonly GrammarPhrase PlanningToDo = new GrammarPhrase("PlanningToDo", "{0}つもりです", WordClasses.Verbs.Link(ConjugatorFuncs.PresentAffirmativeShort)); // dict
+        public static readonly GrammarPhrase HaveHadExperience = new GrammarPhrase("HaveHadExperience", "{0}ことがいます", WordClasses.Verbs.Link(ConjugatorFuncs.PastAffirmativeShort)); // ～た
+        public static readonly GrammarPhrase SuchThingsAs = new GrammarPhrase("SuchThingsAs", "{0}り{1}りする", WordClasses.Any.Link(ConjugatorFuncs.PastAffirmativeShort), WordClasses.Any.Link(ConjugatorFuncs.PastAffirmativeShort)); // ～た
+
         public static readonly GrammarPhrase Because = new GrammarPhrase("Because", "{0}から", WordClasses.Any.Link(ConjugatorFuncs.PresentAffirmativeShort)); // ～だ/dict
         public static readonly GrammarPhrase BecauseNot = new GrammarPhrase("BecauseNot", "{0}から", WordClasses.Any.Link(ConjugatorFuncs.PresentNegativeShort)); // ～ない
         public static readonly GrammarPhrase BecausePolite = new GrammarPhrase("BecausePolite", "{0}から", WordClasses.Any.Link(ConjugatorFuncs.PresentAffirmativeLong)); // ～だ/dict
         public static readonly GrammarPhrase BecauseNotPolite = new GrammarPhrase("BecauseNotPolite", "{0}から", WordClasses.Any.Link(ConjugatorFuncs.PresentNegativeLong)); // ～ない
-        public static readonly GrammarPhrase HaveHadExperience = new GrammarPhrase("HaveHadExperience", "{0}ことがいます", WordClasses.Verbs.Link(ConjugatorFuncs.PastAffirmativeShort)); // ～た
-        public static readonly GrammarPhrase SuchThingsAs = new GrammarPhrase("SuchThingsAs", "{0}り{1}りする", WordClasses.Any.Link(ConjugatorFuncs.PastAffirmativeShort), WordClasses.Any.Link(ConjugatorFuncs.PastAffirmativeShort)); // ～た
 
         // sentence patterns from https://www.learn-japanese-adventure.com/japanese-grammar-cause-reason.html　applies to BecausePolite and ExplainImplicit
         public static readonly GrammarPhrase BecauseFormal = new GrammarPhrase("BecauseFormal", "{0}ので", WordClasses.Any.Link(ConjugatorFuncs.NaPresentAffirmative)); // ～だ ⇒ ～な for noun, adjective-な

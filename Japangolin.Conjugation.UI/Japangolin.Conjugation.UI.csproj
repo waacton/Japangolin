@@ -67,8 +67,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Wacton.Desu">
-      <HintPath>..\..\Desu\Desu\bin\Debug\netstandard2.0\Wacton.Desu.dll</HintPath>
+    <Reference Include="Wacton.Desu, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wacton.Desu.5.0.0\lib\netstandard2.0\Wacton.Desu.dll</HintPath>
     </Reference>
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
