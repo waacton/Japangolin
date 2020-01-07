@@ -34,18 +34,80 @@
             return this.conjugators[wordIndex].WordClasses;
         }
 
-        public string Conjugate(params WordData[] wordDatas)
+        public List<string> Conjugate(params WordData[] wordDatas)
         {
             if (wordDatas.Length != this.RequiredWordDataCount)
             {
                 throw new InvalidOperationException();
             }
 
-            var conjugatedWords = wordDatas
-                .Select((wordData, i) => this.conjugators[i].Conjugate(wordData.Kana, wordData.Class))
+            var conjugations = new List<List<string>>();
+            for (var i = 0; i < wordDatas.Length; i++)
+            {
+                var wordData = wordDatas[i];
+                var conjugator = this.conjugators[i];
+                var kanaConjugation = wordData.ConjugateKana(conjugator);
+                var kanjiConjugation = wordData.ConjugateKanji(conjugator);
+                conjugations.Add(new List<string> { kanaConjugation, kanjiConjugation });
+            }
+
+            var textVariations = this.GetTextVariations(conjugations);
+            var result = textVariations.Select(words => string.Format(this.format, words.ToArray()));
+            return result.ToList();
+        }
+
+        public string ConjugateAllKana(params WordData[] wordDatas)
+        {
+            if (wordDatas.Length != this.RequiredWordDataCount)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var conjugations = wordDatas
+                .Select((wordData, i) => wordData.ConjugateKana(this.conjugators[i]))
                 .ToArray();
 
-            return string.Format(this.format, conjugatedWords);
+            return string.Format(this.format, conjugations);
+        }
+
+        public string ConjugateAllKanji(params WordData[] wordDatas)
+        {
+            if (wordDatas.Length != this.RequiredWordDataCount)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var conjugations = wordDatas
+                .Select((wordData, i) => wordData.ConjugateKanji(this.conjugators[i]))
+                .ToArray();
+
+            return string.Format(this.format, conjugations);
+        }
+
+        private List<List<string>> GetTextVariations(List<List<string>> conjugations)
+        {
+            var current = conjugations[0];
+            var next = conjugations.Skip(1).ToList();
+
+            var results = new List<List<string>>();
+            foreach(var item in current)
+            {
+                if (!next.Any())
+                {
+                    results.Add(new List<string> { item });
+                    continue;
+                }
+
+                var itemLists = this.GetTextVariations(next);
+                foreach(var itemList in itemLists)
+                {
+                    var result = new List<string>() { item };
+                    result.AddRange(itemList);
+                    results.Add(result);
+                }
+            }
+
+            return results;
         }
 
         public string Information(params WordData[] wordDatas)

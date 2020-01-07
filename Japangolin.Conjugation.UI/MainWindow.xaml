@@ -101,15 +101,20 @@
             </Grid.ColumnDefinitions>
 
             <TextBox x:Name="Input" 
-                 Grid.Row="0" Text="{Binding InputKana, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="0" Text="{Binding InputJapanese, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  FontSize="18" VerticalAlignment="Center" Margin="16, 4"
                  cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" 
                  materialDesign:HintAssist.Hint="Enter Japanese"
                  Style="{DynamicResource MaterialDesignTextBox}" />
 
-            <TextBox Grid.Row="1" Text="{Binding AnswerKana, Mode=OneWay}" 
+            <!-- using Caliburn events with things that change the 'AnswerJapanese' binding, probably need to use TargetWithoutContext -->
+            <TextBox Grid.Row="1" Text="{Binding AnswerJapanese, Mode=OneWay}" 
                      FontSize="18" VerticalAlignment="Center" Margin="16, 4"
-                     IsReadOnly="True" Style="{DynamicResource InvisibleTextBox}"  />
+                     ToolTip="{Binding AnswerTooltip}"
+                     cal:Message.Attach="[Event GotFocus] = [Action AnswerGotFocus]; 
+                                         [Event LostFocus] = [Action AnswerLostFocus]"
+                     MouseDoubleClick="AnswerTextBox_MouseDoubleClick"
+                     IsReadOnly="True" Style="{DynamicResource InvisibleTextBox}" />
 
             <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Click="ButtonBase_OnClick" ToolTip="Skip" 
                     Height="60" Width="60" Margin="0"
