@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{25F255C2-1A79-4E8C-BAE6-A9B9B025AEE7}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Wacton.Tovarisch.dll = Dependencies\Wacton.Tovarisch.dll
+		Dependencies\Wacton.Tovarisch.Logging.dll = Dependencies\Wacton.Tovarisch.Logging.dll
+		Dependencies\Wacton.Tovarisch.UI.dll = Dependencies\Wacton.Tovarisch.UI.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Grammar.UI", "Japangolin.Grammar.UI\Japangolin.Grammar.UI.csproj", "{322E1002-66FB-4A07-9D45-D2934B7B7376}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322E1002-66FB-4A07-9D45-D2934B7B7376}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11D39E6C-F087-42AC-8CF4-D3BA6B2A4996}
+	EndGlobalSection
+EndGlobal

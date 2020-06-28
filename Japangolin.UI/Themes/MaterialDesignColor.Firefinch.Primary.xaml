@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <!-- from http://mcg.mbitson.com/#!?mcgpalette0=%23db4949 -->
+
+    <Color x:Key="Primary50">#FBE9E9</Color>
+    <Color x:Key="Primary50Foreground">#DD000000</Color>
+    <Color x:Key="Primary100">#F4C8C8</Color>
+    <Color x:Key="Primary100Foreground">#DD000000</Color>
+    <Color x:Key="Primary200">#EDA4A4</Color>
+    <Color x:Key="Primary200Foreground">#DD000000</Color>
+    <Color x:Key="Primary300">#E68080</Color>
+    <Color x:Key="Primary300Foreground">#DD000000</Color>
+    <Color x:Key="Primary400">#E06464</Color>
+    <Color x:Key="Primary400Foreground">#DD000000</Color>
+    <Color x:Key="Primary500">#DB4949</Color>
+    <Color x:Key="Primary500Foreground">#DDFFFFFF</Color>
+    <Color x:Key="Primary600">#D74242</Color>
+    <Color x:Key="Primary600Foreground">#DDFFFFFF</Color>
+    <Color x:Key="Primary700">#D23939</Color>
+    <Color x:Key="Primary700Foreground">#DDFFFFFF</Color>
+    <Color x:Key="Primary800">#CD3131</Color>
+    <Color x:Key="Primary800Foreground">#DDFFFFFF</Color>
+    <Color x:Key="Primary900">#C42121</Color>
+    <Color x:Key="Primary900Foreground">#DDFFFFFF</Color>
+
+</ResourceDictionary>
