@@ -13,4 +13,4 @@ Japanese learning aid.
 
 ---
 
-<img src="https://gitlab.com/Wacton/Japangolin/raw/master/Japangolin.Romaji.UI/Resources/Japangolin.png" width="32" height="32">
+<img src="https://gitlab.com/Wacton/Japangolin/raw/master/Japangolin.UI/Resources/Japangolin.png" width="32" height="32">
