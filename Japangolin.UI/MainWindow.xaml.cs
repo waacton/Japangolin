@@ -6,14 +6,14 @@
     using System.IO;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text.RegularExpressions;
+    using System.Timers;
     using System.Windows;
     using System.Windows.Input;
 
     using Wacton.Desu.Japanese;
-    using Wacton.Desu.Romaji;
     using Wacton.Japangolin.Mains;
     using Wacton.Japangolin.UI;
+    using Wacton.Tovarisch.Enum;
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.Randomness;
 
@@ -27,27 +27,25 @@
         public string WordText => this.word.English.ToLower();
 
         private Inflection inflection;
-        private readonly List<Inflection> allInflections = GetAllInflections();
+        private readonly List<Inflection> allInflections = Enumeration.GetAll<Inflection>().ToList();
         public string InflectionText { get; private set; }
+
+        public string InputText { get; set; }
 
         private string answerKana;
         private string answerKanji;
-        public List<string> Answers { get; private set; }
-        public string AnswerJapanese { get; set; }
-        public bool HasGrammar => this.InflectionText != null;
-        public bool IsAnswerFocused { get; set; }
-        public string AnswerTooltip => this.IsAnswerFocused ? "Double click to toggle kanji" : "㊙️";
+        private string answer;
+        public bool IsAnswerVisible { get; private set; }
+        public string AnswerText => this.IsAnswerVisible ? this.answer : "Click to reveal the answer";
 
-        public string InputJapanese { get; set; }
-        private bool IsAnswerCorrect => this.InputJapanese != null && this.Answers.Contains(this.InputJapanese);
+        public bool IsSnackbarActive { get; private set; }
 
         public DetailViewModel DetailViewModel { get; private set; }
         private readonly DetailViewModel detailViewModel;
         private readonly NoDetailViewModel noDetailViewModel;
 
-        private List<IJapaneseEntry> japaneseEntries;
-        private Transliterator transliterator = new Transliterator();
-        private Regex pascalCaseRegex = new Regex(@"(?!^)(?=[A-Z])");
+        private readonly List<IJapaneseEntry> japaneseEntries;
+        private readonly Timer snackbarTimer = new Timer(3000);
 
         public MainWindow()
         {
@@ -65,28 +63,9 @@
 
             InitializeComponent();
             this.SetUserInputLanguage();
-        }
 
-        public void InputEntered(KeyEventArgs e)
-        {
-            if (this.IsAnswerCorrect)
-            {
-                this.Refresh();
-            }
-        }
-
-        public void AnswerGotFocus()
-        {
-            this.IsAnswerFocused = true;
-            this.OnPropertyChanged(nameof(this.IsAnswerFocused));
-            this.OnPropertyChanged(nameof(this.AnswerTooltip));
-        }
-
-        public void AnswerLostFocus()
-        {
-            this.IsAnswerFocused = false;
-            this.OnPropertyChanged(nameof(this.IsAnswerFocused));
-            this.OnPropertyChanged(nameof(this.AnswerTooltip));
+            snackbarTimer.Elapsed += HideSnackbar;
+            snackbarTimer.AutoReset = false;
         }
 
         public void WordSelected()
@@ -107,17 +86,72 @@
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        public void InputEntered(KeyEventArgs e)
+        {
+            if (this.IsInputCorrect())
+            {
+                this.Refresh();
+
+                this.IsSnackbarActive = true;
+                this.OnPropertyChanged(nameof(this.IsSnackbarActive));
+
+                snackbarTimer.Start();
+            }
+        }
+
+        private void HideSnackbar(object sender, ElapsedEventArgs e)
+        {
+            this.IsSnackbarActive = false;
+            this.OnPropertyChanged(nameof(this.IsSnackbarActive));
+        }
+
+        private bool IsInputCorrect()
+        {
+            if (this.InputText == null)
+            {
+                return false;
+            }
+
+            return this.InputText == this.answerKana || this.InputText == this.answerKanji;
+        }
+
+        private void SkipButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.Refresh();
             this.Input.Focus(); // does not work in constructor due to some timing issue - attempt fix when refactor for view models
         }
 
-        private void AnswerTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ViewAnswerButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var isAnswerKana = this.AnswerJapanese == this.answerKana;
-            this.AnswerJapanese = isAnswerKana ? this.answerKanji : this.answerKana;
-            this.OnPropertyChanged(nameof(this.AnswerJapanese));
+            this.IsAnswerVisible = true;
+            this.OnPropertyChanged(nameof(this.IsAnswerVisible));
+            this.OnPropertyChanged(nameof(this.AnswerText));
+        }
+
+        private void Refresh()
+        {
+            this.Reset();
+            this.UpdateWordAndInflection();
+            this.NotifyViewOfChanges();
+        }
+
+        private void Reset()
+        {
+            this.InflectionText = null;
+            this.InputText = null;
+            this.DetailViewModel = this.noDetailViewModel;
+            this.IsAnswerVisible = false;
+        }
+
+        private void UpdateWordAndInflection()
+        {
+            this.word = GetRandomWord();
+            this.inflection = RandomSelection.SelectOne(this.allInflections);
+            this.InflectionText = this.inflection.PrettyDisplay();
+
+            (this.answerKana, this.answerKanji) = this.inflection.Conjugate(this.word);
+            var isKanjiDifferent = this.answerKanji != this.answerKana;
+            this.answer = isKanjiDifferent ?  $"{this.answerKana} · {this.answerKanji}" : $"{this.answerKana}";
         }
 
         private Word GetRandomWord()
@@ -131,51 +165,23 @@
                 word = entry.ParseToWord();
                 isValid = word.Class != WordClass.Unknown;
             }
-            
+
             return word;
-        }
-
-        private void Refresh()
-        {
-            this.Reset();
-            this.UpdateWordAndInflection();
-            this.NotifyViewOfChanges();
-        }
-
-        private void Reset()
-        {
-            this.InflectionText = null;
-            this.Answers = null;
-            this.IsAnswerFocused = false;
-            this.InputJapanese = null;
-            this.DetailViewModel = this.noDetailViewModel;
-        }
-
-        private void UpdateWordAndInflection()
-        {
-            this.word = GetRandomWord();
-            this.inflection = RandomSelection.SelectOne(this.allInflections);
-            this.InflectionText = this.inflection.PrettyDisplay();
-
-            (this.answerKana, this.answerKanji) = this.inflection.Conjugate(this.word);
-            this.AnswerJapanese = this.answerKana;
         }
 
         private void NotifyViewOfChanges()
         {
             this.OnPropertyChanged(nameof(this.WordText));
             this.OnPropertyChanged(nameof(this.InflectionText));
-            this.OnPropertyChanged(nameof(this.AnswerJapanese));
-            this.OnPropertyChanged(nameof(this.IsAnswerFocused));
-            this.OnPropertyChanged(nameof(this.AnswerTooltip));
-            this.OnPropertyChanged(nameof(this.HasGrammar)); // TODO: needed?
-            this.OnPropertyChanged(nameof(this.InputJapanese));
+            this.OnPropertyChanged(nameof(this.InputText));
             this.OnPropertyChanged(nameof(this.DetailViewModel));
+            this.OnPropertyChanged(nameof(this.IsAnswerVisible));
+            this.OnPropertyChanged(nameof(this.AnswerText));
         }
 
         private void SetUserInputLanguage()
         {
-            var japaeseCultureInfo = new CultureInfo("ja-JP");
+            var japaneseCultureInfo = new CultureInfo("ja-JP");
 
             var availableInputLanguages = InputLanguageManager.Current.AvailableInputLanguages;
             if (availableInputLanguages == null)
@@ -183,17 +189,10 @@
                 return;
             }
 
-            if (availableInputLanguages.Cast<CultureInfo>().Contains(japaeseCultureInfo))
+            if (availableInputLanguages.Cast<CultureInfo>().Contains(japaneseCultureInfo))
             {
-                InputLanguageManager.SetInputLanguage(this.Input, japaeseCultureInfo);
+                InputLanguageManager.SetInputLanguage(this.Input, japaneseCultureInfo);
             }
-        }
-
-        private static List<Inflection> GetAllInflections()
-        {
-            var inflections = new List<Inflection>();
-            inflections.AddRange(Inflection.GetAll<Inflection>());
-            return inflections;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

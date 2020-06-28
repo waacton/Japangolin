@@ -22,7 +22,7 @@
                        Visibility="{Binding HasSecondDetail, Converter={StaticResource BoolToNotCollapsedConverter}}" />
             <TextBlock Text="{Binding ThirdDetail}" 
                        VerticalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" 
-                       Margin="16,4" FontSize="12" 
+                       Margin="16,4" Opacity="0.6"
                        Visibility="{Binding HasThirdDetail, Converter={StaticResource BoolToNotCollapsedConverter}}" />
         </StackPanel>
 

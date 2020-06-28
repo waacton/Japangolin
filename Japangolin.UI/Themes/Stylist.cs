@@ -1,6 +1,5 @@
 ﻿namespace Wacton.Japangolin
 {
-    using System.Windows;
     using System.Windows.Media;
     using MaterialDesignColors;
     using MaterialDesignThemes.Wpf;
@@ -15,7 +14,7 @@
         public static void SetVibrantTheme(Color vibrantColor)
         {
             var baseTheme = Theme.Light;
-            var primary = SwatchHelper.Lookup[(MaterialDesignColor)PrimaryColor.Grey];
+            var primary = vibrantColor;
             var secondary = vibrantColor;
 
             var theme = Theme.Create(baseTheme, primary, secondary);

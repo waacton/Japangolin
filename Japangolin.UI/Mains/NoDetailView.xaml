@@ -9,9 +9,9 @@
 
     <Grid>
 
-        <TextBlock Text="Select a word to see details" 
+        <TextBlock Text="Select a word or inflection to see a hint" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
-                   Margin="16" FontWeight="Light" FontSize="14"/>
+                   Margin="16" FontWeight="Light" Opacity="0.6"/>
 
     </Grid>
 

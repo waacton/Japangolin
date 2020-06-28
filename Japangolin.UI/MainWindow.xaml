@@ -8,7 +8,7 @@
         xmlns:mains="clr-namespace:Wacton.Japangolin.Mains"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="400" Width="600" MinHeight="400" MinWidth="600" 
+        Title="MainWindow" Height="360" Width="720" MinHeight="360" MinWidth="720" 
         Icon="pack://application:,,,/Wacton.Japangolin.UI;component/Resources/Japangolin.ico"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -23,6 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
@@ -39,23 +40,20 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Text="WORD" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0" 
-                       Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+            <TextBlock Grid.Row="0" Text="WORD" FontSize="10" Opacity="0.6" FontWeight="Medium"
+                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0" />
             
             <TextBox Grid.Row="1" Text="{Binding WordText, Mode=OneWay}" FontSize="18" TextAlignment="Left" 
                      HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                      IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
-                     Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}"
                      cal:Message.Attach="[Event GotFocus] = [Action WordSelected]" />
 
-            <TextBlock Grid.Row="2" Text="INFLECTION" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0"
-                       Foreground="{DynamicResource PrimaryHueMidBrush}" 
-                       Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}" />
+            <TextBlock Grid.Row="2" Text="INFLECTION" FontSize="10" Opacity="0.6" FontWeight="Medium"
+                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0" />
             
             <TextBox Grid.Row="3" Text="{Binding InflectionText, Mode=OneWay}" FontSize="18" TextAlignment="Left" 
                      HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                      IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
-                     Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}" 
                      cal:Message.Attach="[Event GotFocus] = [Action InflectionSelected]" />
 
             <materialDesign:Card Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" VerticalAlignment="Stretch" Margin="16, 4">
@@ -78,33 +76,56 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <TextBox x:Name="Input" 
-                 Grid.Row="0" Text="{Binding InputJapanese, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="18" VerticalAlignment="Center" Margin="16, 4"
-                 cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" 
-                 materialDesign:HintAssist.Hint="Enter Japanese"
-                 Style="{DynamicResource MaterialDesignFilledTextFieldTextBox}" />
+                 Grid.Row="0" Grid.Column="0"
+                 Text="{Binding InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="18" VerticalAlignment="Center" Margin="16, 4, 0, 4"
+                 materialDesign:HintAssist.Hint="Japanese Conjugation"
+                 BorderBrush="{DynamicResource VibrantGradientBrush}"
+                 Style="{DynamicResource MaterialDesignFilledTextFieldTextBox}" 
+                 cal:Message.Attach="[Event KeyUp] = [Action InputEntered($eventArgs)]" />
 
-            <!-- using Caliburn events with things that change the 'AnswerJapanese' binding, probably need to use TargetWithoutContext -->
-            <TextBox Grid.Row="1" Text="{Binding AnswerJapanese, Mode=OneWay}" 
-                     FontSize="18" VerticalAlignment="Center" Margin="16, 4"
-                     ToolTip="{Binding AnswerTooltip}"
-                     cal:Message.Attach="[Event GotFocus] = [Action AnswerGotFocus]; 
-                                         [Event LostFocus] = [Action AnswerLostFocus]"
-                     MouseDoubleClick="AnswerTextBox_MouseDoubleClick"
-                     IsReadOnly="True" />
-
-            <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Click="ButtonBase_OnClick" ToolTip="Skip" 
-                    Height="60" Width="60" Margin="0"
-                    Style="{StaticResource MaterialDesignFlatButton}" 
-                    Foreground="{DynamicResource VibrantGradientBrush}">
-                <materialDesign:PackIcon Kind="ChevronDoubleRight" Height="24" Width="24" />
+            <Button Grid.Row="0" Grid.Column="1" Click="SkipButton_OnClick" ToolTip="Skip" 
+                    Height="64" Width="64" Margin="16, 0" Padding="0"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" 
+                    Foreground="{DynamicResource VibrantGradientBrush}"
+                    BorderBrush="{DynamicResource VibrantGradientBrush}">
+                <materialDesign:PackIcon Kind="Skip" Height="32" Width="32" />
             </Button>
         </Grid>
 
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="1" Grid.Column="0" Click="ViewAnswerButton_OnClick" ToolTip="View Answer" 
+                    Height="32" Width="32" Margin="16, 8, 8, 0" Padding="0"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" 
+                    Foreground="{DynamicResource VibrantGradientBrush}"
+                    BorderBrush="{DynamicResource VibrantGradientBrush}"
+                    IsEnabled="{Binding IsAnswerVisible, Converter={StaticResource BoolToInverseConverter}}">
+                <materialDesign:PackIcon Kind="Eye" Width="16" Height="16" />
+            </Button>
+
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding AnswerText, Mode=OneWay}"
+                     VerticalAlignment="Center" Margin="0, 8, 8, 0"
+                     IsReadOnly="True" Opacity="0.6"
+                     Style="{DynamicResource InvisibleTextBox}" />
+        </Grid>
+
+        <materialDesign:Snackbar Grid.Row="3" Grid.RowSpan="2" IsActive="{Binding IsSnackbarActive}">
+            <materialDesign:SnackbarMessage Content="◯ Correct!" />
+        </materialDesign:Snackbar>
+
     </Grid>
+    
 </Window>
