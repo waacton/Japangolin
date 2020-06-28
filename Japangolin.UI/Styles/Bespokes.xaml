@@ -10,7 +10,6 @@
 
         <!-- the following styles become available for use via the application's resources -->
         <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Controls/HighlightSelectTextBoxStyle.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Controls/InvisibleTextBoxStyle.xaml"/>
 
     </ResourceDictionary.MergedDictionaries>
 

@@ -4,6 +4,7 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Media;
     using System.Windows.Threading;
 
     using Wacton.Tovarisch.Logging;
@@ -23,7 +24,8 @@
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Stylist.SetStyle(Swatch.Grey, Swatch.Firefinch, false);
+            var vibrantColor = (Color)this.FindResource("VibrantStart"); // set in Gradients.xaml
+            Stylist.SetVibrantTheme(vibrantColor);
             base.OnStartup(e);
         }
 

@@ -3,6 +3,7 @@
                     xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
     <!-- initial color definitions; will be overriden on app startup -->
+    <!-- TODO: MaterialDesignInXAML does not appear to be overriding <Color> resources, only <SolidColorBrush> -->
     
     <Color x:Key="Primary50">LimeGreen</Color>
     <Color x:Key="Primary50Foreground">LimeGreen</Color>

@@ -20,14 +20,15 @@
                     <Border x:Name="border" BorderThickness="1">
                         <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource SecondaryAccentBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource VibrantGradientBrush}"/>
                         </Trigger>
+
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource SecondaryAccentForegroundBrush}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource SecondaryAccentBrush}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource VibrantGradientBrush}" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>

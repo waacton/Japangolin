@@ -1,60 +1,58 @@
 ﻿namespace Wacton.Japangolin
 {
-    using System;
-
+    using System.Windows;
+    using System.Windows.Media;
+    using MaterialDesignColors;
     using MaterialDesignThemes.Wpf;
 
     public static class Stylist
     {
-        public static Swatch CurrentPrimarySwatch;
-        public static Swatch CurrentAccentSwatch;
-        public static bool IsDarkBase;
+        private static readonly PaletteHelper paletteHelper = new PaletteHelper();
 
-        private static readonly PaletteHelper PaletteHelper = new PaletteHelper();
-
-        // NOTE: never seems to change (based on MaterialDesignColor XAML files)
-        // NOTE: see if this can be removed in future, if able to QueryPalette when custom swatches are used
-        private static readonly int PrimaryLightHueIndex = 1;
-        private static readonly int PrimaryMidHueIndex = 5;
-        private static readonly int PrimaryDarkHueIndex = 7;
-        private static readonly int AccentHueIndex = 3;
-
-        public static void SetPrimarySwatch(Swatch primarySwatch)
+        // general design uses custom gradients
+        // this sets the overall theme to use one of the gradients colours
+        // so non-customised controls still match colours from the gradient
+        public static void SetVibrantTheme(Color vibrantColor)
         {
-            SetStyle(primarySwatch, CurrentAccentSwatch, IsDarkBase);
+            var baseTheme = Theme.Light;
+            var primary = SwatchHelper.Lookup[(MaterialDesignColor)PrimaryColor.Grey];
+            var secondary = vibrantColor;
+
+            var theme = Theme.Create(baseTheme, primary, secondary);
+
+            // modify secondary colour to make foreground color white
+            theme.SecondaryMid = new ColorPair(theme.SecondaryMid.Color, Colors.White);
+
+            paletteHelper.SetTheme(theme);
         }
 
-        public static void SetAccentSwatch(Swatch accentSwatch)
+
+        // generic styling methods, for reference
+
+        public static void SetStyle(bool isDarkBase, PrimaryColor primary, SecondaryColor secondary)
         {
-            SetStyle(CurrentPrimarySwatch, accentSwatch, IsDarkBase);
+            Color primaryColor = SwatchHelper.Lookup[(MaterialDesignColor)primary];
+            Color secondaryColor = SwatchHelper.Lookup[(MaterialDesignColor)secondary];
+            SetStyle(isDarkBase, primaryColor, secondaryColor);
         }
 
-        public static void SetSwatches(Swatch primarySwatch, Swatch accentSwatch)
+        public static void SetStyle(bool isDarkBase, PrimaryColor primary, Color secondary)
         {
-            SetStyle(primarySwatch, accentSwatch, IsDarkBase);
+            Color primaryColor = SwatchHelper.Lookup[(MaterialDesignColor)primary];
+            SetStyle(isDarkBase, primaryColor, secondary);
         }
 
-        public static void SetDarkBase(bool isDarkBase)
+        public static void SetStyle(bool isDarkBase, Color primary, SecondaryColor secondary)
         {
-            SetStyle(CurrentPrimarySwatch, CurrentAccentSwatch, isDarkBase);
+            Color secondaryColor = SwatchHelper.Lookup[(MaterialDesignColor)secondary];
+            SetStyle(isDarkBase, primary, secondaryColor);
         }
 
-        public static void SetStyle(Swatch primarySwatch, Swatch accentSwatch, bool isDarkBase)
+        public static void SetStyle(bool isDarkBase, Color primary, Color secondary)
         {
-            if (!accentSwatch.IsAccented)
-            {
-                throw new InvalidOperationException($"Swatch {accentSwatch} has no accent definition");
-            }
-
-            CurrentPrimarySwatch = primarySwatch;
-            CurrentAccentSwatch = accentSwatch;
-            IsDarkBase = isDarkBase;
-
-            var newPalette = new Palette(primarySwatch.MaterialSwatch, accentSwatch.MaterialSwatch, 
-                                         PrimaryLightHueIndex, PrimaryMidHueIndex, PrimaryDarkHueIndex, AccentHueIndex);
-
-            PaletteHelper.ReplacePalette(newPalette);
-            PaletteHelper.SetLightDark(IsDarkBase);
+            var baseTheme = isDarkBase ? Theme.Dark : Theme.Light;
+            var theme = Theme.Create(baseTheme, primary, secondary);
+            paletteHelper.SetTheme(theme);
         }
     }
 }
