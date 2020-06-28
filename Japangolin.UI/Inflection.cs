@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Wacton.Japangolin.UI;
 using Wacton.Tovarisch.Enum;
 
 namespace Wacton.Japangolin
@@ -38,5 +36,12 @@ namespace Wacton.Japangolin
         {
             return this.wordConjugator.GetHint(word);
         }
+
+        public string PrettyDisplay()
+        {
+            return PascalCase.InsertSeparator(this.DisplayName, " · ").ToLower();
+        }
+
+        public override string ToString() => this.PrettyDisplay();
     }
 }

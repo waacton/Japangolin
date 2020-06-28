@@ -85,13 +85,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PascalCase.cs" />
     <Compile Include="WordConjugator.cs" />
     <Compile Include="Conjugator.cs" />
     <Compile Include="Conjugators.cs" />
     <Compile Include="Formality.cs" />
     <Compile Include="Forms.cs" />
     <Compile Include="Inflection.cs" />
-    <Compile Include="Infos.cs" />
+    <Compile Include="Hints.cs" />
     <Compile Include="JapaneseEntryExtensions.cs" />
     <Compile Include="POS.cs" />
     <Compile Include="Polarity.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Themes\Stylist.cs" />
     <Compile Include="Themes\Swatch.cs" />
     <Compile Include="WordClass.cs" />
-    <Compile Include="WordClasses.cs" />
     <Compile Include="Word.cs" />
     <Page Include="Mains\DetailView.xaml">
       <Generator>MSBuild:Compile</Generator>

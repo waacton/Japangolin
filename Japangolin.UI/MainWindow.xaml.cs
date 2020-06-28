@@ -13,6 +13,7 @@
     using Wacton.Desu.Japanese;
     using Wacton.Desu.Romaji;
     using Wacton.Japangolin.Mains;
+    using Wacton.Japangolin.UI;
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.Randomness;
 
@@ -90,16 +91,18 @@
 
         public void WordSelected()
         {
-            var wordClassDetail = this.pascalCaseRegex.Replace(this.word.Class.ToString(), "-").ToLower();
-            this.detailViewModel.Update(this.word.Kana, this.word.Kanji, wordClassDetail);
+            var wordClassDetail = PascalCase.InsertSeparator(this.word.Class.ToString(), "-").ToLower();
+
+            var isKanjiDifferent = this.word.Kanji != this.word.Kana;
+            this.detailViewModel.Update(this.word.Kana, isKanjiDifferent ? this.word.Kanji : null, wordClassDetail);
             this.DetailViewModel = this.detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
 
         public void InflectionSelected()
         {
-            var inflectionInfo = this.inflection.GetHint(this.word);
-            this.detailViewModel.Update(inflectionInfo);
+            var hint = this.inflection.GetHint(this.word);
+            this.detailViewModel.Update(hint);
             this.DetailViewModel = this.detailViewModel;
             this.OnPropertyChanged(nameof(this.DetailViewModel));
         }
@@ -152,7 +155,7 @@
         {
             this.word = GetRandomWord();
             this.inflection = RandomSelection.SelectOne(this.allInflections);
-            this.InflectionText = this.pascalCaseRegex.Replace(this.inflection.DisplayName, " ").ToLower();
+            this.InflectionText = this.inflection.PrettyDisplay();
 
             (this.answerKana, this.answerKanji) = this.inflection.Conjugate(this.word);
             this.AnswerJapanese = this.answerKana;

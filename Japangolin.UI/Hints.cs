@@ -1,6 +1,6 @@
 ﻿namespace Wacton.Japangolin
 {
-    public class Infos
+    public class Hints
     {
         public static string Dict() => "[dict]";
 

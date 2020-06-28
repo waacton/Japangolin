@@ -39,14 +39,14 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Text="Word" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0" 
+            <TextBlock Grid.Row="0" Text="WORD" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0" 
                        Foreground="{DynamicResource PrimaryHueMidBrush}"/>
             <TextBox Grid.Row="1" Text="{Binding WordText, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
                      IsReadOnly="True" Style="{DynamicResource HighlightSelectTextBox}" Cursor="Hand" TextWrapping="Wrap" Padding="4"
                      Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}" 
                      cal:Message.Attach="[Event GotFocus] = [Action WordSelected]" />
 
-            <TextBlock Grid.Row="2" Text="Inflection" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0"
+            <TextBlock Grid.Row="2" Text="INFLECTION" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0"
                        Foreground="{DynamicResource PrimaryHueMidBrush}" 
                        Visibility="{Binding HasGrammar, Converter={StaticResource BoolToNotHiddenConverter}}" />
             <TextBox Grid.Row="3" Text="{Binding InflectionText, Mode=OneWay}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
