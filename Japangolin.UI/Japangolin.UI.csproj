@@ -66,9 +66,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Wacton.Desu, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wacton.Desu.5.1.0\lib\netstandard2.0\Wacton.Desu.dll</HintPath>
-    </Reference>
     <Reference Include="Wacton.Tovarisch">
       <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
     </Reference>
@@ -87,21 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PascalCase.cs" />
-    <Compile Include="WordConjugator.cs" />
-    <Compile Include="Conjugator.cs" />
-    <Compile Include="Conjugators.cs" />
-    <Compile Include="Formality.cs" />
-    <Compile Include="Forms.cs" />
-    <Compile Include="Inflection.cs" />
-    <Compile Include="Hints.cs" />
-    <Compile Include="JapaneseEntryExtensions.cs" />
-    <Compile Include="POS.cs" />
-    <Compile Include="Polarity.cs" />
-    <Compile Include="Tense.cs" />
     <Compile Include="Themes\Stylist.cs" />
-    <Compile Include="WordClass.cs" />
-    <Compile Include="Word.cs" />
     <Page Include="Mains\DetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -190,6 +173,12 @@
     <Resource Include="Resources\Japangolin.ico" />
     <Resource Include="Resources\Japangolin.png" />
     <SplashScreen Include="Resources\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Japangolin.Domain\Japangolin.Domain.csproj">
+      <Project>{2300fde1-5dac-41ff-9ec9-b5ceacd4c8a6}</Project>
+      <Name>Japangolin.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" />

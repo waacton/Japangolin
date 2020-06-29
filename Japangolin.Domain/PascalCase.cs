@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Wacton.Japangolin.UI
+namespace Wacton.Japangolin.Domain
 {
     public static class PascalCase
     {

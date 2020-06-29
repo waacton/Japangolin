@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin
+﻿namespace Wacton.Japangolin.Domain
 {
     using System;
 

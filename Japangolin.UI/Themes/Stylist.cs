@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin
+﻿namespace Wacton.Japangolin.UI.Themes
 {
     using System.Windows.Media;
     using MaterialDesignColors;

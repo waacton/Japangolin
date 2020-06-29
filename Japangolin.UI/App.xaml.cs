@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Threading;
-
+    using Wacton.Japangolin.UI.Themes;
     using Wacton.Tovarisch.Logging;
 
     /// <summary>

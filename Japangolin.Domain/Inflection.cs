@@ -1,7 +1,6 @@
-﻿using Wacton.Japangolin.UI;
-using Wacton.Tovarisch.Enum;
+﻿using Wacton.Tovarisch.Enum;
 
-namespace Wacton.Japangolin
+namespace Wacton.Japangolin.Domain
 {
     public class Inflection : Enumeration
     {

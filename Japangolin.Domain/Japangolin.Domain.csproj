@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Wacton.Japangolin.Domain</AssemblyName>
+    <RootNamespace>Wacton.Japangolin.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Wacton.Desu" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Wacton.Tovarisch">
+      <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
+    </Reference>
+    <Reference Include="Wacton.Tovarisch.Logging">
+      <HintPath>..\Dependencies\Wacton.Tovarisch.Logging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

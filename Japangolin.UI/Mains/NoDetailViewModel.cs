@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Mains
+﻿namespace Wacton.Japangolin.UI.Mains
 {
     using Wacton.Tovarisch.MVVM;
     using Wacton.Tovarisch.UI.MVVM;
