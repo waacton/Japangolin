@@ -41,7 +41,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Text="WORD" FontSize="10" Opacity="0.6" FontWeight="Medium"
-                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 0, 0, 0" />
+                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0, 0, 0" Padding="4, 0, 0, 0" />
             
             <TextBox Grid.Row="1" Text="{Binding WordText, Mode=OneWay}" FontSize="18" TextAlignment="Left" 
                      HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
@@ -49,7 +49,7 @@
                      cal:Message.Attach="[Event GotFocus] = [Action WordSelected]" />
 
             <TextBlock Grid.Row="2" Text="INFLECTION" FontSize="10" Opacity="0.6" FontWeight="Medium"
-                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 0" Padding="4, 20, 0, 0" />
+                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 20, 0, 0" Padding="4, 0, 0, 0" />
             
             <TextBox Grid.Row="3" Text="{Binding InflectionText, Mode=OneWay}" FontSize="18" TextAlignment="Left" 
                      HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16, 2"
