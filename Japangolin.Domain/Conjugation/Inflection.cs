@@ -1,6 +1,8 @@
-﻿using Wacton.Tovarisch.Enum;
+﻿using Wacton.Japangolin.Domain.Utils;
+using Wacton.Japangolin.Domain.Words;
+using Wacton.Tovarisch.Enum;
 
-namespace Wacton.Japangolin.Domain
+namespace Wacton.Japangolin.Domain.Conjugation
 {
     public class Inflection : Enumeration
     {

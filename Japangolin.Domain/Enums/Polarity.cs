@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain.Enums
 {
     public enum Polarity
     {

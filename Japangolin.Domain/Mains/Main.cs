@@ -1,10 +1,13 @@
-﻿namespace Wacton.Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain.Mains
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
     using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Domain.Conjugation;
+    using Wacton.Japangolin.Domain.Enums;
+    using Wacton.Japangolin.Domain.Words;
     using Wacton.Tovarisch.Enum;
     using Wacton.Tovarisch.Randomness;
 

@@ -1,4 +1,6 @@
-﻿namespace Wacton.Japangolin.Domain
+﻿using Wacton.Japangolin.Domain.Enums;
+
+namespace Wacton.Japangolin.Domain.Words
 {
     public class Word
     {

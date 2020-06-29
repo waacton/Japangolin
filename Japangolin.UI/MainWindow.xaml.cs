@@ -8,7 +8,8 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Wacton.Japangolin.Domain;
+    using Wacton.Japangolin.Domain.Mains;
+    using Wacton.Japangolin.Domain.Utils;
     using Wacton.Japangolin.UI.Mains;
     using Wacton.Tovarisch.MVVM;
 

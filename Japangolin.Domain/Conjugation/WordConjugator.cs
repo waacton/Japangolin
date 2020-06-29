@@ -1,6 +1,7 @@
-﻿namespace Wacton.Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain.Conjugation
 {
     using System;
+    using Wacton.Japangolin.Domain.Words;
 
     public class WordConjugator
     {

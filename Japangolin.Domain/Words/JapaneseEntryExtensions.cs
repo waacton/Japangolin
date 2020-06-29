@@ -1,4 +1,4 @@
-﻿namespace Wacton.Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain.Words
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,7 @@
 
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
+    using Wacton.Japangolin.Domain.Enums;
 
     public static class JapaneseEntryExtensions
     {

@@ -1,7 +1,9 @@
-﻿namespace Wacton.Japangolin.Domain
+﻿namespace Wacton.Japangolin.Domain.Conjugation
 {
     using System;
     using System.Collections.Generic;
+    using Wacton.Japangolin.Domain.Enums;
+    using Wacton.Japangolin.Domain.Words;
 
     // TODO: explicitly handle irregularities (e.g. adjective-i いい conjugates as よく)
     // TODO: expand te-form to allow negative (which will also allow things like potential & passive forms)
@@ -121,32 +123,9 @@
             return contextualConjugators[(int)tense - 1, (int)polarity - 1, (int)formality - 1];
         }
 
-        public static Conjugator Get(WordClass wordClass, Tense tense, Polarity polarity, Formality formality)
-        {
-            return ContextualByWordClass[wordClass][(int)tense - 1, (int)polarity - 1, (int)formality - 1];
-        }
-
-        public static Conjugator GetDict(WordClass wordClass)
-        {
-            return DictByWordClass[wordClass];
-        }
-
-        public static Conjugator GetStem(WordClass wordClass)
-        {
-            return StemsByWordClass[wordClass];
-        }
-
-        public static Conjugator GetTe(WordClass wordClass)
-        {
-            return TeFormsByWordClass[wordClass];
-        }
-
-        private static void Set(Conjugator[,,] conjugationMatrix, Tense tense, Polarity polarity, Formality formality, 
-            Func<string, string> function, string hint)
+        private static void Set(Conjugator[,,] conjugationMatrix, Tense tense, Polarity polarity, Formality formality, Func<string, string> function, string hint)
         {
             // TODO: consider special cases like ～た and ～ない forms
-            var abstractInfo = 
-                $"{(tense == Tense.Present ? "🔜" : "🔙")}{(polarity == Polarity.Affirmative ? "✔" : "❌")}{(formality == Formality.Long ? "🙇" : "🗣")}";
             conjugationMatrix[(int)tense - 1, (int)polarity - 1, (int)formality - 1] = new Conjugator(function, hint);
         }
     }
