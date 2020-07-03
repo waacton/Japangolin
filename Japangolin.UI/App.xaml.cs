@@ -6,6 +6,7 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Threading;
+    using Wacton.Japangolin.UI.Mains;
     using Wacton.Japangolin.UI.Themes;
     using Wacton.Tovarisch.Logging;
 
@@ -32,7 +33,7 @@
         private static void SetWindowTitle()
         {
             var applicationVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            //ShellViewModel.WindowTitle = $"Wacton.Japangolin ({applicationVersion})";
+            ShellViewModel.WindowTitle = $"Wacton.Japangolin · {applicationVersion}";
         }
 
         private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

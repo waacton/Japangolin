@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
              mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200"
              d:DataContext="{d:DesignInstance Type=mains:DesignTimeNoDetailViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>

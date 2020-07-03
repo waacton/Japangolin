@@ -10,9 +10,11 @@
         }
     }
 
-    public class DesignTimeNoTranslationViewModel : NoDetailViewModel
+    // --- design time ---
+
+    public class DesignTimeNoDetailViewModel : NoDetailViewModel
     {
-        public DesignTimeNoTranslationViewModel() : base(null)
+        public DesignTimeNoDetailViewModel() : base(null)
         {
         }
     }

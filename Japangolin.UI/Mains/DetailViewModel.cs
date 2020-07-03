@@ -25,8 +25,17 @@
         }
     }
 
+    // --- design time ---
+
     public class DesignTimeDetailViewModel : DetailViewModel
     {
+        public new string FirstDetail => "ジャパンゴリン";
+        public new string SecondDetail => "Japangolin";
+        public new string ThirdDetail => "by Wacton";
+
+        public new bool HasSecondDetail => true;
+        public new bool HasThirdDetail => true;
+
         public DesignTimeDetailViewModel() : base(null)
         {
         }
