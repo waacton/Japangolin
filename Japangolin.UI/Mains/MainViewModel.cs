@@ -95,6 +95,8 @@
             this.detailViewModel = detailViewModel;
             this.noDetailViewModel = noDetailViewModel;
 
+            this.ResetView();
+
             snackbarTimer.Elapsed += HideSnackbar;
             snackbarTimer.AutoReset = false;
         }
