@@ -5,9 +5,9 @@
     public class Conjugator
     {
         public Func<string, string> Function { get; private set; }
-        public string Hint { get; private set; }
+        public Hint Hint { get; private set; }
 
-        public Conjugator(Func<string, string> function, string hint)
+        public Conjugator(Func<string, string> function, Hint hint)
         {
             this.Function = function;
             this.Hint = hint;

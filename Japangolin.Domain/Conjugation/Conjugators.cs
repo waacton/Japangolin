@@ -5,14 +5,14 @@
     using Wacton.Japangolin.Domain.Enums;
     using Wacton.Japangolin.Domain.Words;
 
-    // TODO: explicitly handle irregularities (e.g. adjective-i いい conjugates as よく)
+    // TODO: explicitly handle irregularities (e.g. する、来る、 adjective-i いい conjugates as よく)
     // TODO: expand te-form to allow negative (which will also allow things like potential & passive forms)
     /* some useful stuff can be found at https://en.wikipedia.org/wiki/Japanese_verb_conjugation */
     public static class Conjugators
     {
-        public static readonly WordConjugator Dictionary = new WordConjugator((word) => Conjugator1D(word, DictByWordClass));
-        public static readonly WordConjugator Stem = new WordConjugator((word) => Conjugator1D(word, StemsByWordClass));
-        public static readonly WordConjugator Te = new WordConjugator((word) => Conjugator1D(word, TeFormsByWordClass));
+        public static readonly WordConjugator Dictionary = new WordConjugator((word) => Conjugator1D(word, dictsByWordClass));
+        public static readonly WordConjugator Stem = new WordConjugator((word) => Conjugator1D(word, stemsByWordClass));
+        public static readonly WordConjugator Te = new WordConjugator((word) => Conjugator1D(word, teFormsByWordClass));
         public static readonly WordConjugator PresentAffirmativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Affirmative, Formality.Long));
         public static readonly WordConjugator PresentAffirmativeShort = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Affirmative, Formality.Short));
         public static readonly WordConjugator PresentNegativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Negative, Formality.Long));
@@ -22,94 +22,98 @@
         public static readonly WordConjugator PastNegativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Negative, Formality.Long));
         public static readonly WordConjugator PastNegativeShort = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Negative, Formality.Short));
 
-        private static readonly Dictionary<WordClass, Conjugator> DictByWordClass;
-        private static readonly Dictionary<WordClass, Conjugator> StemsByWordClass;
-        private static readonly Dictionary<WordClass, Conjugator> TeFormsByWordClass;
+        private static readonly Dictionary<WordClass, Conjugator> dictsByWordClass;
+        private static readonly Dictionary<WordClass, Conjugator> stemsByWordClass;
+        private static readonly Dictionary<WordClass, Conjugator> teFormsByWordClass;
         private static readonly Dictionary<WordClass, Conjugator[,,]> ContextualByWordClass;
-        private static readonly Conjugator[,,] Noun;
-        private static readonly Conjugator[,,] AdjectiveNa;
-        private static readonly Conjugator[,,] AdjectiveI;
-        private static readonly Conjugator[,,] VerbRu;
-        private static readonly Conjugator[,,] VerbU;
+        private static readonly Conjugator[,,] noun;
+        private static readonly Conjugator[,,] adjectiveNa;
+        private static readonly Conjugator[,,] adjectiveI;
+        private static readonly Conjugator[,,] verbRu;
+        private static readonly Conjugator[,,] verbU;
+
+        private static readonly string dictHint = "dictionary";
+        private static readonly string stemHint = "stem";
+        private static readonly string teHint = "te";
 
         static Conjugators()
         {
-            var identityConjugator = new Conjugator(x => x, "dict");
+            var identityConjugator = new Conjugator(x => x, new Hint("the word itself"));
 
+            dictsByWordClass = new Dictionary<WordClass, Conjugator>();
+            stemsByWordClass = new Dictionary<WordClass, Conjugator>();
+            teFormsByWordClass = new Dictionary<WordClass, Conjugator>();
             ContextualByWordClass = new Dictionary<WordClass, Conjugator[,,]>();
-            DictByWordClass = new Dictionary<WordClass, Conjugator>();
-            StemsByWordClass = new Dictionary<WordClass, Conjugator>();
-            TeFormsByWordClass = new Dictionary<WordClass, Conjugator>();
 
-            Noun = new Conjugator[2, 2, 2];
-            Set(Noun, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.NounStem(x)}です", $"{Hints.NounStem()}　＋です");
-            Set(Noun, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.NounStem(x)}だ", $"{Hints.NounStem()}　＋だ");
-            Set(Noun, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.NounStem(x)}じゃないです", $"{Hints.NounStem()}　＋じゃないです");
-            Set(Noun, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.NounStem(x)}じゃない", $"{Hints.NounStem()}　＋じゃない");
-            Set(Noun, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.NounStem(x)}でした", $"{Hints.NounStem()}　＋でした");
-            Set(Noun, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.NounStem(x)}だった", $"{Hints.NounStem()}　＋だった");
-            Set(Noun, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.NounStem(x)}じゃなかったです", $"{Hints.NounStem()}　＋じゃなかったです");
-            Set(Noun, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.NounStem(x)}じゃなかった", $"{Hints.NounStem()}　＋じゃなかった");
-            DictByWordClass.Add(WordClass.Noun, identityConjugator);
-            StemsByWordClass.Add(WordClass.Noun, new Conjugator(x => $"{Forms.NounStem(x)}", $"{Hints.NounStem()}"));
-            TeFormsByWordClass.Add(WordClass.Noun, new Conjugator(x => $"{Forms.NounFormTe(x)}", $"{Hints.NounFormTe()}"));
-            ContextualByWordClass.Add(WordClass.Noun, Noun);
+            noun = new Conjugator[2, 2, 2];
+            dictsByWordClass.Add(WordClass.Noun, identityConjugator);
+            stemsByWordClass.Add(WordClass.Noun, new Conjugator(x => $"{Forms.NounStem(x)}", new Hint(dictHint)));
+            teFormsByWordClass.Add(WordClass.Noun, new Conjugator(x => $"{Forms.NounFormTe(x)}", new Hint(stemHint, "＋で")));
+            Set(noun, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.NounStem(x)}です", new Hint(stemHint, "＋です"));
+            Set(noun, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.NounStem(x)}だ", new Hint(stemHint, "＋だ"));
+            Set(noun, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.NounStem(x)}じゃないです", new Hint(stemHint, "＋じゃないです")); // TODO: allow ではありません ?
+            Set(noun, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.NounStem(x)}じゃない", new Hint(stemHint, "＋じゃない"));
+            Set(noun, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.NounStem(x)}でした", new Hint(stemHint, "＋でした"));
+            Set(noun, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.NounStem(x)}だった", new Hint(stemHint, "＋だった"));
+            Set(noun, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.NounStem(x)}じゃなかったです", new Hint(stemHint, "＋じゃなかったです")); // TODO: allow ではありませんでした ?
+            Set(noun, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.NounStem(x)}じゃなかった", new Hint(stemHint, "＋じゃなかった"));
+            ContextualByWordClass.Add(WordClass.Noun, noun);
 
-            AdjectiveNa = new Conjugator[2, 2, 2];
-            Set(AdjectiveNa, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.AdjNaStem(x)}です", $"{Hints.AdjNaStem()}　＋です");
-            Set(AdjectiveNa, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.AdjNaStem(x)}だ", $"{Hints.AdjNaStem()}　＋だ");
-            Set(AdjectiveNa, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.AdjNaStem(x)}じゃないです", $"{Hints.AdjNaStem()}　＋じゃないです");
-            Set(AdjectiveNa, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.AdjNaStem(x)}じゃない", $"{Hints.AdjNaStem()}　＋じゃない");
-            Set(AdjectiveNa, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.AdjNaStem(x)}でした", $"{Hints.AdjNaStem()}　＋でした");
-            Set(AdjectiveNa, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.AdjNaStem(x)}だった", $"{Hints.AdjNaStem()}　＋だった");
-            Set(AdjectiveNa, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.AdjNaStem(x)}じゃなかったです", $"{Hints.AdjNaStem()}　＋じゃなかったです");
-            Set(AdjectiveNa, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.AdjNaStem(x)}じゃなかった", $"{Hints.AdjNaStem()}　＋じゃなかった");
-            DictByWordClass.Add(WordClass.AdjectiveNa, identityConjugator);
-            StemsByWordClass.Add(WordClass.AdjectiveNa, new Conjugator(x => $"{Forms.AdjNaStem(x)}", $"{Hints.AdjNaStem()}"));
-            TeFormsByWordClass.Add(WordClass.AdjectiveNa, new Conjugator(x => $"{Forms.AdjNaFormTe(x)}", $"{Hints.AdjNaFormTe()}"));
-            ContextualByWordClass.Add(WordClass.AdjectiveNa, AdjectiveNa);
+            adjectiveNa = new Conjugator[2, 2, 2];
+            dictsByWordClass.Add(WordClass.AdjectiveNa, identityConjugator);
+            stemsByWordClass.Add(WordClass.AdjectiveNa, new Conjugator(x => $"{Forms.AdjNaStem(x)}", new Hint(dictHint, "ーな")));
+            teFormsByWordClass.Add(WordClass.AdjectiveNa, new Conjugator(x => $"{Forms.AdjNaFormTe(x)}", new Hint(stemHint, "＋で")));
+            Set(adjectiveNa, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.AdjNaStem(x)}です", new Hint(stemHint, "＋です"));
+            Set(adjectiveNa, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.AdjNaStem(x)}だ", new Hint(stemHint, "＋だ"));
+            Set(adjectiveNa, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.AdjNaStem(x)}じゃないです", new Hint(stemHint, "＋じゃないです"));　// TODO: allow ではありません ?
+            Set(adjectiveNa, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.AdjNaStem(x)}じゃない", new Hint(stemHint, "＋じゃない"));
+            Set(adjectiveNa, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.AdjNaStem(x)}でした", new Hint(stemHint, "＋でした"));
+            Set(adjectiveNa, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.AdjNaStem(x)}だった", new Hint(stemHint, "＋だった"));
+            Set(adjectiveNa, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.AdjNaStem(x)}じゃなかったです", new Hint(stemHint, "＋じゃなかったです"));　// TODO: allow ではありませんでした ?
+            Set(adjectiveNa, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.AdjNaStem(x)}じゃなかった", new Hint(stemHint, "＋じゃなかった"));
+            ContextualByWordClass.Add(WordClass.AdjectiveNa, adjectiveNa);
 
-            AdjectiveI = new Conjugator[2, 2, 2];
-            Set(AdjectiveI, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.Dict(x)}です", $"{Hints.Dict()}　＋です");
-            Set(AdjectiveI, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", $"{Hints.Dict()}");
-            Set(AdjectiveI, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.AdjIStem(x)}くないです", $"{Hints.AdjIStem()}　＋くないです");
-            Set(AdjectiveI, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.AdjIStem(x)}くない", $"{Hints.AdjIStem()}　＋くない");
-            Set(AdjectiveI, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.AdjIStem(x)}かったです", $"{Hints.AdjIStem()}　＋かったです");
-            Set(AdjectiveI, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.AdjIStem(x)}かった", $"{Hints.AdjIStem()}　＋かった");
-            Set(AdjectiveI, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.AdjIStem(x)}くなかったです", $"{Hints.AdjIStem()}　＋くなかったです");
-            Set(AdjectiveI, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.AdjIStem(x)}くなかった", $"{Hints.AdjIStem()}　＋くなかった");
-            DictByWordClass.Add(WordClass.AdjectiveI, identityConjugator);
-            StemsByWordClass.Add(WordClass.AdjectiveI, new Conjugator(x => $"{Forms.AdjIStem(x)}", $"{Hints.AdjIStem()}"));
-            TeFormsByWordClass.Add(WordClass.AdjectiveI, new Conjugator(x => $"{Forms.AdjIFormTe(x)}", $"{Hints.AdjIFormTe()}"));
-            ContextualByWordClass.Add(WordClass.AdjectiveI, AdjectiveI);
+            adjectiveI = new Conjugator[2, 2, 2];
+            dictsByWordClass.Add(WordClass.AdjectiveI, identityConjugator);
+            stemsByWordClass.Add(WordClass.AdjectiveI, new Conjugator(x => $"{Forms.AdjIStem(x)}", new Hint(dictHint, "ーい")));
+            teFormsByWordClass.Add(WordClass.AdjectiveI, new Conjugator(x => $"{Forms.AdjIFormTe(x)}", new Hint(stemHint, "＋くて")));
+            Set(adjectiveI, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.Dict(x)}です", new Hint(dictHint, "＋です"));
+            Set(adjectiveI, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", new Hint(dictHint));
+            Set(adjectiveI, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.AdjIStem(x)}くないです", new Hint(stemHint, "＋くないです"));　// TODO: allow くありませんでした ?
+            Set(adjectiveI, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.AdjIStem(x)}くない", new Hint(stemHint, "＋くない"));
+            Set(adjectiveI, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.AdjIStem(x)}かったです", new Hint(stemHint, "＋かったです"));
+            Set(adjectiveI, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.AdjIStem(x)}かった", new Hint(stemHint, "＋かった"));
+            Set(adjectiveI, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.AdjIStem(x)}くなかったです", new Hint(stemHint, "＋くなかったです"));　// TODO: allow くありませんでした ?
+            Set(adjectiveI, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.AdjIStem(x)}くなかった", new Hint(stemHint, "＋くなかった"));
+            ContextualByWordClass.Add(WordClass.AdjectiveI, adjectiveI);
 
-            VerbRu = new Conjugator[2, 2, 2];
-            Set(VerbRu, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ます", $"{Hints.VerbRuStem()}　＋ます");
-            Set(VerbRu, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", $"{Hints.Dict()}");
-            Set(VerbRu, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ません", $"{Hints.VerbRuStem()}　＋ません");
-            Set(VerbRu, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}ない", $"{Hints.VerbRuStem()}　＋ない");
-            Set(VerbRu, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ました", $"{Hints.VerbRuStem()}　＋ました");
-            Set(VerbRu, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbRuFormTa(x)}", $"{Hints.VerbRuFormTa()}");
-            Set(VerbRu, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ませんでした", $"{Hints.VerbRuStem()}　＋ませんでした");
-            Set(VerbRu, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}なかった", $"{Hints.VerbRuStem()}　＋なかった");
-            DictByWordClass.Add(WordClass.VerbRu, identityConjugator);
-            StemsByWordClass.Add(WordClass.VerbRu, new Conjugator(x => $"{Forms.VerbRuStem(x)}", $"{Hints.VerbRuStem()}"));
-            TeFormsByWordClass.Add(WordClass.VerbRu, new Conjugator(x => $"{Forms.VerbRuFormTe(x)}", $"{Hints.VerbRuFormTe()}"));
-            ContextualByWordClass.Add(WordClass.VerbRu, VerbRu);
+            verbRu = new Conjugator[2, 2, 2];
+            dictsByWordClass.Add(WordClass.VerbRu, identityConjugator);
+            stemsByWordClass.Add(WordClass.VerbRu, new Conjugator(x => $"{Forms.VerbRuStem(x)}", new Hint(dictHint, "ーる")));
+            teFormsByWordClass.Add(WordClass.VerbRu, new Conjugator(x => $"{Forms.VerbRuFormTe(x)}", new Hint(stemHint, "＋て")));
+            Set(verbRu, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ます", new Hint(stemHint, "＋ます"));
+            Set(verbRu, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", new Hint(dictHint));
+            Set(verbRu, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ません",  new Hint(stemHint, "＋ません"));
+            Set(verbRu, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}ない",  new Hint(stemHint, "＋ない"));
+            Set(verbRu, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ました",  new Hint(stemHint, "＋ました"));
+            Set(verbRu, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbRuFormTa(x)}", new Hint(teHint, "て　↦　た"));
+            Set(verbRu, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ませんでした",  new Hint(stemHint, "＋ませんでした"));
+            Set(verbRu, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}なかった",  new Hint(stemHint, "＋なかった"));
+            ContextualByWordClass.Add(WordClass.VerbRu, verbRu);
 
-            VerbU = new Conjugator[2, 2, 2];
-            Set(VerbU, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ます", $"{Hints.VerbUStemI()}　＋ます");
-            Set(VerbU, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", $"{Hints.Dict()}");
-            Set(VerbU, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ません", $"{Hints.VerbUStemI()}　＋ません");
-            Set(VerbU, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}ない", $"{Hints.VerbUStemA()}　＋ない");
-            Set(VerbU, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ました", $"{Hints.VerbUStemI()}　＋ました");
-            Set(VerbU, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbUFormTa(x)}", $"{Hints.VerbUFormTa()}");
-            Set(VerbU, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ませんでした", $"{Hints.VerbUStemI()}　＋ませんでした");
-            Set(VerbU, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}なかった", $"{Hints.VerbUStemA()}なかった");
-            DictByWordClass.Add(WordClass.VerbU, identityConjugator);
-            StemsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUStemI(x)}", $"{Hints.VerbUStemI()}"));
-            TeFormsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUFormTe(x)}", $"{Hints.VerbUFormTe()}"));
-            ContextualByWordClass.Add(WordClass.VerbU, VerbU);
+            verbU = new Conjugator[2, 2, 2];
+            dictsByWordClass.Add(WordClass.VerbU, identityConjugator);
+            stemsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUStemI(x)}", new Hint(dictHint, "～〇〇う　↦　～〇〇い"))); // TODO: check usage
+            teFormsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUFormTe(x)}", new Hint(dictHint, "～〇〇う　↦　～〇〇て／で")));
+            Set(verbU, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ます", new Hint(stemHint, "＋ます"));
+            Set(verbU, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", new Hint(dictHint));
+            Set(verbU, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ません",  new Hint(stemHint, "＋ません"));
+            Set(verbU, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}ない", new Hint(stemHint, "～〇〇い　↦　～〇〇あない"));
+            Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ました",  new Hint(stemHint, "＋ました"));
+            Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbUFormTa(x)}", new Hint(teHint, "て／で　↦　た／だ"));
+            Set(verbU, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ませんでした",  new Hint(stemHint, "＋ませんでした"));
+            Set(verbU, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}なかった", new Hint(stemHint, "～〇〇い　↦　～〇〇あなかった"));
+            ContextualByWordClass.Add(WordClass.VerbU, verbU);
         }
 
         public static Conjugator Conjugator1D(Word word, Dictionary<WordClass, Conjugator> conjLookup)
@@ -123,7 +127,7 @@
             return contextualConjugators[(int)tense - 1, (int)polarity - 1, (int)formality - 1];
         }
 
-        private static void Set(Conjugator[,,] conjugationMatrix, Tense tense, Polarity polarity, Formality formality, Func<string, string> function, string hint)
+        private static void Set(Conjugator[,,] conjugationMatrix, Tense tense, Polarity polarity, Formality formality, Func<string, string> function, Hint hint)
         {
             // TODO: consider special cases like ～た and ～ない forms
             conjugationMatrix[(int)tense - 1, (int)polarity - 1, (int)formality - 1] = new Conjugator(function, hint);

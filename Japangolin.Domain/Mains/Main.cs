@@ -15,7 +15,7 @@
     {
         public Word Word { get; private set; }
         public Inflection Inflection { get; private set; }
-        public string Hint { get; private set; }
+        public Hint Hint { get; private set; }
         public string AnswerKana { get; private set; }
         public string AnswerKanji { get; private set; }
 
@@ -23,11 +23,8 @@
         private readonly List<Inflection> allInflections = Enumeration.GetAll<Inflection>().ToList();
 
 
-        // pass in IJapaneseDictionary japaneseDictionary
-        public Main()
+        public Main(IJapaneseDictionary japaneseDictionary)
         {
-            var japaneseDictionary = new JapaneseDictionary();
-
             // TODO: embed resource in DLL?
             var rawData = File.ReadAllLines("../../../Resources/JLPTN5_sequences.csv");
             var jlptSequenceNumbers = rawData.Select(data => int.Parse(data)).ToList();

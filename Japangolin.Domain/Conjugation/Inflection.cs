@@ -33,7 +33,7 @@ namespace Wacton.Japangolin.Domain.Conjugation
             return this.wordConjugator.Conjugate(word);
         }
 
-        public string GetHint(Word word)
+        public Hint GetHint(Word word)
         {
             return this.wordConjugator.GetHint(word);
         }

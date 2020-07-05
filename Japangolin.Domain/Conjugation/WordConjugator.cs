@@ -20,7 +20,7 @@
             return (kana, kanji);
         }
 
-        public string GetHint(Word word)
+        public Hint GetHint(Word word)
         {
             var conjugator = this.GetConjugator(word);
             return conjugator.Hint;

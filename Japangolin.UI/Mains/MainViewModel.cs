@@ -108,7 +108,8 @@
 
         public void InflectionSelected()
         {
-            this.detailViewModel.Update(main.Hint);
+            var wordClassDetail = PascalCase.InsertSeparator(main.Word.Class.ToString(), "-").ToLower();
+            this.detailViewModel.Update(main.Hint.BaseForm, main.Hint.Modification, wordClassDetail);
             this.CurrentDetailViewModel = this.detailViewModel;
         }
 
