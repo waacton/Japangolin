@@ -1,6 +1,5 @@
 ﻿namespace Wacton.Japangolin.UI.Mains
 {
-    using System.Timers;
     using System.Windows.Input;
     using Wacton.Japangolin.Domain.Commands;
     using Wacton.Japangolin.Domain.Mains;

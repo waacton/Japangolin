@@ -35,6 +35,7 @@
             this.IsSnackbarActive = true;
             snackbarTimer.Start();
         }
+
         private void HideSnackbar(object sender, ElapsedEventArgs e)
         {
             this.IsSnackbarActive = false;
