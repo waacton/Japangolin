@@ -7,11 +7,13 @@
     {
         public static string WindowTitle { get; set; }
         public MainViewModel MainViewModel { get; }
+        public SnackbarViewModel SnackbarViewModel { get; }
 
-        public ShellViewModel(MainViewModel mainViewModel, ModelChangeNotifier modelChangeNotifier)
+        public ShellViewModel(MainViewModel mainViewModel, SnackbarViewModel snackbarViewModel, ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier)
         {
             this.MainViewModel = mainViewModel;
+            this.SnackbarViewModel = snackbarViewModel;
         }
     }
 
@@ -19,7 +21,7 @@
 
     public class DesignTimeShellViewModel : ShellViewModel
     {
-        public DesignTimeShellViewModel() : base(new DesignTimeMainViewModel(), null)
+        public DesignTimeShellViewModel() : base(new DesignTimeMainViewModel(), new DesignTimeSnackbarViewModel(), null)
         {
         }
     }

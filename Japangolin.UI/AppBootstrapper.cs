@@ -20,6 +20,7 @@
             kernel.Bind<Main>().ToSelf().InSingletonScope();
             kernel.Bind<DetailViewModel>().ToSelf().InSingletonScope();
             kernel.Bind<NoDetailViewModel>().ToSelf().InSingletonScope();
+            kernel.Bind<SnackbarViewModel>().ToSelf().InSingletonScope();
         }
     }
 }

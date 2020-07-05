@@ -14,7 +14,6 @@
         private readonly UpdateCommand updateCommand;
         private readonly DetailViewModel detailViewModel;
         private readonly NoDetailViewModel noDetailViewModel;
-        private readonly Timer snackbarTimer = new Timer(3000);
 
         // domain-specific properties
         public string WordText => main.Word.English.ToLower();
@@ -68,25 +67,13 @@
             }
         }
 
-        private bool isSnackbarActive;
-        public bool IsSnackbarActive
-        {
-            get
-            {
-                return this.isSnackbarActive;
-            }
-
-            private set
-            {
-                this.isSnackbarActive = value;
-                this.NotifyOfPropertyChange(nameof(this.IsSnackbarActive));
-            }
-        }
+        public SnackbarViewModel SnackbarViewModel { get; }
 
         public MainViewModel(Main main,
             UpdateCommand updateCommand,
             DetailViewModel detailViewModel,
             NoDetailViewModel noDetailViewModel,
+            SnackbarViewModel snackbarViewModel,
             ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier, main)
         {
@@ -94,11 +81,9 @@
             this.updateCommand = updateCommand;
             this.detailViewModel = detailViewModel;
             this.noDetailViewModel = noDetailViewModel;
+            this.SnackbarViewModel = snackbarViewModel;
 
             this.ResetView();
-
-            snackbarTimer.Elapsed += HideSnackbar;
-            snackbarTimer.AutoReset = false;
         }
 
         private void UpdateWordAndInflection()
@@ -133,9 +118,7 @@
             if (this.IsInputCorrect())
             {
                 this.UpdateWordAndInflection();
-
-                this.IsSnackbarActive = true;
-                snackbarTimer.Start();
+                this.SnackbarViewModel.TriggerSnackbar();
             }
         }
         private bool IsInputCorrect()
@@ -169,11 +152,6 @@
             var isKanjiDifferent = main.AnswerKanji != main.AnswerKana;
             return isKanjiDifferent ? $"{main.AnswerKana} · {main.AnswerKanji}" : $"{main.AnswerKana}";
         }
-
-        private void HideSnackbar(object sender, ElapsedEventArgs e)
-        {
-            this.IsSnackbarActive = false;
-        }
     }
 
     // --- design time ---
@@ -186,7 +164,7 @@
         public new DetailViewModel CurrentDetailViewModel => new DesignTimeDetailViewModel();
         public new bool IsAnswerVisible => true;
 
-        public DesignTimeMainViewModel() : base(null, null, new DesignTimeDetailViewModel(), new DesignTimeNoDetailViewModel(), null)
+        public DesignTimeMainViewModel() : base(null, null, new DesignTimeDetailViewModel(), new DesignTimeNoDetailViewModel(), new DesignTimeSnackbarViewModel(), null)
         {
         }
     }

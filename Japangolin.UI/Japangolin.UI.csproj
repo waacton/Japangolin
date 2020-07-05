@@ -91,9 +91,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Mains\SnackbarView.xaml.cs">
+      <DependentUpon>SnackbarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Mains\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mains\SnackbarViewModel.cs" />
     <Compile Include="Mains\MainViewModel.cs" />
     <Compile Include="Mains\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -101,6 +105,10 @@
     <Compile Include="Mains\ShellViewModel.cs" />
     <Compile Include="Themes\Stylist.cs" />
     <Page Include="Mains\DetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mains\SnackbarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

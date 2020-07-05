@@ -20,12 +20,17 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="16"/>
         </Grid.ColumnDefinitions>
 
-        <mains:MainView DataContext="{Binding MainViewModel}" />
+        <mains:MainView Grid.Row="1" Grid.Column="1" DataContext="{Binding MainViewModel}" />
+        <mains:SnackbarView Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" DataContext="{Binding SnackbarViewModel}" />
     </Grid>
 </Window>

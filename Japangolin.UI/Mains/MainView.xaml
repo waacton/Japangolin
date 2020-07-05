@@ -12,19 +12,15 @@
 
     <Grid x:Name="Grid" FocusManager.FocusedElement="{Binding ElementName=Input}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="16"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="16"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -66,7 +62,7 @@
             </materialDesign:Card>
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="1">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -95,7 +91,7 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="3" Grid.Column="1">
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -119,10 +115,6 @@
                      IsReadOnly="True" Opacity="0.6"
                      Style="{DynamicResource InvisibleTextBox}" />
         </Grid>
-
-        <materialDesign:Snackbar Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" IsActive="{Binding IsSnackbarActive}">
-            <materialDesign:SnackbarMessage Content="◯ Correct!" />
-        </materialDesign:Snackbar>
 
     </Grid>
 </UserControl>
