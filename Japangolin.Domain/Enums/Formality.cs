@@ -1,9 +1,21 @@
-﻿namespace Wacton.Japangolin.Domain.Enums
+﻿using Wacton.Tovarisch.Enum;
+
+namespace Wacton.Japangolin.Domain.Enums
 {
-    public enum Formality
+    public class Formality : Enumeration
     {
-        None,
-        Long,
-        Short
+        public static readonly Formality None = new Formality("None", -1);
+        public static readonly Formality Long = new Formality("Long", 0);
+        public static readonly Formality Short = new Formality("Short", 1);
+
+        // ---
+
+        public int Index { get; }
+
+        public Formality(string displayName, int index)
+            : base(displayName)
+        {
+            this.Index = index;
+        }
     }
 }

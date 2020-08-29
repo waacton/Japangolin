@@ -124,13 +124,12 @@
         public static Conjugator Conjugator4D(Word word, Dictionary<WordClass, Conjugator[,,]> conjLookup, Tense tense, Polarity polarity, Formality formality)
         {
             var contextualConjugators = conjLookup[word.Class];
-            return contextualConjugators[(int)tense - 1, (int)polarity - 1, (int)formality - 1];
+            return contextualConjugators[tense.Index, polarity.Index, formality.Index];
         }
 
         private static void Set(Conjugator[,,] conjugationMatrix, Tense tense, Polarity polarity, Formality formality, Func<string, string> function, Hint hint)
         {
-            // TODO: consider special cases like ～た and ～ない forms
-            conjugationMatrix[(int)tense - 1, (int)polarity - 1, (int)formality - 1] = new Conjugator(function, hint);
+            conjugationMatrix[tense.Index, polarity.Index, formality.Index] = new Conjugator(function, hint);
         }
     }
 }
