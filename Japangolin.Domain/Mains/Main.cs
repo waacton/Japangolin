@@ -1,7 +1,6 @@
 ﻿namespace Wacton.Japangolin.Domain.Mains
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
 
     using Wacton.Desu.Japanese;
@@ -22,15 +21,10 @@
         private readonly List<IJapaneseEntry> japaneseEntries;
         private readonly List<Inflection> allInflections = Enumeration.GetAll<Inflection>().ToList();
 
-
         public Main(IJapaneseDictionary japaneseDictionary)
         {
-            // TODO: embed resource in DLL?
-            var rawData = File.ReadAllLines("../../../Resources/JLPTN5_sequences.csv");
-            var jlptSequenceNumbers = rawData.Select(data => int.Parse(data)).ToList();
             this.japaneseEntries = japaneseDictionary.GetEntries()
-                .Where(entry => jlptSequenceNumbers.Contains(entry.Sequence))
-                .ToList();
+                .Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
 
             this.UpdateWordAndInflection();
         }
