@@ -3,11 +3,11 @@
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Tovarisch.MVVM;
 
-    public class UpdateCommand : ModelChangeCommand
+    public class UpdateWordAndInflectionCommand : ModelChangeCommand
     {
         private readonly Main main;
 
-        public UpdateCommand(ModelChangeNotifier modelChangeNotifier, Main main)
+        public UpdateWordAndInflectionCommand(ModelChangeNotifier modelChangeNotifier, Main main)
             : base(modelChangeNotifier, main)
         {
             this.main = main;

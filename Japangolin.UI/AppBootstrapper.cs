@@ -17,9 +17,11 @@
         public static void SetupKernelBindings(IKernel kernel)
         {
             kernel.Bind<IJapaneseDictionary>().To<JapaneseDictionary>().InSingletonScope();
+            kernel.Bind<Settings>().To<Settings>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();
             kernel.Bind<DetailViewModel>().ToSelf().InSingletonScope();
             kernel.Bind<NoDetailViewModel>().ToSelf().InSingletonScope();
+            kernel.Bind<SettingsViewModel>().ToSelf().InSingletonScope();
             kernel.Bind<SnackbarViewModel>().ToSelf().InSingletonScope();
         }
     }

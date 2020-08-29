@@ -18,18 +18,20 @@
         public string AnswerKana { get; private set; }
         public string AnswerKanji { get; private set; }
 
-        private readonly List<IJapaneseEntry> japaneseEntries;
+        private readonly List<IJapaneseEntry> allEntries;
+        private readonly List<IJapaneseEntry> jlptN5Entries;
         private readonly List<Inflection> allInflections = Enumeration.GetAll<Inflection>().ToList();
 
-        public Main(IJapaneseDictionary japaneseDictionary)
-        {
-            this.japaneseEntries = japaneseDictionary.GetEntries()
-                .Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
+        private readonly Settings settings;
 
-            this.UpdateWordAndInflection();
+        public Main(IJapaneseDictionary japaneseDictionary, Settings settings)
+        {
+            this.settings = settings;
+            this.allEntries = japaneseDictionary.GetEntries().ToList();
+            this.jlptN5Entries = allEntries.Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
         }
 
-        public void UpdateWordAndInflection()
+        internal void UpdateWordAndInflection()
         {
             this.Word = GetRandomWord();
             this.Inflection = RandomSelection.SelectOne(this.allInflections);
@@ -44,7 +46,7 @@
 
             while (!isValid)
             {
-                var entry = RandomSelection.SelectOne(japaneseEntries);
+                var entry = RandomSelection.SelectOne(this.settings.WordFilter == WordFilter.JLPTN5 ? jlptN5Entries : allEntries);
                 word = entry.ParseToWord();
                 isValid = word.Class != WordClass.Unknown;
             }

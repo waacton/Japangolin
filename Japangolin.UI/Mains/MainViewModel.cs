@@ -10,7 +10,7 @@
     public class MainViewModel : ViewModelBase
     {
         private readonly Main main;
-        private readonly UpdateCommand updateCommand;
+        private readonly UpdateWordAndInflectionCommand updateWordAndInflectionCommand;
         private readonly DetailViewModel detailViewModel;
         private readonly NoDetailViewModel noDetailViewModel;
 
@@ -23,11 +23,7 @@
         private string inputText;
         public string InputText
         {
-            get
-            {
-                return this.inputText;
-            }
-
+            get { return this.inputText; }
             set
             {
                 this.inputText = value;
@@ -38,11 +34,7 @@
         private DetailViewModel currentDetailViewModel;
         public DetailViewModel CurrentDetailViewModel
         {
-            get
-            {
-                return this.currentDetailViewModel;
-            }
-
+            get { return this.currentDetailViewModel; }
             private set
             {
                 this.currentDetailViewModel = value;
@@ -53,11 +45,7 @@
         private bool isAnswerVisible;
         public bool IsAnswerVisible
         {
-            get
-            {
-                return this.isAnswerVisible;
-            }
-
+            get { return this.isAnswerVisible; }
             private set
             {
                 this.isAnswerVisible = value;
@@ -69,7 +57,7 @@
         public SnackbarViewModel SnackbarViewModel { get; }
 
         public MainViewModel(Main main,
-            UpdateCommand updateCommand,
+            UpdateWordAndInflectionCommand updateWordAndInflectionCommand,
             DetailViewModel detailViewModel,
             NoDetailViewModel noDetailViewModel,
             SnackbarViewModel snackbarViewModel,
@@ -77,18 +65,18 @@
             : base(modelChangeNotifier, main)
         {
             this.main = main;
-            this.updateCommand = updateCommand;
+            this.updateWordAndInflectionCommand = updateWordAndInflectionCommand;
             this.detailViewModel = detailViewModel;
             this.noDetailViewModel = noDetailViewModel;
             this.SnackbarViewModel = snackbarViewModel;
 
-            this.ResetView();
+            this.UpdateWordAndInflection();
         }
 
         private void UpdateWordAndInflection()
         {
             this.ResetView();
-            this.updateCommand.ExecuteAndNotify();
+            this.updateWordAndInflectionCommand.ExecuteAndNotify();
         }
 
         private void ResetView()

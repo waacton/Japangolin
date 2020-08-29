@@ -6,7 +6,7 @@
         xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding WindowTitle}" Height="360" Width="720" MinHeight="360" MinWidth="720" 
+        Title="{Binding WindowTitle}" Height="368" Width="736" MinHeight="368" MinWidth="736" 
         Icon="pack://application:,,,/Wacton.Japangolin.UI;component/Resources/Japangolin.ico"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -15,12 +15,12 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        d:DesignHeight="360" d:DesignWidth="720"
+        d:DesignHeight="368" d:DesignWidth="736"
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeShellViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
@@ -30,6 +30,7 @@
             <ColumnDefinition Width="16"/>
         </Grid.ColumnDefinitions>
 
+        <mains:SettingsView Grid.Row="0" Grid.Column="1" DataContext="{Binding SettingsViewModel}" />
         <mains:MainView Grid.Row="1" Grid.Column="1" DataContext="{Binding MainViewModel}" />
         <mains:SnackbarView Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" DataContext="{Binding SnackbarViewModel}" />
     </Grid>
