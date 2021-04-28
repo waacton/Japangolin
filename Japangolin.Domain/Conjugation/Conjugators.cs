@@ -93,12 +93,12 @@
             teFormsByWordClass.Add(WordClass.VerbRu, new Conjugator(x => $"{Forms.VerbRuFormTe(x)}", new Hint(stemHint, "＋て")));
             Set(verbRu, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ます", new Hint(stemHint, "＋ます"));
             Set(verbRu, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", new Hint(dictHint));
-            Set(verbRu, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ません",  new Hint(stemHint, "＋ません"));
-            Set(verbRu, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}ない",  new Hint(stemHint, "＋ない"));
-            Set(verbRu, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ました",  new Hint(stemHint, "＋ました"));
+            Set(verbRu, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ません", new Hint(stemHint, "＋ません"));
+            Set(verbRu, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}ない", new Hint(stemHint, "＋ない"));
+            Set(verbRu, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ました", new Hint(stemHint, "＋ました"));
             Set(verbRu, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbRuFormTa(x)}", new Hint(teHint, "て　↦　た"));
-            Set(verbRu, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ませんでした",  new Hint(stemHint, "＋ませんでした"));
-            Set(verbRu, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}なかった",  new Hint(stemHint, "＋なかった"));
+            Set(verbRu, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbRuStem(x)}ませんでした", new Hint(stemHint, "＋ませんでした"));
+            Set(verbRu, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbRuStem(x)}なかった", new Hint(stemHint, "＋なかった"));
             ContextualByWordClass.Add(WordClass.VerbRu, verbRu);
 
             verbU = new Conjugator[2, 2, 2];
@@ -107,12 +107,12 @@
             teFormsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUFormTe(x)}", new Hint(dictHint, "～〇〇う　↦　～〇〇て／で")));
             Set(verbU, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ます", new Hint(stemHint, "＋ます"));
             Set(verbU, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", new Hint(dictHint));
-            Set(verbU, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ません",  new Hint(stemHint, "＋ません"));
-            Set(verbU, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}ない", new Hint(stemHint, "～〇〇い　↦　～〇〇あない"));
-            Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ました",  new Hint(stemHint, "＋ました"));
+            Set(verbU, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ません", new Hint(stemHint, "＋ません"));
+            Set(verbU, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}ない", new Hint(stemHint, "～〇〇う　↦　～〇〇あない"));
+            Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ました", new Hint(stemHint, "＋ました"));
             Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbUFormTa(x)}", new Hint(teHint, "て／で　↦　た／だ"));
-            Set(verbU, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ませんでした",  new Hint(stemHint, "＋ませんでした"));
-            Set(verbU, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}なかった", new Hint(stemHint, "～〇〇い　↦　～〇〇あなかった"));
+            Set(verbU, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ませんでした", new Hint(stemHint, "＋ませんでした"));
+            Set(verbU, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}なかった", new Hint(stemHint, "～〇〇う　↦　～〇〇あなかった"));
             ContextualByWordClass.Add(WordClass.VerbU, verbU);
         }
 
