@@ -11,6 +11,27 @@ It is primarily targeted at JLPT N5 vocabulary, but it can be turned off to allo
 
 ![Example: word "pangolin" and inflection "past · affirmative · long" with word selected](Resources/example-4_pangolin.png "Example: word \"pangolin\" and inflection \"past · affirmative · long\" with word selected")
 ![Example: word "pangolin" and inflection "past · affirmative · long" with word selected and answer revealed](Resources/example-5_pangolin.png "Example: word \"pangolin\" and inflection \"past · affirmative · long\" with word selected and answer revealed")
+
+## Attributions 🙇
+This application uses the following software packages in conformance to their respective licences:
+
+**Caliburn.Micro** ([MIT License](https://github.com/Caliburn-Micro/Caliburn.Micro/blob/master/License.txt) · [source](https://github.com/Caliburn-Micro/Caliburn.Micro))
+Copyright Blue Spire Consulting, Inc.<br>
+**MaterialDesignInXAML** ([MIT License](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE) · [source](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit))
+Copyright James Willock,  Mulholland Software and Contributors
+<br>
+**Ninject** ([Apache License 2.0](https://github.com/ninject/Ninject/blob/master/LICENSE.txt) · [source](https://github.com/ninject/Ninject))<br>
+**Wacton.Desu** ([CC BY-SA 4.0](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu))
+Copyright William Acton
+
+---
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+</a>
+<br>
+<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Wacton.Japangolin</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://gitlab.com/Wacton/Japangolin" property="cc:attributionName" rel="cc:attributionURL">William Acton</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
 ---
 
 ジャパンゴリン
