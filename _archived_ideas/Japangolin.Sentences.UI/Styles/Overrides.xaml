@@ -1,9 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <ResourceDictionary.MergedDictionaries>
-        <!-- enable this to override the color of the close button (when using a clean window style in shell view) -->
-        <!--<ResourceDictionary Source="pack://application:,,,/Wacton.Skeleton.UI;component/Styles/Controls/CleanWindowCloseButton.xaml"/>-->
-    </ResourceDictionary.MergedDictionaries>
-
-</ResourceDictionary>
