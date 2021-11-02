@@ -15,17 +15,17 @@ It is primarily targeted at JLPT N5 vocabulary, but it can be turned off to allo
 ## Attributions 🙇
 This application uses the following software packages in conformance to their respective licences:
 
-- **Caliburn.Micro** ([MIT License](https://github.com/Caliburn-Micro/Caliburn.Micro/blob/master/License.txt) · [source](https://github.com/Caliburn-Micro/Caliburn.Micro))
-Copyright Blue Spire Consulting, Inc.
-- **MaterialDesignInXAML** ([MIT License](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE) · [source](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit))
-Copyright James Willock,  Mulholland Software and Contributors
+- **Caliburn.Micro** ([MIT License](https://github.com/Caliburn-Micro/Caliburn.Micro/blob/master/License.txt) · [source](https://github.com/Caliburn-Micro/Caliburn.Micro)),
+copyright © Blue Spire Consulting, Inc.
+- **MaterialDesignInXAML** ([MIT License](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE) · [source](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)),
+copyright © James Willock,  Mulholland Software and Contributors
 - **Ninject** ([Apache License 2.0](https://github.com/ninject/Ninject/blob/master/LICENSE.txt) · [source](https://github.com/ninject/Ninject))<br>
-- **Wacton.Desu** ([Creative Commons Attribution-ShareAlike 4.0 International License](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu))
-Copyright William Acton
+- **Wacton.Desu** ([Creative Commons Attribution-ShareAlike 4.0 International License](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu)),
+copyright © William Acton
 
 ---
 
-[Wacton.Japangolin](https://gitlab.com/Wacton/japangolin) by William Acton is licensed under the [GNU General Public License v3.0](https://gitlab.com/Wacton/japangolin/-/blob/main/LICENSE).
+[Wacton.Japangolin](https://gitlab.com/Wacton/japangolin) is licensed under the [GNU General Public License v3.0](https://gitlab.com/Wacton/japangolin/-/blob/main/LICENSE), copyright © 2015-2021 William Acton.
 
 See [Creative Commons](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software) and [GNU](https://www.gnu.org/licenses/license-list.en.html#ccbysa) for details about the one-way compatibility between CC BY-SA 4.0 and GNU GPLv3.
 
