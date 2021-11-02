@@ -20,7 +20,7 @@ Copyright Blue Spire Consulting, Inc.
 - **MaterialDesignInXAML** ([MIT License](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE) · [source](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit))
 Copyright James Willock,  Mulholland Software and Contributors
 - **Ninject** ([Apache License 2.0](https://github.com/ninject/Ninject/blob/master/LICENSE.txt) · [source](https://github.com/ninject/Ninject))<br>
-- **Wacton.Desu** ([GNU General Public License v3.0](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu))
+- **Wacton.Desu** ([Creative Commons Attribution-ShareAlike 4.0 International License](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu))
 Copyright William Acton
 
 ---
