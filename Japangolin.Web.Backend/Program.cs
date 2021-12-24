@@ -1,3 +1,9 @@
+using System.Diagnostics;
+using Wacton.Desu.Japanese;
+using Wacton.Japangolin.Domain.Commands;
+using Wacton.Japangolin.Domain.Mains;
+using Wacton.Tovarisch.MVVM;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,24 +22,25 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+var stopwatch = new Stopwatch();
+stopwatch.Start();
+var japaneseEntries = JapaneseDictionary.ParseEntries().ToList();
+stopwatch.Stop();
+Console.WriteLine($"Initialisation took {stopwatch.Elapsed}");
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/random", async () =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-       new WeatherForecast
-       (
-           DateTime.Now.AddDays(index),
-           Random.Shared.Next(-20, 55),
-           summaries[Random.Shared.Next(summaries.Length)]
-       ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    // TODO: extract MVVM stuff from Tovarisch lib
+    // create a new "japangolin main" that captures everything required, update it via the desktop UI's command pattern, then return it
+    // TODO: does any of this really work if > 1 client is accessing simultaneously?
+    var japangolinSettings = new Settings();
+    var japangolinMain = new Main(japaneseEntries, japangolinSettings);
+    var updateCommand = new UpdateWordAndInflectionCommand(new ModelChangeNotifier(), japangolinMain);
+    var wordFilterCommand = new ChangeWordFilterCommand(new ModelChangeNotifier(), japangolinSettings);
+    await updateCommand.ExecuteAndNotifyAsync();
+    // TODO: allow parameter to allow JLPT N5 toggle - wordFilterCommand.ExecuteAndNotifyAsync()...
+    return japangolinMain;
+}).WithName("GetRandomJapangolin");
 
 app.Run();
 

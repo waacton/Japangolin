@@ -1,11 +1,11 @@
 import './App.css';
 
-import HelloWorld from "./components/HelloWorld";
+import JapangolinTest from "./components/JapangolinTest";
 
 function App() {
   return (
       <div className="App">
-          <HelloWorld value={"Here is a prop value"} />
+          <JapangolinTest value={"Here is a prop value"} />
       </div>
   );
 }

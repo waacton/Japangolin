@@ -24,10 +24,18 @@
 
         private readonly Settings settings;
 
+        // TODO: is this constructor required? doesn't work the web version
         public Main(IJapaneseDictionary japaneseDictionary, Settings settings)
         {
             this.settings = settings;
             this.allEntries = japaneseDictionary.GetEntries().ToList();
+            this.jlptN5Entries = allEntries.Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
+        }
+
+        public Main(List<IJapaneseEntry> japaneseEntries, Settings settings)
+        {
+            this.settings = settings;
+            this.allEntries = japaneseEntries;
             this.jlptN5Entries = allEntries.Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
         }
 
