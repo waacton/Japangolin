@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Wacton.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Wacton.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-    <ApplicationIcon>Japangolin.ico</ApplicationIcon>
+    <ApplicationIcon>..\Japangolin.UI\Resources\Japangolin.ico</ApplicationIcon>
 	<UserSecretsId>23db3597-d139-4183-a112-79439d3b7e0c</UserSecretsId>
 	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
