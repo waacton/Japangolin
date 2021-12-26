@@ -22,11 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var stopwatch = new Stopwatch();
-stopwatch.Start();
-var japaneseEntries = JapaneseDictionary.ParseEntries().ToList();
-stopwatch.Stop();
-Console.WriteLine($"Initialisation took {stopwatch.Elapsed}");
+var japaneseEntries = await GetJapaneseEntries();
 
 app.MapGet("/random", async () =>
 {
@@ -44,7 +40,12 @@ app.MapGet("/random", async () =>
 
 app.Run();
 
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
+static async Task<List<IJapaneseEntry>> GetJapaneseEntries()
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    var stopwatch = new Stopwatch();
+    stopwatch.Start();
+    var japaneseEntries = await JapaneseDictionary.ParseEntriesAsync();
+    stopwatch.Stop();
+    Console.WriteLine($"Initialisation took {stopwatch.Elapsed}");
+    return japaneseEntries.ToList();
 }
