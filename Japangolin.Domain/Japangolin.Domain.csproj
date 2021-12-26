@@ -4,12 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Wacton.Japangolin.Domain</AssemblyName>
     <RootNamespace>Wacton.Japangolin.Domain</RootNamespace>
-    <ApplicationIcon>Japangolin.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="Japangolin.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Wacton.Desu" Version="6.0.0" />
