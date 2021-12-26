@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 type JapangolinTestProps = {
-    value: string;
+    textColor: string;
 };
 
 function JapangolinTest(props: JapangolinTestProps) {
@@ -39,17 +39,17 @@ function JapangolinTest(props: JapangolinTestProps) {
 
     return (
         <div>
-            <h1>Japangolin!</h1>
-            <h3>Prop: {props.value}</h3>
-            <h3>Word kana: {wordKana}</h3>
-            <h3>Word kanji: {wordKanji}</h3>
-            <h3>Word english: {wordEnglish}</h3>
-            <h3>Word class: {wordClass}</h3>
-            <h3>Inflection: {inflection}</h3>
-            <h3>Hint base form: {hintBaseForm}</h3>
-            <h3>Hint modification: {hintModification}</h3>
-            <h3>Answer kana: {answerKana}</h3>
-            <h3>Answer kanji: {answerKanji}</h3>
+            <h1 style={{color: props.textColor}}>Japangolin!</h1>
+            <h3 style={{color: props.textColor}}>Prop (text colour): {props.textColor}</h3>
+            <h3 style={{color: props.textColor}}>Word kana: {wordKana}</h3>
+            <h3 style={{color: props.textColor}}>Word kanji: {wordKanji}</h3>
+            <h3 style={{color: props.textColor}}>Word english: {wordEnglish}</h3>
+            <h3 style={{color: props.textColor}}>Word class: {wordClass}</h3>
+            <h3 style={{color: props.textColor}}>Inflection: {inflection}</h3>
+            <h3 style={{color: props.textColor}}>Hint base form: {hintBaseForm}</h3>
+            <h3 style={{color: props.textColor}}>Hint modification: {hintModification}</h3>
+            <h3 style={{color: props.textColor}}>Answer kana: {answerKana}</h3>
+            <h3 style={{color: props.textColor}}>Answer kanji: {answerKanji}</h3>
             <button onClick={() => loadData()} disabled={loading}>Update</button>
         </div>
     )
