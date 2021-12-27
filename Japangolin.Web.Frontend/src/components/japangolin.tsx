@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { Api } from "../api";
+import { Button, Typography } from "@mui/material";
+import Icon from "@mui/material/Icon";
+import StarIcon from "@mui/icons-material/Star";
 
 type JapangolinProps = {
   textColor: string;
@@ -22,7 +25,7 @@ function Japangolin(props: JapangolinProps) {
   }, []);
 
   const loadData = async () => {
-    console.log("Fetching data...")
+    console.log("Fetching data...");
     setLoading(true);
     const data = await Api.getJapangolin();
     setWordKana(data.word.kana);
@@ -35,30 +38,28 @@ function Japangolin(props: JapangolinProps) {
     setAnswerKana(data.answerKana);
     setAnswerKanji(data.answerKanji);
     setLoading(false);
-    console.log("... data retrieved")
+    console.log("... data retrieved");
     console.log(data);
   };
 
   return (
     <div>
-      <h1 style={{ color: props.textColor }}>Japangolin!</h1>
-      <h3 style={{ color: props.textColor }}>
-        Prop (text colour): {props.textColor}
-      </h3>
-      <h3 style={{ color: props.textColor }}>Word kana: {wordKana}</h3>
-      <h3 style={{ color: props.textColor }}>Word kanji: {wordKanji}</h3>
-      <h3 style={{ color: props.textColor }}>Word english: {wordEnglish}</h3>
-      <h3 style={{ color: props.textColor }}>Word class: {wordClass}</h3>
-      <h3 style={{ color: props.textColor }}>Inflection: {inflection}</h3>
-      <h3 style={{ color: props.textColor }}>Hint base form: {hintBaseForm}</h3>
-      <h3 style={{ color: props.textColor }}>
-        Hint modification: {hintModification}
-      </h3>
-      <h3 style={{ color: props.textColor }}>Answer kana: {answerKana}</h3>
-      <h3 style={{ color: props.textColor }}>Answer kanji: {answerKanji}</h3>
-      <button onClick={() => loadData()} disabled={loading}>
+      <Icon color={"secondary"}>star</Icon>
+      <StarIcon color={"primary"} />
+      <Typography style={{ color: props.textColor }}>Japangolin!</Typography>
+      <Typography style={{ color: props.textColor }}>Prop (text colour): {props.textColor}</Typography>
+      <Typography style={{ color: props.textColor }}>Word kana: {wordKana}</Typography>
+      <Typography style={{ color: props.textColor }}>Word kanji: {wordKanji}</Typography>
+      <Typography style={{ color: props.textColor }}>Word english: {wordEnglish}</Typography>
+      <Typography style={{ color: props.textColor }}>Word class: {wordClass}</Typography>
+      <Typography style={{ color: props.textColor }}>Inflection: {inflection}</Typography>
+      <Typography style={{ color: props.textColor }}>Hint base form: {hintBaseForm}</Typography>
+      <Typography style={{ color: props.textColor }}>Hint modification: {hintModification}</Typography>
+      <Typography style={{ color: props.textColor }}>Answer kana: {answerKana}</Typography>
+      <Typography style={{ color: props.textColor }}>Answer kanji: {answerKanji}</Typography>
+      <Button variant={"contained"} onClick={() => loadData()} disabled={loading}>
         Update
-      </button>
+      </Button>
     </div>
   );
 }
