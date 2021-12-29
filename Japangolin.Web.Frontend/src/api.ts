@@ -1,6 +1,6 @@
 export namespace Api {
   export async function getJapangolin() {
-    return await api<JapangolinMain>("/random");
+    return await api<Japangolin>("/random");
   }
 
   async function api<T>(url: string): Promise<T> {
@@ -13,28 +13,27 @@ export namespace Api {
     return data as T;
   }
 
-  type JapangolinMain = {
+  interface Japangolin {
     word: Word;
     inflection: Inflection;
     hint: Hint;
     answerKana: string;
     answerKanji: string;
-  };
+  }
 
-  type Word = {
+  interface Word {
     kana: string;
     kanji: string;
     english: string;
     class: number;
-  };
+  }
 
-  type Inflection = {
+  interface Inflection {
     displayName: string;
-  };
+  }
 
-  type Hint = {
+  interface Hint {
     baseForm: string;
     modification: string;
-  };
+  }
 }
-

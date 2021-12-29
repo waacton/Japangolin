@@ -4,11 +4,11 @@ import { Button, Typography } from "@mui/material";
 import Icon from "@mui/material/Icon";
 import StarIcon from "@mui/icons-material/Star";
 
-type JapangolinProps = {
+interface Props {
   textColor: string;
-};
+}
 
-function Japangolin(props: JapangolinProps) {
+function JapangolinTest(props: Props) {
   const [wordKana, setWordKana] = useState("[n/a]");
   const [wordKanji, setWordKanji] = useState("[n/a]");
   const [wordEnglish, setWordEnglish] = useState("[n/a]");
@@ -64,4 +64,4 @@ function Japangolin(props: JapangolinProps) {
   );
 }
 
-export default Japangolin;
+export default JapangolinTest;
