@@ -2,6 +2,7 @@ import { Link, Stack, Typography } from "@mui/material";
 import Logo from "./logo";
 import { useState } from "react";
 import { SxProps } from "@mui/system";
+import packageJson from "../../package.json";
 
 function Header() {
   const [hovering, setHovering] = useState(false);
@@ -13,19 +14,25 @@ function Header() {
   } as const;
 
   // TODO: make gradient more accessible throughout the app
+  // @ts-ignore - don't know why textFillColor causes problems
   const gradientTextStyle: SxProps = {
     background: "linear-gradient(to right, #E004DD 0%, #F63D96 100%)",
     backgroundClip: "text",
-    WebkitTextFillColor: "transparent",
+    textFillColor: "transparent",
   } as const;
 
   const gradientBackground: SxProps = {
-    background: "linear-gradient(to right, #FFFFFF 25%, #F07AEE 50%, #E004DD 75%, #F63D96 100%)",
-    transition: "background-color 2s ease",
+    background: "linear-gradient(to right, #FFFFFF 50%, #F07AEE 75%, #E004DD 87.5%, #F63D96 100%)",
   } as const;
 
   return (
-    <Link href={"https://gitlab.com/Wacton/Japangolin"} target={"_blank"} rel={"noreferrer"} underline={"hover"} color={"text.secondary"}>
+    <Link
+      href={"https://gitlab.com/Wacton/Japangolin"}
+      target={"_blank"}
+      rel={"noreferrer"}
+      underline={"hover"}
+      color={"text.secondary"}
+    >
       <Stack
         direction={"row"}
         justifyContent={"flex-start"}
@@ -36,7 +43,9 @@ function Header() {
         sx={hovering ? gradientBackground : {}}
       >
         <Logo />
-        <Typography sx={hovering ? gradientTextStyle : normalTextStyle}>Wacton.Japangolin</Typography>
+        <Typography sx={hovering ? gradientTextStyle : normalTextStyle}>
+          Wacton.Japangolin · {packageJson.version}
+        </Typography>
       </Stack>
     </Link>
   );

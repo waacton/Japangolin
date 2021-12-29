@@ -7,10 +7,10 @@ import Main from "./components/main";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#512da8",
+      main: "#E004DD",
     },
     secondary: {
-      main: "#ff9100",
+      main: "#F63D96",
     },
   },
   // just experimenting with adding custom theme variables

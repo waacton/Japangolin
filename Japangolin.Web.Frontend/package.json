@@ -50,6 +50,6 @@
     "prettier": "2.5.1"
   },
   "prettier": {
-    "printWidth": 160
+    "printWidth": 120
   }
 }
