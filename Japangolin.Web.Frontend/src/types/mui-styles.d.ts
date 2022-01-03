@@ -8,6 +8,7 @@ declare module "@mui/material/styles" {
       wactonDark: string;
       wactonLight: string;
       gradient: string;
+      background: string;
       labelTextSize: string;
       subTextSize: string;
     };
@@ -18,6 +19,7 @@ declare module "@mui/material/styles" {
       wactonDark?: string;
       wactonLight?: string;
       gradient?: string;
+      background?: string;
       labelTextSize?: string;
       subTextSize?: string;
     };

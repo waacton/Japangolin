@@ -5,6 +5,8 @@ import { Api } from "../api";
 import { useEffect, useState } from "react";
 import Filter from "./filter";
 import WordOrInflection from "./wordOrInflection";
+import { defaultJapangolin, Japangolin } from "../types/japangolin";
+import {Detail, NoDetail} from "./detail";
 
 function SkipIcon(props: SvgIconProps) {
   return (
@@ -31,37 +33,55 @@ function Main() {
     setInflectionSelected(true);
   };
 
-  const [wordKana, setWordKana] = useState("[n/a]");
-  const [wordKanji, setWordKanji] = useState("[n/a]");
-  const [wordEnglish, setWordEnglish] = useState("[n/a]");
-  const [wordClass, setWordClass] = useState(-1);
-  const [inflection, setInflection] = useState("[n/a]");
-  const [hintBaseForm, setHintBaseForm] = useState("[n/a]");
-  const [hintModification, setHintModification] = useState("[n/a]");
-  const [answerKana, setAnswerKana] = useState("[n/a]");
-  const [answerKanji, setAnswerKanji] = useState("[n/a]");
+  const [japangolin, setJapangolin] = useState<Japangolin>(defaultJapangolin);
+
+  // const [wordKana, setWordKana] = useState("[n/a]");
+  // const [wordKanji, setWordKanji] = useState("[n/a]");
+  // const [wordEnglish, setWordEnglish] = useState("[n/a]");
+  // const [wordClass, setWordClass] = useState(-1);
+  // const [inflection, setInflection] = useState("[n/a]");
+  // const [hintBaseForm, setHintBaseForm] = useState("[n/a]");
+  // const [hintModification, setHintModification] = useState("[n/a]");
+  // const [answerKana, setAnswerKana] = useState("[n/a]");
+  // const [answerKanji, setAnswerKanji] = useState("[n/a]");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  // TODO: turn back on
+  // useEffect(() => {
+  //   loadData();
+  // }, []);
 
   const loadData = async () => {
     console.log("Fetching data...");
     setLoading(true);
     const data = await Api.getJapangolin();
-    setWordKana(data.word.kana);
-    setWordKanji(data.word.kanji);
-    setWordEnglish(data.word.english);
-    setWordClass(data.word.class);
-    setInflection(data.inflection.displayName);
-    setHintBaseForm(data.hint.baseForm);
-    setHintModification(data.hint.modification);
-    setAnswerKana(data.answerKana);
-    setAnswerKanji(data.answerKanji);
+    setJapangolin(data);
+    // setWordKana(data.word.kana);
+    // setWordKanji(data.word.kanji);
+    // setWordEnglish(data.word.english);
+    // setWordClass(data.word.class);
+    // setInflection(data.inflection.displayName);
+    // setHintBaseForm(data.hint.baseForm);
+    // setHintModification(data.hint.modification);
+    // setAnswerKana(data.answerKana);
+    // setAnswerKanji(data.answerKanji);
     setLoading(false);
     console.log("... data retrieved");
     console.log(data);
+  };
+
+  const detailComponent = () => {
+    if (wordSelected || inflectionSelected) {
+      return (
+        <Detail
+          firstDetail={japangolin.hint.baseForm}
+          secondDetail={japangolin.hint.modification}
+          thirdDetail={japangolin.word.class.toString()}
+        />
+      );
+    }
+
+    return <NoDetail />;
   };
 
   return (
@@ -70,7 +90,7 @@ function Main() {
         display: "grid",
         gridTemplateColumns: "2fr 2fr",
         gridTemplateRows: "repeat(6, auto)",
-        bgcolor: "#FAFAFA",
+        bgcolor: (theme) => theme.custom.background,
         borderBottom: 1,
         borderColor: "#40404622",
       }}
@@ -114,7 +134,7 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <WordOrInflection label={"word"} text={wordEnglish} selected={wordSelected} onSelect={selectWord} />
+        <WordOrInflection label={"word"} text={japangolin.word.english} selected={wordSelected} onSelect={selectWord} />
       </Stack>
 
       <Stack
@@ -131,7 +151,7 @@ function Main() {
       >
         <WordOrInflection
           label={"inflection"}
-          text={inflection}
+          text={japangolin.inflection.displayName}
           selected={inflectionSelected}
           onSelect={selectInflection}
         />
@@ -148,13 +168,7 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <Card variant={"elevation"} sx={{ height: "100%" }}>
-          <Stack sx={{ justifyContent: "center", alignItems: "center", height: "100%" }}>
-            <Typography sx={{ fontWeight: "light", fontSize: "0.75rem", opacity: 0.6 }}>
-              Select a word or inflection to see a hint
-            </Typography>
-          </Stack>
-        </Card>
+        {detailComponent()}
       </Box>
 
       <Stack

@@ -17,6 +17,7 @@ const theme = createTheme({
     wactonDark: "#404046",
     wactonLight: "#E8E8FF",
     gradient: "linear-gradient(to right, #E004DD 0%, #F63D96 100%)",
+    background: "#FAFAFA",
     labelTextSize: "0.7rem",
     subTextSize: "0.75rem",
   },

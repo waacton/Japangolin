@@ -1,3 +1,5 @@
+import { Japangolin } from "./types/japangolin";
+
 export namespace Api {
   export async function getJapangolin() {
     return await api<Japangolin>("/random");
@@ -11,29 +13,5 @@ export namespace Api {
 
     const data = await response.json();
     return data as T;
-  }
-
-  export interface Japangolin {
-    word: Word;
-    inflection: Inflection;
-    hint: Hint;
-    answerKana: string;
-    answerKanji: string;
-  }
-
-  interface Word {
-    kana: string;
-    kanji: string;
-    english: string;
-    class: number;
-  }
-
-  interface Inflection {
-    displayName: string;
-  }
-
-  interface Hint {
-    baseForm: string;
-    modification: string;
   }
 }

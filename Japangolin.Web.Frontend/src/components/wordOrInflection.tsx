@@ -10,24 +10,23 @@ interface Props {
   onSelect?: () => void;
 }
 
+/*
+ * notes on gradient borders (with radius): https://codyhouse.co/nuggets/css-gradient-borders
+ * essentially, background has 2 "background images" (gradients are images, not colours)
+ * 1. a "fake" background-looking gradient, takes up padding box (everything but border)
+ * 2. the desired border gradient, takes up border box (everything including border)
+ * the fake gradient sits on top of the desired gradient, masking everything except the border
+ * */
+
+const getBorderGradientPaddingBox = (colour: string) => `linear-gradient(${colour}, ${colour}) padding-box`;
+const getBorderGradientBorderBox = (gradient: string) => `${gradient} border-box`;
+
+const gradientBorderStyle: SxProps<Theme> = {
+  background: (theme: Theme) =>
+    `${getBorderGradientPaddingBox(theme.custom.background)}, ${getBorderGradientBorderBox(theme.custom.gradient)}`,
+};
+
 function WordOrInflection(props: Props) {
-  /*
-   * notes on gradient borders (with radius): https://codyhouse.co/nuggets/css-gradient-borders
-   * essentially, background has 2 "background images" (gradients are images, not colours)
-   * 1. a "fake" background-looking gradient, takes up padding box (everything but border)
-   * 2. the desired border gradient, takes up border box (everything including border)
-   * the fake gradient sits on top of the desired gradient, masking everything except the border
-   * */
-
-  const boxHoverStyle: SxProps<Theme> = props.selected
-    ? {
-        background: (theme) => theme.custom.gradient,
-      }
-    : {
-        background: (theme: Theme) =>
-          "linear-gradient(#FAFAFA, #FAFAFA) padding-box, " + theme.custom.gradient + " border-box",
-      };
-
   const boxStyle: SxProps<Theme> = {
     width: "fit-content",
     lineHeight: "unset",
@@ -37,7 +36,7 @@ function WordOrInflection(props: Props) {
     background: (theme) => (props.selected ? theme.custom.gradient : "transparent"),
     color: props.selected ? "white" : "text.primary",
     cursor: "pointer",
-    "&:hover": boxHoverStyle,
+    "&:hover": props.selected ? {} : gradientBorderStyle,
   };
 
   return (
