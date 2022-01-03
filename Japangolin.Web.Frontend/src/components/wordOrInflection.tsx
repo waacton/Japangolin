@@ -3,6 +3,7 @@ import { Theme } from "@mui/material/styles";
 import { Fragment } from "react";
 import { SxProps } from "@mui/system";
 import UppercaseLabel from "./uppercaseLabel";
+import { gradientBorderStyle, gradientFillStyle } from "../utils/gradientHelper";
 
 interface Props {
   label: "word" | "inflection";
@@ -11,33 +12,21 @@ interface Props {
   onSelect?: () => void;
 }
 
-/*
- * notes on gradient borders (with radius): https://codyhouse.co/nuggets/css-gradient-borders
- * essentially, background has 2 "background images" (gradients are images, not colours)
- * 1. a "fake" background-looking gradient, takes up padding box (everything but border)
- * 2. the desired border gradient, takes up border box (everything including border)
- * the fake gradient sits on top of the desired gradient, masking everything except the border
- * */
-
-const getBorderGradientPaddingBox = (colour: string) => `linear-gradient(${colour}, ${colour}) padding-box`;
-const getBorderGradientBorderBox = (gradient: string) => `${gradient} border-box`;
-
-const gradientBorderStyle: SxProps<Theme> = {
-  background: (theme: Theme) =>
-    `${getBorderGradientPaddingBox(theme.custom.background)}, ${getBorderGradientBorderBox(theme.custom.gradient)}`,
-};
-
 function WordOrInflection(props: Props) {
+  const hoverStyle = props.selected ? gradientFillStyle() : gradientBorderStyle();
+  // @ts-ignore - I don't know why "border" isn't a known type here
+  const border = hoverStyle!.border;
+
   const boxStyle: SxProps<Theme> = {
     width: "fit-content",
     lineHeight: "unset",
     padding: 0.5,
-    border: "1px solid transparent",
+    border: border,
     borderRadius: 1,
     background: (theme) => (props.selected ? theme.custom.gradient : "transparent"),
     color: props.selected ? "white" : "text.primary",
     cursor: "pointer",
-    "&:hover": props.selected ? {} : gradientBorderStyle,
+    "&:hover": hoverStyle,
   };
 
   return (

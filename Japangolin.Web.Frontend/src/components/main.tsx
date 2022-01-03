@@ -1,12 +1,12 @@
-import { Box, Button, Card, Stack, SvgIcon, SvgIconProps, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Stack, SvgIcon, SvgIconProps, TextField, Tooltip } from "@mui/material";
 import Header from "./header";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Api } from "../api";
 import { useEffect, useState } from "react";
 import Filter from "./filter";
 import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
 import { Detail, NoDetail } from "./detail";
+import Answer from "./answer";
 
 function SkipIcon(props: SvgIconProps) {
   return (
@@ -20,35 +20,42 @@ const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
 
 function Main() {
-  const [wordSelected, setWordSelected] = useState(false);
-  const [inflectionSelected, setInflectionSelected] = useState(false);
-
-  const selectWord = () => {
-    setWordSelected(true);
-    setInflectionSelected(false);
-  };
-
-  const selectInflection = () => {
-    setWordSelected(false);
-    setInflectionSelected(true);
-  };
-
   const [japangolin, setJapangolin] = useState<Japangolin>(defaultJapangolin);
   const [loading, setLoading] = useState(false);
+  const [wordSelected, setWordSelected] = useState(false);
+  const [inflectionSelected, setInflectionSelected] = useState(false);
+  const [answerShowing, setAnswerShowing] = useState(false);
+
+  function selectWord() {
+    setWordSelected(true);
+    setInflectionSelected(false);
+  }
+
+  function selectInflection() {
+    setWordSelected(false);
+    setInflectionSelected(true);
+  }
+
+  function resetState() {
+    setWordSelected(false);
+    setInflectionSelected(false);
+    setAnswerShowing(false);
+  }
 
   useEffect(() => {
     loadData();
   }, []);
 
-  const loadData = async () => {
+  async function loadData() {
     console.log("Fetching data...");
+    resetState();
     setLoading(true);
     const data = await Api.getJapangolin();
     setJapangolin(data);
     setLoading(false);
     console.log("... data retrieved");
     console.log(data);
-  };
+  }
 
   const detailComponent = () => {
     if (wordSelected) {
@@ -199,13 +206,10 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <Tooltip title={"View Answer"}>
-          <Button variant={"outlined"} sx={{ width: 32, height: 32, minWidth: 32 }}>
-            <VisibilityIcon sx={{ width: 16, height: 16 }} />
-          </Button>
-        </Tooltip>
-
-        <Typography sx={{ fontSize: "0.75rem", opacity: 0.6 }}>Click to reveal the answer</Typography>
+        <Answer
+          showAnswer={answerShowing}
+          onShowAnswer={() => setAnswerShowing(true)}
+        >{`${japangolin.answerKana} · ${japangolin.answerKanji}`}</Answer>
       </Stack>
     </Box>
   );

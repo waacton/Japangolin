@@ -40,7 +40,7 @@ export function Detail(props: Props) {
 export function NoDetail() {
   return (
     <DetailBase>
-      <Typography sx={{ fontWeight: "light", fontSize: "0.75rem", opacity: 0.6, margin: 2 }}>
+      <Typography sx={{ fontWeight: "light", fontSize: (theme) => theme.custom.subTextSize, opacity: 0.6, margin: 2 }}>
         Select a word or inflection to see a hint
       </Typography>
     </DetailBase>
