@@ -11,6 +11,7 @@ declare module "@mui/material/styles" {
       background: string;
       labelTextSize: string;
       subTextSize: string;
+      japaneseFont: string;
     };
   }
   // allow configuration using `createTheme`
@@ -22,6 +23,7 @@ declare module "@mui/material/styles" {
       background?: string;
       labelTextSize?: string;
       subTextSize?: string;
+      japaneseFont?: string;
     };
   }
 }

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Filter from "./filter";
 import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
-import {Detail, NoDetail} from "./detail";
+import { Detail, NoDetail } from "./detail";
 
 function SkipIcon(props: SvgIconProps) {
   return (
@@ -46,10 +46,9 @@ function Main() {
   // const [answerKanji, setAnswerKanji] = useState("[n/a]");
   const [loading, setLoading] = useState(false);
 
-  // TODO: turn back on
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const loadData = async () => {
     console.log("Fetching data...");
@@ -71,7 +70,17 @@ function Main() {
   };
 
   const detailComponent = () => {
-    if (wordSelected || inflectionSelected) {
+    if (wordSelected) {
+      return (
+        <Detail
+          firstDetail={japangolin.word.kana}
+          secondDetail={japangolin.word.kanji}
+          thirdDetail={japangolin.word.class.toString()}
+        />
+      );
+    }
+
+    if (inflectionSelected) {
       return (
         <Detail
           firstDetail={japangolin.hint.baseForm}

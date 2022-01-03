@@ -20,6 +20,7 @@ const theme = createTheme({
     background: "#FAFAFA",
     labelTextSize: "0.7rem",
     subTextSize: "0.75rem",
+    japaneseFont: "'Noto Sans JP', sans-serif;"
   },
 });
 
