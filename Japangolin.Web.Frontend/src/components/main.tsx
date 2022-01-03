@@ -1,18 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  FormControlLabel,
-  Stack,
-  SvgIcon,
-  SvgIconProps,
-  Switch,
-  TextField,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, Stack, SvgIcon, SvgIconProps, TextField, Tooltip, Typography } from "@mui/material";
 import Header from "./header";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Api } from "../api";
+import { useEffect, useState } from "react";
+import Filter from "./filter";
+import WordOrInflection from "./wordOrInflection";
 
 function SkipIcon(props: SvgIconProps) {
   return (
@@ -25,8 +17,53 @@ function SkipIcon(props: SvgIconProps) {
 const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
 
-// TODO: make colours such as #404046 and #FAFAFA accessible around the app - custom theme variables?
 function Main() {
+  const [wordSelected, setWordSelected] = useState(false);
+  const [inflectionSelected, setInflectionSelected] = useState(false);
+
+  const selectWord = () => {
+    setWordSelected(true);
+    setInflectionSelected(false);
+  };
+
+  const selectInflection = () => {
+    setWordSelected(false);
+    setInflectionSelected(true);
+  };
+
+  const [wordKana, setWordKana] = useState("[n/a]");
+  const [wordKanji, setWordKanji] = useState("[n/a]");
+  const [wordEnglish, setWordEnglish] = useState("[n/a]");
+  const [wordClass, setWordClass] = useState(-1);
+  const [inflection, setInflection] = useState("[n/a]");
+  const [hintBaseForm, setHintBaseForm] = useState("[n/a]");
+  const [hintModification, setHintModification] = useState("[n/a]");
+  const [answerKana, setAnswerKana] = useState("[n/a]");
+  const [answerKanji, setAnswerKanji] = useState("[n/a]");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    console.log("Fetching data...");
+    setLoading(true);
+    const data = await Api.getJapangolin();
+    setWordKana(data.word.kana);
+    setWordKanji(data.word.kanji);
+    setWordEnglish(data.word.english);
+    setWordClass(data.word.class);
+    setInflection(data.inflection.displayName);
+    setHintBaseForm(data.hint.baseForm);
+    setHintModification(data.hint.modification);
+    setAnswerKana(data.answerKana);
+    setAnswerKanji(data.answerKanji);
+    setLoading(false);
+    console.log("... data retrieved");
+    console.log(data);
+  };
+
   return (
     <Box
       sx={{
@@ -50,7 +87,6 @@ function Main() {
         <Header />
       </Box>
 
-      {/* `checked` needs to be controlled by state */}
       <Stack
         sx={{
           gridRow: 2,
@@ -63,16 +99,7 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <FormControlLabel
-          control={<Switch defaultChecked />}
-          label={
-            <Typography variant={"overline"} sx={{ fontSize: "0.7rem", fontWeight: "medium", opacity: 0.6 }}>
-              JLPT N5
-            </Typography>
-          }
-          labelPlacement={"start"}
-          checked={true}
-        />
+        <Filter text={"JLPT N5"} />
       </Stack>
 
       <Stack
@@ -87,10 +114,7 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <Typography variant={"overline"} sx={{ fontSize: "0.7rem", fontWeight: "medium", opacity: 0.6 }}>
-          WORD
-        </Typography>
-        <Typography variant={"body1"}>word</Typography>
+        <WordOrInflection label={"word"} text={wordEnglish} selected={wordSelected} onSelect={selectWord} />
       </Stack>
 
       <Stack
@@ -105,10 +129,12 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <Typography variant={"overline"} sx={{ fontSize: "0.7rem", fontWeight: "medium", opacity: 0.6 }}>
-          Inflection
-        </Typography>
-        <Typography variant={"body1"}>inflection</Typography>
+        <WordOrInflection
+          label={"inflection"}
+          text={inflection}
+          selected={inflectionSelected}
+          onSelect={selectInflection}
+        />
       </Stack>
 
       <Box
@@ -147,7 +173,7 @@ function Main() {
       >
         <TextField label={"Japanese Conjugation"} variant={"filled"} fullWidth />
 
-        <Tooltip title={"Skip"}>
+        <Tooltip title={"Skip"} onClick={() => loadData()}>
           <Button variant={"outlined"} sx={{ width: 64, height: 64 }}>
             <SkipIcon />
           </Button>

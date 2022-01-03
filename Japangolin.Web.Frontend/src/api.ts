@@ -13,7 +13,7 @@ export namespace Api {
     return data as T;
   }
 
-  interface Japangolin {
+  export interface Japangolin {
     word: Word;
     inflection: Inflection;
     hint: Hint;

@@ -1,7 +1,6 @@
 import "./App.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { orange, pink } from "@mui/material/colors";
 import Main from "./components/main";
 
 const theme = createTheme({
@@ -13,11 +12,13 @@ const theme = createTheme({
       main: "#F63D96",
     },
   },
-  // just experimenting with adding custom theme variables
-  // (requires typescript module augmentation, see types/mui-styles.d.ts)
-  status: {
-    danger: orange[500],
-    hot: pink[500],
+  // custom theme variables (requires typescript module augmentation, see types/mui-styles.d.ts)
+  custom: {
+    wactonDark: "#404046",
+    wactonLight: "#E8E8FF",
+    gradient: "linear-gradient(to right, #E004DD 0%, #F63D96 100%)",
+    labelTextSize: "0.7rem",
+    subTextSize: "0.75rem",
   },
 });
 
