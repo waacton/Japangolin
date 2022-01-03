@@ -1,27 +1,18 @@
-import { FormControlLabel, Switch, Typography } from "@mui/material";
-import { Theme } from "@mui/material/styles";
+import { FormControlLabel, Switch } from "@mui/material";
+import UppercaseLabel from "./uppercaseLabel";
 
 interface Props {
-  text: string;
+  children: string;
 }
 
 function Filter(props: Props) {
-  const label = (
-    <Typography
-      variant={"overline"}
-      sx={{ fontSize: (theme: Theme) => theme.custom.labelTextSize, fontWeight: "medium", opacity: 0.5 }}
-    >
-      {props.text}
-    </Typography>
-  )
-
   // TODO: need to control checked state
   return (
     <FormControlLabel
       labelPlacement={"start"}
       checked={true}
       control={<Switch defaultChecked />}
-      label={label}
+      label={<UppercaseLabel>{props.children}</UppercaseLabel>}
     />
   );
 }

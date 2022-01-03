@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { Fragment } from "react";
 import { SxProps } from "@mui/system";
+import UppercaseLabel from "./uppercaseLabel";
 
 interface Props {
   label: "word" | "inflection";
@@ -41,18 +42,7 @@ function WordOrInflection(props: Props) {
 
   return (
     <Fragment>
-      <Typography
-        variant={"overline"}
-        sx={{
-          fontSize: (theme: Theme) => theme.custom.labelTextSize,
-          fontWeight: "medium",
-          opacity: 0.5,
-          lineHeight: "unset",
-          paddingLeft: 0.5,
-        }}
-      >
-        {props.label}
-      </Typography>
+      <UppercaseLabel sx={{ marginLeft: 0.5 }}>{props.label}</UppercaseLabel>
 
       <Box sx={boxStyle} onClick={props.onSelect}>
         <Typography variant={"body1"}>{props.text}</Typography>

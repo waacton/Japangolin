@@ -34,16 +34,6 @@ function Main() {
   };
 
   const [japangolin, setJapangolin] = useState<Japangolin>(defaultJapangolin);
-
-  // const [wordKana, setWordKana] = useState("[n/a]");
-  // const [wordKanji, setWordKanji] = useState("[n/a]");
-  // const [wordEnglish, setWordEnglish] = useState("[n/a]");
-  // const [wordClass, setWordClass] = useState(-1);
-  // const [inflection, setInflection] = useState("[n/a]");
-  // const [hintBaseForm, setHintBaseForm] = useState("[n/a]");
-  // const [hintModification, setHintModification] = useState("[n/a]");
-  // const [answerKana, setAnswerKana] = useState("[n/a]");
-  // const [answerKanji, setAnswerKanji] = useState("[n/a]");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -55,15 +45,6 @@ function Main() {
     setLoading(true);
     const data = await Api.getJapangolin();
     setJapangolin(data);
-    // setWordKana(data.word.kana);
-    // setWordKanji(data.word.kanji);
-    // setWordEnglish(data.word.english);
-    // setWordClass(data.word.class);
-    // setInflection(data.inflection.displayName);
-    // setHintBaseForm(data.hint.baseForm);
-    // setHintModification(data.hint.modification);
-    // setAnswerKana(data.answerKana);
-    // setAnswerKanji(data.answerKanji);
     setLoading(false);
     console.log("... data retrieved");
     console.log(data);
@@ -128,7 +109,7 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <Filter text={"JLPT N5"} />
+        <Filter>JLPT N5</Filter>
       </Stack>
 
       <Stack
