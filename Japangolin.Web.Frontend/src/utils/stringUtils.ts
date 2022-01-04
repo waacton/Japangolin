@@ -4,3 +4,8 @@
 export function containsNonLatinCharacters(text: string) {
   return /[\u{2E80}-\u{3134F}]/u.test(text);
 }
+
+export function pascalCase(text: string, separator: string) {
+  const pascalCaseRegex = /(?!^)(?=[A-Z])/g
+  return text.replaceAll(pascalCaseRegex, separator).toLowerCase();
+}

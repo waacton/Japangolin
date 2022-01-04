@@ -23,7 +23,7 @@ const theme = createTheme({
     gradientSvgFill: "url(#svgGradient)",
     background: "#FAFAFA",
     labelTextSize: "0.7rem",
-    subTextSize: "0.75rem",
+    subTextSize: "0.8rem",
     japaneseFont: "'Noto Sans JP', sans-serif;",
   },
 });

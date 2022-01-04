@@ -2,6 +2,7 @@ import { Card, Stack } from "@mui/material";
 import { Hint, Word } from "../types/japangolin";
 import { WordClass } from "../types/wordClass";
 import { Detail, NoDetail } from "./detail";
+import { pascalCase } from "../utils/stringUtils";
 
 interface Props {
   word: Word;
@@ -10,15 +11,9 @@ interface Props {
   inflectionSelected?: boolean;
 }
 
-function pascalCase(text: string) {
-  const pascalCaseRegex = new RegExp("(?!^)(?=[A-Z])");
-  if (text != null) {
-    return text.replace(pascalCaseRegex, "-").toLowerCase();
-  }
-}
-
 function DetailCard(props: Props) {
-  const wordClassText = pascalCase(WordClass[props.word.class]) ?? "[unknown enum]";
+  const wordClass = WordClass[props.word.class];
+  const wordClassText = wordClass ? pascalCase(WordClass[props.word.class], "-") : "[unknown enum]";
 
   function detail() {
     if (!props.wordSelected && !props.inflectionSelected) {

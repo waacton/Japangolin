@@ -10,6 +10,7 @@ import GradientIconButton from "./gradientIconButton";
 import { SkipIcon } from "../utils/customIcons";
 import JapaneseInput from "./japaneseInput";
 import DetailCard from "./detailCard";
+import { pascalCase } from "../utils/stringUtils";
 
 const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
@@ -125,7 +126,7 @@ function Main() {
       >
         <WordOrInflection
           label={"inflection"}
-          text={japangolin.inflection.displayName}
+          text={pascalCase(japangolin.inflection.displayName, " · ")}
           selected={inflectionSelected}
           onSelect={selectInflection}
         />

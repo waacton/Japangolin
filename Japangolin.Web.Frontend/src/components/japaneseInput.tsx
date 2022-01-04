@@ -1,5 +1,5 @@
 import { styled, TextField, TextFieldProps } from "@mui/material";
-import { containsNonLatinCharacters } from "../utils/japaneseUtils";
+import { containsNonLatinCharacters } from "../utils/stringUtils";
 import React from "react";
 
 interface Props {

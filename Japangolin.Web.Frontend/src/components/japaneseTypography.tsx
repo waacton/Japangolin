@@ -1,5 +1,5 @@
 import { Typography, TypographyProps, useTheme } from "@mui/material";
-import { containsNonLatinCharacters } from "../utils/japaneseUtils";
+import { containsNonLatinCharacters } from "../utils/stringUtils";
 
 function JapaneseTypography(props: TypographyProps) {
   let useJapaneseFont = false;
