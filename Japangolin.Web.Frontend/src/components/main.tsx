@@ -81,7 +81,6 @@ function Main() {
 
   async function handleUserInput(event: React.ChangeEvent<HTMLInputElement>) {
     setUserInput(event.target.value);
-    console.log("change " + event.target.value);
   }
 
   async function handleUserKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
