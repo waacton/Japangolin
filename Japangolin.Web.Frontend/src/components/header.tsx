@@ -1,8 +1,9 @@
-import { Link, Stack, Theme, Typography } from "@mui/material";
+import { Link, Stack, Typography } from "@mui/material";
 import Logo from "./logo";
 import { useState } from "react";
 import { SxProps } from "@mui/system";
 import packageJson from "../../package.json";
+import { gradientTextStyle } from "../utils/gradientUtils";
 
 function Header() {
   const [hovering, setHovering] = useState(false);
@@ -10,16 +11,6 @@ function Header() {
   const normalTextStyle: SxProps = {
     color: "text.primary",
   };
-
-  // typescript has issues with "textFillColor"
-  // which seems to work, but not be typed
-  // for "as const", see https://next--material-ui-docs.netlify.app/system/the-sx-prop/#typescript-usage
-  // @ts-ignore
-  const gradientTextStyle: SxProps<Theme> = {
-    background: theme => theme.custom.gradient,
-    backgroundClip: "text",
-    textFillColor: "transparent",
-  } as const;
 
   return (
     <Link
@@ -38,7 +29,7 @@ function Header() {
         onMouseLeave={() => setHovering(false)}
       >
         <Logo />
-        <Typography sx={hovering ? gradientTextStyle : normalTextStyle}>
+        <Typography sx={hovering ? gradientTextStyle() : normalTextStyle}>
           Wacton.Japangolin · {packageJson.version}
         </Typography>
       </Stack>

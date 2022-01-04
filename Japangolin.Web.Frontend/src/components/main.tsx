@@ -1,4 +1,4 @@
-import { Box, Stack, TextField, Tooltip } from "@mui/material";
+import { Box, Stack, styled, TextField, Tooltip } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { Detail, NoDetail } from "./detail";
 import Answer from "./answer";
 import GradientIconButton from "./gradientIconButton";
 import { SkipIcon } from "../utils/customIcons";
+import JapaneseInput from "./japaneseInput";
 
 const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
@@ -19,6 +20,11 @@ function Main() {
   const [wordSelected, setWordSelected] = useState(false);
   const [inflectionSelected, setInflectionSelected] = useState(false);
   const [answerShowing, setAnswerShowing] = useState(false);
+  const [userInput, setUserInput] = useState("");
+  const handleUserInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    setUserInput(event.target.value);
+  };
 
   function selectWord() {
     setWordSelected(true);
@@ -34,6 +40,7 @@ function Main() {
     setWordSelected(false);
     setInflectionSelected(false);
     setAnswerShowing(false);
+    setUserInput("");
   }
 
   useEffect(() => {
@@ -176,7 +183,7 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        <TextField label={"Japanese Conjugation"} variant={"filled"} fullWidth />
+        <JapaneseInput value={userInput} onChange={handleUserInput} />
 
         <Tooltip title={"Skip"}>
           <GradientIconButton icon={SkipIcon} width={64} height={64} disabled={loading} onClick={() => loadData()} />

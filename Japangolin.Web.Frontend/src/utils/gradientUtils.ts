@@ -1,6 +1,18 @@
 import { SxProps } from "@mui/system";
 import { Theme } from "@mui/material/styles";
 
+export function gradientTextStyle(): SxProps<Theme> {
+  // typescript has issues with "textFillColor"
+  // which seems to work, but not be typed
+  // for "as const", see https://next--material-ui-docs.netlify.app/system/the-sx-prop/#typescript-usage
+  // @ts-ignore
+  return {
+    background: (theme) => theme.custom.gradient,
+    backgroundClip: "text",
+    textFillColor: "transparent",
+  } as const;
+}
+
 /*
  * notes on gradient borders (with radius): https://codyhouse.co/nuggets/css-gradient-borders
  * essentially, background has 2 "background images" (gradients are images, not colours)

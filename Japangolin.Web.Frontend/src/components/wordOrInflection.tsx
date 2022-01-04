@@ -3,7 +3,7 @@ import { Theme } from "@mui/material/styles";
 import { Fragment } from "react";
 import { SxProps } from "@mui/system";
 import UppercaseLabel from "./uppercaseLabel";
-import { gradientBorderStyle, gradientFillStyle } from "../utils/gradientHelper";
+import { gradientBorderStyle, gradientFillStyle } from "../utils/gradientUtils";
 
 interface Props {
   label: "word" | "inflection";

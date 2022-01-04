@@ -1,16 +1,17 @@
 import { Typography, TypographyProps, useTheme } from "@mui/material";
+import { containsNonLatinCharacters } from "../utils/japaneseUtils";
 
 function JapaneseTypography(props: TypographyProps) {
-  // looks for any character from CJK Radicals Supplement to CJK Unified Ideographs Extension G (https://unicode-table.com/en/blocks/)
-  let containsNonLatinCharacters = false;
+  let useJapaneseFont = false;
   if (props.children != null) {
     const text = props.children as string;
-    containsNonLatinCharacters = /[\u{2E80}-\u{3134F}]/u.test(text);
+    useJapaneseFont = containsNonLatinCharacters(text);
   }
 
+  // small example of `useTheme()` instead of accessing directly via sx prop
   const theme = useTheme();
   return (
-    <Typography {...props} fontFamily={containsNonLatinCharacters ? theme.custom.japaneseFont : {}}>
+    <Typography {...props} fontFamily={useJapaneseFont ? theme.custom.japaneseFont : {}}>
       {props.children}
     </Typography>
   );
