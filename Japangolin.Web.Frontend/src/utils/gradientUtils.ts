@@ -14,13 +14,13 @@ export function gradientTextStyle(): SxProps<Theme> {
 }
 
 /*
- * notes on gradient borders (with radius): https://codyhouse.co/nuggets/css-gradient-borders
- * essentially, background has 2 "background images" (gradients are images, not colours)
- * 1. a "fake" background-looking gradient, takes up padding box (everything but border)
- * 2. the desired border gradient, takes up border box (everything including border)
- * the fake gradient sits on top of the desired gradient, masking everything except the border
- * ----------
- * I've added a 3rd box which shows a translucent gradient effect on hover, using the same mechanics
+notes on gradient borders (with radius): https://codyhouse.co/nuggets/css-gradient-borders
+essentially, background has 2 "background images" (gradients are images, not colours)
+1. a "fake" background-looking gradient, takes up padding box (everything but border)
+2. the desired border gradient, takes up border box (everything including border)
+the fake gradient sits on top of the desired gradient, masking everything except the border
+----------
+I've added a 3rd box which shows a translucent gradient effect on hover, using the same mechanics
  */
 
 const gradientBorderBox = (theme: Theme) => `${theme.custom.gradient} border-box`;

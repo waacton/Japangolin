@@ -1,7 +1,7 @@
-import { Box, Stack, Tooltip } from "@mui/material";
+import { Box, Snackbar, Stack, Tooltip } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filter from "./filter";
 import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
@@ -16,16 +16,39 @@ const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
 
 function Main() {
+  const shouldLog = true;
+
   const [japangolin, setJapangolin] = useState<Japangolin>(defaultJapangolin);
   const [loading, setLoading] = useState(false);
   const [wordSelected, setWordSelected] = useState(false);
   const [inflectionSelected, setInflectionSelected] = useState(false);
   const [answerShowing, setAnswerShowing] = useState(false);
+  const [snackbarShowing, setSnackbarShowing] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const handleUserInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-    setUserInput(event.target.value);
-  };
+
+  /*
+  this is a lot of react-guff for a simple one-time "component did mount" action
+  mostly using useCallback to appease eslint's "exhaustive-deps" warning for useEffect, as it's probably good practice
+  ----------
+  useCallback is typically a last resort (https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)
+  ensures the fetchData function doesn't change on every render, unless its own dependencies change (i.e. shouldLog in this contrived example)
+  the recommended fix is to define the function inside useEffect itself
+  but using useCallback instead so that the function can be called from elsewhere (e.g. clicking skip button)
+   */
+  const fetchData = useCallback(async () => {
+    if (shouldLog) console.log("Fetching data...");
+    resetState();
+    setLoading(true);
+    const data = await Api.getJapangolin();
+    setJapangolin(data);
+    setLoading(false);
+    if (shouldLog) console.log("... data retrieved");
+    if (shouldLog) console.log(data);
+  }, [shouldLog]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   function selectWord() {
     setWordSelected(true);
@@ -44,19 +67,23 @@ function Main() {
     setUserInput("");
   }
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  async function handleUserInput(event: React.ChangeEvent<HTMLInputElement>) {
+    const text = event.target.value;
+    setUserInput(text);
 
-  async function loadData() {
-    console.log("Fetching data...");
-    resetState();
-    setLoading(true);
-    const data = await Api.getJapangolin();
-    setJapangolin(data);
-    setLoading(false);
-    console.log("... data retrieved");
-    console.log(data);
+    // don't use `userInput` state here as it does not update asynchronously
+    // and it seems overkill to handle it as a `useEffect` "side-effect" when it's really a direct effect
+    if (text == null) {
+      return;
+    }
+
+    const isCorrect = text === japangolin.answerKana || text === japangolin.answerKanji;
+    if (!isCorrect) {
+      return;
+    }
+
+    setSnackbarShowing(true);
+    await fetchData();
   }
 
   return (
@@ -168,7 +195,7 @@ function Main() {
         <JapaneseInput value={userInput} onChange={handleUserInput} />
 
         <Tooltip title={"Skip"}>
-          <GradientIconButton icon={SkipIcon} width={56} height={56} disabled={loading} onClick={() => loadData()} />
+          <GradientIconButton icon={SkipIcon} width={56} height={56} disabled={loading} onClick={() => fetchData()} />
         </Tooltip>
       </Stack>
 
@@ -192,6 +219,14 @@ function Main() {
           onShowAnswer={() => setAnswerShowing(true)}
         >{`${japangolin.answerKana} · ${japangolin.answerKanji}`}</Answer>
       </Stack>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={snackbarShowing}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarShowing(false)}
+        message="🏆 Correct!"
+      />
     </Box>
   );
 }

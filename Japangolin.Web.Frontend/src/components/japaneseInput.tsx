@@ -21,7 +21,6 @@ const ColourfulHoverTextField = styled(TextField)<TextFieldProps>(({ theme }) =>
 
 function JapaneseInput(props: Props) {
   const useJapaneseFont = containsNonLatinCharacters(props.value);
-  console.log(`Input value: ${props.value} --> use Japanese? ${useJapaneseFont}`);
 
   return (
     <ColourfulHoverTextField

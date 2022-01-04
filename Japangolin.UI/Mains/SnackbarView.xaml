@@ -10,7 +10,7 @@
         d:DataContext="{d:DesignInstance Type=mains:DesignTimeSnackbarViewModel, IsDesignTimeCreatable=True}">
 
         <materialDesign:Snackbar IsActive="{Binding IsSnackbarActive}">
-            <materialDesign:SnackbarMessage Content="◯ Correct!" />
+            <materialDesign:SnackbarMessage Content="🏆 Correct!" />
         </materialDesign:Snackbar>
     
 </UserControl>
