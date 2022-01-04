@@ -5,8 +5,7 @@ function JapaneseTypography(props: TypographyProps) {
   let containsNonLatinCharacters = false;
   if (props.children != null) {
     const text = props.children as string;
-    const regex = /[\u2E80-\u3134F]/;
-    containsNonLatinCharacters = regex.test(text);
+    containsNonLatinCharacters = /[\u{2E80}-\u{3134F}]/u.test(text);
   }
 
   const theme = useTheme();

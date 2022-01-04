@@ -1,4 +1,4 @@
-import { Box, Button, Stack, SvgIcon, SvgIconProps, TextField, Tooltip } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
 import { useEffect, useState } from "react";
@@ -7,14 +7,7 @@ import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
 import { Detail, NoDetail } from "./detail";
 import Answer from "./answer";
-
-function SkipIcon(props: SvgIconProps) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M12,14A2,2 0 0,1 14,16A2,2 0 0,1 12,18A2,2 0 0,1 10,16A2,2 0 0,1 12,14M23.46,8.86L21.87,15.75L15,14.16L18.8,11.78C17.39,9.5 14.87,8 12,8C8.05,8 4.77,10.86 4.12,14.63L2.15,14.28C2.96,9.58 7.06,6 12,6C15.58,6 18.73,7.89 20.5,10.72L23.46,8.86Z" />
-    </SvgIcon>
-  );
-}
+import SkipButton from "./skipButton";
 
 const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
@@ -184,11 +177,7 @@ function Main() {
       >
         <TextField label={"Japanese Conjugation"} variant={"filled"} fullWidth />
 
-        <Tooltip title={"Skip"} onClick={() => loadData()}>
-          <Button variant={"outlined"} sx={{ width: 64, height: 64 }}>
-            <SkipIcon />
-          </Button>
-        </Tooltip>
+        <SkipButton onClick={() => loadData()} />
       </Stack>
 
       <Stack
