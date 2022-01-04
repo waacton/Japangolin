@@ -8,6 +8,7 @@ interface Props {
   children: string;
   showAnswer: boolean;
   onShowAnswer: () => void;
+  disabled?: boolean;
 }
 
 function Answer(props: Props) {
@@ -18,12 +19,19 @@ function Answer(props: Props) {
           icon={VisibilityIcon}
           width={32}
           height={32}
-          disabled={props.showAnswer}
+          disabled={props.showAnswer || props.disabled}
           onClick={props.onShowAnswer}
         />
       </Tooltip>
 
-      <JapaneseTypography sx={{ fontSize: (theme) => theme.custom.subTextSize, opacity: 0.6, cursor: "help" }}>
+      <JapaneseTypography
+        sx={{
+          fontSize: (theme) => theme.custom.subTextSize,
+          opacity: 0.6,
+          cursor: "help",
+          color: props.disabled ? "rgba(0, 0, 0, 0.38)" : {},
+        }}
+      >
         {props.showAnswer ? props.children : "Click to reveal the answer"}
       </JapaneseTypography>
     </Fragment>

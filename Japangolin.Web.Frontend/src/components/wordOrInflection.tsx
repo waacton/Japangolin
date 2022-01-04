@@ -10,6 +10,7 @@ interface Props {
   text: string;
   selected?: boolean;
   onSelect?: () => void;
+  disabled?: boolean;
 }
 
 function WordOrInflection(props: Props) {
@@ -29,11 +30,24 @@ function WordOrInflection(props: Props) {
     "&:hover": hoverStyle,
   };
 
+  const disabledBoxStyle: SxProps<Theme> = {
+    width: "fit-content",
+    lineHeight: "unset",
+    padding: 0.5,
+    border: "1px solid transparent",
+    borderRadius: 1,
+    background: "transparent",
+    opacity: 0.5,
+  };
+
+  // rgba(0, 0, 0, 0.38) taken from FormControlLabel disabled state (used in <Filter>)
   return (
     <Fragment>
-      <UppercaseLabel sx={{ marginLeft: 0.5 }}>{props.label}</UppercaseLabel>
+      <UppercaseLabel sx={{ marginLeft: 0.5, color: props.disabled ? "rgba(0, 0, 0, 0.38)" : {} }}>
+        {props.label}
+      </UppercaseLabel>
 
-      <Box sx={boxStyle} onClick={props.onSelect}>
+      <Box sx={props.disabled ? disabledBoxStyle : boxStyle} onClick={props.disabled ? () => {} : props.onSelect}>
         <Typography variant={"body1"}>{props.text}</Typography>
       </Box>
     </Fragment>

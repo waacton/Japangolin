@@ -9,6 +9,7 @@ interface Props {
   hint: Hint;
   wordSelected?: boolean;
   inflectionSelected?: boolean;
+  disabled?: boolean;
 }
 
 function DetailCard(props: Props) {
@@ -26,7 +27,10 @@ function DetailCard(props: Props) {
   }
 
   return (
-    <Card variant={"elevation"} sx={{ height: "100%", textAlign: "center" }}>
+    <Card
+      variant={"elevation"}
+      sx={{ height: "100%", textAlign: "center", color: props.disabled ? "rgba(0, 0, 0, 0.38)" : {} }}
+    >
       <Stack sx={{ justifyContent: "center", alignItems: "center", height: "100%" }}>{detail()}</Stack>
     </Card>
   );

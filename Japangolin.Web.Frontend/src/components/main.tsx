@@ -1,7 +1,7 @@
-import { Box, Snackbar, Stack, Tooltip } from "@mui/material";
+import { Box, LinearProgress, Snackbar, Stack, Tooltip } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Filter from "./filter";
 import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
@@ -23,8 +23,8 @@ function Main() {
   const [wordSelected, setWordSelected] = useState(false);
   const [inflectionSelected, setInflectionSelected] = useState(false);
   const [answerShowing, setAnswerShowing] = useState(false);
-  const [snackbarShowing, setSnackbarShowing] = useState(false);
   const [userInput, setUserInput] = useState("");
+  const [snackbarShowing, setSnackbarShowing] = useState(false);
 
   /*
   this is a lot of react-guff for a simple one-time "component did mount" action
@@ -37,10 +37,10 @@ function Main() {
    */
   const fetchData = useCallback(async () => {
     if (shouldLog) console.log("Fetching data...");
-    resetState();
     setLoading(true);
     const data = await Api.getJapangolin();
     setJapangolin(data);
+    resetState();
     setLoading(false);
     if (shouldLog) console.log("... data retrieved");
     if (shouldLog) console.log(data);
@@ -68,12 +68,17 @@ function Main() {
   }
 
   async function handleUserInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInput(event.target.value);
+    console.log("change " + event.target.value);
+  }
+
+  async function handleUserKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
+    // @ts-ignore
     const text = event.target.value;
-    setUserInput(text);
 
     // don't use `userInput` state here as it does not update asynchronously
     // and it seems overkill to handle it as a `useEffect` "side-effect" when it's really a direct effect
-    if (text == null) {
+    if (!text) {
       return;
     }
 
@@ -87,138 +92,151 @@ function Main() {
   }
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "2fr 2fr",
-        gridTemplateRows: "repeat(6, auto)",
-        bgcolor: (theme) => theme.custom.background,
-        borderBottom: 1,
-        borderColor: (theme) => `${theme.custom.wactonDark}22`,
-      }}
-    >
+    <Box>
       <Box
         sx={{
-          gridRow: 1,
-          gridColumn: "1 / span 2",
+          display: "grid",
+          gridTemplateColumns: "2fr 2fr",
+          gridTemplateRows: "repeat(6, auto)",
+          bgcolor: (theme) => theme.custom.background,
           borderBottom: 1,
           borderColor: (theme) => `${theme.custom.wactonDark}22`,
-          bgcolor: "background.paper",
         }}
       >
-        <Header />
+        <Box
+          sx={{
+            gridRow: 1,
+            gridColumn: "1 / span 2",
+            borderBottom: 1,
+            borderColor: (theme) => `${theme.custom.wactonDark}22`,
+            bgcolor: "background.paper",
+          }}
+        >
+          <Header />
+        </Box>
+
+        <Stack
+          sx={{
+            gridRow: 2,
+            gridColumn: "1 / span 2",
+            justifyContent: "center",
+            alignItems: "flex-end",
+            marginLeft: 2,
+            marginRight: 2,
+            marginTop: 1,
+            bgcolor: bgcolor,
+          }}
+        >
+          <Filter disabled={loading}>JLPT N5</Filter>
+        </Stack>
+
+        <Stack
+          direction={"column"}
+          sx={{
+            gridRow: 3,
+            gridColumn: 1,
+            marginLeft: 2,
+            marginTop: 1,
+            marginBottom: 1,
+            marginRight: 1,
+            bgcolor: bgcolor,
+          }}
+        >
+          <WordOrInflection
+            label={"word"}
+            text={japangolin.word.english}
+            selected={wordSelected}
+            onSelect={selectWord}
+            disabled={loading}
+          />
+        </Stack>
+
+        <Stack
+          direction={"column"}
+          sx={{
+            gridRow: 4,
+            gridColumn: 1,
+            marginLeft: 2,
+            marginTop: 1,
+            marginBottom: 1,
+            marginRight: 1,
+            bgcolor: bgcolor,
+          }}
+        >
+          <WordOrInflection
+            label={"inflection"}
+            text={pascalCase(japangolin.inflection.displayName, " · ")}
+            selected={inflectionSelected}
+            onSelect={selectInflection}
+            disabled={loading}
+          />
+        </Stack>
+
+        <Box
+          sx={{
+            gridRow: "3 / span 2",
+            gridColumn: 2,
+            marginLeft: 1,
+            marginTop: 1,
+            marginBottom: 1,
+            marginRight: 2,
+            bgcolor: bgcolor,
+          }}
+        >
+          <DetailCard
+            word={japangolin.word}
+            hint={japangolin.hint}
+            wordSelected={wordSelected}
+            inflectionSelected={inflectionSelected}
+            disabled={loading}
+          />
+        </Box>
+
+        <Stack
+          direction={"row"}
+          sx={{
+            gridRow: 5,
+            gridColumn: "1 / span 2",
+            gap: 2,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            marginLeft: 2,
+            marginTop: 1,
+            marginRight: 2,
+            bgcolor: bgcolor,
+          }}
+        >
+          <JapaneseInput value={userInput} onChange={handleUserInput} onKeyUp={handleUserKeyUp} disabled={loading} />
+
+          <Tooltip title={"Skip"}>
+            <GradientIconButton icon={SkipIcon} width={56} height={56} disabled={loading} onClick={() => fetchData()} />
+          </Tooltip>
+        </Stack>
+
+        <Stack
+          direction={"row"}
+          sx={{
+            gridRow: 6,
+            gridColumn: "1 / span 2",
+            gap: 1,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            marginLeft: 2,
+            marginRight: 2,
+            marginTop: 1,
+            marginBottom: 2,
+            bgcolor: bgcolor,
+          }}
+        >
+          <Answer
+            showAnswer={answerShowing}
+            onShowAnswer={() => setAnswerShowing(true)}
+            disabled={loading}
+          >{`${japangolin.answerKana} · ${japangolin.answerKanji}`}</Answer>
+        </Stack>
       </Box>
 
-      <Stack
-        sx={{
-          gridRow: 2,
-          gridColumn: "1 / span 2",
-          justifyContent: "center",
-          alignItems: "flex-end",
-          marginLeft: 2,
-          marginRight: 2,
-          marginTop: 1,
-          bgcolor: bgcolor,
-        }}
-      >
-        <Filter>JLPT N5</Filter>
-      </Stack>
-
-      <Stack
-        direction={"column"}
-        sx={{
-          gridRow: 3,
-          gridColumn: 1,
-          marginLeft: 2,
-          marginTop: 1,
-          marginBottom: 1,
-          marginRight: 1,
-          bgcolor: bgcolor,
-        }}
-      >
-        <WordOrInflection label={"word"} text={japangolin.word.english} selected={wordSelected} onSelect={selectWord} />
-      </Stack>
-
-      <Stack
-        direction={"column"}
-        sx={{
-          gridRow: 4,
-          gridColumn: 1,
-          marginLeft: 2,
-          marginTop: 1,
-          marginBottom: 1,
-          marginRight: 1,
-          bgcolor: bgcolor,
-        }}
-      >
-        <WordOrInflection
-          label={"inflection"}
-          text={pascalCase(japangolin.inflection.displayName, " · ")}
-          selected={inflectionSelected}
-          onSelect={selectInflection}
-        />
-      </Stack>
-
-      <Box
-        sx={{
-          gridRow: "3 / span 2",
-          gridColumn: 2,
-          marginLeft: 1,
-          marginTop: 1,
-          marginBottom: 1,
-          marginRight: 2,
-          bgcolor: bgcolor,
-        }}
-      >
-        <DetailCard
-          word={japangolin.word}
-          hint={japangolin.hint}
-          wordSelected={wordSelected}
-          inflectionSelected={inflectionSelected}
-        />
-      </Box>
-
-      <Stack
-        direction={"row"}
-        sx={{
-          gridRow: 5,
-          gridColumn: "1 / span 2",
-          gap: 2,
-          justifyContent: "flex-start",
-          alignItems: "center",
-          marginLeft: 2,
-          marginTop: 1,
-          marginRight: 2,
-          bgcolor: bgcolor,
-        }}
-      >
-        <JapaneseInput value={userInput} onChange={handleUserInput} />
-
-        <Tooltip title={"Skip"}>
-          <GradientIconButton icon={SkipIcon} width={56} height={56} disabled={loading} onClick={() => fetchData()} />
-        </Tooltip>
-      </Stack>
-
-      <Stack
-        direction={"row"}
-        sx={{
-          gridRow: 6,
-          gridColumn: "1 / span 2",
-          gap: 1,
-          justifyContent: "flex-start",
-          alignItems: "center",
-          marginLeft: 2,
-          marginRight: 2,
-          marginTop: 1,
-          marginBottom: 2,
-          bgcolor: bgcolor,
-        }}
-      >
-        <Answer
-          showAnswer={answerShowing}
-          onShowAnswer={() => setAnswerShowing(true)}
-        >{`${japangolin.answerKana} · ${japangolin.answerKanji}`}</Answer>
-      </Stack>
+      <LinearProgress sx={{ visibility: loading ? "visible" : "collapse" }} />
 
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

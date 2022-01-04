@@ -3,6 +3,7 @@ import UppercaseLabel from "./uppercaseLabel";
 
 interface Props {
   children: string;
+  disabled?: boolean;
 }
 
 function Filter(props: Props) {
@@ -13,6 +14,7 @@ function Filter(props: Props) {
       checked={true}
       control={<Switch defaultChecked />}
       label={<UppercaseLabel>{props.children}</UppercaseLabel>}
+      disabled={props.disabled}
     />
   );
 }
