@@ -24,7 +24,7 @@
 
         private readonly Settings settings;
 
-        // TODO: is this constructor required? doesn't work the web version
+        // TODO: is this constructor required? doesn't work with the web version
         public Main(IJapaneseDictionary japaneseDictionary, Settings settings)
         {
             this.settings = settings;

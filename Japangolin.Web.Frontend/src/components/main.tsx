@@ -1,15 +1,15 @@
-import { Box, Stack, styled, TextField, Tooltip } from "@mui/material";
+import { Box, Stack, Tooltip } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
 import { useEffect, useState } from "react";
 import Filter from "./filter";
 import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
-import { Detail, NoDetail } from "./detail";
 import Answer from "./answer";
 import GradientIconButton from "./gradientIconButton";
 import { SkipIcon } from "../utils/customIcons";
 import JapaneseInput from "./japaneseInput";
+import DetailCard from "./detailCard";
 
 const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
@@ -58,30 +58,6 @@ function Main() {
     console.log(data);
   }
 
-  const detailComponent = () => {
-    if (wordSelected) {
-      return (
-        <Detail
-          firstDetail={japangolin.word.kana}
-          secondDetail={japangolin.word.kanji}
-          thirdDetail={japangolin.word.class.toString()}
-        />
-      );
-    }
-
-    if (inflectionSelected) {
-      return (
-        <Detail
-          firstDetail={japangolin.hint.baseForm}
-          secondDetail={japangolin.hint.modification}
-          thirdDetail={japangolin.word.class.toString()}
-        />
-      );
-    }
-
-    return <NoDetail />;
-  };
-
   return (
     <Box
       sx={{
@@ -90,7 +66,7 @@ function Main() {
         gridTemplateRows: "repeat(6, auto)",
         bgcolor: (theme) => theme.custom.background,
         borderBottom: 1,
-        borderColor: "#40404622",
+        borderColor: (theme) => `${theme.custom.wactonDark}22`,
       }}
     >
       <Box
@@ -98,7 +74,7 @@ function Main() {
           gridRow: 1,
           gridColumn: "1 / span 2",
           borderBottom: 1,
-          borderColor: "#40404622",
+          borderColor: (theme) => `${theme.custom.wactonDark}22`,
           bgcolor: "background.paper",
         }}
       >
@@ -166,7 +142,12 @@ function Main() {
           bgcolor: bgcolor,
         }}
       >
-        {detailComponent()}
+        <DetailCard
+          word={japangolin.word}
+          hint={japangolin.hint}
+          wordSelected={wordSelected}
+          inflectionSelected={inflectionSelected}
+        />
       </Box>
 
       <Stack
@@ -186,7 +167,7 @@ function Main() {
         <JapaneseInput value={userInput} onChange={handleUserInput} />
 
         <Tooltip title={"Skip"}>
-          <GradientIconButton icon={SkipIcon} width={64} height={64} disabled={loading} onClick={() => loadData()} />
+          <GradientIconButton icon={SkipIcon} width={56} height={56} disabled={loading} onClick={() => loadData()} />
         </Tooltip>
       </Stack>
 
@@ -200,7 +181,7 @@ function Main() {
           alignItems: "center",
           marginLeft: 2,
           marginRight: 2,
-          marginTop: 0.5,
+          marginTop: 1,
           marginBottom: 2,
           bgcolor: bgcolor,
         }}

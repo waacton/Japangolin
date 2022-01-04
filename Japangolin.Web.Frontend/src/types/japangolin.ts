@@ -6,7 +6,7 @@ export interface Japangolin {
   answerKanji: string;
 }
 
-interface Word {
+export interface Word {
   kana: string;
   kanji: string;
   english: string;
@@ -17,7 +17,7 @@ interface Inflection {
   displayName: string;
 }
 
-interface Hint {
+export interface Hint {
   baseForm: string;
   modification: string;
 }
