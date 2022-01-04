@@ -16,7 +16,7 @@ function Filter(props: Props) {
       labelPlacement={"start"}
       checked={props.checked}
       onChange={props.onChange}
-      control={<Switch defaultChecked />}
+      control={<Switch />}
       label={<UppercaseLabel>{props.children}</UppercaseLabel>}
       disabled={props.disabled}
     />

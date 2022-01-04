@@ -1,8 +1,8 @@
-import { Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import JapaneseTypography from "./japaneseTypography";
 import GradientIconButton from "./gradientIconButton";
+import { Box, Tooltip } from "@mui/material";
 
 interface Props {
   children: string;
@@ -15,13 +15,16 @@ function Answer(props: Props) {
   return (
     <Fragment>
       <Tooltip title={"View Answer"}>
-        <GradientIconButton
-          icon={VisibilityIcon}
-          width={32}
-          height={32}
-          disabled={props.showAnswer || props.disabled}
-          onClick={props.onShowAnswer}
-        />
+        <Box>
+          {/* see discussion in tooltipWithForwardRef.tsx for why <Box> is needed */}
+          <GradientIconButton
+            icon={VisibilityIcon}
+            width={32}
+            height={32}
+            disabled={props.showAnswer || props.disabled}
+            onClick={props.onShowAnswer}
+          />
+        </Box>
       </Tooltip>
 
       <JapaneseTypography

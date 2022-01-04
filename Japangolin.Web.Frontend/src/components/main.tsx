@@ -226,7 +226,16 @@ function Main() {
           <JapaneseInput value={userInput} onChange={handleUserInput} onKeyUp={handleUserKeyUp} disabled={loading} />
 
           <Tooltip title={"Skip"}>
-            <GradientIconButton icon={SkipIcon} width={56} height={56} disabled={loading} onClick={() => fetchData()} />
+            <Box>
+              {/* see discussion in tooltipWithForwardRef.tsx for why <Box> is needed */}
+              <GradientIconButton
+                icon={SkipIcon}
+                width={56}
+                height={56}
+                disabled={loading}
+                onClick={() => fetchData()}
+              />
+            </Box>
           </Tooltip>
         </Stack>
 

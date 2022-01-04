@@ -2,6 +2,7 @@ import "./App.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Main from "./components/main";
+import packageJson from "../package.json";
 
 const gradientStart = "#E004DD";
 const gradientEnd = "#F63D96";
@@ -29,6 +30,7 @@ const theme = createTheme({
 });
 
 function App() {
+  console.log(`Welcome to Wacton.Japangolin · ${packageJson.version} · いらっしゃいませー`);
   return (
     <ThemeProvider theme={theme}>
       <Main />
