@@ -1,8 +1,11 @@
 import { FormControlLabel, Switch } from "@mui/material";
 import UppercaseLabel from "./uppercaseLabel";
+import React from "react";
 
 interface Props {
   children: string;
+  checked: boolean;
+  onChange: (event: React.SyntheticEvent) => void;
   disabled?: boolean;
 }
 
@@ -11,7 +14,8 @@ function Filter(props: Props) {
   return (
     <FormControlLabel
       labelPlacement={"start"}
-      checked={true}
+      checked={props.checked}
+      onChange={props.onChange}
       control={<Switch defaultChecked />}
       label={<UppercaseLabel>{props.children}</UppercaseLabel>}
       disabled={props.disabled}

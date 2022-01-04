@@ -24,18 +24,18 @@ export interface Hint {
 
 export const defaultJapangolin: Japangolin = {
   word: {
-    kana: "[kana]",
-    kanji: "[kanji]",
-    english: "[english]",
+    kana: "-",
+    kanji: "-",
+    english: "-",
     class: -1,
   },
   inflection: {
-    displayName: "[inflection]",
+    displayName: "-",
   },
   hint: {
-    baseForm: "[base form]",
-    modification: "[modification]",
+    baseForm: "-",
+    modification: "-",
   },
-  answerKana: "[answer kana]",
-  answerKanji: "[answer kanji]",
+  answerKana: "-",
+  answerKanji: "-",
 };

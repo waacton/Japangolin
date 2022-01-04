@@ -16,10 +16,11 @@ const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
 
 function Main() {
-  const shouldLog = true;
+  const shouldLog = false;
 
   const [japangolin, setJapangolin] = useState<Japangolin>(defaultJapangolin);
   const [loading, setLoading] = useState(false);
+  const [jlptN5Filtered, setJlptN5Filtered] = useState(true);
   const [wordSelected, setWordSelected] = useState(false);
   const [inflectionSelected, setInflectionSelected] = useState(false);
   const [answerShowing, setAnswerShowing] = useState(false);
@@ -31,24 +32,35 @@ function Main() {
   mostly using useCallback to appease eslint's "exhaustive-deps" warning for useEffect, as it's probably good practice
   ----------
   useCallback is typically a last resort (https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)
-  ensures the fetchData function doesn't change on every render, unless its own dependencies change (i.e. shouldLog in this contrived example)
+  it ensures the fetch data function doesn't change on every render, unless its own dependencies change
+  (e.g. if shouldLog was modified: a) the function would update b) the initial data fetch would re-trigger as the function itself is a dependency to useEffect)
+  ----------
   the recommended fix is to define the function inside useEffect itself
   but using useCallback instead so that the function can be called from elsewhere (e.g. clicking skip button)
    */
-  const fetchData = useCallback(async () => {
-    if (shouldLog) console.log("Fetching data...");
-    setLoading(true);
-    const data = await Api.getJapangolin();
-    setJapangolin(data);
-    resetState();
-    setLoading(false);
-    if (shouldLog) console.log("... data retrieved");
-    if (shouldLog) console.log(data);
-  }, [shouldLog]);
+  const memoizedFetchDataFunc = useCallback(
+    async (jlptN5: boolean) => {
+      if (shouldLog) console.log(`fetching data (JLPT N5 = ${jlptN5}) ...`);
+      setLoading(true);
+      const data = await Api.getJapangolin(jlptN5);
+      setJapangolin(data);
+      resetState();
+      setLoading(false);
+      if (shouldLog) console.log("... data retrieved");
+      if (shouldLog) console.log(data);
+    },
+    [shouldLog]
+  );
 
+  // initial render data fetching
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    memoizedFetchDataFunc(true);
+  }, [memoizedFetchDataFunc]);
+
+  // general purpose data fetching
+  async function fetchData() {
+    await memoizedFetchDataFunc(jlptN5Filtered);
+  }
 
   function selectWord() {
     setWordSelected(true);
@@ -73,8 +85,7 @@ function Main() {
   }
 
   async function handleUserKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
-    // @ts-ignore
-    const text = event.target.value;
+    const text = (event.target as HTMLInputElement).value; // shame the generic event typing doesn't help
 
     // don't use `userInput` state here as it does not update asynchronously
     // and it seems overkill to handle it as a `useEffect` "side-effect" when it's really a direct effect
@@ -127,7 +138,13 @@ function Main() {
             bgcolor: bgcolor,
           }}
         >
-          <Filter disabled={loading}>JLPT N5</Filter>
+          <Filter
+            disabled={loading}
+            checked={jlptN5Filtered}
+            onChange={(event) => setJlptN5Filtered((event.target as HTMLInputElement).checked)} // nasty
+          >
+            JLPT N5
+          </Filter>
         </Stack>
 
         <Stack

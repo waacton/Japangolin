@@ -1,8 +1,8 @@
 import { Japangolin } from "./types/japangolin";
 
 export namespace Api {
-  export async function getJapangolin() {
-    return await api<Japangolin>("/random");
+  export async function getJapangolin(jlptN5: boolean) {
+    return await api<Japangolin>(`/random?jlptN5=${jlptN5}`);
   }
 
   async function api<T>(url: string): Promise<T> {
