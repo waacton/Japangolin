@@ -1,10 +1,8 @@
-import { Button, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Fragment } from "react";
 import JapaneseTypography from "./japaneseTypography";
-import { gradientBorderStyle, gradientBorderWithTranslucentFillStyle } from "../utils/gradientHelper";
-import { SxProps } from "@mui/system";
-import { Theme } from "@mui/material/styles";
+import GradientIconButton from "./gradientIconButton";
 
 interface Props {
   children: string;
@@ -13,35 +11,16 @@ interface Props {
 }
 
 function Answer(props: Props) {
-  const disabled = props.showAnswer;
-  const buttonStyle: SxProps<Theme> = disabled
-    ? {} // no style override when disabled
-    : {
-        // fancy style override when enabled
-        ...gradientBorderStyle(),
-        "&:hover": {
-          ...gradientBorderWithTranslucentFillStyle(),
-        },
-      };
-
-  const svgIconStyle: SxProps<Theme> = disabled ? {} : { fill: (theme) => theme.custom.gradientSvgFill };
-
   return (
     <Fragment>
       <Tooltip title={"View Answer"}>
-        <Button
-          variant={"outlined"}
-          onClick={props.onShowAnswer}
+        <GradientIconButton
+          icon={VisibilityIcon}
+          width={32}
+          height={32}
           disabled={props.showAnswer}
-          sx={{
-            width: 32,
-            height: 32,
-            minWidth: 32,
-            ...buttonStyle,
-          }}
-        >
-          <VisibilityIcon sx={{ width: 16, height: 16, ...svgIconStyle }} />
-        </Button>
+          onClick={props.onShowAnswer}
+        />
       </Tooltip>
 
       <JapaneseTypography sx={{ fontSize: (theme) => theme.custom.subTextSize, opacity: 0.6, cursor: "help" }}>

@@ -1,4 +1,4 @@
-import { Box, Stack, TextField } from "@mui/material";
+import { Box, Stack, TextField, Tooltip } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
 import { useEffect, useState } from "react";
@@ -7,7 +7,8 @@ import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
 import { Detail, NoDetail } from "./detail";
 import Answer from "./answer";
-import SkipButton from "./skipButton";
+import GradientIconButton from "./gradientIconButton";
+import { SkipIcon } from "../utils/customIcons";
 
 const showHighlight = false;
 const bgcolor = showHighlight ? "yellow" : "transparent";
@@ -177,7 +178,9 @@ function Main() {
       >
         <TextField label={"Japanese Conjugation"} variant={"filled"} fullWidth />
 
-        <SkipButton onClick={() => loadData()} />
+        <Tooltip title={"Skip"}>
+          <GradientIconButton icon={SkipIcon} width={64} height={64} disabled={loading} onClick={() => loadData()} />
+        </Tooltip>
       </Stack>
 
       <Stack

@@ -3,7 +3,7 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Main from "./components/main";
 
-const gradientStart = "#E004DD";
+const gradientStart = "#00AAFF";
 const gradientEnd = "#F63D96";
 
 const theme = createTheme({
