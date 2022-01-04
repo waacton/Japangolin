@@ -8,6 +8,13 @@
     // TODO: explicitly handle irregularities (e.g. する、来る、 adjective-i いい conjugates as よく)
     // TODO: expand te-form to allow negative (which will also allow things like potential & passive forms)
     /* some useful stuff can be found at https://en.wikipedia.org/wiki/Japanese_verb_conjugation */
+    
+    /*
+     * a note on placeholder characters:
+     * 〇〇 (U+3007) seems to be the primary placeholder referenced in JMdict (https://jisho.org/word/%E3%80%87%E3%80%87)
+     * ○○ (U+25CB) is the symbol used by wikipedia placeholder examples (https://en.wiktionary.org/wiki/%E2%97%8B)
+     * using ○○ (U+25CB) as it has less visual weight, less distracting
+     */
     public static class Conjugators
     {
         public static readonly WordConjugator Dictionary = new WordConjugator((word) => Conjugator1D(word, dictsByWordClass));
@@ -103,16 +110,16 @@
 
             verbU = new Conjugator[2, 2, 2];
             dictsByWordClass.Add(WordClass.VerbU, identityConjugator);
-            stemsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUStemI(x)}", new Hint(dictHint, "～〇〇う　↦　～〇〇い"))); // TODO: check usage
-            teFormsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUFormTe(x)}", new Hint(dictHint, "～〇〇う　↦　～〇〇て／で")));
+            stemsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUStemI(x)}", new Hint(dictHint, "～○○う　↦　～○○い"))); // TODO: check usage
+            teFormsByWordClass.Add(WordClass.VerbU, new Conjugator(x => $"{Forms.VerbUFormTe(x)}", new Hint(dictHint, "～○○う　↦　～○○て／で")));
             Set(verbU, Tense.Present, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ます", new Hint(stemHint, "＋ます"));
             Set(verbU, Tense.Present, Polarity.Affirmative, Formality.Short, x => $"{Forms.Dict(x)}", new Hint(dictHint));
             Set(verbU, Tense.Present, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ません", new Hint(stemHint, "＋ません"));
-            Set(verbU, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}ない", new Hint(stemHint, "～〇〇う　↦　～〇〇あない"));
+            Set(verbU, Tense.Present, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}ない", new Hint(stemHint, "～○○う　↦　～○○あない"));
             Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ました", new Hint(stemHint, "＋ました"));
             Set(verbU, Tense.Past, Polarity.Affirmative, Formality.Short, x => $"{Forms.VerbUFormTa(x)}", new Hint(teHint, "て／で　↦　た／だ"));
             Set(verbU, Tense.Past, Polarity.Negative, Formality.Long, x => $"{Forms.VerbUStemI(x)}ませんでした", new Hint(stemHint, "＋ませんでした"));
-            Set(verbU, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}なかった", new Hint(stemHint, "～〇〇う　↦　～〇〇あなかった"));
+            Set(verbU, Tense.Past, Polarity.Negative, Formality.Short, x => $"{Forms.VerbUStemA(x)}なかった", new Hint(stemHint, "～○○う　↦　～○○あなかった"));
             ContextualByWordClass.Add(WordClass.VerbU, verbU);
         }
 
