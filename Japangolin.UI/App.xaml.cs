@@ -32,7 +32,7 @@
 
         private static void SetWindowTitle()
         {
-            var applicationVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            var applicationVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             ShellViewModel.WindowTitle = $"Wacton.Japangolin · {applicationVersion}";
         }
 
