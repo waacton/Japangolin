@@ -1,4 +1,4 @@
-import { Box, LinearProgress, Snackbar, Stack, Tooltip } from "@mui/material";
+import { Alert, AlertTitle, Box, LinearProgress, Snackbar, Stack, Tooltip } from "@mui/material";
 import Header from "./header";
 import { Api } from "../api";
 import React, { useCallback, useEffect, useState } from "react";
@@ -26,6 +26,7 @@ function Main() {
   const [answerShowing, setAnswerShowing] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [snackbarShowing, setSnackbarShowing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   /*
   this is a lot of react-guff for a simple one-time "component did mount" action
@@ -42,12 +43,30 @@ function Main() {
     async (jlptN5: boolean) => {
       if (shouldLog) console.log(`fetching data (JLPT N5 = ${jlptN5}) ...`);
       setLoading(true);
-      const data = await Api.getJapangolin(jlptN5);
+
+      let data: Japangolin = defaultJapangolin;
+      try {
+        data = await Api.getJapangolin(jlptN5);
+        if (shouldLog) console.log("... data retrieved");
+        if (shouldLog) console.log(data);
+      } catch (e: unknown) {
+        if (shouldLog) console.log(e);
+
+        let message: string;
+        if (e instanceof Error) {
+          message = e.message;
+        } else if (typeof e === "string") {
+          message = e;
+        } else {
+          message = "Something unexpected happened...";
+        }
+
+        setErrorMessage(message);
+      }
+
       setJapangolin(data);
       resetState();
       setLoading(false);
-      if (shouldLog) console.log("... data retrieved");
-      if (shouldLog) console.log(data);
     },
     [shouldLog]
   );
@@ -101,6 +120,7 @@ function Main() {
     await fetchData();
   }
 
+  const disabled: boolean = loading || errorMessage !== undefined;
   return (
     <Box>
       <Box
@@ -138,7 +158,7 @@ function Main() {
           }}
         >
           <Filter
-            disabled={loading}
+            disabled={disabled}
             checked={jlptN5Filtered}
             onChange={(event) => setJlptN5Filtered((event.target as HTMLInputElement).checked)} // nasty
           >
@@ -163,7 +183,7 @@ function Main() {
             text={japangolin.word.english}
             selected={wordSelected}
             onSelect={selectWord}
-            disabled={loading}
+            disabled={disabled}
           />
         </Stack>
 
@@ -184,7 +204,7 @@ function Main() {
             text={pascalCase(japangolin.inflection.displayName, " · ")}
             selected={inflectionSelected}
             onSelect={selectInflection}
-            disabled={loading}
+            disabled={disabled}
           />
         </Stack>
 
@@ -204,7 +224,7 @@ function Main() {
             hint={japangolin.hint}
             wordSelected={wordSelected}
             inflectionSelected={inflectionSelected}
-            disabled={loading}
+            disabled={disabled}
           />
         </Box>
 
@@ -222,7 +242,7 @@ function Main() {
             bgcolor: bgcolor,
           }}
         >
-          <JapaneseInput value={userInput} onChange={handleUserInput} onKeyUp={handleUserKeyUp} disabled={loading} />
+          <JapaneseInput value={userInput} onChange={handleUserInput} onKeyUp={handleUserKeyUp} disabled={disabled} />
 
           <Tooltip title={"Skip"}>
             <Box>
@@ -231,7 +251,7 @@ function Main() {
                 icon={SkipIcon}
                 width={56}
                 height={56}
-                disabled={loading}
+                disabled={disabled}
                 onClick={() => fetchData()}
               />
             </Box>
@@ -256,12 +276,17 @@ function Main() {
           <Answer
             showAnswer={answerShowing}
             onShowAnswer={() => setAnswerShowing(true)}
-            disabled={loading}
+            disabled={disabled}
           >{`${japangolin.answerKana} · ${japangolin.answerKanji}`}</Answer>
         </Stack>
       </Box>
 
       <LinearProgress sx={{ visibility: loading ? "visible" : "collapse" }} />
+
+      <Alert severity="error" sx={{ margin: 2, visibility: errorMessage !== undefined ? "visible" : "collapse" }}>
+        <AlertTitle>{`Error: ${errorMessage}`}</AlertTitle>
+        There might be an issue with the server. Try refreshing the page and crossing your fingers 🤞
+      </Alert>
 
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
