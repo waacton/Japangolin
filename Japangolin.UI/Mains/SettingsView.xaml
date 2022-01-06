@@ -11,7 +11,7 @@
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
         <TextBlock Text="JLPT N5" FontSize="10" Opacity="0.6" FontWeight="Medium" VerticalAlignment="Center" Margin="0, 0, 8, 0" />
-        <ToggleButton IsChecked="{Binding IsJLPTN5, Mode=OneWay}" cal:Message.Attach="ToggleWordFilter" />
+        <ToggleButton IsChecked="{Binding IsJLPTN5, Mode=OneWay}" cal:Message.Attach="ToggleWordFilter" Cursor="Hand" />
     </StackPanel>
 
 </UserControl>
