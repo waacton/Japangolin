@@ -17,7 +17,7 @@ function Filter(props: Props) {
       checked={props.checked}
       onChange={props.onChange}
       control={<Switch />}
-      label={<UppercaseLabel>{props.children}</UppercaseLabel>}
+      label={<UppercaseLabel sx={{ lineHeight: "2.5" }}>{props.children}</UppercaseLabel>}
       disabled={props.disabled}
     />
   );

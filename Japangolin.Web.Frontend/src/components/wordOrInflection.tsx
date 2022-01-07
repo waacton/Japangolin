@@ -43,7 +43,7 @@ function WordOrInflection(props: Props) {
   // rgba(0, 0, 0, 0.38) taken from FormControlLabel disabled state (used in <Filter>)
   return (
     <Fragment>
-      <UppercaseLabel sx={{ marginLeft: 0.5, color: props.disabled ? "rgba(0, 0, 0, 0.38)" : {} }}>
+      <UppercaseLabel sx={{ marginLeft: 0.5, lineHeight: "unset", color: props.disabled ? "rgba(0, 0, 0, 0.38)" : {} }}>
         {props.label}
       </UppercaseLabel>
 

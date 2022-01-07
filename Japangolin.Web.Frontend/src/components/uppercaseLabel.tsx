@@ -11,7 +11,6 @@ function UppercaseLabel(props: TypographyProps) {
         fontSize: (theme: Theme) => theme.custom.labelTextSize,
         fontWeight: "medium",
         opacity: 0.5,
-        lineHeight: "unset",
       }}
     >
       {props.children}
