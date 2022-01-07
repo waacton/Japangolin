@@ -89,7 +89,7 @@
 
         public void WordSelected()
         {
-            var wordClassDetail = PascalCase.InsertSeparator(main.Word.Class.ToString(), "-").ToLower();
+            var wordClassDetail = StringUtils.PascalCase(main.Word.Class.ToString(), "-").ToLower();
             var isKanjiDifferent = main.Word.Kanji != main.Word.Kana;
             this.detailViewModel.Update(main.Word.Kana, isKanjiDifferent ? main.Word.Kanji : null, wordClassDetail);
             this.CurrentDetailViewModel = this.detailViewModel;
@@ -97,7 +97,7 @@
 
         public void InflectionSelected()
         {
-            var wordClassDetail = PascalCase.InsertSeparator(main.Word.Class.ToString(), "-").ToLower();
+            var wordClassDetail = StringUtils.PascalCase(main.Word.Class.ToString(), "-").ToLower();
             this.detailViewModel.Update(main.Hint.BaseForm, main.Hint.Modification, wordClassDetail);
             this.CurrentDetailViewModel = this.detailViewModel;
         }
