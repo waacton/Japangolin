@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 
+    custom font resources used for better display of Japanese text
+    note: text after # is the font name, not the file name (can be found by opening the font file in explorer)
+    see https://stackoverflow.com/questions/6453640/how-to-include-external-font-in-wpf-application-without-installing-it
+    -->
+
+    <FontFamily x:Key="NotoSansJP">pack://application:,,,/Resources/#Noto Sans JP</FontFamily> <!-- has bold variation -->
+    <FontFamily x:Key="NotoSansJP_Thin">pack://application:,,,/Resources/#Noto Sans JP Thin</FontFamily>
+    <FontFamily x:Key="NotoSansJP_Light">pack://application:,,,/Resources/#Noto Sans JP Light</FontFamily>
+    <FontFamily x:Key="NotoSansJP_Medium">pack://application:,,,/Resources/#Noto Sans JP Medium</FontFamily>
+    <FontFamily x:Key="NotoSansJP_Black">pack://application:,,,/Resources/#Noto Sans JP Black</FontFamily>
+
+</ResourceDictionary>

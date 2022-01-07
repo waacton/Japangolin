@@ -15,7 +15,8 @@
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Converters/CommonConverters.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Bespokes.xaml" />
-
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Fonts.xaml" />
+                
                 <!-- add gradient-specific resources, manually handling outside of MaterialDesignInXAML as their <Color> resources appear to not get updated -->
                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Gradients.xaml" />
 
@@ -23,11 +24,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
                 <!-- use tweaked or overridden Material styles with custom default styles where desired (but should still be "based on" Material styles) -->
-                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Defaults.xaml" /> 
-                 <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Overrides.xaml" /> 
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.UI;component/Styles/Overrides.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

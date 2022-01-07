@@ -40,7 +40,7 @@
 
         public string PrettyDisplay()
         {
-            return PascalCase.InsertSeparator(this.DisplayName, " · ").ToLower();
+            return StringUtils.PascalCase(this.DisplayName, " · ").ToLower();
         }
 
         public override string ToString() => this.PrettyDisplay();
