@@ -42,7 +42,11 @@
     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}" po:Freeze="True" />
     <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}" po:Freeze="True" />
 
-    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Accent700}" po:Freeze="True" />
-    <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="{StaticResource Accent700Foreground}" po:Freeze="True" />
+    <SolidColorBrush x:Key="SecondaryHueLightBrush" Color="{StaticResource Primary200}" po:Freeze="True" />
+    <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="{StaticResource Primary200Foreground}" po:Freeze="True" />
+    <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="{StaticResource Primary500}" po:Freeze="True" />
+    <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="{StaticResource Primary500Foreground}" po:Freeze="True" />
+    <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="{StaticResource Primary700}" po:Freeze="True" />
+    <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}" po:Freeze="True" />
 
 </ResourceDictionary>
