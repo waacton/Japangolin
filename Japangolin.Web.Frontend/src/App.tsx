@@ -3,6 +3,8 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Main from "./components/main";
 import packageJson from "../package.json";
+import { useEffect } from "react";
+import WebFont from "webfontloader";
 
 const gradientStart = "#E004DD";
 const gradientEnd = "#F63D96";
@@ -31,6 +33,15 @@ const theme = createTheme({
 
 function App() {
   console.log(`Welcome to Wacton.Japangolin · ${packageJson.version} · いらっしゃいませー`);
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Noto Sans JP:300,400,500,700"],
+      },
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Main />
