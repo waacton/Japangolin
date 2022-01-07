@@ -3,6 +3,7 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Main from "./components/main";
 import packageJson from "../package.json";
+import "@fontsource/noto-sans-jp";
 
 const gradientStart = "#E004DD";
 const gradientEnd = "#F63D96";
@@ -25,7 +26,7 @@ const theme = createTheme({
     background: "#FAFAFA",
     labelTextSize: "0.7rem",
     subTextSize: "0.8rem",
-    japaneseFont: "'Noto Sans JP', sans-serif;",
+    japaneseFont: "Noto Sans JP",
   },
 });
 
