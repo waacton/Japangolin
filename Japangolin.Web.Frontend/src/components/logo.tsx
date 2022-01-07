@@ -10,7 +10,7 @@ function Logo() {
       alignItems={"center"}
       sx={{ bgcolor: "#404046", height: 40, width: 40 }}
     >
-      <img src={logo} className="App-logo" alt="logo" height={24} />
+      <img src={logo} className="App-logo" alt="logo" width={24} height={24} />
     </Stack>
   );
 }
