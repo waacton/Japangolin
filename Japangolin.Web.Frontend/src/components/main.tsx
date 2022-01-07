@@ -7,7 +7,7 @@ import WordOrInflection from "./wordOrInflection";
 import { defaultJapangolin, Japangolin } from "../types/japangolin";
 import Answer from "./answer";
 import GradientIconButton from "./gradientIconButton";
-import { SkipIcon } from "../utils/customIcons";
+import { SkipNext } from "@mui/icons-material";
 import JapaneseInput from "./japaneseInput";
 import DetailCard from "./detailCard";
 import { pascalCase } from "../utils/stringUtils";
@@ -248,7 +248,7 @@ function Main() {
             <Box>
               {/* see discussion in tooltipWithForwardRef.tsx for why <Box> is needed */}
               <GradientIconButton
-                icon={SkipIcon}
+                icon={SkipNext}
                 width={56}
                 height={56}
                 disabled={disabled}
