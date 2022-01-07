@@ -1,7 +1,6 @@
 ﻿namespace Wacton.Japangolin.Domain.Enums
 {
     using System.Collections.Generic;
-
     using Wacton.Desu.Enums;
 
     public static class POS

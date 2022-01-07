@@ -1,7 +1,7 @@
-﻿using Wacton.Tovarisch.Enum;
-
-namespace Wacton.Japangolin.Domain.Enums
+﻿namespace Wacton.Japangolin.Domain.Enums
 {
+    using Wacton.Desu.Enums;
+
     public class Tense : Enumeration
     {
         public static readonly Tense None = new Tense("None", -1);

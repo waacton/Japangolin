@@ -13,15 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Reference Include="Wacton.Tovarisch">
-	  <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
-	</Reference>
-	<Reference Include="Wacton.Tovarisch.Logging">
-	  <HintPath>..\Dependencies\Wacton.Tovarisch.Logging.dll</HintPath>
-	</Reference>
-  </ItemGroup>
-
-  <ItemGroup>
 	<Compile Update="Properties\Resources.Designer.cs">
 	  <DesignTime>True</DesignTime>
 	  <AutoGen>True</AutoGen>

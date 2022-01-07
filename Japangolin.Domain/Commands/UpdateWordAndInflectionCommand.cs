@@ -1,7 +1,7 @@
 ﻿namespace Wacton.Japangolin.Domain.Commands
 {
     using Wacton.Japangolin.Domain.Mains;
-    using Wacton.Tovarisch.MVVM;
+    using Wacton.Japangolin.Domain.MVVM;
 
     public class UpdateWordAndInflectionCommand : ModelChangeCommand
     {

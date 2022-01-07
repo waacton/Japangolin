@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using Wacton.Japangolin.Domain.Conjugation;
-using Wacton.Japangolin.Domain.Enums;
-using Wacton.Japangolin.Domain.Words;
-
-namespace Wacton.Japangolin.Tests
+﻿namespace Wacton.Japangolin.Tests
 {
+    using NUnit.Framework;
+    using Wacton.Japangolin.Domain.Conjugation;
+    using Wacton.Japangolin.Domain.Enums;
+    using Wacton.Japangolin.Domain.Words;
+
     public class VerbIrregular来る
     {
         // TODO: enable handling of irregular verb 来る (new WordClass)

@@ -20,10 +20,4 @@
     <ProjectReference Include="..\Japangolin.Domain\Japangolin.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Wacton.Tovarisch">
-      <HintPath>..\Dependencies\Wacton.Tovarisch.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

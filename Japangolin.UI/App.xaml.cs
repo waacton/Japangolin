@@ -6,18 +6,25 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Threading;
+    using NLog;
     using Wacton.Japangolin.UI.Mains;
     using Wacton.Japangolin.UI.Themes;
-    using Wacton.Tovarisch.Logging;
 
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        
        public App()
         {
-            Application.Current.DispatcherUnhandledException += OnDispatcherUnhandledException;
+            LogManager.Setup().LoadConfiguration(builder => {
+                builder.ForLogger().FilterMinLevel(LogLevel.Info).WriteToConsole();
+                builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToFile("log.txt");
+            });
+            
+            Current.DispatcherUnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
             TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
             SetWindowTitle();

@@ -2,13 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
     using Wacton.Japangolin.Domain.Conjugation;
     using Wacton.Japangolin.Domain.Enums;
+    using Wacton.Japangolin.Domain.Utils;
     using Wacton.Japangolin.Domain.Words;
-    using Wacton.Tovarisch.Enum;
-    using Wacton.Tovarisch.Randomness;
 
     public class Main
     {
@@ -42,7 +41,7 @@
         internal void UpdateWordAndInflection()
         {
             this.Word = GetRandomWord();
-            this.Inflection = RandomSelection.SelectOne(this.allInflections);
+            this.Inflection = RNG.SelectOne(this.allInflections);
             this.Hint = this.Inflection.GetHint(this.Word);
             (this.AnswerKana, this.AnswerKanji) = this.Inflection.Conjugate(this.Word);
         }
@@ -54,7 +53,7 @@
 
             while (!isValid)
             {
-                var entry = RandomSelection.SelectOne(this.settings.WordFilter == WordFilter.JLPTN5 ? jlptN5Entries : allEntries);
+                var entry = RNG.SelectOne(this.settings.WordFilter == WordFilter.JLPTN5 ? jlptN5Entries : allEntries);
                 word = entry.ParseToWord();
                 isValid = word.Class != WordClass.Unknown;
             }

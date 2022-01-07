@@ -3,8 +3,8 @@
     using Wacton.Japangolin.Domain.Commands;
     using Wacton.Japangolin.Domain.Enums;
     using Wacton.Japangolin.Domain.Mains;
-    using Wacton.Tovarisch.MVVM;
-    using Wacton.Tovarisch.UI.MVVM;
+    using Wacton.Japangolin.Domain.MVVM;
+    using Wacton.Japangolin.UI.MVVM;
 
     public class SettingsViewModel : ViewModelBase
     {

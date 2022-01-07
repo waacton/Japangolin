@@ -1,7 +1,7 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Wacton.Japangolin.Domain.Utils
+﻿namespace Wacton.Japangolin.Domain.Utils
 {
+    using System.Text.RegularExpressions;
+
     public static class PascalCase
     {
         private static readonly Regex pascalCaseRegex = new Regex(@"(?!^)(?=[A-Z])");

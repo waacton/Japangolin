@@ -1,9 +1,9 @@
-﻿using Wacton.Japangolin.Domain.Utils;
-using Wacton.Japangolin.Domain.Words;
-using Wacton.Tovarisch.Enum;
-
-namespace Wacton.Japangolin.Domain.Conjugation
+﻿namespace Wacton.Japangolin.Domain.Conjugation
 {
+    using Wacton.Desu.Enums;
+    using Wacton.Japangolin.Domain.Utils;
+    using Wacton.Japangolin.Domain.Words;
+
     public class Inflection : Enumeration
     {
         public static readonly Inflection Dictionary = new Inflection("Dictionary", Conjugators.Dictionary);

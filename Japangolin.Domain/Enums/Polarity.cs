@@ -1,7 +1,7 @@
-﻿using Wacton.Tovarisch.Enum;
-
-namespace Wacton.Japangolin.Domain.Enums
+﻿namespace Wacton.Japangolin.Domain.Enums
 {
+    using Wacton.Desu.Enums;
+
     public class Polarity : Enumeration
     {
         public static readonly Polarity None = new Polarity("None", -1);

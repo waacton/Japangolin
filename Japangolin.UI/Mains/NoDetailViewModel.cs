@@ -1,7 +1,6 @@
 ﻿namespace Wacton.Japangolin.UI.Mains
 {
-    using Wacton.Tovarisch.MVVM;
-    using Wacton.Tovarisch.UI.MVVM;
+    using Wacton.Japangolin.Domain.MVVM;
 
     public class NoDetailViewModel : DetailViewModel
     {

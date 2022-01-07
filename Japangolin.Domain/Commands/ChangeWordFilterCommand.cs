@@ -2,7 +2,7 @@
 {
     using Wacton.Japangolin.Domain.Enums;
     using Wacton.Japangolin.Domain.Mains;
-    using Wacton.Tovarisch.MVVM;
+    using Wacton.Japangolin.Domain.MVVM;
 
     public class ChangeWordFilterCommand : ModelChangeCommand<WordFilter>
     {

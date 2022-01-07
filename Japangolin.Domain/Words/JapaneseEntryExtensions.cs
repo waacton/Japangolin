@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Wacton.Desu.Enums;
     using Wacton.Desu.Japanese;
     using Wacton.Japangolin.Domain.Enums;

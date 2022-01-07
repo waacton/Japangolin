@@ -1,7 +1,7 @@
-﻿using System.Windows;
-
-namespace Wacton.Japangolin.UI.Mains
+﻿namespace Wacton.Japangolin.UI.Mains
 {
+    using System.Windows;
+
     /// <summary>
     /// Interaction logic for ShellView.xaml
     /// </summary>

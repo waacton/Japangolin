@@ -3,7 +3,7 @@ using Wacton.Desu.Japanese;
 using Wacton.Japangolin.Domain.Commands;
 using Wacton.Japangolin.Domain.Enums;
 using Wacton.Japangolin.Domain.Mains;
-using Wacton.Tovarisch.MVVM;
+using Wacton.Japangolin.Domain.MVVM;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,10 +35,7 @@ var japaneseEntries = await GetJapaneseEntries();
  */
 app.MapGet("/random", async (bool? jlptN5) =>
 {
-    // TODO: extract MVVM stuff from Tovarisch lib
     // create a new "japangolin main" that captures everything required, update it via the desktop UI's command pattern, then return it
-    // TODO: does any of this really work if > 1 client is accessing simultaneously?
-    
     var japangolinSettings = new Settings();
     var japangolinMain = new Main(japaneseEntries, japangolinSettings);
 

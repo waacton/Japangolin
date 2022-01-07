@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
-
-namespace Wacton.Japangolin.UI.Mains
+﻿namespace Wacton.Japangolin.UI.Mains
 {
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for DetailView.xaml
     /// </summary>

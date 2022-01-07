@@ -19,7 +19,8 @@ This application uses the following software packages in conformance to their re
 copyright © Blue Spire Consulting, Inc.
 - **MaterialDesignInXAML** ([MIT License](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE) · [source](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)),
 copyright © James Willock,  Mulholland Software and Contributors
-- **Ninject** ([Apache License 2.0](https://github.com/ninject/Ninject/blob/master/LICENSE.txt) · [source](https://github.com/ninject/Ninject))<br>
+- **Ninject** ([Apache License 2.0](https://github.com/ninject/Ninject/blob/master/LICENSE.txt) · [source](https://github.com/ninject/Ninject))
+- **NLog** ([BSD-3-Clause License](https://github.com/NLog/NLog/blob/dev/LICENSE.txt) · [source](https://github.com/NLog/NLog)), copyright © Jaroslaw Kowalski, Kim Christensen, Julian Verdurmen
 - **Wacton.Desu** ([Creative Commons Attribution-ShareAlike 4.0 International License](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu)),
 copyright © William Acton
 

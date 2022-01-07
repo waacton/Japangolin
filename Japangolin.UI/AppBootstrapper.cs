@@ -1,13 +1,12 @@
 ﻿namespace Wacton.Japangolin.UI
 {
     using Ninject;
-
     using Wacton.Desu.Japanese;
     using Wacton.Japangolin.Domain.Mains;
+    using Wacton.Japangolin.Domain.MVVM;
     using Wacton.Japangolin.UI.Mains;
-    using Wacton.Tovarisch.UI;
 
-    public class AppBootstrapper : Bootstrapper<ShellViewModel>
+    public class AppBootstrapper : NinjectBootstrapper<ShellViewModel>
     {
         protected override void ConfigureApplication(IKernel kernel)
         {
@@ -16,6 +15,8 @@
 
         public static void SetupKernelBindings(IKernel kernel)
         {
+            kernel.Bind<ModelChangeNotifier>().ToSelf().InSingletonScope();
+
             kernel.Bind<IJapaneseDictionary>().To<JapaneseDictionary>().InSingletonScope();
             kernel.Bind<Settings>().To<Settings>().InSingletonScope();
             kernel.Bind<Main>().ToSelf().InSingletonScope();

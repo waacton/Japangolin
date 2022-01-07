@@ -1,7 +1,7 @@
-﻿using Wacton.Japangolin.Domain.Enums;
-
-namespace Wacton.Japangolin.Domain.Words
+﻿namespace Wacton.Japangolin.Domain.Words
 {
+    using Wacton.Japangolin.Domain.Enums;
+
     public class Word
     {
         public string Kana { get; set; }

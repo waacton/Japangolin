@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Input;
-
-namespace Wacton.Japangolin.UI.Mains
+﻿namespace Wacton.Japangolin.UI.Mains
 {
+    using System.Globalization;
+    using System.Linq;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>

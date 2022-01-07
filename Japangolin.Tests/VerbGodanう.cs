@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using Wacton.Japangolin.Domain.Conjugation;
-using Wacton.Japangolin.Domain.Enums;
-using Wacton.Japangolin.Domain.Words;
-
-namespace Wacton.Japangolin.Tests
+﻿namespace Wacton.Japangolin.Tests
 {
+    using NUnit.Framework;
+    using Wacton.Japangolin.Domain.Conjugation;
+    using Wacton.Japangolin.Domain.Enums;
+    using Wacton.Japangolin.Domain.Words;
+
     public class VerbGodanう
     {
         private readonly Word word = new Word { Kanji = "会う", Kana = "あう", Class = WordClass.VerbU };
