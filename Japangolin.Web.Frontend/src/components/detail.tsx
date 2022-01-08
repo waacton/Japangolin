@@ -3,7 +3,7 @@ import JapaneseTypography from "./japaneseTypography";
 
 interface Props {
   firstDetail: string;
-  secondDetail: string;
+  secondDetail: string | null;
   thirdDetail: string;
 }
 

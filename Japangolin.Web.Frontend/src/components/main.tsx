@@ -120,7 +120,10 @@ function Main() {
     await fetchData();
   }
 
+  const isKanjiDifferent = japangolin.answerKanji !== japangolin.answerKana;
+  const answerText = isKanjiDifferent ? `${japangolin.answerKana} · ${japangolin.answerKanji}` : japangolin.answerKana;
   const disabled: boolean = loading || errorMessage !== undefined;
+
   return (
     <Box>
       <Box
@@ -273,11 +276,9 @@ function Main() {
             bgcolor: bgcolor,
           }}
         >
-          <Answer
-            showAnswer={answerShowing}
-            onShowAnswer={() => setAnswerShowing(true)}
-            disabled={disabled}
-          >{`${japangolin.answerKana} · ${japangolin.answerKanji}`}</Answer>
+          <Answer showAnswer={answerShowing} onShowAnswer={() => setAnswerShowing(true)} disabled={disabled}>
+            {answerText}
+          </Answer>
         </Stack>
       </Box>
 

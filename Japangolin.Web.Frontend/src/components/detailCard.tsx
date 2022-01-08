@@ -21,8 +21,10 @@ function DetailCard(props: Props) {
       return <NoDetail />;
     }
 
+    const isKanjiDifferent = props.word.kanji !== props.word.kana;
+    const kanjiDetail = isKanjiDifferent ? props.word.kanji : null;
     const firstDetail = props.wordSelected ? props.word.kana : props.hint.baseForm;
-    const secondDetail = props.wordSelected ? props.word.kanji : props.hint.modification;
+    const secondDetail = props.wordSelected ? kanjiDetail : props.hint.modification;
     return <Detail firstDetail={firstDetail} secondDetail={secondDetail} thirdDetail={wordClassText} />;
   }
 
