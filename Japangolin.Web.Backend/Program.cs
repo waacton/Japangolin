@@ -23,6 +23,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// enables static /wwwroot/index.html to be served by default
+if (app.Environment.IsProduction())
+{
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+}
+
 var japaneseEntries = await GetJapaneseEntries();
 
 /*
