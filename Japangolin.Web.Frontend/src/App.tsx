@@ -32,7 +32,7 @@ const theme = createTheme({
 });
 
 function App() {
-  console.log(`Welcome to Wacton.Japangolin · ${packageJson.version} · いらっしゃいませー`);
+  console.log(`Wacton.Japangolin · ${packageJson.version} · いらっしゃいませー 🇯🇵`);
 
   useEffect(() => {
     WebFont.load({
