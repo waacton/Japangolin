@@ -27,7 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prestart": "node aspnetcore-https && node aspnetcore-react"
+    "prestart": "node aspnetcore-https && node aspnetcore-react",
+    "build-for-deploy": "react-scripts build && mv build ../Japangolin.Web.Backend/wwwroot || move build ../Japangolin.Web.Backend/wwwroot"
   },
   "eslintConfig": {
     "extends": [
