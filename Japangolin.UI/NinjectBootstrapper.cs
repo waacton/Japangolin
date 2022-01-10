@@ -53,11 +53,5 @@ namespace Wacton.Japangolin.UI
         {
             kernel.Inject(instance);
         }
-
-        // the assemblies where caliburn will look for convention-named Views and ViewModels
-        //protected override IEnumerable<Assembly> SelectAssemblies()
-        //{
-        //    return new[] { Assembly.GetExecutingAssembly(), typeof(T).Assembly };
-        //}
     }
 }
