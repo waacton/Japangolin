@@ -18,7 +18,7 @@ namespace Wacton.Japangolin.UI
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<T>();
+            DisplayRootViewForAsync<T>();
         }
 
         protected override void Configure()
