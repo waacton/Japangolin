@@ -1,5 +1,5 @@
 # <img src="https://gitlab.com/Wacton/Japangolin/raw/main/Japangolin.UI/Resources/Japangolin.png" width="32" height="32"> Japangolin 
-Japangolin is Japanese conjugation learning aid. It generates a random word/inflection pairing and the user must type the conjugated form.
+Japangolin is a Japanese conjugation learning aid. It generates a random word/inflection pairing and the user must type the conjugated form. A [demo web app](https://japangolin.wacton.xyz/) is available.
 
 For example, the pairing of the word `to eat` with the inflection `present · negative · long` expects the answer `たべません` or `食べません`. Hints can be shown by clicking on the word or inflection.
 
