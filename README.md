@@ -12,7 +12,9 @@ It is primarily targeted at JLPT N5 vocabulary, but it can be turned off to allo
 ![Example: word "pangolin" and inflection "past · affirmative · long" with word selected](Resources/example-4_pangolin.png "Example: word \"pangolin\" and inflection \"past · affirmative · long\" with word selected")
 ![Example: word "pangolin" and inflection "past · affirmative · long" with word selected and answer revealed](Resources/example-5_pangolin.png "Example: word \"pangolin\" and inflection \"past · affirmative · long\" with word selected and answer revealed")
 
-## Attributions 🙇
+<details>
+<summary>Attributions 🙇</summary>
+
 This application uses the following software packages in conformance to their respective licences:
 
 - **Caliburn.Micro** ([MIT License](https://github.com/Caliburn-Micro/Caliburn.Micro/blob/master/License.txt) · [source](https://github.com/Caliburn-Micro/Caliburn.Micro)),
@@ -23,6 +25,9 @@ copyright © James Willock,  Mulholland Software and Contributors
 - **NLog** ([BSD-3-Clause License](https://github.com/NLog/NLog/blob/dev/LICENSE.txt) · [source](https://github.com/NLog/NLog)), copyright © Jaroslaw Kowalski, Kim Christensen, Julian Verdurmen
 - **Wacton.Desu** ([Creative Commons Attribution-ShareAlike 4.0 International License](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu)),
 copyright © William Acton
+ 
+
+</details>
 
 ---
 
