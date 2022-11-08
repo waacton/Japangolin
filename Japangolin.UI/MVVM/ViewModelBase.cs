@@ -53,7 +53,7 @@ namespace Wacton.Japangolin.UI.MVVM
             }
         } 
 
-        protected void NotifyAboutAllProperties() => OnPropertyChanged(null!);
+        protected void NotifyAboutAllProperties() => OnPropertyChanged(null);
     }
 
     public abstract class ViewModelBase<T> : ViewModelBase

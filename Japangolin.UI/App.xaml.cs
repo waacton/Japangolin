@@ -89,7 +89,7 @@
             shellView.Show();
         }
 
-        private static readonly object UnhandledExceptionLock = new();
+        private static readonly object UnhandledExceptionLock = new object();
         private static bool hasDisplayedErrorMessage;
         private static void ProcessUnhandledException(Exception exception, string contextInfo)
         {
