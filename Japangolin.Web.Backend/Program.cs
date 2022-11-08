@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Wacton.Desu.Japanese;
-using Wacton.Japangolin.Domain.Commands;
+using Wacton.Japangolin.Domain.Actions;
 using Wacton.Japangolin.Domain.Enums;
 using Wacton.Japangolin.Domain.Mains;
 using Wacton.Japangolin.Domain.MVVM;
@@ -47,10 +47,10 @@ app.MapGet("/random", async (bool? jlptN5) =>
     var japangolinMain = new Main(japaneseEntries, japangolinSettings);
 
     var wordFilter = jlptN5.HasValue && jlptN5.Value ? WordFilter.JLPTN5 : WordFilter.None;
-    var wordFilterCommand = new ChangeWordFilterCommand(new ModelChangeNotifier(), japangolinSettings);
+    var wordFilterCommand = new ChangeWordFilterAction(new ModelChangeNotifier(), japangolinSettings);
     await wordFilterCommand.ExecuteAndNotifyAsync(wordFilter);
     
-    var updateCommand = new UpdateWordAndInflectionCommand(new ModelChangeNotifier(), japangolinMain);
+    var updateCommand = new UpdateWordAndInflectionAction(new ModelChangeNotifier(), japangolinMain);
     await updateCommand.ExecuteAndNotifyAsync();
     
     return japangolinMain;

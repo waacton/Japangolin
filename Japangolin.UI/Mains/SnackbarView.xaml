@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         d:DesignHeight="64" d:DesignWidth="300"
-        d:DataContext="{d:DesignInstance Type=mains:DesignTimeSnackbarViewModel, IsDesignTimeCreatable=True}">
+        d:DataContext="{d:DesignInstance mains:SnackbarViewModel}">
 
         <materialDesign:Snackbar IsActive="{Binding IsSnackbarActive}">
             <materialDesign:SnackbarMessage Content="🏆 Correct!" />

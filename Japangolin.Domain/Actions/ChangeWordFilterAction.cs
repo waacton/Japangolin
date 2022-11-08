@@ -1,14 +1,14 @@
-﻿namespace Wacton.Japangolin.Domain.Commands
+﻿namespace Wacton.Japangolin.Domain.Actions
 {
     using Wacton.Japangolin.Domain.Enums;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.Domain.MVVM;
-
-    public class ChangeWordFilterCommand : ModelChangeCommand<WordFilter>
+    
+    public class ChangeWordFilterAction : ModelChangeAction<WordFilter>
     {
         private readonly Settings settings;
 
-        public ChangeWordFilterCommand(ModelChangeNotifier modelChangeNotifier, Settings settings)
+        public ChangeWordFilterAction(ModelChangeNotifier modelChangeNotifier, Settings settings)
             : base(modelChangeNotifier, settings)
         {
             this.settings = settings;

@@ -11,16 +11,8 @@
         private bool isSnackbarActive;
         public bool IsSnackbarActive
         {
-            get
-            {
-                return this.isSnackbarActive;
-            }
-
-            private set
-            {
-                this.isSnackbarActive = value;
-                this.NotifyOfPropertyChange(nameof(this.IsSnackbarActive));
-            }
+            get => this.isSnackbarActive;
+            private set => SetField(ref isSnackbarActive, value);
         }
 
         public SnackbarViewModel(ModelChangeNotifier modelChangeNotifier)
@@ -39,17 +31,6 @@
         private void HideSnackbar(object sender, ElapsedEventArgs e)
         {
             this.IsSnackbarActive = false;
-        }
-    }
-
-    // --- design time ---
-
-    public class DesignTimeSnackbarViewModel : SnackbarViewModel
-    {
-        public new bool IsSnackbarActive => true;
-
-        public DesignTimeSnackbarViewModel() : base(null)
-        {
         }
     }
 }

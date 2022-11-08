@@ -1,13 +1,13 @@
-﻿namespace Wacton.Japangolin.Domain.Commands
+﻿namespace Wacton.Japangolin.Domain.Actions
 {
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.Domain.MVVM;
-
-    public class UpdateWordAndInflectionCommand : ModelChangeCommand
+    
+    public class UpdateWordAndInflectionAction : ModelChangeAction
     {
         private readonly Main main;
 
-        public UpdateWordAndInflectionCommand(ModelChangeNotifier modelChangeNotifier, Main main)
+        public UpdateWordAndInflectionAction(ModelChangeNotifier modelChangeNotifier, Main main)
             : base(modelChangeNotifier, main)
         {
             this.main = main;

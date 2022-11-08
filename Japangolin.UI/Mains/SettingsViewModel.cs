@@ -1,6 +1,9 @@
-﻿namespace Wacton.Japangolin.UI.Mains
+﻿using System;
+using System.Windows.Input;
+using Wacton.Japangolin.Domain.Actions;
+
+namespace Wacton.Japangolin.UI.Mains
 {
-    using Wacton.Japangolin.Domain.Commands;
     using Wacton.Japangolin.Domain.Enums;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.Domain.MVVM;
@@ -9,32 +12,24 @@
     public class SettingsViewModel : ViewModelBase
     {
         private readonly Settings settings;
-        private readonly ChangeWordFilterCommand changeWordFilterCommand;
+        private readonly ChangeWordFilterAction changeWordFilterAction;
 
         public bool IsJLPTN5 => settings.WordFilter == WordFilter.JLPTN5;
+        
+        public ICommand ToggleFilterCommand { get; }
 
-        public SettingsViewModel(Settings settings, ChangeWordFilterCommand changeWordFilterCommand, ModelChangeNotifier modelChangeNotifier)
+        public SettingsViewModel(Settings settings, ChangeWordFilterAction changeWordFilterAction, ModelChangeNotifier modelChangeNotifier)
             : base(modelChangeNotifier, settings)
         {
             this.settings = settings;
-            this.changeWordFilterCommand = changeWordFilterCommand;
+            this.changeWordFilterAction = changeWordFilterAction;
+            ToggleFilterCommand = new RelayCommand(_ => ToggleWordFilter());
         }
 
-        public void ToggleWordFilter()
+        private async void ToggleWordFilter()
         {
-            var wordFilter = settings.WordFilter == WordFilter.None ? WordFilter.JLPTN5 : WordFilter.None; 
-            this.changeWordFilterCommand.ExecuteAndNotify(wordFilter);
-        }
-    }
-
-    // --- design time ---
-
-    public class DesignTimeSettingsViewModel : SettingsViewModel
-    {
-        public new bool IsJLPTN5 => true;
-
-        public DesignTimeSettingsViewModel() : base(null, null, null)
-        {
+            var wordFilter = settings.WordFilter == WordFilter.None ? WordFilter.JLPTN5 : WordFilter.None;
+            await this.changeWordFilterAction.ExecuteAndNotifyAsync(wordFilter);
         }
     }
 }

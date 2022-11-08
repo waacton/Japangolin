@@ -17,12 +17,9 @@ It is primarily targeted at JLPT N5 vocabulary, but it can be turned off to allo
 
 This application uses the following software packages in conformance to their respective licences:
 
-- **Caliburn.Micro** ([MIT License](https://github.com/Caliburn-Micro/Caliburn.Micro/blob/master/License.txt) · [source](https://github.com/Caliburn-Micro/Caliburn.Micro)),
-copyright © Blue Spire Consulting, Inc.
 - **MaterialDesignInXAML** ([MIT License](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE) · [source](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)),
 copyright © James Willock,  Mulholland Software and Contributors
-- **Ninject** ([Apache License 2.0](https://github.com/ninject/Ninject/blob/master/LICENSE.txt) · [source](https://github.com/ninject/Ninject))
-- **NLog** ([BSD-3-Clause License](https://github.com/NLog/NLog/blob/dev/LICENSE.txt) · [source](https://github.com/NLog/NLog)), copyright © Jaroslaw Kowalski, Kim Christensen, Julian Verdurmen
+- **Serilog** ([Apache License 2.0](https://github.com/serilog/serilog/blob/main/LICENSE) · [source](https://github.com/serilog/serilog)), copyright © Serilog Contributors
 - **Wacton.Desu** ([Creative Commons Attribution-ShareAlike 4.0 International License](https://gitlab.com/Wacton/Desu/-/blob/main/LICENSE) · [source](https://gitlab.com/Wacton/Desu)),
 copyright © William Acton
  

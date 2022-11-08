@@ -2,14 +2,17 @@
 {
     using System.Globalization;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-
+    
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
     public partial class MainView : UserControl
     {
+        private MainViewModel MainViewModel => (MainViewModel) DataContext;
+        
         public MainView()
         {
             InitializeComponent();
@@ -20,7 +23,7 @@
         private void SetUserInputLanguage()
         {
             var japaneseCultureInfo = new CultureInfo("ja-JP");
-            if (!this.IsInputLanguageAvailable(japaneseCultureInfo))
+            if (!IsInputLanguageAvailable(japaneseCultureInfo))
             {
                 return;
             }
@@ -30,7 +33,7 @@
             InputLanguageManager.SetRestoreInputLanguage(this.Input, true);
         }
 
-        private bool IsInputLanguageAvailable(CultureInfo cultureInfo)
+        private static bool IsInputLanguageAvailable(CultureInfo cultureInfo)
         {
             var availableInputLanguages = InputLanguageManager.Current.AvailableInputLanguages;
             if (availableInputLanguages == null)
@@ -45,5 +48,9 @@
 
             return true;
         }
+
+        private void WordTextBox_OnGotFocus(object sender, RoutedEventArgs e) => MainViewModel.WordSelected();
+        private void InflectionTextBox_OnGotFocus(object sender, RoutedEventArgs e) => MainViewModel.InflectionSelected();
+        private void Input_OnKeyUp(object sender, KeyEventArgs e) => MainViewModel.InputEntered();
     }
 }

@@ -8,6 +8,10 @@
     <AssemblyName>Wacton.Japangolin.Tests</AssemblyName>
 
     <RootNamespace>Wacton.Japangolin.Tests</RootNamespace>
+
+    <LangVersion>latestmajor</LangVersion>
+
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

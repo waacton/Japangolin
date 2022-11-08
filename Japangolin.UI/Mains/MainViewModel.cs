@@ -1,8 +1,7 @@
 ﻿namespace Wacton.Japangolin.UI.Mains
 {
-    using System;
     using System.Windows.Input;
-    using Wacton.Japangolin.Domain.Commands;
+    using Wacton.Japangolin.Domain.Actions;
     using Wacton.Japangolin.Domain.Mains;
     using Wacton.Japangolin.Domain.MVVM;
     using Wacton.Japangolin.Domain.Utils;
@@ -11,9 +10,10 @@
     public class MainViewModel : ViewModelBase
     {
         private readonly Main main;
-        private readonly UpdateWordAndInflectionCommand updateWordAndInflectionCommand;
+        private readonly UpdateWordAndInflectionAction updateWordAndInflectionAction;
         private readonly DetailViewModel detailViewModel;
         private readonly NoDetailViewModel noDetailViewModel;
+        private readonly SnackbarViewModel snackbarViewModel;
 
         // domain-specific properties
         public string WordText => main.Word.English.ToLower();
@@ -24,41 +24,33 @@
         private string inputText;
         public string InputText
         {
-            get { return this.inputText; }
-            set
-            {
-                this.inputText = value;
-                this.NotifyOfPropertyChange(nameof(this.InputText));
-            }
+            get => this.inputText;
+            set => SetField(ref inputText, value);
         }
 
         private DetailViewModel currentDetailViewModel;
         public DetailViewModel CurrentDetailViewModel
         {
-            get { return this.currentDetailViewModel; }
-            private set
-            {
-                this.currentDetailViewModel = value;
-                this.NotifyOfPropertyChange(nameof(this.CurrentDetailViewModel));
-            }
+            get => this.currentDetailViewModel;
+            set => SetField(ref currentDetailViewModel, value);
         }
 
         private bool isAnswerVisible;
         public bool IsAnswerVisible
         {
-            get { return this.isAnswerVisible; }
+            get => this.isAnswerVisible;
             private set
             {
-                this.isAnswerVisible = value;
-                this.NotifyOfPropertyChange(nameof(this.IsAnswerVisible));
-                this.NotifyOfPropertyChange(nameof(this.AnswerText));
+                SetField(ref isAnswerVisible, value);
+                OnPropertyChanged(nameof(AnswerText));
             }
         }
-
-        public SnackbarViewModel SnackbarViewModel { get; }
+        
+        public ICommand SkipCommand { get; }
+        public ICommand ShowAnswerCommand { get; }
 
         public MainViewModel(Main main,
-            UpdateWordAndInflectionCommand updateWordAndInflectionCommand,
+            UpdateWordAndInflectionAction updateWordAndInflectionAction,
             DetailViewModel detailViewModel,
             NoDetailViewModel noDetailViewModel,
             SnackbarViewModel snackbarViewModel,
@@ -66,10 +58,12 @@
             : base(modelChangeNotifier, main)
         {
             this.main = main;
-            this.updateWordAndInflectionCommand = updateWordAndInflectionCommand;
+            this.updateWordAndInflectionAction = updateWordAndInflectionAction;
             this.detailViewModel = detailViewModel;
             this.noDetailViewModel = noDetailViewModel;
-            this.SnackbarViewModel = snackbarViewModel;
+            this.snackbarViewModel = snackbarViewModel;
+            SkipCommand = new RelayCommand(_ => UpdateWordAndInflection());
+            ShowAnswerCommand = new RelayCommand(_ => IsAnswerVisible = true);
 
             this.UpdateWordAndInflection();
         }
@@ -77,7 +71,7 @@
         private void UpdateWordAndInflection()
         {
             this.ResetView();
-            this.updateWordAndInflectionCommand.ExecuteAndNotify();
+            this.updateWordAndInflectionAction.ExecuteAndNotify();
         }
 
         private void ResetView()
@@ -102,14 +96,17 @@
             this.CurrentDetailViewModel = this.detailViewModel;
         }
 
-        public void InputEntered(KeyEventArgs e)
+        public void InputEntered()
         {
-            if (this.IsInputCorrect())
+            if (!this.IsInputCorrect())
             {
-                this.UpdateWordAndInflection();
-                this.SnackbarViewModel.TriggerSnackbar();
+                return;
             }
+            
+            this.UpdateWordAndInflection();
+            this.snackbarViewModel.TriggerSnackbar();
         }
+        
         private bool IsInputCorrect()
         {
             if (this.InputText == null)
@@ -118,17 +115,6 @@
             }
 
             return this.InputText == main.AnswerKana || this.InputText == main.AnswerKanji;
-        }
-
-        public void Skip()
-        {
-            this.UpdateWordAndInflection();
-        }
-
-        public void ViewAnswer()
-        {
-            this.IsAnswerVisible = true;
-            this.NotifyOfPropertyChange(nameof(this.AnswerText));
         }
 
         private string GetAnswerText()
@@ -140,21 +126,6 @@
 
             var isKanjiDifferent = main.AnswerKanji != main.AnswerKana;
             return isKanjiDifferent ? $"{main.AnswerKana} · {main.AnswerKanji}" : $"{main.AnswerKana}";
-        }
-    }
-
-    // --- design time ---
-
-    public class DesignTimeMainViewModel : MainViewModel
-    {
-        public new string WordText => "ジャパンゴリン";
-        public new string InflectionText => "ジャパンゴリン";
-        public new string AnswerText => "ジャパンゴリン";
-        public new DetailViewModel CurrentDetailViewModel => new DesignTimeDetailViewModel();
-        public new bool IsAnswerVisible => true;
-
-        public DesignTimeMainViewModel() : base(null, null, new DesignTimeDetailViewModel(), new DesignTimeNoDetailViewModel(), new DesignTimeSnackbarViewModel(), null)
-        {
         }
     }
 }

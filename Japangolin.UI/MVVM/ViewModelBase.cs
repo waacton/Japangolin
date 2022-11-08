@@ -1,11 +1,12 @@
 namespace Wacton.Japangolin.UI.MVVM
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Windows;
-    using Caliburn.Micro;
     using Wacton.Japangolin.Domain.MVVM;
 
-    public abstract class ViewModelBase : PropertyChangedBase
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         private static bool IsRunningFromXamlDesigner => DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
@@ -22,18 +23,37 @@ namespace Wacton.Japangolin.UI.MVVM
             ModelChangeNotifier = modelChangeNotifier;
             foreach (var watchedModel in watchedModels)
             {
-                ModelChangeNotifier.Subscribe(watchedModel, NotifyAllPropertyBindings);
+                ModelChangeNotifier.Subscribe(watchedModel, NotifyAboutAllProperties);
             }
+        }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual void NotifyAllPropertyBindings()
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            var properties = GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                NotifyOfPropertyChange(property.Name);
-            }
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
+        
+        protected void SetField<T>(ref T field, T value, params string[] otherPropertiesToNotifyAbout)
+        {
+            var setPropertyResult = SetField(ref field, value);
+            if (!setPropertyResult) return;
+
+            foreach (var otherProperty in otherPropertiesToNotifyAbout)
+            {
+                OnPropertyChanged(otherProperty);
+            }
+        } 
+
+        protected void NotifyAboutAllProperties() => OnPropertyChanged(null!);
     }
 
     public abstract class ViewModelBase<T> : ViewModelBase

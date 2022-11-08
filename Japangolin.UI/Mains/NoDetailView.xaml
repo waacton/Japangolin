@@ -6,7 +6,7 @@
              xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="200"
-             d:DataContext="{d:DesignInstance Type=mains:DesignTimeNoDetailViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance mains:NoDetailViewModel}">
 
     <Grid>
 

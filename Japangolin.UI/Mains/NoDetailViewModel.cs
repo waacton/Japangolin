@@ -8,13 +8,4 @@
         {
         }
     }
-
-    // --- design time ---
-
-    public class DesignTimeNoDetailViewModel : NoDetailViewModel
-    {
-        public DesignTimeNoDetailViewModel() : base(null)
-        {
-        }
-    }
 }

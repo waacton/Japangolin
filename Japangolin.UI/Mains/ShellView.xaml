@@ -6,7 +6,7 @@
         xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding WindowTitle}" Height="368" Width="736" MinHeight="368" MinWidth="736" 
+        Height="368" Width="736" MinHeight="368" MinWidth="736" 
         Icon="pack://application:,,,/Wacton.Japangolin.UI;component/Resources/Japangolin.ico"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -16,7 +16,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         d:DesignHeight="368" d:DesignWidth="736"
-        d:DataContext="{d:DesignInstance Type=mains:DesignTimeShellViewModel, IsDesignTimeCreatable=True}">
+        d:DataContext="{d:DesignInstance mains:ShellViewModel}">
 
     <Grid>
         <Grid.RowDefinitions>

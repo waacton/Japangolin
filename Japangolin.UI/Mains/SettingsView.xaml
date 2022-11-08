@@ -3,15 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:cal="http://www.caliburnproject.org"
         xmlns:mains="clr-namespace:Wacton.Japangolin.UI.Mains"
         mc:Ignorable="d"
         d:DesignHeight="64" d:DesignWidth="300"
-        d:DataContext="{d:DesignInstance Type=mains:DesignTimeSettingsViewModel, IsDesignTimeCreatable=True}">
+        d:DataContext="{d:DesignInstance mains:SettingsViewModel}">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
         <TextBlock Text="JLPT N5" FontSize="10" Opacity="0.6" FontWeight="Medium" VerticalAlignment="Center" Margin="0, 0, 8, 0" />
-        <ToggleButton IsChecked="{Binding IsJLPTN5, Mode=OneWay}" cal:Message.Attach="ToggleWordFilter" Cursor="Hand" />
+        <ToggleButton IsChecked="{Binding IsJLPTN5, Mode=OneWay}" Command="{Binding ToggleFilterCommand}" Cursor="Hand" />
     </StackPanel>
 
 </UserControl>

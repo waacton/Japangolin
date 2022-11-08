@@ -5,7 +5,6 @@
 
     public class ShellViewModel : ViewModelBase
     {
-        public static string WindowTitle { get; set; }
         public MainViewModel MainViewModel { get; }
         public SettingsViewModel SettingsViewModel { get; }
         public SnackbarViewModel SnackbarViewModel { get; }
@@ -19,15 +18,6 @@
             this.MainViewModel = mainViewModel;
             this.SettingsViewModel = settingsViewModel;
             this.SnackbarViewModel = snackbarViewModel;
-        }
-    }
-
-    // --- design time ---
-
-    public class DesignTimeShellViewModel : ShellViewModel
-    {
-        public DesignTimeShellViewModel() : base(new DesignTimeMainViewModel(), new DesignTimeSettingsViewModel(), new DesignTimeSnackbarViewModel(), null)
-        {
         }
     }
 }
