@@ -15,6 +15,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="CanMinimize"
         d:DesignHeight="368" d:DesignWidth="736"
         d:DataContext="{d:DesignInstance mains:ShellViewModel}">
 
