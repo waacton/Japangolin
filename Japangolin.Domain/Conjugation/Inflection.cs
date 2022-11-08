@@ -30,19 +30,19 @@
 
         public (string kana, string kanji) Conjugate(Word word)
         {
-            return this.wordConjugator.Conjugate(word);
+            return wordConjugator.Conjugate(word);
         }
 
         public Hint GetHint(Word word)
         {
-            return this.wordConjugator.GetHint(word);
+            return wordConjugator.GetHint(word);
         }
 
         public string PrettyDisplay()
         {
-            return StringUtils.PascalCase(this.DisplayName, " · ").ToLower();
+            return StringUtils.PascalCase(DisplayName, " · ").ToLower();
         }
 
-        public override string ToString() => this.PrettyDisplay();
+        public override string ToString() => PrettyDisplay();
     }
 }

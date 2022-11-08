@@ -1,15 +1,14 @@
-﻿namespace Wacton.Japangolin.UI.Mains
-{
-    using System.Windows.Controls;
+﻿namespace Wacton.Japangolin.UI.Mains;
 
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
-    public partial class SettingsView : UserControl
+using System.Windows.Controls;
+
+/// <summary>
+/// Interaction logic for MainView.xaml
+/// </summary>
+public partial class SettingsView : UserControl
+{
+    public SettingsView()
     {
-        public SettingsView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

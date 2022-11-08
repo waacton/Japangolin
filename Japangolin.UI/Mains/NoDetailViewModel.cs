@@ -1,11 +1,10 @@
-﻿namespace Wacton.Japangolin.UI.Mains
-{
-    using Wacton.Japangolin.Domain.MVVM;
+﻿namespace Wacton.Japangolin.UI.Mains;
 
-    public class NoDetailViewModel : DetailViewModel
+using Wacton.Japangolin.Domain.MVVM;
+
+public class NoDetailViewModel : DetailViewModel
+{
+    public NoDetailViewModel(ModelChangeNotifier modelChangeNotifier) : base(modelChangeNotifier)
     {
-        public NoDetailViewModel(ModelChangeNotifier modelChangeNotifier) : base(modelChangeNotifier)
-        {
-        }
     }
 }

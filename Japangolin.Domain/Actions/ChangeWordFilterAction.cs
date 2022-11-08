@@ -16,7 +16,7 @@
 
         protected override void Action(WordFilter wordFilter)
         {
-            this.settings.SetWordFilter(wordFilter);
+            settings.SetWordFilter(wordFilter);
         }
     }
 }

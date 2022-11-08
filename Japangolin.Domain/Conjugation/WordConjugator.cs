@@ -9,12 +9,12 @@
 
         public WordConjugator(Func<Word, Conjugator> getConjugator)
         {
-            this.GetConjugator = getConjugator;
+            GetConjugator = getConjugator;
         }
 
         public (string kana, string kanji) Conjugate(Word word)
         {
-            var conjugator = this.GetConjugator(word);
+            var conjugator = GetConjugator(word);
             var kana = conjugator.Conjugate(word.Kana);
             var kanji = conjugator.Conjugate(word.Kanji);
             return (kana, kanji);
@@ -22,7 +22,7 @@
 
         public Hint GetHint(Word word)
         {
-            var conjugator = this.GetConjugator(word);
+            var conjugator = GetConjugator(word);
             return conjugator.Hint;
         }
     }

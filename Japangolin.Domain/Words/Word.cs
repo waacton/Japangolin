@@ -9,6 +9,6 @@
         public string English { get; set; }
         public WordClass Class { get; set; }
 
-        public override string ToString() => $"{this.Kana} · {this.Class} · {this.English}";
+        public override string ToString() => $"{Kana} · {Class} · {English}";
     }
 }

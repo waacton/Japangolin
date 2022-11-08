@@ -8,12 +8,12 @@
 
         public Settings()
         {
-            this.WordFilter = WordFilter.JLPTN5;
+            WordFilter = WordFilter.JLPTN5;
         }
 
         internal void SetWordFilter(WordFilter wordFilter)
         {
-            this.WordFilter = wordFilter;
+            WordFilter = wordFilter;
         }
     }
 }

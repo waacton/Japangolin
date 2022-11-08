@@ -1,15 +1,14 @@
-﻿namespace Wacton.Japangolin.UI.Mains
-{
-    using System.Windows.Controls;
+﻿namespace Wacton.Japangolin.UI.Mains;
 
-    /// <summary>
-    /// Interaction logic for DetailView.xaml
-    /// </summary>
-    public partial class DetailView : UserControl
+using System.Windows.Controls;
+
+/// <summary>
+/// Interaction logic for DetailView.xaml
+/// </summary>
+public partial class DetailView : UserControl
+{
+    public DetailView()
     {
-        public DetailView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

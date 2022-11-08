@@ -26,16 +26,16 @@
         public Main(List<IJapaneseEntry> japaneseEntries, Settings settings)
         {
             this.settings = settings;
-            this.allEntries = japaneseEntries;
-            this.jlptN5Entries = allEntries.Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
+            allEntries = japaneseEntries;
+            jlptN5Entries = allEntries.Where(entry => JLPT.N5.Contains(entry.Sequence)).ToList();
         }
 
         internal void UpdateWordAndInflection()
         {
-            this.Word = GetRandomWord();
-            this.Inflection = RNG.SelectOne(this.allInflections);
-            this.Hint = this.Inflection.GetHint(this.Word);
-            (this.AnswerKana, this.AnswerKanji) = this.Inflection.Conjugate(this.Word);
+            Word = GetRandomWord();
+            Inflection = RNG.SelectOne(allInflections);
+            Hint = Inflection.GetHint(Word);
+            (AnswerKana, AnswerKanji) = Inflection.Conjugate(Word);
         }
 
         private Word GetRandomWord()
@@ -45,7 +45,7 @@
 
             while (!isValid)
             {
-                var entry = RNG.SelectOne(this.settings.WordFilter == WordFilter.JLPTN5 ? jlptN5Entries : allEntries);
+                var entry = RNG.SelectOne(settings.WordFilter == WordFilter.JLPTN5 ? jlptN5Entries : allEntries);
                 word = entry.ParseToWord();
                 isValid = word.Class != WordClass.Unknown;
             }

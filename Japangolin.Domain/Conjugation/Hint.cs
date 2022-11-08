@@ -7,8 +7,8 @@
 
         public Hint(string baseForm, string modification)
         {
-            this.BaseForm = baseForm;
-            this.Modification = modification;
+            BaseForm = baseForm;
+            Modification = modification;
         }
 
         public Hint(string baseForm) : this(baseForm, null)

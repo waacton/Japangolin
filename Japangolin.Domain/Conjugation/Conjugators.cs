@@ -17,17 +17,17 @@
      */
     public static class Conjugators
     {
-        public static readonly WordConjugator Dictionary = new WordConjugator((word) => Conjugator1D(word, dictsByWordClass));
-        public static readonly WordConjugator Stem = new WordConjugator((word) => Conjugator1D(word, stemsByWordClass));
-        public static readonly WordConjugator Te = new WordConjugator((word) => Conjugator1D(word, teFormsByWordClass));
-        public static readonly WordConjugator PresentAffirmativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Affirmative, Formality.Long));
-        public static readonly WordConjugator PresentAffirmativeShort = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Affirmative, Formality.Short));
-        public static readonly WordConjugator PresentNegativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Negative, Formality.Long));
-        public static readonly WordConjugator PresentNegativeShort = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Negative, Formality.Short));
-        public static readonly WordConjugator PastAffirmativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Affirmative, Formality.Long));
-        public static readonly WordConjugator PastAffirmativeShort = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Affirmative, Formality.Short));
-        public static readonly WordConjugator PastNegativeLong = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Negative, Formality.Long));
-        public static readonly WordConjugator PastNegativeShort = new WordConjugator((word) => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Negative, Formality.Short));
+        public static readonly WordConjugator Dictionary = new WordConjugator(word => Conjugator1D(word, dictsByWordClass));
+        public static readonly WordConjugator Stem = new WordConjugator(word => Conjugator1D(word, stemsByWordClass));
+        public static readonly WordConjugator Te = new WordConjugator(word => Conjugator1D(word, teFormsByWordClass));
+        public static readonly WordConjugator PresentAffirmativeLong = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Affirmative, Formality.Long));
+        public static readonly WordConjugator PresentAffirmativeShort = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Affirmative, Formality.Short));
+        public static readonly WordConjugator PresentNegativeLong = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Negative, Formality.Long));
+        public static readonly WordConjugator PresentNegativeShort = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Present, Polarity.Negative, Formality.Short));
+        public static readonly WordConjugator PastAffirmativeLong = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Affirmative, Formality.Long));
+        public static readonly WordConjugator PastAffirmativeShort = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Affirmative, Formality.Short));
+        public static readonly WordConjugator PastNegativeLong = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Negative, Formality.Long));
+        public static readonly WordConjugator PastNegativeShort = new WordConjugator(word => Conjugator4D(word, ContextualByWordClass, Tense.Past, Polarity.Negative, Formality.Short));
 
         private static readonly Dictionary<WordClass, Conjugator> dictsByWordClass;
         private static readonly Dictionary<WordClass, Conjugator> stemsByWordClass;

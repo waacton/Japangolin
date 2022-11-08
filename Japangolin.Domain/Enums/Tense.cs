@@ -15,7 +15,7 @@
         public Tense(string displayName, int index)
             : base(displayName)
         {
-            this.Index = index;
+            Index = index;
         }
     }
 }

@@ -4,18 +4,18 @@
 
     public class Conjugator
     {
-        public Func<string, string> Function { get; private set; }
-        public Hint Hint { get; private set; }
+        public Func<string, string> Function { get; }
+        public Hint Hint { get; }
 
         public Conjugator(Func<string, string> function, Hint hint)
         {
-            this.Function = function;
-            this.Hint = hint;
+            Function = function;
+            Hint = hint;
         }
 
         public string Conjugate(string text)
         {
-            return this.Function(text);
+            return Function(text);
         }
     }
 }

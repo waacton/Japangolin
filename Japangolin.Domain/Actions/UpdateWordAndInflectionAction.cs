@@ -15,7 +15,7 @@
 
         protected override void Action()
         {
-            this.main.UpdateWordAndInflection();
+            main.UpdateWordAndInflection();
         }
     }
 }

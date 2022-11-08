@@ -19,7 +19,7 @@
 
         private static List<int> ReadSequenceData(string file)
         {
-            var lines = file.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            var lines = file.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             var splitLines = lines.Select(line => line.Split(','));
             var sequences = splitLines.Where(values => !string.IsNullOrEmpty(values[0])).Select(values => int.Parse(values[0]));
             return sequences.Distinct().ToList();
