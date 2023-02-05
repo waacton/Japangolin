@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Wacton.Japangolin.Desktop.Converters">
+
+    <converters:BoolToVisibilityConverter x:Key="BoolToNotCollapsedConverter" Hidden="False" Reverse="False"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToNotHiddenConverter" Hidden="True" Reverse="False"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" Hidden="False" Reverse="True"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToHiddenConverter" Hidden="True" Reverse="True"/>
+    <converters:BoolToInverseConverter x:Key="BoolToInverseConverter" />
+    
+</ResourceDictionary>
