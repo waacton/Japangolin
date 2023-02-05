@@ -16,7 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:7080;https://localhost:7443",
+      "applicationUrl": "https://localhost:7443;http://localhost:7080",
       "dotnetRunMessages": true
     },
     "IIS Express": {
@@ -26,15 +26,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "Docker": {
-      "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true,
-      "useSSL": true,
-      "sslPort": 9870,
-      "httpPort": 9871
     }
   }
 }
