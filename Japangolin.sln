@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.UI", "Japangolin.UI\Japangolin.UI.csproj", "{E433E6AA-3E5B-48D6-A592-4BBFC4CC3032}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Desktop", "Japangolin.Desktop\Japangolin.Desktop.csproj", "{E433E6AA-3E5B-48D6-A592-4BBFC4CC3032}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Japangolin.Domain", "Japangolin.Domain\Japangolin.Domain.csproj", "{2300FDE1-5DAC-41FF-9EC9-B5CEACD4C8A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Japangolin.Core", "Japangolin.Core\Japangolin.Core.csproj", "{2300FDE1-5DAC-41FF-9EC9-B5CEACD4C8A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Japangolin.Tests", "Japangolin.Tests\Japangolin.Tests.csproj", "{21F3DD86-ECB0-442E-B8EF-A174033BF8BF}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Japangolin.Web.Frontend", "Japangolin.Web.Frontend\Japangolin.Web.Frontend.esproj", "{FDF428BD-46F9-4904-BF01-F7E411BC0911}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Japangolin.Web", "Japangolin.Web", "{159A1D18-9D13-4BED-8225-BE85649F6F01}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Japangolin.Web.Backend", "Japangolin.Web.Backend\Japangolin.Web.Backend.csproj", "{7DA84D66-D4DE-4182-B64D-BA4A4BC91CDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Web.Backend", "Japangolin.Web\Backend\Japangolin.Web.Backend.csproj", "{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Web.Frontend", "Japangolin.Web\Frontend\Japangolin.Web.Frontend.esproj", "{FDF428BD-46F9-4904-BF01-F7E411BC0911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,21 +33,23 @@ Global
 		{21F3DD86-ECB0-442E-B8EF-A174033BF8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21F3DD86-ECB0-442E-B8EF-A174033BF8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21F3DD86-ECB0-442E-B8EF-A174033BF8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{7DA84D66-D4DE-4182-B64D-BA4A4BC91CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DA84D66-D4DE-4182-B64D-BA4A4BC91CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DA84D66-D4DE-4182-B64D-BA4A4BC91CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DA84D66-D4DE-4182-B64D-BA4A4BC91CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDF428BD-46F9-4904-BF01-F7E411BC0911}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36F4565D-D199-4562-B1DD-CF4285636FEA}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27} = {159A1D18-9D13-4BED-8225-BE85649F6F01}
+		{FDF428BD-46F9-4904-BF01-F7E411BC0911} = {159A1D18-9D13-4BED-8225-BE85649F6F01}
 	EndGlobalSection
 EndGlobal

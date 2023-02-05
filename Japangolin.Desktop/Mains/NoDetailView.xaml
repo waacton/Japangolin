@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Wacton.Japangolin.Desktop.Mains.NoDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mains="clr-namespace:Wacton.Japangolin.Desktop.Mains"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200"
+             d:DataContext="{d:DesignInstance mains:NoDetailViewModel}">
+
+    <Grid>
+
+        <TextBlock Text="Select a word or inflection to see a hint" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" 
+                   Margin="16" FontWeight="Light" Opacity="0.6"/>
+
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,27 @@
+﻿<Application x:Class="Wacton.Japangolin.Desktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- add resources for controls to use into the application's resource dictionary -->
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Converters/CommonConverters.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Styles/Bespokes.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Styles/Fonts.xaml" />
+                
+                <!-- add gradient-specific resources, manually handling outside of MaterialDesignInXAML as their <Color> resources appear to not get updated -->
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Styles/Gradients.xaml" />
+
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+                <!-- use tweaked or overridden Material styles with custom default styles where desired (but should still be "based on" Material styles) -->
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Styles/Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wacton.Japangolin.Desktop;component/Styles/Overrides.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

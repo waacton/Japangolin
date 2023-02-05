@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Japangolin.Domain\Japangolin.Domain.csproj" />
+    <ProjectReference Include="..\Japangolin.Core\Japangolin.Core.csproj" />
   </ItemGroup>
 
 </Project>

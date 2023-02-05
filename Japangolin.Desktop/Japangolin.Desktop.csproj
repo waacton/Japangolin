@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Wacton.Japangolin.Desktop</RootNamespace>
+    <AssemblyName>Wacton.Japangolin.Desktop</AssemblyName>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Japangolin.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Resources\NotoSansJP-Black.otf" />
+    <Resource Include="Resources\NotoSansJP-Bold.otf" />
+    <Resource Include="Resources\NotoSansJP-Light.otf" />
+    <Resource Include="Resources\NotoSansJP-Medium.otf" />
+    <Resource Include="Resources\NotoSansJP-Regular.otf" />
+    <Resource Include="Resources\NotoSansJP-Thin.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Japangolin.ico" />
+    <Resource Include="Resources\Japangolin.png" />
+    <SplashScreen Include="Resources\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Japangolin.Core\Japangolin.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.7.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="Wacton.Desu" Version="6.2.0" />
+  </ItemGroup>
+</Project>

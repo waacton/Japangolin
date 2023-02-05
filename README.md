@@ -28,7 +28,7 @@ copyright © William Acton
 
 ---
 
-[Wacton.Japangolin](https://gitlab.com/Wacton/japangolin) is licensed under the [GNU General Public License v3.0](https://gitlab.com/Wacton/japangolin/-/blob/main/LICENSE), copyright © 2015-2022 William Acton.
+[Wacton.Japangolin](https://gitlab.com/Wacton/japangolin) is licensed under the [GNU General Public License v3.0](https://gitlab.com/Wacton/japangolin/-/blob/main/LICENSE), copyright © 2015-2023 William Acton.
 
 See [Creative Commons](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software) and [GNU](https://www.gnu.org/licenses/license-list.en.html#ccbysa) for details about the one-way compatibility between CC BY-SA 4.0 and GNU GPLv3.
 
