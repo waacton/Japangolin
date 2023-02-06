@@ -26,7 +26,7 @@ dotnet dev-certs https --trust
 ```shell
 dotnet run --project .\Backend\Japangolin.Web.Backend.csproj --launch-profile Japangolin.Web.Backend
 ```
-3. Navigate to [`https://localhost:7443/swagger/index.html`]() to interact with the API (browser may complain about invalid certificate authority if dev certs not setup or trusted).
+3. Navigate to https://localhost:7443/swagger/index.html to interact with the server API (browser may complain about invalid certificate authority if dev certs not setup or trusted).
 
 ### Run as Docker container
 1. Build the [Docker image](Backend/Dockerfile), which builds and publishes the backend project in a Docker environment. Note that the docker build context (`..`) references the root of the repository, so that the docker image can replicate the solution folder structure and access dependencies such as `Japangolin.Core`.
@@ -37,13 +37,17 @@ docker build -t japangolin-backend -f .\Backend\Dockerfile ..
 ```shell
 docker run --rm -p 7080:80 -p 7443:443 -v ${pwd}\Backend\https:/https/ -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_Kestrel__Certificates__Default__Password="<PASSWORD>" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -e ASPNETCORE_ENVIRONMENT="Development" japangolin-backend
 ```
-3. Navigate to [`https://localhost:7443/swagger/index.html`]() to interact with the API.
+3. Navigate to https://localhost:7443/swagger/index.html to interact with the server API.
 
 ## Frontend
-The client application can be run in its own development server:
+The client application can be run in its own development server.
+
+1. Start the development server.
 ```shell
 npm start --prefix .\Frontend\
 ```
+
+2. Navigate to http://localhost:3000 to interact with the client-side application. Currently a backend server is required to show data.
 
 ## Both?
 TODO: see how much pain is involved in creating a Docker image that contains published backend with production-ready frontend (via `npm run build`)
