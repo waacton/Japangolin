@@ -7,8 +7,6 @@ The following commands assume:
 - working directory is`/Japangolin/Japangolin.Web/`
 - using PowerShell
 
----
-
 ## Backend
 The server application can be run as either locally or within a Docker container. Swagger is available in development environments.
 
@@ -35,13 +33,11 @@ dotnet run --project .\Backend\Japangolin.Web.Backend.csproj --launch-profile Ja
 ```shell
 docker build -t japangolin-backend -f .\Backend\Dockerfile ..
 ```
-2. Run a container from the Docker image. Here the `\Backend\https\` containing the dev cert is mounted as a volume to avoid directly copying the .pfx file.
+2. Run a container from the Docker image. Here the `\Backend\https\` folder containing the dev cert is mounted as a volume to avoid directly copying the .pfx file.
 ```shell
 docker run --rm -p 7080:80 -p 7443:443 -v ${pwd}\Backend\https:/https/ -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_Kestrel__Certificates__Default__Password="<PASSWORD>" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -e ASPNETCORE_ENVIRONMENT="Development" japangolin-backend
 ```
 3. Navigate to [`https://localhost:7443/swagger/index.html`]() to interact with the API.
-
----
 
 ## Frontend
 The client application can be run in its own development server:
@@ -49,12 +45,11 @@ The client application can be run in its own development server:
 npm start --prefix .\Frontend\
 ```
 
----
-
 ## Both?
 TODO: see how much pain is involved in creating a Docker image that contains published backend with production-ready frontend (via `npm run build`)
 
 ---
+
 Handy resources:
 - https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-dev-certs
 - https://learn.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-7.0
