@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Japangolin.ico" />
-    <Resource Include="Resources\Japangolin.png" />
     <SplashScreen Include="Resources\SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>

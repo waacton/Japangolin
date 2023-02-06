@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Japangolin.Tests", "Japangolin.Tests\Japangolin.Tests.csproj", "{21F3DD86-ECB0-442E-B8EF-A174033BF8BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Japangolin.Web", "Japangolin.Web", "{159A1D18-9D13-4BED-8225-BE85649F6F01}"
+	ProjectSection(SolutionItems) = preProject
+		Japangolin.Web\README.md = Japangolin.Web\README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Japangolin.Web.Backend", "Japangolin.Web\Backend\Japangolin.Web.Backend.csproj", "{A66CFC2B-9B96-49E0-A6CF-FC0F6231FB27}"
 EndProject

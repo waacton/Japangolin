@@ -1,4 +1,5 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+# working directory / docker build context needs to be top-level /Japangolin so that entire folder structure can be replicated in docker image 
+# see https://aka.ms/containerfastmode for more details about this dockerfile
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
