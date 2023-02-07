@@ -1,16 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Web.Backend (Docker)" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+  <configuration default="false" name="Web.Fullstack (Docker)" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
-        <option name="imageTag" value="japangolin-backend" />
-        <option name="containerName" value="japangolin-backend-container" />
+        <option name="imageTag" value="japangolin-fullstack" />
+        <option name="containerName" value="japangolin-fullstack-container" />
         <option name="contextFolderPath" value="." />
         <option name="envVars">
           <list>
-            <DockerEnvVarImpl>
-              <option name="name" value="ASPNETCORE_ENVIRONMENT" />
-              <option name="value" value="Development" />
-            </DockerEnvVarImpl>
             <DockerEnvVarImpl>
               <option name="name" value="ASPNETCORE_Kestrel__Certificates__Default__Password" />
               <option name="value" value="&lt;PASSWORD&gt;" />
@@ -37,7 +33,7 @@
             </DockerPortBindingImpl>
           </list>
         </option>
-        <option name="sourceFilePath" value="Japangolin.Web/Backend/Dockerfile" />
+        <option name="sourceFilePath" value="Japangolin.Web/Dockerfile" />
         <option name="volumeBindings">
           <list>
             <DockerVolumeBindingImpl>
