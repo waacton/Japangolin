@@ -1,0 +1,52 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Desktop",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Japangolin.Desktop/bin/Debug/net6.0-windows/Wacton.Japangolin.Desktop.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Japangolin.Desktop",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Web.Backend",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Japangolin.Web/Backend/bin/Debug/net6.0/Wacton.Japangolin.Web.Backend.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Japangolin.Web/Backend",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Web.Frontend",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run start",
+            "cwd": "${workspaceFolder}\\Japangolin.Web\\Frontend"
+        },
+        {
+            "name": "Web.Backend (Docker)",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/Japangolin.Web/Backend/Japangolin.Web.Backend.csproj"
+            }
+        }
+    ]
+}

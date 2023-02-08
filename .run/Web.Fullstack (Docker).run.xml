@@ -38,7 +38,7 @@
           <list>
             <DockerVolumeBindingImpl>
               <option name="containerPath" value="/https/" />
-              <option name="hostPath" value="C:\Users\William\Code\Wacton\Japangolin\Japangolin.Web\Backend\https\" />
+              <option name="hostPath" value="$PROJECT_DIR$\Japangolin.Web\Backend\https\" />
             </DockerVolumeBindingImpl>
           </list>
         </option>

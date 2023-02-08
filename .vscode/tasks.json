@@ -1,0 +1,106 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Japangolin.Desktop/Japangolin.Desktop.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Japangolin.Desktop/Japangolin.Desktop.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/Japangolin.Desktop/Japangolin.Desktop.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: debug",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "japangolin:dev",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}/Japangolin.Web/Backend/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Japangolin.Web/Backend/Japangolin.Web.Backend.csproj"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: release",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "japangolin:latest",
+                "dockerfile": "${workspaceFolder}/Japangolin.Web/Backend/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Japangolin.Web/Backend/Japangolin.Web.Backend.csproj"
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "ASPNETCORE_Kestrel__Certificates__Default__Password": "<PASSWORD>",
+                    "ASPNETCORE_Kestrel__Certificates__Default__Path": "/https/aspnetapp.pfx",
+                    "ASPNETCORE_URLS": "https://+;http://+"
+                },
+                "ports": [{"containerPort": 443, "hostPort": 7443}, {"containerPort": 80, "hostPort": 7080}],
+                "volumes": [{"localPath": "${workspaceFolder}/Japangolin.Web/Backend/https/", "containerPath": "/https/"}]
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Japangolin.Web/Backend/Japangolin.Web.Backend.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: release",
+            "dependsOn": [
+                "docker-build: release"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/Japangolin.Web/Backend/Japangolin.Web.Backend.csproj"
+            }
+        }
+    ]
+}
